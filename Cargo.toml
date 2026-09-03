@@ -1,0 +1,39 @@
+[package]
+name = "gdownloader"
+version = "0.2.0"
+edition = "2021"
+description = "A JDownloader-like GTK4 download manager"
+authors = ["Xavier Fuentes <xfuentes-dev@serviam.cc>"]
+license = "GPL-3.0-or-later"
+
+[dependencies]
+anyhow = "1"
+async-channel = "2"
+dirs = "6"
+env_logger = "0.11"
+gtk4 = { version = "0.11", features = ["v4_22"] }
+adw = { package = "libadwaita", version = "0.9", features = ["v1_9", "gtk_v4_22"] }
+image = { version = "0.25", default-features = false, features = ["ico"] }
+log = "0.4.34"
+reqwest = { version = "0.13.4", features = ["blocking", "json", "query"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tr = { version = "0.1.11", default-features = false }
+i18n-embed = { version = "0.16.0", features = ["gettext-system", "desktop-requester"] }
+rust-embed = "8.0.0"
+ksni = { version = "0.3", default-features = false, features = ["async-io", "blocking"] }
+
+[package.metadata.deb]
+maintainer = "Xavier Fuentes <xfuentes-dev@serviam.cc>"
+copyright = "2026, Xavier Fuentes <xfuentes-dev@serviam.cc>"
+section = "network"
+priority = "optional"
+extended-description = """\
+A GTK4/libadwaita download manager that integrates with JDownloader.\
+"""
+assets = [
+    ["target/release/gdownloader", "usr/bin/", "755"],
+    ["data/resources/**/*", "usr/share/gdownloader/data/resources/", "644"],
+    ["data/io.github.xfuentes.gdownloader.desktop", "usr/share/applications/io.github.xfuentes.gdownloader.desktop", "644"],
+    ["data/jdownloader.svg", "usr/share/icons/hicolor/scalable/apps/io.github.xfuentes.gdownloader.svg", "644"],
+]

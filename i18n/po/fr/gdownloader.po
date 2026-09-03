@@ -1,0 +1,748 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: gdownloader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-28 16:31+0000\n"
+"PO-Revision-Date: 2026-08-18 00:00+0000\n"
+"Last-Translator: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/app.rs:18
+msgid "Error: {}"
+msgstr "Erreur : {}"
+
+#: src/app.rs:39
+msgid "JDownloader did not respond in time"
+msgstr "JDownloader n'a pas répondu dans le délai imparti"
+
+#: src/gui/settings_panel.rs:17 src/gui/settings_panel.rs:25
+msgid "General"
+msgstr "Général"
+
+#: src/gui/settings_panel.rs:20 src/gui/settings_panel.rs:28
+#: src/gui/components/settings/account_manager.rs:42
+#, fuzzy
+msgid "Account Manager"
+msgstr "Règles d'utilisation du compte"
+
+#: src/gui/settings_panel.rs:31 src/gui/main_menu_bar.rs:38
+#: src/gui/menus/settings.rs:9 src/gui/menus/settings.rs:45
+#: src/gui/menus/tools.rs:20 src/gui/menus/tools.rs:41 src/gui/mod.rs:157
+#: src/gui/mod.rs:175
+msgid "Settings"
+msgstr "Paramètres"
+
+#: src/gui/link_grabber_panel.rs:21 src/gui/downloads_panel.rs:21
+#: src/gui/main_menu_bar.rs:36
+msgid "File"
+msgstr "Fichier"
+
+#: src/gui/link_grabber_panel.rs:22
+msgid "Variant"
+msgstr "Variante"
+
+#: src/gui/link_grabber_panel.rs:23
+msgid "URL"
+msgstr "URL"
+
+#: src/gui/link_grabber_panel.rs:24
+msgid "Download folder"
+msgstr "Dossier de téléchargement"
+
+#: src/gui/link_grabber_panel.rs:25 src/gui/downloads_panel.rs:23
+msgid "Size"
+msgstr "Taille"
+
+#: src/gui/link_grabber_panel.rs:26 src/gui/downloads_panel.rs:22
+#: src/gui/components/account_table.rs:131
+msgid "Hoster"
+msgstr "Hébergeur"
+
+#: src/gui/link_grabber_panel.rs:27
+msgid "Availability"
+msgstr "Disponibilité"
+
+#: src/gui/link_grabber_panel.rs:28 src/gui/components/account_table.rs:35
+msgid "Enabled"
+msgstr "Activé"
+
+#: src/gui/link_grabber_panel.rs:29
+msgid "Priority"
+msgstr "Priorité"
+
+#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:304
+#: src/gui/downloads_panel.rs:86 src/gui/downloads_panel.rs:194
+#: src/gui/components/account_table.rs:163
+msgid "Overview"
+msgstr "Vue d'ensemble"
+
+#: src/gui/link_grabber_panel.rs:164 src/gui/downloads_panel.rs:104
+msgid "Add links to linkgrabber"
+msgstr "Ajouter des liens au collecteur"
+
+#: src/gui/link_grabber_panel.rs:173 src/gui/downloads_panel.rs:113
+msgid "Add links"
+msgstr "Ajouter des liens"
+
+#: src/gui/link_grabber_panel.rs:173 src/gui/downloads_panel.rs:113
+msgid "Add container"
+msgstr "Ajouter un conteneur"
+
+#: src/gui/link_grabber_panel.rs:173 src/gui/downloads_panel.rs:113
+msgid "Paste links"
+msgstr "Coller des liens"
+
+#: src/gui/link_grabber_panel.rs:196
+msgid "Clear linkgrabber"
+msgstr "Vider le collecteur de liens"
+
+#: src/gui/link_grabber_panel.rs:205
+msgid "Delete"
+msgstr "Supprimer"
+
+#: src/gui/link_grabber_panel.rs:215 src/gui/downloads_panel.rs:146
+msgid "Delete disabled"
+msgstr "Supprimer les désactivés"
+
+#: src/gui/link_grabber_panel.rs:216 src/gui/downloads_panel.rs:149
+msgid "Delete offline"
+msgstr "Supprimer les hors ligne"
+
+#: src/gui/link_grabber_panel.rs:217
+msgid "Remove incomplete archives"
+msgstr "Supprimer les archives incomplètes"
+
+#: src/gui/link_grabber_panel.rs:218
+msgid "Clear filtered links"
+msgstr "Effacer les liens filtrés"
+
+#: src/gui/link_grabber_panel.rs:239 src/gui/downloads_panel.rs:171
+msgid "Filter"
+msgstr "Filtrer"
+
+#: src/gui/link_grabber_panel.rs:248
+msgid "Add filtered stuff"
+msgstr "Ajouter les éléments filtrés"
+
+#: src/gui/link_grabber_panel.rs:258
+msgid "Add to download list"
+msgstr "Ajouter à la liste de téléchargement"
+
+#: src/gui/link_grabber_panel.rs:270
+msgid "Add and start all"
+msgstr "Ajouter et démarrer tout"
+
+#: src/gui/link_grabber_panel.rs:271
+msgid "Add and start selected"
+msgstr "Ajouter et démarrer la sélection"
+
+#: src/gui/link_grabber_panel.rs:272
+msgid "Add all"
+msgstr "Ajouter tout"
+
+#: src/gui/link_grabber_panel.rs:273
+msgid "Add selected"
+msgstr "Ajouter la sélection"
+
+#: src/gui/link_grabber_panel.rs:299
+msgid "Add at top"
+msgstr "Ajouter en haut"
+
+#: src/gui/link_grabber_panel.rs:300
+msgid "Auto confirm"
+msgstr "Confirmation automatique"
+
+#: src/gui/link_grabber_panel.rs:301
+msgid "Auto start"
+msgstr "Démarrage automatique"
+
+#: src/gui/link_grabber_panel.rs:302
+msgid "Link filter"
+msgstr "Filtre de lien"
+
+#: src/gui/link_grabber_panel.rs:303 src/gui/downloads_panel.rs:193
+msgid "Properties"
+msgstr "Propriétés"
+
+#: src/gui/link_grabber_panel.rs:305
+msgid "Sidebar"
+msgstr "Barre latérale"
+
+#: src/gui/link_grabber_panel.rs:306 src/gui/downloads_panel.rs:195
+msgid "Bottom bar manager"
+msgstr "Gestionnaire de la barre du bas"
+
+#: src/gui/downloads_panel.rs:24 src/gui/components/account_table.rs:132
+msgid "Status"
+msgstr "État"
+
+#: src/gui/downloads_panel.rs:25
+msgid "Progress"
+msgstr "Progression"
+
+#: src/gui/downloads_panel.rs:26
+msgid "Speed"
+msgstr "Vitesse"
+
+#: src/gui/downloads_panel.rs:27
+msgid "ETA"
+msgstr "Temps restant"
+
+#: src/gui/downloads_panel.rs:28
+msgid "Loaded"
+msgstr "Chargé"
+
+#: src/gui/downloads_panel.rs:29
+msgid "Remaining"
+msgstr "Restant"
+
+#: src/gui/downloads_panel.rs:136
+msgid "Delete all"
+msgstr "Tout supprimer"
+
+#: src/gui/downloads_panel.rs:147
+msgid "Delete failed"
+msgstr "Supprimer les échoués"
+
+#: src/gui/downloads_panel.rs:148
+msgid "Delete finished"
+msgstr "Supprimer les terminés"
+
+#: src/gui/downloads_panel.rs:189
+msgid "Chunks"
+msgstr "Segments"
+
+#: src/gui/downloads_panel.rs:190
+msgid "Parallel downloads"
+msgstr "Téléchargements parallèles"
+
+#: src/gui/downloads_panel.rs:191
+msgid "Parallel per host"
+msgstr "Parallèle par hôte"
+
+#: src/gui/downloads_panel.rs:192
+msgid "Speed limit"
+msgstr "Limite de vitesse"
+
+#: src/gui/main_menu_bar.rs:41
+msgid "Tools"
+msgstr "Outils"
+
+#: src/gui/main_menu_bar.rs:42
+msgid "Help"
+msgstr "Aide"
+
+#: src/gui/menus/file.rs:10 src/gui/menus/file.rs:22
+msgid "Backup all settings"
+msgstr "Exporter les paramètres"
+
+#: src/gui/menus/file.rs:15 src/gui/menus/file.rs:26
+msgid "Restore settings"
+msgstr "Importer les paramètres"
+
+#: src/gui/menus/file.rs:34 src/gui/menus/file.rs:68
+msgid "Analyse Text with Links"
+msgstr "Analyser le texte contenant des liens"
+
+#: src/gui/menus/file.rs:39 src/gui/menus/file.rs:72
+msgid "Add Container"
+msgstr "Ajouter un conteneur"
+
+#: src/gui/menus/file.rs:47 src/gui/menus/file.rs:76
+msgid "Backup"
+msgstr "Export/Import"
+
+#: src/gui/menus/file.rs:55 src/gui/menus/file.rs:80
+msgid "Restart"
+msgstr "Redémarrer"
+
+#: src/gui/menus/file.rs:60 src/gui/menus/file.rs:84
+msgid "Exit"
+msgstr "Quitter"
+
+#: src/gui/menus/help.rs:9 src/gui/menus/help.rs:48
+msgid "Online Help"
+msgstr "Aide"
+
+#: src/gui/menus/help.rs:14 src/gui/menus/help.rs:52
+msgid "Create a Log"
+msgstr "Créer un journal"
+
+#: src/gui/menus/help.rs:22 src/gui/menus/help.rs:56
+msgid "Find Updates"
+msgstr "Rechercher des mises à jour"
+
+#: src/gui/menus/help.rs:27 src/gui/menus/help.rs:60
+msgid "Changelog"
+msgstr "Journal des modifications"
+
+#: src/gui/menus/help.rs:35 src/gui/menus/help.rs:64
+msgid "Contribute"
+msgstr "Contribuer"
+
+#: src/gui/menus/help.rs:40 src/gui/menus/help.rs:68
+msgid "About JDownloader"
+msgstr "À propos de JDownloader"
+
+#: src/gui/menus/settings.rs:14 src/gui/menus/settings.rs:49
+msgid "My.JDownloader"
+msgstr "My.JDownloader"
+
+#: src/gui/menus/settings.rs:22 src/gui/menus/settings.rs:53
+#: src/gui/components/settings/general.rs:184
+msgid "Max. Chunks per Download"
+msgstr "Nombre maximum de morceaux par téléchargement"
+
+#: src/gui/menus/settings.rs:27 src/gui/menus/settings.rs:57
+#: src/gui/components/settings/general.rs:168
+msgid "Max. simultaneous Downloads"
+msgstr "Téléchargements simultanés maximums"
+
+#: src/gui/menus/settings.rs:32 src/gui/menus/settings.rs:61
+msgid "Max. sim. Downloads per Hoster"
+msgstr "Téléchargements simultanés maximums par hôte"
+
+#: src/gui/menus/settings.rs:37 src/gui/menus/settings.rs:65
+msgid "Speed Limit"
+msgstr "Vitesse maximum"
+
+#: src/gui/menus/tools.rs:10 src/gui/menus/tools.rs:33 src/gui/mod.rs:123
+msgid "Download"
+msgstr "Téléchargements"
+
+#: src/gui/menus/tools.rs:15 src/gui/menus/tools.rs:37 src/gui/mod.rs:127
+msgid "Link Collector"
+msgstr "Collecteur de liens"
+
+#: src/gui/menus/tools.rs:25 src/gui/menus/tools.rs:45 src/gui/mod.rs:133
+msgid "Donate"
+msgstr "Faire un don"
+
+#: src/gui/menus/tools.rs:53 src/gui/menus/tools.rs:61
+msgid "Windows"
+msgstr "Fenêtres"
+
+#: src/gui/components/account_table.rs:27
+#, fuzzy
+msgid "Disabled"
+msgstr "Supprimer les désactivés"
+
+#: src/gui/components/account_table.rs:33
+msgid "Invalid"
+msgstr ""
+
+#. Icon names and sizes from JDownloader's AccountListPanel.
+#: src/gui/components/account_table.rs:107
+#, fuzzy
+msgid "Add"
+msgstr "Modules complémentaires"
+
+#: src/gui/components/account_table.rs:108
+msgid "Remove"
+msgstr ""
+
+#: src/gui/components/account_table.rs:109
+msgid "Buy"
+msgstr ""
+
+#: src/gui/components/account_table.rs:110
+msgid "Refresh"
+msgstr ""
+
+#: src/gui/components/account_table.rs:113
+msgid "Buy premium account"
+msgstr ""
+
+#: src/gui/components/account_table.rs:133
+msgid "Username"
+msgstr ""
+
+#: src/gui/components/account_table.rs:134
+msgid "Password"
+msgstr ""
+
+#: src/gui/components/account_table.rs:135
+msgid "Expire Date"
+msgstr ""
+
+#: src/gui/components/account_table.rs:136
+#, fuzzy
+msgid "Download Traffic left"
+msgstr "Dossier de téléchargement"
+
+#: src/gui/components/account_add_dialog.rs:34
+msgid "Add new Account"
+msgstr ""
+
+#: src/gui/components/account_add_dialog.rs:42
+msgid "1. Choose a Hoster"
+msgstr ""
+
+#: src/gui/components/account_add_dialog.rs:52
+msgid "Search"
+msgstr ""
+
+#: src/gui/components/account_add_dialog.rs:62
+msgid "Domain"
+msgstr ""
+
+#: src/gui/components/account_add_dialog.rs:77
+msgid "2. Enter your Login Information"
+msgstr ""
+
+#: src/gui/components/account_add_dialog.rs:84
+msgid "Name:"
+msgstr ""
+
+#: src/gui/components/account_add_dialog.rs:85
+#: src/jd/plugins/hoster/onefichier.rs:54
+msgid "Pass:"
+msgstr ""
+
+#: src/gui/components/account_add_dialog.rs:90
+msgid "Enter Username..."
+msgstr ""
+
+#: src/gui/components/account_add_dialog.rs:95
+#: src/jd/plugins/hoster/onefichier.rs:59
+msgid "Enter password..."
+msgstr ""
+
+#: src/gui/components/account_add_dialog.rs:118 src/gui/donate.rs:33
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/gui/components/account_add_dialog.rs:119
+msgid "Save"
+msgstr ""
+
+#: src/gui/components/account_add_dialog.rs:144
+msgid "2. Enter your {} Login Information"
+msgstr ""
+
+#: src/gui/components/settings/account_manager.rs:35
+msgid "Use Account(s) to download"
+msgstr ""
+
+#: src/gui/components/settings/account_manager.rs:44
+msgid "Enter and manage all your Premium/Gold/Platinum accounts."
+msgstr ""
+
+#: src/gui/components/settings/general.rs:141
+msgid "Browse"
+msgstr "Parcourir"
+
+#: src/gui/components/settings/general.rs:150
+#: src/gui/components/settings/general.rs:154
+msgid "Download Folder"
+msgstr "Dossier de téléchargement"
+
+#: src/gui/components/settings/general.rs:156
+msgid ""
+"Set the default download path here. Changing default path here, affects only "
+"new downloads."
+msgstr ""
+"Définissez ici le chemin de téléchargement par défaut. Changer le chemin ici "
+"n'affecte que les nouveaux téléchargements."
+
+#: src/gui/components/settings/general.rs:176
+msgid "Maximum of simultaneous downloads per host"
+msgstr "Téléchargements simultanés par hôte max."
+
+#: src/gui/components/settings/general.rs:193
+msgid "Immediate"
+msgstr "Immédiat"
+
+#: src/gui/components/settings/general.rs:194
+msgid "At start"
+msgstr "Au démarrage"
+
+#: src/gui/components/settings/general.rs:195
+msgid "Package ready"
+msgstr "Package prêt"
+
+#: src/gui/components/settings/general.rs:196
+#: src/gui/components/settings/general.rs:227
+msgid "Never"
+msgstr "Jamais"
+
+#: src/gui/components/settings/general.rs:198
+msgid "Remove finished downloads"
+msgstr "Supprimer les téléchargements terminés"
+
+#: src/gui/components/settings/general.rs:202
+msgid "Overwrite existing file"
+msgstr "Écraser le fichier existant"
+
+#: src/gui/components/settings/general.rs:203
+msgid "Skip file"
+msgstr "Ignorer le fichier"
+
+#: src/gui/components/settings/general.rs:204
+msgid "Auto-rename"
+msgstr "Renommage automatique"
+
+#: src/gui/components/settings/general.rs:205
+msgid "Ask for each file"
+msgstr "Demander pour chaque fichier"
+
+#: src/gui/components/settings/general.rs:207
+msgid "If the file already exists"
+msgstr "Si le fichier existe déjà"
+
+#: src/gui/components/settings/general.rs:211
+msgid "Download Management"
+msgstr "Gestion des téléchargements"
+
+#: src/gui/components/settings/general.rs:213
+msgid ""
+"Connection limits, Download order, Priorities, ... Set up the Download "
+"controller details."
+msgstr ""
+"Limites de connexion, ordre de téléchargement, priorités... Configurez les "
+"détails du contrôleur de téléchargement."
+
+#: src/gui/components/settings/general.rs:225
+msgid "Always"
+msgstr "Toujours"
+
+#: src/gui/components/settings/general.rs:226
+msgid "Only if downloads were running at last Session's end"
+msgstr ""
+"Uniquement si des téléchargements étaient en cours à la fin de la dernière "
+"session"
+
+#: src/gui/components/settings/general.rs:230
+msgid "Autostart downloads at application start"
+msgstr "Démarrer les téléchargements au lancement de l'application"
+
+#: src/gui/components/settings/general.rs:241
+msgid "Show Countdown (seconds)"
+msgstr "Afficher le compte à rebours (secondes)"
+
+#: src/gui/components/settings/general.rs:248
+msgid "Autostart Downloads"
+msgstr "Démarrage automatique des téléchargements"
+
+#: src/gui/components/settings/general.rs:250
+msgid ""
+"Choose if, and when JDownloader should start pending downloads without user "
+"interaction."
+msgstr ""
+"Choisissez si et quand JDownloader doit démarrer les téléchargements en "
+"attente sans intervention de l'utilisateur."
+
+#: src/gui/components/settings/general.rs:262
+msgid "Group single files in a Various package"
+msgstr "Regrouper les fichiers seuls dans un package Various"
+
+#: src/gui/components/settings/general.rs:269
+msgid "LinkGrabber"
+msgstr "Collecteur de liens"
+
+#: src/gui/components/settings/general.rs:280
+msgid "SFV / CRC check when possible"
+msgstr "Vérification SFV / CRC si possible"
+
+#: src/gui/components/settings/general.rs:284
+msgid "Restart Downloads when SFV/CRC check fails"
+msgstr ""
+"Redémarrer les téléchargements en cas d'échec de la vérification SFV/CRC"
+
+#: src/gui/components/settings/general.rs:291
+msgid "File Writing"
+msgstr "Écriture des fichiers"
+
+#: src/gui/components/settings/general.rs:293
+msgid ""
+"JDownloader will verify your downloads for correctness after download using "
+"the hash/check option"
+msgstr ""
+"JDownloader vérifiera l'intégrité de vos téléchargements après "
+"téléchargement en utilisant l'option de vérification par hachage."
+
+#: src/gui/components/settings/general.rs:305
+msgid "Auto open Link Containers (dlc,rsdf,...)"
+msgstr "Ouvrir automatiquement les conteneurs de liens (dlc, rsdf...)"
+
+#: src/gui/components/settings/general.rs:312
+msgid "Miscellaneous"
+msgstr "Divers"
+
+#: src/gui/components/settings/general.rs:332
+msgid "Select Folder"
+msgstr "Sélectionner un dossier"
+
+#: src/gui/donate.rs:11
+msgid "The JDownloader project needs your help!"
+msgstr "Le projet JDownloader a besoin de votre aide !"
+
+#: src/gui/donate.rs:13
+msgid ""
+"If you are a satisfied user of JDownloader, please think about contributing "
+"to this project. JDownloader is the result of daily hard work since more "
+"than %s1 years. We need your help to keep it free of charge, free of "
+"advertising, free of installer bundles and to improve JDownloader even more. "
+"Moreover, donating is a good way to tell us what modules we should focus our "
+"work on."
+msgstr ""
+"Si vous êtes un utilisateur satisfait de JDownloader, pensez à contribuer à "
+"ce projet. JDownloader est le fruit d'un travail quotidien depuis plus de "
+"%s1 ans. Nous avons besoin de votre aide pour le garder gratuit, sans "
+"publicité, sans installateurs groupés et pour améliorer JDownloader encore "
+"davantage. De plus, faire un don est un bon moyen de nous indiquer sur quels "
+"modules nous devrions concentrer notre travail."
+
+#: src/gui/donate.rs:37
+msgid "Continue"
+msgstr "Continuer"
+
+#: src/gui/mod.rs:107
+msgid "JDownloader for GNOME"
+msgstr "JDownloader pour GNOME"
+
+#: src/gui/mod.rs:256
+msgid "Ready"
+msgstr "Prêt"
+
+#: src/gui/mod.rs:361
+msgid "JDownloader started"
+msgstr "JDownloader démarré"
+
+#: src/gui/mod.rs:390
+msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
+msgstr "JDownloader.jar non trouvé. Définissez JDOWNLOADER_JAR."
+
+#: src/gui/mod.rs:417
+msgid "Waiting for JDownloader to exit..."
+msgstr "En attente de la fermeture de JDownloader"
+
+#: src/jd/jar.rs:74
+msgid "Unable to create local JDownloader directory {}: {}"
+msgstr "Impossible de créer le répertoire local JDownloader {} : {}"
+
+#: src/jd/jar.rs:88
+msgid "Unable to copy JDownloader.jar to {}: {}"
+msgstr "Impossible de copier JDownloader.jar vers {} : {}"
+
+#: src/jd/log_watcher.rs:62
+msgid "JDownloader starting, please wait..."
+msgstr "Démarrage de JDownloader, veuillez patienter..."
+
+#: src/jd/log_watcher.rs:68
+msgid "Restarting after update"
+msgstr "Redémarrage après mise à jour"
+
+#: src/jd/log_watcher.rs:73
+msgid "Update"
+msgstr "Mise à jour"
+
+#: src/jd/log_watcher.rs:78
+msgid "JDownloader starting"
+msgstr "Démarrage de JDownloader"
+
+#: src/jd/log_watcher.rs:83
+msgid "Initialization"
+msgstr "Initialisation"
+
+#: src/jd/plugins/hoster/onefichier.rs:21
+#, fuzzy
+msgid "Account Type:"
+msgstr "Règles d'utilisation du compte"
+
+#: src/jd/plugins/hoster/onefichier.rs:25
+msgid "Premium Account | API Login [Recommended]"
+msgstr ""
+
+#: src/jd/plugins/hoster/onefichier.rs:26
+msgid "Premium GOLD Account | API Login [Recommended]"
+msgstr ""
+
+#: src/jd/plugins/hoster/onefichier.rs:27
+msgid "Premium Account | Website Login"
+msgstr ""
+
+#: src/jd/plugins/hoster/onefichier.rs:28
+msgid "Premium GOLD Account | Website Login"
+msgstr ""
+
+#: src/jd/plugins/hoster/onefichier.rs:29
+msgid "Free Account with paid CDN credits"
+msgstr ""
+
+#: src/jd/plugins/hoster/onefichier.rs:30
+msgid "Free Account"
+msgstr ""
+
+#: src/jd/plugins/hoster/onefichier.rs:39
+msgid "Premium API Key:"
+msgstr ""
+
+#: src/jd/plugins/hoster/onefichier.rs:44
+msgid "Enter API key (click here to find it)"
+msgstr ""
+
+#: src/jd/plugins/hoster/onefichier.rs:49
+msgid "E-Mail:"
+msgstr ""
+
+#: src/jd/plugins/hoster/onefichier.rs:53
+msgid "Enter e-mail..."
+msgstr ""
+
+#: src/jd/process.rs:24
+msgid "JDownloader is already running"
+msgstr "JDownloader est déjà en cours d'exécution"
+
+#: src/jd/process.rs:29
+msgid "JDownloader.jar has no parent directory"
+msgstr "JDownloader.jar n'a pas de répertoire parent"
+
+#: src/jd/process.rs:32
+msgid "JDownloader.jar has no file name"
+msgstr "JDownloader.jar n'a pas de nom de fichier"
+
+#~ msgid "Restore backup"
+#~ msgstr "Restaurer une sauvegarde"
+
+#~ msgid "Parallel downloads per host"
+#~ msgstr "Téléchargements parallèles par hôte"
+
+#~ msgid "Installed extensions"
+#~ msgstr "Extensions installées"
+
+#~ msgid "Extension windows"
+#~ msgstr "Fenêtres d'extension"
+
+#~ msgid "Knowledge base"
+#~ msgstr "Base de connaissances"
+
+#~ msgid "Send logs"
+#~ msgstr "Envoyer les journaux"
+
+#~ msgid "Check for updates"
+#~ msgstr "Rechercher des mises à jour"
+
+#~ msgid "Latest changes"
+#~ msgstr "Dernières modifications"
+
+#~ msgid "About"
+#~ msgstr "À propos"
+
+#, fuzzy
+#~ msgid "Download directory"
+#~ msgstr "JDownloader.jar n'a pas de répertoire parent"
+
+#, fuzzy
+#~ msgid "Set the default download directory."
+#~ msgstr "Impossible de créer le répertoire local JDownloader {} : {}"
+
+#, fuzzy
+#~ msgid "Only if closed running"
+#~ msgstr "JDownloader est déjà en cours d'exécution"
+
+#~ msgid "Preparing..."
+#~ msgstr "Préparation..."

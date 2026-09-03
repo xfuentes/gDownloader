@@ -1,0 +1,9 @@
+/target
+
+.vscode/
+
+.devin
+
+.claude/
+
+/i18n/pot

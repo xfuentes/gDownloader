@@ -1,0 +1,89 @@
+use gtk4::gio;
+
+use super::{action_button, custom_item, disabled_button, submenu_button};
+
+pub fn build() -> gtk4::PopoverMenu {
+    // Backup submenu
+    let backup_menu = gio::Menu::new();
+    let backup_section = gio::Menu::new();
+    backup_section.append_item(&custom_item(
+        tr!("Backup all settings").as_ref(),
+        None,
+        "backup-save",
+    ));
+    backup_section.append_item(&custom_item(
+        tr!("Restore settings").as_ref(),
+        None,
+        "backup-load",
+    ));
+    backup_menu.append_section(None, &backup_section);
+    let backup_popover = gtk4::PopoverMenu::from_model(Some(&backup_menu));
+    backup_popover.add_child(
+        &disabled_button("save", tr!("Backup all settings").as_ref()),
+        "backup-save",
+    );
+    backup_popover.add_child(
+        &disabled_button("load", tr!("Restore settings").as_ref()),
+        "backup-load",
+    );
+
+    // File menu
+    let file_menu = gio::Menu::new();
+    let file_top_section = gio::Menu::new();
+    file_top_section.append_item(&custom_item(
+        tr!("Analyse Text with Links").as_ref(),
+        None,
+        "file-analyse",
+    ));
+    file_top_section.append_item(&custom_item(
+        tr!("Add Container").as_ref(),
+        None,
+        "file-container",
+    ));
+    file_menu.append_section(None, &file_top_section);
+
+    let file_backup_section = gio::Menu::new();
+    file_backup_section.append_item(&custom_item(
+        tr!("Backup").as_ref(),
+        None,
+        "file-backup",
+    ));
+    file_menu.append_section(None, &file_backup_section);
+
+    let file_exit_section = gio::Menu::new();
+    file_exit_section.append_item(&custom_item(
+        tr!("Restart").as_ref(),
+        None,
+        "file-restart",
+    ));
+    file_exit_section.append_item(&custom_item(
+        tr!("Exit").as_ref(),
+        Some("win.exit"),
+        "file-exit",
+    ));
+    file_menu.append_section(None, &file_exit_section);
+
+    let file_popover = gtk4::PopoverMenu::from_model(Some(&file_menu));
+    file_popover.add_child(
+        &disabled_button("add", tr!("Analyse Text with Links").as_ref()),
+        "file-analyse",
+    );
+    file_popover.add_child(
+        &disabled_button("addContainer", tr!("Add Container").as_ref()),
+        "file-container",
+    );
+    file_popover.add_child(
+        &submenu_button("backup", tr!("Backup").as_ref(), &backup_popover),
+        "file-backup",
+    );
+    file_popover.add_child(
+        &disabled_button("restart", tr!("Restart").as_ref()),
+        "file-restart",
+    );
+    file_popover.add_child(
+        &action_button("exit", tr!("Exit").as_ref(), "win.exit", &file_popover),
+        "file-exit",
+    );
+
+    file_popover
+}

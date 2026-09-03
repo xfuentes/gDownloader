@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=gDownloader
+Comment=A JDownloader-like GTK4 download manager
+Exec=gdownloader
+Type=Application
+Icon=io.github.xfuentes.gdownloader
+Categories=Network;FileTransfer;
+Terminal=false
+StartupWMClass=io.github.xfuentes.gdownloader
