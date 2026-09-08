@@ -1,8 +1,9 @@
+use adw::prelude::*;
 use gtk4::gio;
 
-use super::{action_button, custom_item, disabled_button, submenu_button};
+use super::{action_button, custom_item, disabled_button, submenu_button, MenuChildren};
 
-pub fn build() -> gtk4::PopoverMenu {
+pub fn build() -> (gio::Menu, MenuChildren) {
     // Windows submenu
     let windows_menu = gio::Menu::new();
     let windows_section = gio::Menu::new();
@@ -38,7 +39,7 @@ pub fn build() -> gtk4::PopoverMenu {
         "windows-collector",
     );
     windows_popover.add_child(
-        &action_button("settings", tr!("Settings").as_ref(), "win.settings", &windows_popover),
+        &action_button("settings", tr!("Settings").as_ref(), "win.settings"),
         "windows-settings",
     );
     windows_popover.add_child(
@@ -56,11 +57,10 @@ pub fn build() -> gtk4::PopoverMenu {
     ));
     tools_menu.append_section(None, &tools_section);
 
-    let tools_popover = gtk4::PopoverMenu::from_model(Some(&tools_menu));
-    tools_popover.add_child(
-        &submenu_button("extension", tr!("Windows").as_ref(), &windows_popover),
-        "tools-windows",
-    );
+    let children: MenuChildren = vec![(
+        submenu_button("extension", tr!("Windows").as_ref(), &windows_popover).upcast(),
+        "tools-windows".to_string(),
+    )];
 
-    tools_popover
+    (tools_menu, children)
 }

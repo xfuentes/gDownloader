@@ -1,8 +1,9 @@
+use adw::prelude::*;
 use gtk4::gio;
 
-use super::{action_button, custom_item, disabled_button, submenu_button};
+use super::{action_button, custom_item, disabled_button, submenu_button, MenuChildren};
 
-pub fn build() -> gtk4::PopoverMenu {
+pub fn build() -> (gio::Menu, MenuChildren) {
     // Backup submenu
     let backup_menu = gio::Menu::new();
     let backup_section = gio::Menu::new();
@@ -63,27 +64,28 @@ pub fn build() -> gtk4::PopoverMenu {
     ));
     file_menu.append_section(None, &file_exit_section);
 
-    let file_popover = gtk4::PopoverMenu::from_model(Some(&file_menu));
-    file_popover.add_child(
-        &disabled_button("add", tr!("Analyse Text with Links").as_ref()),
-        "file-analyse",
-    );
-    file_popover.add_child(
-        &disabled_button("addContainer", tr!("Add Container").as_ref()),
-        "file-container",
-    );
-    file_popover.add_child(
-        &submenu_button("backup", tr!("Backup").as_ref(), &backup_popover),
-        "file-backup",
-    );
-    file_popover.add_child(
-        &disabled_button("restart", tr!("Restart").as_ref()),
-        "file-restart",
-    );
-    file_popover.add_child(
-        &action_button("exit", tr!("Exit").as_ref(), "win.exit", &file_popover),
-        "file-exit",
-    );
+    let children: MenuChildren = vec![
+        (
+            disabled_button("add", tr!("Analyse Text with Links").as_ref()).upcast(),
+            "file-analyse".to_string(),
+        ),
+        (
+            disabled_button("addContainer", tr!("Add Container").as_ref()).upcast(),
+            "file-container".to_string(),
+        ),
+        (
+            submenu_button("backup", tr!("Backup").as_ref(), &backup_popover).upcast(),
+            "file-backup".to_string(),
+        ),
+        (
+            disabled_button("restart", tr!("Restart").as_ref()).upcast(),
+            "file-restart".to_string(),
+        ),
+        (
+            action_button("exit", tr!("Exit").as_ref(), "win.exit").upcast(),
+            "file-exit".to_string(),
+        ),
+    ];
 
-    file_popover
+    (file_menu, children)
 }

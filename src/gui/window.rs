@@ -59,19 +59,8 @@ pub fn setup_icon_theme() {
 
 /// Injects application-level CSS rules.
 pub fn setup_css() {
-    let css_provider = gtk4::CssProvider::new();
-    css_provider.load_from_string(".donate-page { background: #87CEEB; }");
-    if let Some(display) = gtk4::gdk::Display::default() {
-        gtk4::style_context_add_provider_for_display(
-            &display,
-            &css_provider,
-            gtk4::STYLE_PROVIDER_PRIORITY_APPLICATION,
-        );
-    }
-
     let tab_bar_css = gtk4::CssProvider::new();
-    tab_bar_css
-        .load_from_string(".tabbar.compact-tabbar { padding-left: 0; padding-right: 0; }");
+    tab_bar_css.load_from_string(".tabbar { padding-left: 0; padding-right: 0; }");
     if let Some(display) = gtk4::gdk::Display::default() {
         gtk4::style_context_add_provider_for_display(
             &display,
@@ -93,6 +82,7 @@ pub fn setup_css() {
          dropdown button, dropdown box, dropdown arrow { min-height: 0; margin: 0; padding: 2px 6px; }\n\
          dropdown button.toggle { padding: 0 0 1px 0; }\n\
          columnview > listview > row { min-height: 24px; }\n\
+         columnview > listview > row > cell { padding: 1px; }\n\
          columnview header button { min-height: 22px; padding: 2px 6px; }",
     );
     if let Some(display) = gtk4::gdk::Display::default() {
@@ -102,6 +92,8 @@ pub fn setup_css() {
             gtk4::STYLE_PROVIDER_PRIORITY_APPLICATION,
         );
     }
+
+    super::cells::progress_cell::install_css();
 }
 
 /// Creates the main application window.

@@ -132,13 +132,122 @@ pub struct DownloadsPanel {
     pub child_stores: Rc<RefCell<HashMap<i64, gio::ListStore>>>,
     pub selection: gtk4::MultiSelection,
     pub view: gtk4::ColumnView,
-    pub properties: Rc<crate::gui::properties_panel::PropertiesPanel>,
-    pub overview_labels: Vec<gtk4::Label>,
+    pub overview: Rc<crate::gui::overview_panel::OverviewPanel>,
     /// Shared with `start_refresh`, which consults it to avoid ever
     /// splicing an *expanded* package's own row back into `store` (that
     /// would discard its `TreeListRow`'s expanded state — see
     /// `sync_store_keep_expanded`).
     expanded_state: Rc<RefCell<HashMap<i64, bool>>>,
+}
+
+/// Keys identifying each Overview stat, passed to
+/// `overview_panel::OverviewPanel::set_value`.
+const OVERVIEW_PACKAGES: &str = "packages";
+const OVERVIEW_LINKS: &str = "links";
+const OVERVIEW_SIZE: &str = "size";
+const OVERVIEW_SPEED: &str = "speed";
+const OVERVIEW_LOADED: &str = "loaded";
+const OVERVIEW_REMAINING: &str = "remaining";
+const OVERVIEW_ETA: &str = "eta";
+const OVERVIEW_RUNNING: &str = "running";
+const OVERVIEW_FINISHED: &str = "finished";
+const OVERVIEW_SKIPPED: &str = "skipped";
+const OVERVIEW_FAILED: &str = "failed";
+
+/// Overview stats and their JDownloader `GraphicalUserInterfaceSettings`
+/// visibility flags (JDownloader's own key names, reused verbatim), in
+/// `DownloadOverview.createDataEntries()`'s declaration order — that order
+/// drives the 2-row grid packing (see `overview_panel::relayout`). Defaults
+/// mirror JDownloader's `@DefaultBooleanValue` on each `is...Visible()`.
+fn overview_field_defs() -> Vec<crate::gui::overview_panel::OverviewFieldDef> {
+    use crate::gui::overview_panel::OverviewFieldDef;
+    vec![
+        OverviewFieldDef::new(
+            OVERVIEW_PACKAGES,
+            "OverviewPanelDownloadPackageCountVisible",
+            tr!("Packages").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_LINKS,
+            "OverviewPanelDownloadLinkCountVisible",
+            tr!("Links").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_SIZE,
+            "OverviewPanelDownloadTotalBytesVisible",
+            tr!("Size").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_SPEED,
+            "OverviewPanelDownloadSpeedVisible",
+            tr!("Speed").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_LOADED,
+            "OverviewPanelDownloadBytesLoadedVisible",
+            tr!("Loaded").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_REMAINING,
+            "OverviewPanelDownloadBytesRemainingVisible",
+            tr!("Remaining").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_ETA,
+            "OverviewPanelDownloadETAVisible",
+            tr!("ETA").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_RUNNING,
+            "OverviewPanelDownloadRunningDownloadsCountVisible",
+            tr!("Running downloads").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_FINISHED,
+            "OverviewPanelDownloadLinksFinishedCountVisible",
+            tr!("Finished downloads").to_string(),
+            false,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_SKIPPED,
+            "OverviewPanelDownloadLinksSkippedCountVisible",
+            tr!("Skipped downloads").to_string(),
+            false,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_FAILED,
+            "OverviewPanelDownloadLinksFailedCountVisible",
+            tr!("Failed downloads").to_string(),
+            false,
+        ),
+    ]
+}
+
+/// Maps an overview stat key to its JDownloader config key.
+fn overview_cfg_key(field: &str) -> Option<&'static str> {
+    overview_field_defs().into_iter().find(|d| d.key == field).map(|d| d.cfg_key)
+}
+
+fn overview_actions(gui_settings: GraphicalUserInterfaceSettings) -> crate::gui::overview_panel::OverviewActions {
+    crate::gui::overview_panel::OverviewActions {
+        set_field_visible: Box::new(move |field, visible| {
+            let Some(cfg_key) = overview_cfg_key(field) else {
+                return;
+            };
+            let gui_settings = gui_settings.clone();
+            crate::gui::spawn::api_fire(move || {
+                let _ = gui_settings.set_flag(cfg_key, visible);
+            });
+        }),
+    }
 }
 
 /// `GraphicalUserInterfaceSettings` config keys backing this panel's "visible
@@ -472,15 +581,11 @@ impl DownloadsPanel {
         let mut togglable_columns: Vec<(&'static str, String, gtk4::ColumnViewColumn)> = Vec::new();
 
         // Name: TreeExpander (package/link indentation + expand triangle) +
-        // file/package icon + label, with an aggregate/per-link progress bar.
+        // file/package icon + label.
         {
             let factory = gtk4::SignalListItemFactory::new();
             factory.connect_setup(move |_, list_item| {
                 let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
-                let vbox = gtk4::Box::new(gtk4::Orientation::Vertical, 2);
-                vbox.set_halign(gtk4::Align::Fill);
-                vbox.set_hexpand(true);
-
                 let hbox = gtk4::Box::new(gtk4::Orientation::Horizontal, 6);
                 hbox.set_halign(gtk4::Align::Fill);
                 hbox.set_hexpand(true);
@@ -500,17 +605,7 @@ impl DownloadsPanel {
                 expander.set_hexpand(true);
                 expander.set_child(Some(&hbox));
 
-                let bar = gtk4::ProgressBar::new();
-                bar.add_css_class("osd");
-                bar.set_show_text(false);
-                bar.set_halign(gtk4::Align::Fill);
-                bar.set_hexpand(true);
-                bar.set_valign(gtk4::Align::Center);
-                bar.set_visible(false);
-
-                vbox.append(&expander);
-                vbox.append(&bar);
-                list_item.set_child(Some(&vbox));
+                list_item.set_child(Some(&expander));
             });
             factory.connect_bind({
                 let expanded_state = expanded_state.clone();
@@ -526,14 +621,8 @@ impl DownloadsPanel {
                 else {
                     return;
                 };
-                let Some(vbox) = list_item.child().and_downcast::<gtk4::Box>() else {
-                    return;
-                };
-                let Some(expander) = vbox.first_child().and_downcast::<gtk4::TreeExpander>()
+                let Some(expander) = list_item.child().and_downcast::<gtk4::TreeExpander>()
                 else {
-                    return;
-                };
-                let Some(bar) = vbox.last_child().and_downcast::<gtk4::ProgressBar>() else {
                     return;
                 };
                 expander.set_list_row(Some(&tree_row));
@@ -577,25 +666,11 @@ impl DownloadsPanel {
                     let pkg = obj.borrow::<PackageRow>();
                     label.set_text(&pkg.name);
                     label.set_tooltip_text(Some(&pkg.name));
-                    let fraction = if pkg.bytes_total > 0 {
-                        pkg.bytes_loaded as f64 / pkg.bytes_total as f64
-                    } else {
-                        0.0
-                    };
-                    bar.set_fraction(fraction);
-                    bar.set_visible(pkg.running);
                 } else {
                     let row = obj.borrow::<DownloadRow>();
                     icon.set_from_gicon(&row.file_type_icon);
                     label.set_text(&row.name);
                     label.set_tooltip_text(Some(&row.name));
-                    let fraction = if row.bytes_total > 0 {
-                        row.bytes_loaded as f64 / row.bytes_total as f64
-                    } else {
-                        0.0
-                    };
-                    bar.set_fraction(fraction);
-                    bar.set_visible(row.show_progress);
                 }
                 }
             });
@@ -603,6 +678,42 @@ impl DownloadsPanel {
             col.set_fixed_width(220);
             col.set_resizable(false);
             col.set_expand(true);
+            view.append_column(&col);
+        }
+
+        // Progress: see `gui::cells::progress_cell` for how the bar/label
+        // overlay is built; only the fraction computation is specific to
+        // download rows here.
+        {
+            let col = crate::gui::cells::progress_cell::build_column(
+                tr!("Progress").as_ref(),
+                165,
+                false,
+                |list_item| {
+                    let (tree_row, obj) = tree_item(list_item)?;
+                    let fraction = if tree_row.depth() == 0 {
+                        let pkg = obj.borrow::<PackageRow>();
+                        if pkg.bytes_total > 0 {
+                            pkg.bytes_loaded as f64 / pkg.bytes_total as f64
+                        } else if pkg.finished {
+                            1.0
+                        } else {
+                            0.0
+                        }
+                    } else {
+                        let row = obj.borrow::<DownloadRow>();
+                        if row.bytes_total > 0 {
+                            row.bytes_loaded as f64 / row.bytes_total as f64
+                        } else if row.finished {
+                            1.0
+                        } else {
+                            0.0
+                        }
+                    };
+                    Some(fraction)
+                },
+            );
+            togglable_columns.push(("progress", tr!("Progress").to_string(), col.clone()));
             view.append_column(&col);
         }
 
@@ -870,7 +981,9 @@ impl DownloadsPanel {
         crate::gui::properties_panel::restore_field_visibility(properties.clone(), {
             let gui_settings = gui_settings.clone();
             move || gui_settings.is_ready()
-        }, move || {
+        }, {
+            let gui_settings = gui_settings.clone();
+            move || {
             vec![
                 (
                     crate::gui::properties_panel::FIELD_PACKAGE_NAME,
@@ -893,6 +1006,7 @@ impl DownloadsPanel {
                     gui_settings.get_flag(CFG_COMMENT_VISIBLE, true).unwrap_or(true),
                 ),
             ]
+            }
         });
         // Properties panel only supports link-level detail for now: package
         // selections hide it, matching "no data to show" rather than guessing.
@@ -938,48 +1052,32 @@ impl DownloadsPanel {
         });
 
         // Overview
-        let overview = gtk4::Box::new(gtk4::Orientation::Vertical, 6);
-        overview.set_margin_start(12);
-        overview.set_margin_end(12);
-        overview.set_margin_top(6);
-        overview.set_margin_bottom(6);
-
-        let overview_grid = gtk4::Grid::new();
-        overview_grid.set_row_spacing(4);
-        overview_grid.set_column_spacing(12);
-        overview_grid.set_halign(gtk4::Align::Start);
-
-        let stats = [
-            (tr!("Packages"), "0"),
-            (tr!("Downloads"), "0"),
-            (tr!("Finished"), "0"),
-            (tr!("Failed"), "0"),
-            (tr!("Skipped"), "0"),
-            (tr!("Bytes Loaded"), "0 B"),
-            (tr!("Bytes Remaining"), "0 B"),
-            (tr!("Total Size"), "0 B"),
-            (tr!("Speed"), "0 B/s"),
-            (tr!("ETA"), "-"),
-        ];
-
-        let mut overview_labels = Vec::new();
-
-        for (col, (name, value)) in stats.iter().enumerate() {
-            let name_label = gtk4::Label::new(Some(name.as_ref()));
-            name_label.add_css_class("caption");
-            let value_label = gtk4::Label::new(Some(*value));
-            value_label.add_css_class("body");
-            overview_grid.attach(&name_label, col as i32, 0, 1, 1);
-            overview_grid.attach(&value_label, col as i32, 1, 1, 1);
-            overview_labels.push(value_label);
-        }
-
-        overview.append(&overview_grid);
-
-        let overview_frame = gtk4::Frame::new(Some(tr!("Overview").as_ref()));
-        overview_frame.set_child(Some(&overview));
-
-        page.append(&overview_frame);
+        let overview = Rc::new(crate::gui::overview_panel::OverviewPanel::build(
+            tr!("Overview").as_ref(),
+            crate::gui::icon_key::ICON_DOWNLOAD,
+            overview_field_defs(),
+            overview_actions(gui_settings.clone()),
+        ));
+        page.append(&overview.widget);
+        crate::gui::overview_panel::restore_field_visibility(
+            overview.clone(),
+            {
+                let gui_settings = gui_settings.clone();
+                move || gui_settings.is_ready()
+            },
+            {
+                let gui_settings = gui_settings.clone();
+                move || {
+                    overview_field_defs()
+                        .into_iter()
+                        .map(|d| {
+                            let visible = gui_settings.get_flag(d.cfg_key, d.default_visible).unwrap_or(d.default_visible);
+                            (d.key, visible)
+                        })
+                        .collect()
+                }
+            },
+        );
 
         // Bottom bar
         let bottom_bar = gtk4::Box::new(gtk4::Orientation::Horizontal, 2);
@@ -1121,8 +1219,7 @@ impl DownloadsPanel {
             child_stores,
             selection,
             view,
-            properties,
-            overview_labels,
+            overview,
             expanded_state,
         }
     }
@@ -1138,10 +1235,11 @@ impl DownloadsPanel {
         app: adw::Application,
         toast_overlay: adw::ToastOverlay,
     ) {
+        let view = self.view.clone();
         let store = self.store.clone();
         let child_stores = self.child_stores.clone();
         let selection = self.selection.clone();
-        let overview_labels = self.overview_labels.clone();
+        let overview = self.overview.clone();
         let expanded_state = self.expanded_state.clone();
         let last_packages: Rc<RefCell<Vec<PackageRow>>> = Rc::new(RefCell::new(Vec::new()));
         let last_links_by_package: Rc<RefCell<HashMap<i64, Vec<DownloadRow>>>> =
@@ -1154,10 +1252,11 @@ impl DownloadsPanel {
 
         glib::source::timeout_add_local(Duration::from_secs(2), move || {
             let api = api.clone();
+            let view = view.clone();
             let store = store.clone();
             let child_stores = child_stores.clone();
             let selection = selection.clone();
-            let overview_labels = overview_labels.clone();
+            let overview = overview.clone();
             let expanded_state = expanded_state.clone();
             let last_packages = last_packages.clone();
             let last_links_by_package = last_links_by_package.clone();
@@ -1178,12 +1277,7 @@ impl DownloadsPanel {
 
             glib::MainContext::default().spawn_local(async move {
                 if let Ok((packages_json, links_json)) = rx.recv().await {
-                    if let Some(label) = overview_labels.first() {
-                        label.set_text(&packages_json.len().to_string());
-                    }
-                    if let Some(label) = overview_labels.get(1) {
-                        label.set_text(&links_json.len().to_string());
-                    }
+                    update_overview_values(&overview, packages_json.len(), &links_json);
                     let new_packages: Vec<PackageRow> =
                         packages_json.iter().map(package_row_from_json).collect();
                     let new_links: Vec<DownloadRow> =
@@ -1294,6 +1388,18 @@ impl DownloadsPanel {
                         links_by_package.entry(row.package_uuid).or_default().push(row);
                     }
 
+                    // sync_store/sync_store_keep_expanded rebuild rows via
+                    // remove_all()+re-append when the list changes, which
+                    // tears down the GtkListItem holding keyboard focus (if
+                    // the user had clicked a row). GTK doesn't reassign focus
+                    // on its own, so without this the Delete shortcut wired
+                    // on `view` silently stops receiving events a few
+                    // seconds after the row is touched.
+                    let had_focus = view
+                        .root()
+                        .and_then(|r| r.focus())
+                        .is_some_and(|f| f == view.clone().upcast::<gtk4::Widget>() || f.is_ancestor(&view));
+
                     sync_store_keep_expanded(
                         &store,
                         &mut last_packages.borrow_mut(),
@@ -1354,6 +1460,10 @@ impl DownloadsPanel {
                             }
                         }
                     }
+
+                    if had_focus {
+                        view.grab_focus();
+                    }
                 }
             });
             glib::ControlFlow::Continue
@@ -1395,22 +1505,47 @@ impl DownloadsPanel {
 }
 
 /// Walks the flattened tree and collects `(uuid, bytes_loaded)` for every
-/// currently selected *link* row (package-row selections are ignored: they
-/// aren't individually deletable as a single link id).
-fn selected_rows(selection: &gtk4::MultiSelection) -> Vec<(String, i64)> {
+/// row that should be removed for the current selection: individually
+/// selected link rows, plus (mirroring JDownloader) every link belonging to
+/// a selected package row, since deleting a package deletes all files
+/// inside it.
+fn selected_rows(
+    selection: &gtk4::MultiSelection,
+    child_stores: &Rc<RefCell<HashMap<i64, gio::ListStore>>>,
+) -> Vec<(String, i64)> {
     let bitset = selection.selection();
-    (0..bitset.size())
-        .filter_map(|i| {
-            let pos = bitset.nth(i as u32);
-            let tree_row = selection.item(pos).and_downcast::<gtk4::TreeListRow>()?;
-            if tree_row.depth() == 0 {
-                return None;
+    let stores = child_stores.borrow();
+    let mut seen = std::collections::HashSet::new();
+    let mut rows = Vec::new();
+    let mut push = |uuid: String, bytes_loaded: i64| {
+        if seen.insert(uuid.clone()) {
+            rows.push((uuid, bytes_loaded));
+        }
+    };
+    for i in 0..bitset.size() {
+        let pos = bitset.nth(i as u32);
+        let Some(tree_row) = selection.item(pos).and_downcast::<gtk4::TreeListRow>() else {
+            continue;
+        };
+        if tree_row.depth() == 0 {
+            let Some(obj) = tree_row.item().and_downcast::<glib::BoxedAnyObject>() else {
+                continue;
+            };
+            let package_uuid = obj.borrow::<PackageRow>().uuid;
+            if let Some(store) = stores.get(&package_uuid) {
+                for cpos in 0..store.n_items() {
+                    if let Some(child) = store.item(cpos).and_downcast::<glib::BoxedAnyObject>() {
+                        let row = child.borrow::<DownloadRow>();
+                        push(row.uuid.clone(), row.bytes_loaded);
+                    }
+                }
             }
-            let obj = tree_row.item()?.downcast::<glib::BoxedAnyObject>().ok()?;
+        } else if let Some(obj) = tree_row.item().and_downcast::<glib::BoxedAnyObject>() {
             let row = obj.borrow::<DownloadRow>();
-            Some((row.uuid.clone(), row.bytes_loaded))
-        })
-        .collect()
+            push(row.uuid.clone(), row.bytes_loaded);
+        }
+    }
+    rows
 }
 
 /// Removes link rows matching `uuids` from whichever per-package child store
@@ -1432,15 +1567,73 @@ fn remove_rows_by_uuid(
     }
 }
 
+/// Removes from the top-level store any package whose child store is now
+/// empty, so a package that was fully deleted disappears immediately
+/// instead of lingering as an empty row until the next periodic refresh.
+fn prune_empty_packages(
+    store: &gio::ListStore,
+    child_stores: &Rc<RefCell<HashMap<i64, gio::ListStore>>>,
+) {
+    let mut pos = store.n_items();
+    while pos > 0 {
+        pos -= 1;
+        if let Some(obj) = store.item(pos).and_downcast::<glib::BoxedAnyObject>() {
+            let uuid = obj.borrow::<PackageRow>().uuid;
+            let empty = child_stores
+                .borrow()
+                .get(&uuid)
+                .is_some_and(|s| s.n_items() == 0);
+            if empty {
+                store.remove(pos);
+                child_stores.borrow_mut().remove(&uuid);
+            }
+        }
+    }
+}
+
+/// Selects and focuses the flattened-tree row at `pos` (clamped to the last
+/// row once items have been removed), so after deleting a selection the row
+/// that slid up to fill its place ends up selected and focused — mirroring
+/// how most file managers handle "delete the selected item(s)".
+pub fn select_and_focus_row(view: &gtk4::ColumnView, selection: &gtk4::MultiSelection, pos: u32) {
+    let n = selection.n_items();
+    if n == 0 {
+        return;
+    }
+    let target = pos.min(n - 1);
+    selection.select_item(target, true);
+    // `ListScrollFlags::FOCUS` targets the row widget directly, but that
+    // widget may not be realized/mapped yet right after the model changes,
+    // in which case the focus request is silently dropped — the row still
+    // *looks* selected, but keyboard events (e.g. a second Delete) no
+    // longer reach it. Scroll the row into view, then grab focus on the
+    // already-mapped `view` itself, which GTK forwards to the selected row;
+    // this is the same reliable pattern used to restore focus after the
+    // periodic refresh.
+    view.scroll_to(target, None, gtk4::ListScrollFlags::SELECT, None);
+    view.grab_focus();
+}
+
 /// `DeleteFileOptions` enum names, as used by JDownloader's `/downloadsV2/cleanup`.
 const MODE_REMOVE_LINKS_ONLY: &str = "REMOVE_LINKS_ONLY";
 const MODE_RECYCLE_FILES: &str = "REMOVE_LINKS_AND_RECYCLE_FILES";
 const MODE_DELETE_FILES: &str = "REMOVE_LINKS_AND_DELETE_FILES";
 
+/// Config key for the "Don't show this again" checkbox on this dialog
+/// (mirrors JDownloader's per-dialog dont-show-again registry).
+const SKIP_CONFIRM_KEY: &str = "skip_confirm_downloads_remove";
+
 /// Shows JDownloader's "Are you sure?" removal dialog: a summary of what will
 /// be removed, plus (only when some data was already downloaded) a dropdown
-/// to also recycle or permanently delete the files on disk. Calls
-/// `on_confirm` with the chosen delete mode if the user confirms.
+/// to also recycle or permanently delete the files on disk. Always shown
+/// unless the user previously ticked "Don't show this again" — in that case
+/// files are only detached from the list, never silently recycled/deleted.
+/// Calls `on_confirm` with the chosen delete mode if the user confirms.
+///
+/// Uses a plain `gtk4::Window` rather than `adw::AlertDialog` so the "Don't
+/// show this again" checkbox can sit on the same row as the Continue/Cancel
+/// buttons, matching JDownloader's layout (`AlertDialog`'s response row is
+/// fixed and can't host extra widgets).
 fn confirm_remove<W: IsA<gtk4::Widget> + Clone + 'static>(
     parent: &W,
     link_count: usize,
@@ -1449,49 +1642,79 @@ fn confirm_remove<W: IsA<gtk4::Widget> + Clone + 'static>(
     links_left: usize,
     on_confirm: impl FnOnce(&'static str) + 'static,
 ) {
-    let mut body = format!(
-        "{}\n{}\n\n{}",
-        tr!("Are you sure that you want to do this:"),
-        tr!("Remove selected link" | "Remove selected links" % link_count),
-        tr!("{n} link to delete" | "{n} links to delete" % link_count),
-    );
-    if local_file_count > 0 {
-        body.push_str(&format!(
-            "\n{}",
-            tr!("{n} file ({}) on disk" | "{n} files ({}) on disk" % local_file_count,
-                format_size_jd(bytes_loaded))
-        ));
+    if crate::config::get_bool_map("dialog_prefs")
+        .get(SKIP_CONFIRM_KEY)
+        .copied()
+        .unwrap_or(false)
+    {
+        on_confirm(MODE_REMOVE_LINKS_ONLY);
+        return;
     }
-    body.push_str(&format!(
-        "\n{}",
-        tr!("Links left in list: {}", links_left)
-    ));
 
-    let dialog = adw::AlertDialog::builder()
-        .heading(tr!("Are you sure?").to_string())
-        .close_response("cancel")
-        .default_response("cancel")
-        .build();
-    dialog.add_response("remove", tr!("Delete").as_ref());
-    dialog.add_response("cancel", tr!("Cancel").as_ref());
-    dialog.set_response_appearance("remove", adw::ResponseAppearance::Destructive);
+    let Some(parent_window) = parent.root().and_then(|r| r.downcast::<gtk4::Window>().ok())
+    else {
+        on_confirm(MODE_REMOVE_LINKS_ONLY);
+        return;
+    };
+
+    let dialog = gtk4::Window::new();
+    dialog.set_transient_for(Some(&parent_window));
+    dialog.set_modal(true);
+    dialog.set_resizable(false);
+    dialog.set_title(Some(tr!("Are you sure?").as_ref()));
+
+    let outer = gtk4::Box::new(gtk4::Orientation::Vertical, 0);
 
     let content = gtk4::Box::new(gtk4::Orientation::Horizontal, 12);
+    content.set_margin_top(18);
+    content.set_margin_bottom(12);
+    content.set_margin_start(18);
+    content.set_margin_end(18);
+
     let robot = gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(
         crate::gui::icon_key::ICON_BOTTY_STOP,
     ));
-    robot.set_pixel_size(125);
+    robot.set_pixel_size(100);
     robot.set_valign(gtk4::Align::Start);
     content.append(&robot);
 
-    let text_box = gtk4::Box::new(gtk4::Orientation::Vertical, 8);
+    let text_box = gtk4::Box::new(gtk4::Orientation::Vertical, 10);
     text_box.set_hexpand(true);
 
-    let body_label = gtk4::Label::new(Some(&body));
-    body_label.set_halign(gtk4::Align::Start);
-    body_label.set_xalign(0.0);
-    body_label.set_wrap(true);
-    text_box.append(&body_label);
+    let intro_label = gtk4::Label::new(Some(&format!(
+        "{}\n{}",
+        tr!("Do you really want to perform this clean up action:"),
+        tr!("Delete Selected Downloads?")
+    )));
+    intro_label.set_halign(gtk4::Align::Start);
+    intro_label.set_xalign(0.0);
+    intro_label.set_wrap(true);
+    text_box.append(&intro_label);
+
+    let tasks_label = gtk4::Label::new(Some(tr!("Tasks to do:").as_ref()));
+    tasks_label.set_halign(gtk4::Align::Start);
+    tasks_label.set_xalign(0.0);
+    tasks_label.add_css_class("heading");
+    tasks_label.set_margin_top(6);
+    text_box.append(&tasks_label);
+
+    let mut task_text = format!(
+        "{} — {}",
+        tr!("Delete selected link" | "Delete selected links" % link_count),
+        tr!("{n} link remaining" | "{n} links remaining" % links_left),
+    );
+    if local_file_count > 0 {
+        task_text.push('\n');
+        task_text.push_str(&tr!(
+            "{n} file ({}) on disk" | "{n} files ({}) on disk" % local_file_count,
+            format_size_jd(bytes_loaded)
+        ));
+    }
+    let task_label = gtk4::Label::new(Some(&task_text));
+    task_label.set_halign(gtk4::Align::Start);
+    task_label.set_xalign(0.0);
+    task_label.set_wrap(true);
+    text_box.append(&task_label);
 
     let mode_dropdown = if bytes_loaded > 0 {
         let options = [
@@ -1503,38 +1726,98 @@ fn confirm_remove<W: IsA<gtk4::Widget> + Clone + 'static>(
         let option_refs: Vec<&str> = options.iter().map(String::as_str).collect();
         let dropdown = gtk4::DropDown::from_strings(&option_refs);
         dropdown.set_selected(0);
+        dropdown.set_margin_top(6);
         text_box.append(&dropdown);
         Some(dropdown)
     } else {
         None
     };
-    content.append(&text_box);
-    dialog.set_extra_child(Some(&content));
 
-    let parent = parent.clone();
-    glib::MainContext::default().spawn_local(async move {
-        if dialog.choose_future(Some(&parent)).await == "remove" {
-            let mode = match mode_dropdown.map(|d| d.selected()) {
-                Some(1) => MODE_RECYCLE_FILES,
-                Some(2) => MODE_DELETE_FILES,
-                _ => MODE_REMOVE_LINKS_ONLY,
-            };
-            on_confirm(mode);
+    content.append(&text_box);
+    outer.append(&content);
+
+    let button_row = gtk4::Box::new(gtk4::Orientation::Horizontal, 12);
+    button_row.set_margin_top(6);
+    button_row.set_margin_bottom(12);
+    button_row.set_margin_start(18);
+    button_row.set_margin_end(18);
+
+    let dont_show_again = gtk4::CheckButton::with_label(tr!("Don't show this again").as_ref());
+    dont_show_again.set_valign(gtk4::Align::Center);
+    dont_show_again.set_hexpand(true);
+    dont_show_again.set_halign(gtk4::Align::Start);
+    button_row.append(&dont_show_again);
+
+    let cancel_btn = gtk4::Button::with_label(tr!("Cancel").as_ref());
+    let continue_btn = gtk4::Button::with_label(tr!("Continue").as_ref());
+    continue_btn.add_css_class("suggested-action");
+
+    let button_size_group = gtk4::SizeGroup::new(gtk4::SizeGroupMode::Horizontal);
+    button_size_group.add_widget(&cancel_btn);
+    button_size_group.add_widget(&continue_btn);
+
+    let buttons_box = gtk4::Box::new(gtk4::Orientation::Horizontal, 12);
+    buttons_box.set_halign(gtk4::Align::End);
+    buttons_box.append(&continue_btn);
+    buttons_box.append(&cancel_btn);
+    button_row.append(&buttons_box);
+    outer.append(&button_row);
+
+    dialog.set_child(Some(&outer));
+    dialog.set_default_widget(Some(&continue_btn));
+
+    let escape_controller = gtk4::EventControllerKey::new();
+    escape_controller.connect_key_pressed({
+        let cancel_btn = cancel_btn.clone();
+        move |_, key, _, _| {
+            if key == gtk4::gdk::Key::Escape {
+                cancel_btn.activate();
+                glib::Propagation::Stop
+            } else {
+                glib::Propagation::Proceed
+            }
         }
     });
+    dialog.add_controller(escape_controller);
+
+    cancel_btn.connect_clicked({
+        let dialog = dialog.clone();
+        move |_| dialog.close()
+    });
+
+    let on_confirm = Rc::new(RefCell::new(Some(on_confirm)));
+    let dialog_c = dialog.clone();
+    continue_btn.connect_clicked(move |_| {
+        if dont_show_again.is_active() {
+            crate::config::set_bool_entry("dialog_prefs", SKIP_CONFIRM_KEY, true);
+        }
+        let mode = match mode_dropdown.as_ref().map(|d| d.selected()) {
+            Some(1) => MODE_RECYCLE_FILES,
+            Some(2) => MODE_DELETE_FILES,
+            _ => MODE_REMOVE_LINKS_ONLY,
+        };
+        if let Some(f) = on_confirm.borrow_mut().take() {
+            f(mode);
+        }
+        dialog_c.close();
+    });
+
+    dialog.present();
+    continue_btn.grab_focus();
 }
 
 /// Removes the selected downloads from the list, mirroring JDownloader's
 /// "Remove"/"Delete" action: prompts for confirmation (as JDownloader does)
 /// and, depending on the chosen mode, either only detaches the entries from
 /// the list or also recycles/permanently deletes the downloaded files.
-pub fn remove_selected<W: IsA<gtk4::Widget> + Clone + 'static>(
+pub fn remove_selected(
     api: &Arc<JdApi>,
     selection: &gtk4::MultiSelection,
+    store: &gio::ListStore,
     child_stores: &Rc<RefCell<HashMap<i64, gio::ListStore>>>,
-    parent: &W,
+    view: &gtk4::ColumnView,
 ) {
-    let rows = selected_rows(selection);
+    let rows = selected_rows(selection, child_stores);
     if rows.is_empty() {
         return;
     }
@@ -1550,10 +1833,18 @@ pub fn remove_selected<W: IsA<gtk4::Widget> + Clone + 'static>(
     let uuids: std::collections::HashSet<String> =
         rows.into_iter().map(|(uuid, _)| uuid).collect();
 
+    // Lowest flattened-tree position among the rows about to be removed:
+    // once they're gone, the row that slides up into this position is the
+    // one immediately below the deleted selection.
+    let focus_pos = selection.selection().minimum();
+
     let api = api.clone();
+    let store = store.clone();
     let child_stores = child_stores.clone();
+    let selection = selection.clone();
+    let view = view.clone();
     confirm_remove(
-        parent,
+        &view.clone(),
         link_count,
         bytes_loaded,
         local_file_count,
@@ -1566,6 +1857,8 @@ pub fn remove_selected<W: IsA<gtk4::Widget> + Clone + 'static>(
                 },
                 move |_| {
                     remove_rows_by_uuid(&child_stores, &uuids);
+                    prune_empty_packages(&store, &child_stores);
+                    select_and_focus_row(&view, &selection, focus_pos);
                 },
             );
         },
@@ -1598,7 +1891,7 @@ pub(crate) fn file_type_icon_key(name: &str) -> &'static str {
 }
 
 /// Shared JSON pointer-based getters for both link and package payloads.
-fn get_str_at(value: &Value, key: &str) -> String {
+pub(crate) fn get_str_at(value: &Value, key: &str) -> String {
     value
         .pointer(&format!("/{}", key))
         .or_else(|| value.pointer(&format!("/infoMap/{}", key)))
@@ -1607,19 +1900,77 @@ fn get_str_at(value: &Value, key: &str) -> String {
         .to_string()
 }
 
-fn get_num_at(value: &Value, key: &str) -> Option<i64> {
+pub(crate) fn get_num_at(value: &Value, key: &str) -> Option<i64> {
     value
         .pointer(&format!("/{}", key))
         .or_else(|| value.pointer(&format!("/infoMap/{}", key)))
         .and_then(Value::as_i64)
 }
 
-fn get_bool_at(value: &Value, key: &str) -> bool {
+pub(crate) fn get_bool_at(value: &Value, key: &str) -> bool {
     value
         .pointer(&format!("/{}", key))
         .or_else(|| value.pointer(&format!("/infoMap/{}", key)))
         .and_then(Value::as_bool)
         .unwrap_or(false)
+}
+
+/// A link is "failed" once JDownloader has attached a `FinalLinkState` that
+/// isn't one of the `FINISHED*` variants — mirrors
+/// `org.jdownloader.plugins.FinalLinkState.isFailed()` (`!isFinished()`).
+fn is_failed_link(link: &Value) -> bool {
+    link.pointer("/advancedStatus/FinalLinkState/id")
+        .and_then(Value::as_str)
+        .map(|id| !id.starts_with("FINISHED"))
+        .unwrap_or(false)
+}
+
+/// Recomputes every Overview stat from the flat list of download links (the
+/// same aggregation JDownloader's `AggregatedNumbers` does over its
+/// `SelectionInfo`), and pushes the results into `overview`.
+fn update_overview_values(overview: &crate::gui::overview_panel::OverviewPanel, packages_len: usize, links_json: &[Value]) {
+    let mut bytes_total: i64 = 0;
+    let mut bytes_loaded: i64 = 0;
+    let mut speed: i64 = 0;
+    let mut running = 0i64;
+    let mut finished = 0i64;
+    let mut skipped = 0i64;
+    let mut failed = 0i64;
+    for link in links_json {
+        bytes_total += get_num_at(link, "bytesTotal").unwrap_or(0);
+        bytes_loaded += get_num_at(link, "bytesLoaded").unwrap_or(0);
+        if get_bool_at(link, "running") {
+            running += 1;
+            speed += get_num_at(link, "speed").unwrap_or(0);
+        }
+        if get_bool_at(link, "finished") {
+            finished += 1;
+        }
+        if get_bool_at(link, "skipped") {
+            skipped += 1;
+        }
+        if is_failed_link(link) {
+            failed += 1;
+        }
+    }
+    let remaining = (bytes_total - bytes_loaded).max(0);
+    let eta = if speed > 0 {
+        format_seconds(remaining / speed)
+    } else {
+        String::from("-")
+    };
+
+    overview.set_value(OVERVIEW_PACKAGES, &packages_len.to_string());
+    overview.set_value(OVERVIEW_LINKS, &links_json.len().to_string());
+    overview.set_value(OVERVIEW_SIZE, &format_size_jd(bytes_total));
+    overview.set_value(OVERVIEW_SPEED, &format!("{}/s", format_size_jd(speed)));
+    overview.set_value(OVERVIEW_LOADED, &format_size_jd(bytes_loaded));
+    overview.set_value(OVERVIEW_REMAINING, &format_size_jd(remaining));
+    overview.set_value(OVERVIEW_ETA, &eta);
+    overview.set_value(OVERVIEW_RUNNING, &running.to_string());
+    overview.set_value(OVERVIEW_FINISHED, &finished.to_string());
+    overview.set_value(OVERVIEW_SKIPPED, &skipped.to_string());
+    overview.set_value(OVERVIEW_FAILED, &failed.to_string());
 }
 
 fn format_seconds(seconds: i64) -> String {

@@ -9,6 +9,10 @@ pub mod help;
 pub mod settings;
 pub mod tools;
 
+/// Custom widgets to register on the hosting `PopoverMenu`/`PopoverMenuBar`
+/// via `add_child`, paired with the "custom" attribute id they render for.
+pub type MenuChildren = Vec<(gtk4::Widget, String)>;
+
 pub fn custom_item(label: &str, detailed_action: Option<&str>, id: &str) -> gio::MenuItem {
     let item = gio::MenuItem::new(Some(label), detailed_action);
     item.set_attribute_value("custom", Some(&glib::Variant::from(id)));
@@ -66,26 +70,28 @@ pub fn merged_icon_label(
     bx
 }
 
-pub fn text_label(label: &str) -> gtk4::Label {
-    gtk4::Label::new(Some(label))
+/// Closes the nearest ancestor popover of `widget`, if any. Custom children
+/// added to a `PopoverMenu`/`PopoverMenuBar` via `add_child` are plain
+/// buttons and don't auto-close their popover on activation like native
+/// menu-model items do, so callers close it by hand after the action runs.
+fn popdown_ancestor(widget: &impl IsA<gtk4::Widget>) {
+    if let Some(popover) = widget
+        .as_ref()
+        .ancestor(gtk4::Popover::static_type())
+        .and_then(|w| w.downcast::<gtk4::Popover>().ok())
+    {
+        popover.popdown();
+    }
 }
 
-pub fn action_button(
-    icon: &str,
-    label: &str,
-    action: &str,
-    popover: &gtk4::PopoverMenu,
-) -> gtk4::Button {
+pub fn action_button(icon: &str, label: &str, action: &str) -> gtk4::Button {
     let btn = gtk4::Button::builder()
         .child(&icon_label(icon, label))
         .has_frame(false)
         .halign(gtk4::Align::Fill)
         .action_name(action)
         .build();
-    let popover = popover.clone();
-    btn.connect_clicked(move |_| {
-        popover.popdown();
-    });
+    btn.connect_clicked(popdown_ancestor);
     btn
 }
 
@@ -98,7 +104,6 @@ pub fn merged_action_button(
     y: f64,
     label: &str,
     action: &str,
-    popover: &gtk4::PopoverMenu,
 ) -> gtk4::Button {
     let btn = gtk4::Button::builder()
         .child(&merged_icon_label(
@@ -108,10 +113,7 @@ pub fn merged_action_button(
         .halign(gtk4::Align::Fill)
         .action_name(action)
         .build();
-    let popover = popover.clone();
-    btn.connect_clicked(move |_| {
-        popover.popdown();
-    });
+    btn.connect_clicked(popdown_ancestor);
     btn
 }
 
@@ -121,14 +123,6 @@ pub fn disabled_button(icon: &str, label: &str) -> gtk4::Button {
         .has_frame(false)
         .halign(gtk4::Align::Fill)
         .sensitive(false)
-        .build()
-}
-
-pub fn top_menu_button(label: &str, popover: &gtk4::PopoverMenu) -> gtk4::MenuButton {
-    gtk4::MenuButton::builder()
-        .child(&text_label(label))
-        .has_frame(false)
-        .popover(popover)
         .build()
 }
 

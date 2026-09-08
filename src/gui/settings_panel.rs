@@ -3,7 +3,10 @@ use std::rc::Rc;
 
 use adw::prelude::*;
 
-use crate::gui::components::settings::{AccountManagerPage, GeneralSettingsPage};
+use crate::gui::components::settings::{
+    AccountManagerPage, ExtensionManagerPage, GeneralSettingsPage, PackageManagerPage,
+    ScriptsPage,
+};
 use crate::gui::jd_icon;
 use crate::jd::GraphicalUserInterfaceSettings;
 
@@ -31,6 +34,15 @@ impl SettingsPanel {
                 &AccountManagerPage::build(),
                 tr!("Account Manager").as_ref(),
             ),
+            adw::NavigationPage::new(
+                &PackageManagerPage::build(),
+                tr!("Package Manager").as_ref(),
+            ),
+            adw::NavigationPage::new(
+                &ExtensionManagerPage::build(),
+                tr!("Extension Manager").as_ref(),
+            ),
+            adw::NavigationPage::new(&ScriptsPage::build(), tr!("Scripts").as_ref()),
         ];
         let pages = Rc::new(pages);
 
@@ -40,6 +52,15 @@ impl SettingsPanel {
                 crate::gui::icon_key::ICON_PREMIUM,
                 tr!("Account Manager").as_ref(),
             ),
+            Self::sidebar_row(
+                crate::gui::icon_key::ICON_PACKAGIZER,
+                tr!("Package Manager").as_ref(),
+            ),
+            Self::sidebar_row(
+                crate::gui::icon_key::ICON_EXTENSIONMANAGER,
+                tr!("Extension Manager").as_ref(),
+            ),
+            Self::sidebar_row(crate::gui::icon_key::ICON_EVENT, tr!("Scripts").as_ref()),
         ];
         for row in &rows {
             listbox.append(row);

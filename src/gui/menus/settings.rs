@@ -1,8 +1,9 @@
+use adw::prelude::*;
 use gtk4::gio;
 
-use super::{action_button, custom_item, disabled_button};
+use super::{action_button, custom_item, disabled_button, MenuChildren};
 
-pub fn build() -> gtk4::PopoverMenu {
+pub fn build() -> (gio::Menu, MenuChildren) {
     let settings_menu = gio::Menu::new();
     let settings_top_section = gio::Menu::new();
     settings_top_section.append_item(&custom_item(
@@ -40,31 +41,32 @@ pub fn build() -> gtk4::PopoverMenu {
     ));
     settings_menu.append_section(None, &settings_tuning_section);
 
-    let settings_popover = gtk4::PopoverMenu::from_model(Some(&settings_menu));
-    settings_popover.add_child(
-        &action_button("settings", tr!("Settings").as_ref(), "win.settings", &settings_popover),
-        "settings-settings",
-    );
-    settings_popover.add_child(
-        &disabled_button("myjdownloader", tr!("My.JDownloader").as_ref()),
-        "settings-myjd",
-    );
-    settings_popover.add_child(
-        &disabled_button("chunks", tr!("Max. Chunks per Download").as_ref()),
-        "settings-chunks",
-    );
-    settings_popover.add_child(
-        &disabled_button("paralell", tr!("Max. simultaneous Downloads").as_ref()),
-        "settings-sim",
-    );
-    settings_popover.add_child(
-        &disabled_button("batch", tr!("Max. sim. Downloads per Hoster").as_ref()),
-        "settings-host",
-    );
-    settings_popover.add_child(
-        &disabled_button("speed", tr!("Speed Limit").as_ref()),
-        "settings-speed",
-    );
+    let children: MenuChildren = vec![
+        (
+            action_button("settings", tr!("Settings").as_ref(), "win.settings").upcast(),
+            "settings-settings".to_string(),
+        ),
+        (
+            disabled_button("myjdownloader", tr!("My.JDownloader").as_ref()).upcast(),
+            "settings-myjd".to_string(),
+        ),
+        (
+            disabled_button("chunks", tr!("Max. Chunks per Download").as_ref()).upcast(),
+            "settings-chunks".to_string(),
+        ),
+        (
+            disabled_button("paralell", tr!("Max. simultaneous Downloads").as_ref()).upcast(),
+            "settings-sim".to_string(),
+        ),
+        (
+            disabled_button("batch", tr!("Max. sim. Downloads per Hoster").as_ref()).upcast(),
+            "settings-host".to_string(),
+        ),
+        (
+            disabled_button("speed", tr!("Speed Limit").as_ref()).upcast(),
+            "settings-speed".to_string(),
+        ),
+    ];
 
-    settings_popover
+    (settings_menu, children)
 }

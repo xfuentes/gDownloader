@@ -1,3 +1,4 @@
+pub mod cells;
 pub mod clipboard;
 pub mod components;
 pub mod spawn;
@@ -13,6 +14,7 @@ pub mod main_menu_bar;
 pub mod main_tool_bar;
 pub mod menus;
 pub mod notifications;
+pub mod overview_panel;
 pub mod properties_panel;
 pub mod settings_panel;
 pub mod tray;
@@ -111,7 +113,7 @@ pub fn build_ui(app: &adw::Application) {
     let header = adw::HeaderBar::new();
     let window_title = adw::WindowTitle::new(
         title.as_str(),
-        tr!("JDownloader for GNOME").as_ref(),
+        tr!("The power of JDownloader, the elegance of GNOME").as_ref(),
     );
     header.set_title_widget(Some(&window_title));
 
@@ -181,9 +183,11 @@ pub fn build_ui(app: &adw::Application) {
     remove_selected_action.connect_activate({
         let api = Arc::clone(&api);
         let selection = collector.selection.clone();
+        let store = collector.store.clone();
         let child_stores = collector.child_stores.clone();
+        let view = collector.view.clone();
         move |_, _| {
-            link_grabber_panel::remove_selected(&api, &selection, &child_stores);
+            link_grabber_panel::remove_selected(&api, &selection, &store, &child_stores, &view);
         }
     });
     linkgrabber_actions.add_action(&remove_selected_action);
@@ -214,7 +218,7 @@ pub fn build_ui(app: &adw::Application) {
     context_popover.add_child(
         &menus::merged_action_button(
             icon_key::ICON_MEDIA_PLAYBACK_START, 16, icon_key::ICON_ADD, 14,
-            6.0, 6.0, tr!("Start Downloads").as_ref(), "linkgrabber.start", &context_popover,
+            6.0, 6.0, tr!("Start Downloads").as_ref(), "linkgrabber.start",
         ),
         "linkgrabber-start",
     );
@@ -222,13 +226,12 @@ pub fn build_ui(app: &adw::Application) {
         &menus::merged_action_button(
             icon_key::ICON_MEDIA_PLAYBACK_START, 16, icon_key::ICON_ADD, 14,
             6.0, 6.0, tr!("Start All Downloads").as_ref(), "linkgrabber.start-all",
-            &context_popover,
         ),
         "linkgrabber-start-all",
     );
     context_popover.add_child(
         &menus::action_button(
-            icon_key::ICON_DELETE, tr!("Delete").as_ref(), "linkgrabber.remove", &context_popover,
+            icon_key::ICON_DELETE, tr!("Delete").as_ref(), "linkgrabber.remove",
         ),
         "linkgrabber-remove",
     );
@@ -248,10 +251,12 @@ pub fn build_ui(app: &adw::Application) {
     collector_key_controller.connect_key_pressed({
         let api = Arc::clone(&api);
         let selection = collector.selection.clone();
+        let store = collector.store.clone();
         let child_stores = collector.child_stores.clone();
+        let view = collector.view.clone();
         move |_, key, _, _| {
             if key == gtk4::gdk::Key::Delete {
-                link_grabber_panel::remove_selected(&api, &selection, &child_stores);
+                link_grabber_panel::remove_selected(&api, &selection, &store, &child_stores, &view);
                 glib::Propagation::Stop
             } else {
                 glib::Propagation::Proceed
@@ -266,10 +271,11 @@ pub fn build_ui(app: &adw::Application) {
     remove_downloads_action.connect_activate({
         let api = Arc::clone(&api);
         let selection = downloads.selection.clone();
+        let store = downloads.store.clone();
         let child_stores = downloads.child_stores.clone();
         let view = downloads.view.clone();
         move |_, _| {
-            downloads_panel::remove_selected(&api, &selection, &child_stores, &view);
+            downloads_panel::remove_selected(&api, &selection, &store, &child_stores, &view);
         }
     });
     downloads_actions.add_action(&remove_downloads_action);
@@ -288,7 +294,6 @@ pub fn build_ui(app: &adw::Application) {
     downloads_context_popover.add_child(
         &menus::action_button(
             icon_key::ICON_DELETE, tr!("Delete").as_ref(), "downloads.remove",
-            &downloads_context_popover,
         ),
         "downloads-remove",
     );
@@ -308,11 +313,12 @@ pub fn build_ui(app: &adw::Application) {
     downloads_key_controller.connect_key_pressed({
         let api = Arc::clone(&api);
         let selection = downloads.selection.clone();
+        let store = downloads.store.clone();
         let child_stores = downloads.child_stores.clone();
         let view = downloads.view.clone();
         move |_, key, _, _| {
             if key == gtk4::gdk::Key::Delete {
-                downloads_panel::remove_selected(&api, &selection, &child_stores, &view);
+                downloads_panel::remove_selected(&api, &selection, &store, &child_stores, &view);
                 glib::Propagation::Stop
             } else {
                 glib::Propagation::Proceed
@@ -471,7 +477,6 @@ pub fn build_ui(app: &adw::Application) {
         tab_bar.set_hexpand(true);
         tab_bar.set_margin_start(0);
         tab_bar.set_margin_end(0);
-        tab_bar.add_css_class("compact-tabbar");
 
         let toolbar_view = adw::ToolbarView::new();
         toolbar_view.add_top_bar(&header);

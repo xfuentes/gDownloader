@@ -1,0 +1,1327 @@
+# Korean translations for gdownloader package.
+# Copyright (C) 2026 THE gdownloader'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gdownloader package.
+# Xavier Fuentes <xfuentes-dev@serviam.cc>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gdownloader 0.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-08 05:50+0000\n"
+"PO-Revision-Date: 2026-09-07 17:48+0200\n"
+"Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
+"Language-Team: Korean <translation-team-ko@googlegroups.com>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/app.rs:18
+msgid "Error: {}"
+msgstr "오류: {}"
+
+#: src/app.rs:39
+msgid "JDownloader did not respond in time"
+msgstr "JDownloader가 제시간에 응답하지 않았습니다"
+
+#: src/gui/overview_panel.rs:114 src/gui/properties_panel.rs:201
+msgid "Choose visible fields"
+msgstr "표시할 필드 선택"
+
+#: src/gui/clipboard.rs:208
+msgid "New links from clipboard"
+msgstr "클립보드에서 새 링크"
+
+#: src/gui/clipboard.rs:210
+msgid "New links from clipboard ({})"
+msgstr "클립보드에서 새 링크 ({})"
+
+#: src/gui/clipboard.rs:212
+msgid "One link captured"
+msgid_plural "{n} links captured"
+msgstr[0] "{n}개의 링크를 수집했습니다"
+
+#: src/gui/clipboard.rs:225
+msgid "Show"
+msgstr "표시"
+
+#: src/gui/settings_panel.rs:32 src/gui/settings_panel.rs:50
+msgid "General"
+msgstr "일반"
+
+#: src/gui/settings_panel.rs:35 src/gui/settings_panel.rs:53
+#: src/gui/components/settings/account_manager.rs:43
+msgid "Account Manager"
+msgstr "계정 관리자"
+
+#: src/gui/settings_panel.rs:39 src/gui/settings_panel.rs:57
+#: src/gui/components/settings/package_manager.rs:54
+msgid "Package Manager"
+msgstr "패키지 관리자"
+
+#: src/gui/settings_panel.rs:43 src/gui/settings_panel.rs:61
+#: src/gui/components/settings/extension_manager.rs:69
+msgid "Extension Manager"
+msgstr "확장 관리자"
+
+#: src/gui/settings_panel.rs:45 src/gui/settings_panel.rs:63
+#: src/gui/components/settings/scripts.rs:51
+msgid "Scripts"
+msgstr "스크립트"
+
+#: src/gui/settings_panel.rs:72 src/gui/settings_panel.rs:123
+#: src/gui/settings_panel.rs:138 src/gui/main_menu_bar.rs:37
+#: src/gui/menus/settings.rs:10 src/gui/menus/settings.rs:46
+#: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
+msgid "Settings"
+msgstr "설정"
+
+#: src/gui/link_grabber_panel.rs:132 src/gui/downloads_panel.rs:168
+msgid "Packages"
+msgstr "패키지"
+
+#: src/gui/link_grabber_panel.rs:138 src/gui/downloads_panel.rs:174
+msgid "Links"
+msgstr "링크"
+
+#: src/gui/link_grabber_panel.rs:144 src/gui/link_grabber_panel.rs:715
+#: src/gui/link_grabber_panel.rs:720 src/gui/downloads_panel.rs:180
+#: src/gui/downloads_panel.rs:725 src/gui/downloads_panel.rs:730
+msgid "Size"
+msgstr "크기"
+
+#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1888
+msgid "Online"
+msgstr "온라인"
+
+#: src/gui/link_grabber_panel.rs:156 src/gui/link_grabber_panel.rs:786
+#: src/gui/link_grabber_panel.rs:788 src/gui/downloads_panel.rs:737
+#: src/gui/downloads_panel.rs:739 src/gui/components/account_table.rs:182
+msgid "Hoster"
+msgstr "호스터"
+
+#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1892
+msgid "Offline"
+msgstr "오프라인"
+
+#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1900
+msgid "Unknown"
+msgstr "알 수 없음"
+
+#: src/gui/link_grabber_panel.rs:483 src/gui/main_menu_bar.rs:36
+msgid "File"
+msgstr "파일"
+
+#: src/gui/link_grabber_panel.rs:692 src/gui/link_grabber_panel.rs:694
+msgid "Variant"
+msgstr "변형"
+
+#: src/gui/link_grabber_panel.rs:702 src/gui/link_grabber_panel.rs:707
+#: src/gui/downloads_panel.rs:895 src/gui/downloads_panel.rs:900
+msgid "Save To"
+msgstr "저장 위치"
+
+#: src/gui/link_grabber_panel.rs:795 src/gui/link_grabber_panel.rs:799
+msgid "Availability"
+msgstr "가용성"
+
+#: src/gui/link_grabber_panel.rs:824 src/gui/downloads_panel.rs:936
+msgid "Choose visible columns"
+msgstr "표시할 열 선택"
+
+#: src/gui/link_grabber_panel.rs:1019 src/gui/link_grabber_panel.rs:1194
+#: src/gui/downloads_panel.rs:1056 src/gui/downloads_panel.rs:1194
+#: src/gui/components/account_table.rs:248
+msgid "Overview"
+msgstr "개요"
+
+#: src/gui/link_grabber_panel.rs:1054 src/gui/downloads_panel.rs:1098
+msgid "Add links to linkgrabber"
+msgstr "링크그래버에 링크 추가"
+
+#: src/gui/link_grabber_panel.rs:1063 src/gui/downloads_panel.rs:1107
+msgid "Add links"
+msgstr "링크 추가"
+
+#: src/gui/link_grabber_panel.rs:1063 src/gui/downloads_panel.rs:1107
+msgid "Add container"
+msgstr "컨테이너 추가"
+
+#: src/gui/link_grabber_panel.rs:1063 src/gui/downloads_panel.rs:1107
+msgid "Paste links"
+msgstr "링크 붙여넣기"
+
+#: src/gui/link_grabber_panel.rs:1086
+msgid "Clear linkgrabber"
+msgstr "링크그래버 비우기"
+
+#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:210 src/gui/mod.rs:234
+#: src/gui/mod.rs:287 src/gui/mod.rs:296
+msgid "Delete"
+msgstr "삭제"
+
+#: src/gui/link_grabber_panel.rs:1105 src/gui/downloads_panel.rs:1144
+msgid "Delete disabled"
+msgstr "비활성 항목 삭제"
+
+#: src/gui/link_grabber_panel.rs:1106 src/gui/downloads_panel.rs:1147
+msgid "Delete offline"
+msgstr "오프라인 항목 삭제"
+
+#: src/gui/link_grabber_panel.rs:1107
+msgid "Remove incomplete archives"
+msgstr "불완전한 압축 파일 제거"
+
+#: src/gui/link_grabber_panel.rs:1108
+msgid "Clear filtered links"
+msgstr "필터링된 링크 지우기"
+
+#: src/gui/link_grabber_panel.rs:1129 src/gui/downloads_panel.rs:1171
+msgid "Filter"
+msgstr "필터"
+
+#: src/gui/link_grabber_panel.rs:1138
+msgid "Add filtered stuff"
+msgstr "필터링된 항목 추가"
+
+#: src/gui/link_grabber_panel.rs:1148
+msgid "Add to download list"
+msgstr "다운로드 목록에 추가"
+
+#: src/gui/link_grabber_panel.rs:1160
+msgid "Add and start all"
+msgstr "모두 추가하고 시작"
+
+#: src/gui/link_grabber_panel.rs:1161
+msgid "Add and start selected"
+msgstr "선택 항목 추가하고 시작"
+
+#: src/gui/link_grabber_panel.rs:1162
+msgid "Add all"
+msgstr "모두 추가"
+
+#: src/gui/link_grabber_panel.rs:1163
+msgid "Add selected"
+msgstr "선택 항목 추가"
+
+#: src/gui/link_grabber_panel.rs:1189
+msgid "Add at top"
+msgstr "맨 위에 추가"
+
+#: src/gui/link_grabber_panel.rs:1190
+msgid "Auto confirm"
+msgstr "자동 확인"
+
+#: src/gui/link_grabber_panel.rs:1191
+msgid "Auto start"
+msgstr "자동 시작"
+
+#: src/gui/link_grabber_panel.rs:1192
+msgid "Link filter"
+msgstr "링크 필터"
+
+#: src/gui/link_grabber_panel.rs:1193 src/gui/downloads_panel.rs:1193
+msgid "Properties"
+msgstr "속성"
+
+#: src/gui/link_grabber_panel.rs:1195
+msgid "Sidebar"
+msgstr "사이드바"
+
+#: src/gui/link_grabber_panel.rs:1196 src/gui/downloads_panel.rs:1195
+msgid "Bottom bar manager"
+msgstr "하단 바 관리자"
+
+#: src/gui/link_grabber_panel.rs:1617 src/gui/downloads_panel.rs:1664
+msgid "Are you sure?"
+msgstr "확실합니까?"
+
+#: src/gui/link_grabber_panel.rs:1639 src/gui/downloads_panel.rs:1686
+msgid "Do you really want to perform this clean up action:"
+msgstr "이 정리 작업을 정말로 수행하시겠습니까:"
+
+#: src/gui/link_grabber_panel.rs:1640
+msgid "Delete Selected Links?"
+msgstr "선택한 링크를 삭제하시겠습니까?"
+
+#: src/gui/link_grabber_panel.rs:1647 src/gui/downloads_panel.rs:1694
+msgid "Tasks to do:"
+msgstr "수행할 작업:"
+
+#: src/gui/link_grabber_panel.rs:1656 src/gui/downloads_panel.rs:1703
+msgid "Delete selected link"
+msgid_plural "Delete selected links"
+msgstr[0] "선택한 링크 삭제"
+
+#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
+msgid "{n} link remaining"
+msgid_plural "{n} links remaining"
+msgstr[0] "{n}개의 링크 남음"
+
+#: src/gui/link_grabber_panel.rs:1674 src/gui/downloads_panel.rs:1745
+msgid "Don't show this again"
+msgstr "다시 표시하지 않음"
+
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.2.0)  #-#-#-#-#
+#. Buttons
+#: src/gui/link_grabber_panel.rs:1680 src/gui/downloads_panel.rs:1751
+#: src/gui/dialogs/account_add_dialog.rs:114
+#: src/gui/dialogs/packagizer_rule_dialog.rs:443
+#: src/gui/dialogs/script_edit_dialog.rs:96 src/gui/donate.rs:33
+msgid "Cancel"
+msgstr "취소"
+
+#: src/gui/link_grabber_panel.rs:1681 src/gui/downloads_panel.rs:1752
+#: src/gui/donate.rs:37
+msgid "Continue"
+msgstr "계속"
+
+#: src/gui/link_grabber_panel.rs:1896
+msgid "Temporarily Unknown"
+msgstr "일시적으로 알 수 없음"
+
+#: src/gui/downloads_panel.rs:186 src/gui/downloads_panel.rs:856
+#: src/gui/downloads_panel.rs:861
+msgid "Speed"
+msgstr "속도"
+
+#: src/gui/downloads_panel.rs:192 src/gui/downloads_panel.rs:882
+#: src/gui/downloads_panel.rs:887
+msgid "Loaded"
+msgstr "받음"
+
+#: src/gui/downloads_panel.rs:198
+msgid "Remaining"
+msgstr "남음"
+
+#: src/gui/downloads_panel.rs:204 src/gui/downloads_panel.rs:869
+#: src/gui/downloads_panel.rs:874
+msgid "ETA"
+msgstr "ETA"
+
+#: src/gui/downloads_panel.rs:210
+msgid "Running downloads"
+msgstr "진행 중인 다운로드"
+
+#: src/gui/downloads_panel.rs:216
+msgid "Finished downloads"
+msgstr "완료된 다운로드"
+
+#: src/gui/downloads_panel.rs:222
+msgid "Skipped downloads"
+msgstr "건너뛴 다운로드"
+
+#: src/gui/downloads_panel.rs:228
+msgid "Failed downloads"
+msgstr "실패한 다운로드"
+
+#: src/gui/downloads_panel.rs:677
+#: src/gui/components/settings/package_manager.rs:115
+#: src/gui/components/settings/scripts.rs:104
+#: src/gui/dialogs/script_edit_dialog.rs:40
+msgid "Name"
+msgstr "이름"
+
+#: src/gui/downloads_panel.rs:689 src/gui/downloads_panel.rs:716
+msgid "Progress"
+msgstr "진행률"
+
+#: src/gui/downloads_panel.rs:791 src/gui/downloads_panel.rs:794
+msgid "Connection"
+msgstr "연결"
+
+#: src/gui/downloads_panel.rs:845 src/gui/downloads_panel.rs:848
+#: src/gui/components/account_table.rs:183
+msgid "Status"
+msgstr "상태"
+
+#: src/gui/downloads_panel.rs:908 src/gui/downloads_panel.rs:913
+#: src/gui/dialogs/packagizer_rule_dialog.rs:243
+#: src/gui/dialogs/packagizer_rule_dialog.rs:385
+#: src/gui/properties_panel.rs:305
+msgid "Comment"
+msgstr "설명"
+
+#: src/gui/downloads_panel.rs:1134
+msgid "Delete all"
+msgstr "모두 삭제"
+
+#: src/gui/downloads_panel.rs:1145
+msgid "Delete failed"
+msgstr "실패 항목 삭제"
+
+#: src/gui/downloads_panel.rs:1146
+msgid "Delete finished"
+msgstr "완료 항목 삭제"
+
+#: src/gui/downloads_panel.rs:1189
+#: src/gui/dialogs/packagizer_rule_dialog.rs:391
+msgid "Chunks"
+msgstr "청크"
+
+#: src/gui/downloads_panel.rs:1190
+msgid "Parallel downloads"
+msgstr "동시 다운로드"
+
+#: src/gui/downloads_panel.rs:1191
+msgid "Parallel per host"
+msgstr "호스트당 동시 다운로드"
+
+#: src/gui/downloads_panel.rs:1192
+msgid "Speed limit"
+msgstr "속도 제한"
+
+#: src/gui/downloads_panel.rs:1345
+msgid "Downloads complete"
+msgstr "다운로드 완료"
+
+#: src/gui/downloads_panel.rs:1346
+msgid "One file downloaded successfully"
+msgid_plural "{n} files downloaded successfully"
+msgstr[0] "파일 {n}개를 성공적으로 다운로드했습니다"
+
+#: src/gui/downloads_panel.rs:1687
+msgid "Delete Selected Downloads?"
+msgstr "선택한 다운로드를 삭제하시겠습니까?"
+
+#: src/gui/downloads_panel.rs:1709
+msgid "{n} file ({}) on disk"
+msgid_plural "{n} files ({}) on disk"
+msgstr[0] "디스크에 파일 {n}개 ({})"
+
+#: src/gui/downloads_panel.rs:1721
+msgid "Keep all downloaded files - just remove links from JDownloader"
+msgstr "다운로드한 모든 파일 유지 - JDownloader에서 링크만 제거"
+
+#: src/gui/downloads_panel.rs:1722
+msgid "Move downloaded files to Trash & remove links from JDownloader"
+msgstr "다운로드한 파일을 휴지통으로 이동하고 JDownloader에서 링크 제거"
+
+#: src/gui/downloads_panel.rs:1723
+msgid ""
+"Delete downloaded files permanently from disk & remove links from JDownloader"
+msgstr ""
+"다운로드한 파일을 디스크에서 영구적으로 삭제하고 JDownloader에서 링크 제거"
+
+#: src/gui/main_menu_bar.rs:38
+msgid "Tools"
+msgstr "도구"
+
+#: src/gui/main_menu_bar.rs:39
+msgid "Help"
+msgstr "도움말"
+
+#: src/gui/menus/file.rs:11 src/gui/menus/file.rs:23
+msgid "Backup all settings"
+msgstr "모든 설정 백업"
+
+#: src/gui/menus/file.rs:16 src/gui/menus/file.rs:27
+msgid "Restore settings"
+msgstr "설정 복원"
+
+#: src/gui/menus/file.rs:35 src/gui/menus/file.rs:69
+msgid "Analyse Text with Links"
+msgstr "링크가 포함된 텍스트 분석"
+
+#: src/gui/menus/file.rs:40 src/gui/menus/file.rs:73
+msgid "Add Container"
+msgstr "컨테이너 추가"
+
+#: src/gui/menus/file.rs:48 src/gui/menus/file.rs:77
+msgid "Backup"
+msgstr "백업"
+
+#: src/gui/menus/file.rs:56 src/gui/menus/file.rs:81
+msgid "Restart"
+msgstr "재시작"
+
+#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:126
+msgid "Exit"
+msgstr "종료"
+
+#: src/gui/menus/help.rs:10 src/gui/menus/help.rs:49
+msgid "Online Help"
+msgstr "온라인 도움말"
+
+#: src/gui/menus/help.rs:15 src/gui/menus/help.rs:53
+msgid "Create a Log"
+msgstr "로그 생성"
+
+#: src/gui/menus/help.rs:23 src/gui/menus/help.rs:57
+msgid "Find Updates"
+msgstr "업데이트 찾기"
+
+#: src/gui/menus/help.rs:28 src/gui/menus/help.rs:61
+msgid "Changelog"
+msgstr "변경 사항"
+
+#: src/gui/menus/help.rs:36 src/gui/menus/help.rs:65
+msgid "Contribute"
+msgstr "기여하기"
+
+#: src/gui/menus/help.rs:41 src/gui/menus/help.rs:69
+msgid "About JDownloader"
+msgstr "JDownloader 정보"
+
+#: src/gui/menus/settings.rs:15 src/gui/menus/settings.rs:50
+msgid "My.JDownloader"
+msgstr "My.JDownloader"
+
+#: src/gui/menus/settings.rs:23 src/gui/menus/settings.rs:54
+#: src/gui/components/settings/general.rs:186
+msgid "Max. Chunks per Download"
+msgstr "다운로드당 최대 청크 수"
+
+#: src/gui/menus/settings.rs:28 src/gui/menus/settings.rs:58
+#: src/gui/components/settings/general.rs:170
+msgid "Max. simultaneous Downloads"
+msgstr "최대 동시 다운로드 수"
+
+#: src/gui/menus/settings.rs:33 src/gui/menus/settings.rs:62
+msgid "Max. sim. Downloads per Hoster"
+msgstr "호스터당 최대 동시 다운로드 수"
+
+#: src/gui/menus/settings.rs:38 src/gui/menus/settings.rs:66
+msgid "Speed Limit"
+msgstr "속도 제한"
+
+#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:125
+msgid "Download"
+msgstr "다운로드"
+
+#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:129
+msgid "Link Collector"
+msgstr "링크 수집기"
+
+#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:134
+msgid "Donate"
+msgstr "기부"
+
+#: src/gui/menus/tools.rs:54 src/gui/menus/tools.rs:61
+msgid "Windows"
+msgstr "창"
+
+#: src/gui/components/account_table.rs:31
+#: src/gui/dialogs/packagizer_rule_dialog.rs:107
+msgid "Disabled"
+msgstr "비활성화됨"
+
+#: src/gui/components/account_table.rs:37
+msgid "Invalid"
+msgstr "유효하지 않음"
+
+#: src/gui/components/account_table.rs:42
+msgid "Account is ok"
+msgstr "계정이 정상입니다"
+
+#: src/gui/components/account_table.rs:70
+msgid "Unlimited"
+msgstr "무제한"
+
+#. #-#-#-#-#  account_table.pot (gdownloader 0.2.0)  #-#-#-#-#
+#. Icon names and sizes from JDownloader's AccountListPanel.
+#: src/gui/components/account_table.rs:146
+#: src/gui/components/settings/package_manager.rs:81
+#: src/gui/components/settings/scripts.rs:78
+msgid "Add"
+msgstr "추가"
+
+#: src/gui/components/account_table.rs:147
+#: src/gui/components/settings/package_manager.rs:84
+#: src/gui/components/settings/scripts.rs:81
+msgid "Remove"
+msgstr "제거"
+
+#: src/gui/components/account_table.rs:148
+msgid "Buy"
+msgstr "구매"
+
+#: src/gui/components/account_table.rs:149
+#: src/gui/components/settings/extension_manager.rs:75
+msgid "Refresh"
+msgstr "새로고침"
+
+#: src/gui/components/account_table.rs:152
+msgid "Buy premium account"
+msgstr "프리미엄 계정 구매"
+
+#: src/gui/components/account_table.rs:184
+msgid "Username"
+msgstr "사용자 이름"
+
+#: src/gui/components/account_table.rs:185
+msgid "Password"
+msgstr "비밀번호"
+
+#: src/gui/components/account_table.rs:186
+msgid "Expire Date"
+msgstr "만료일"
+
+#: src/gui/components/account_table.rs:187
+msgid "Download Traffic left"
+msgstr "남은 다운로드 트래픽"
+
+#: src/gui/components/settings/account_manager.rs:36
+msgid "Use Account(s) to download"
+msgstr "계정을 사용하여 다운로드"
+
+#: src/gui/components/settings/account_manager.rs:45
+msgid "Enter and manage all your Premium/Gold/Platinum accounts."
+msgstr "모든 프리미엄/골드/플래티넘 계정을 입력하고 관리하세요."
+
+#: src/gui/components/settings/extension_manager.rs:70
+msgid "Enable, disable or install JDownloader extensions."
+msgstr "JDownloader 확장 기능을 활성화, 비활성화 또는 설치합니다."
+
+#: src/gui/components/settings/extension_manager.rs:87
+msgid "Loading extensions…"
+msgstr "확장 기능을 불러오는 중…"
+
+#: src/gui/components/settings/extension_manager.rs:129
+msgid "No extensions found."
+msgstr "확장 기능을 찾을 수 없습니다."
+
+#: src/gui/components/settings/extension_manager.rs:203
+msgid "Install"
+msgstr "설치"
+
+#: src/gui/components/settings/extension_manager.rs:211
+msgid "Installing…"
+msgstr "설치하는 중…"
+
+#: src/gui/components/settings/general.rs:143
+#: src/gui/dialogs/packagizer_rule_dialog.rs:154
+msgid "Browse"
+msgstr "찾아보기"
+
+#: src/gui/components/settings/general.rs:152
+#: src/gui/components/settings/general.rs:156
+msgid "Download Folder"
+msgstr "다운로드 폴더"
+
+#: src/gui/components/settings/general.rs:158
+msgid ""
+"Set the default download path here. Changing default path here, affects only "
+"new downloads."
+msgstr ""
+"기본 다운로드 경로를 여기서 설정하세요. 이 경로를 변경해도 새 다운로드에만 적"
+"용됩니다."
+
+#: src/gui/components/settings/general.rs:178
+msgid "Maximum of simultaneous downloads per host"
+msgstr "호스트당 최대 동시 다운로드 수"
+
+#: src/gui/components/settings/general.rs:195
+msgid "Immediate"
+msgstr "즉시"
+
+#: src/gui/components/settings/general.rs:196
+msgid "At start"
+msgstr "시작 시"
+
+#: src/gui/components/settings/general.rs:197
+msgid "Package ready"
+msgstr "패키지 준비 완료 시"
+
+#: src/gui/components/settings/general.rs:198
+#: src/gui/components/settings/general.rs:229
+msgid "Never"
+msgstr "안 함"
+
+#: src/gui/components/settings/general.rs:200
+msgid "Remove finished downloads"
+msgstr "완료된 다운로드 제거"
+
+#: src/gui/components/settings/general.rs:204
+msgid "Overwrite existing file"
+msgstr "기존 파일 덮어쓰기"
+
+#: src/gui/components/settings/general.rs:205
+msgid "Skip file"
+msgstr "파일 건너뛰기"
+
+#: src/gui/components/settings/general.rs:206
+msgid "Auto-rename"
+msgstr "자동 이름 변경"
+
+#: src/gui/components/settings/general.rs:207
+msgid "Ask for each file"
+msgstr "파일마다 확인"
+
+#: src/gui/components/settings/general.rs:209
+msgid "If the file already exists"
+msgstr "파일이 이미 있는 경우"
+
+#: src/gui/components/settings/general.rs:213
+msgid "Download Management"
+msgstr "다운로드 관리"
+
+#: src/gui/components/settings/general.rs:215
+msgid ""
+"Connection limits, Download order, Priorities, ... Set up the Download "
+"controller details."
+msgstr ""
+"연결 제한, 다운로드 순서, 우선순위 등 다운로드 컨트롤러의 세부 사항을 설정합"
+"니다."
+
+#: src/gui/components/settings/general.rs:227
+msgid "Always"
+msgstr "항상"
+
+#: src/gui/components/settings/general.rs:228
+msgid "Only if downloads were running at last Session's end"
+msgstr "이전 세션 종료 시 다운로드가 진행 중이었던 경우에만"
+
+#: src/gui/components/settings/general.rs:232
+msgid "Autostart downloads at application start"
+msgstr "애플리케이션 시작 시 다운로드 자동 시작"
+
+#: src/gui/components/settings/general.rs:243
+msgid "Show Countdown (seconds)"
+msgstr "카운트다운 표시 (초)"
+
+#: src/gui/components/settings/general.rs:250
+msgid "Autostart Downloads"
+msgstr "다운로드 자동 시작"
+
+#: src/gui/components/settings/general.rs:252
+msgid ""
+"Choose if, and when JDownloader should start pending downloads without user "
+"interaction."
+msgstr ""
+"JDownloader가 사용자 개입 없이 대기 중인 다운로드를 시작할지, 언제 시작할지 "
+"선택하세요."
+
+#: src/gui/components/settings/general.rs:264
+msgid "Group single files in a Various package"
+msgstr "단일 파일을 '기타' 패키지로 그룹화"
+
+#: src/gui/components/settings/general.rs:271
+msgid "LinkGrabber"
+msgstr "링크그래버"
+
+#: src/gui/components/settings/general.rs:282
+msgid "SFV / CRC check when possible"
+msgstr "가능한 경우 SFV / CRC 검사"
+
+#: src/gui/components/settings/general.rs:286
+msgid "Restart Downloads when SFV/CRC check fails"
+msgstr "SFV/CRC 검사 실패 시 다운로드 재시작"
+
+#: src/gui/components/settings/general.rs:293
+msgid "File Writing"
+msgstr "파일 기록"
+
+#: src/gui/components/settings/general.rs:295
+msgid ""
+"JDownloader will verify your downloads for correctness after download using "
+"the hash/check option"
+msgstr ""
+"JDownloader는 해시/검사 옵션을 사용하여 다운로드 후 다운로드의 무결성을 확인"
+"합니다"
+
+#: src/gui/components/settings/general.rs:307
+msgid "Auto open Link Containers (dlc,rsdf,...)"
+msgstr "링크 컨테이너 자동 열기 (dlc, rsdf 등)"
+
+#: src/gui/components/settings/general.rs:314
+msgid "Miscellaneous"
+msgstr "기타"
+
+#: src/gui/components/settings/general.rs:337
+#: src/gui/dialogs/packagizer_rule_dialog.rs:161
+#: src/gui/properties_panel.rs:400
+msgid "Select Folder"
+msgstr "폴더 선택"
+
+#: src/gui/components/settings/package_manager.rs:50
+msgid "Enable Package Manager"
+msgstr "패키지 관리자 활성화"
+
+#: src/gui/components/settings/package_manager.rs:56
+msgid ""
+"Rules that automatically set the download settings of files based on their "
+"properties."
+msgstr "파일 속성에 따라 다운로드 설정을 자동으로 지정하는 규칙입니다."
+
+#: src/gui/components/settings/package_manager.rs:82
+#: src/gui/components/settings/scripts.rs:79
+msgid "Edit"
+msgstr "편집"
+
+#: src/gui/components/settings/package_manager.rs:86
+msgid "Duplicate"
+msgstr "복제"
+
+#: src/gui/components/settings/package_manager.rs:88
+#: src/gui/main_tool_bar.rs:146
+msgid "Move up"
+msgstr "위로 이동"
+
+#: src/gui/components/settings/package_manager.rs:90
+#: src/gui/main_tool_bar.rs:148
+msgid "Move down"
+msgstr "아래로 이동"
+
+#: src/gui/components/settings/package_manager.rs:107
+#: src/gui/components/settings/scripts.rs:96
+#: src/gui/dialogs/packagizer_rule_dialog.rs:106
+msgid "Enabled"
+msgstr "활성화됨"
+
+#: src/gui/components/settings/package_manager.rs:201
+msgid "New rule"
+msgstr "새 규칙"
+
+#: src/gui/components/settings/package_manager.rs:287
+msgid "copy"
+msgstr "복사본"
+
+#: src/gui/components/settings/scripts.rs:53
+msgid ""
+"Run JavaScript automatically when a chosen event occurs (Eventscripter)."
+msgstr ""
+"선택한 이벤트가 발생하면 자동으로 JavaScript를 실행합니다 (이벤트 스크립터)."
+
+#: src/gui/components/settings/scripts.rs:113
+#: src/gui/dialogs/script_edit_dialog.rs:47
+msgid "Event trigger"
+msgstr "이벤트 트리거"
+
+#: src/gui/components/settings/scripts.rs:196
+msgid "New script"
+msgstr "새 스크립트"
+
+#: src/gui/dialogs/account_add_dialog.rs:35
+msgid "Add new Account"
+msgstr "새 계정 추가"
+
+#: src/gui/dialogs/account_add_dialog.rs:43
+msgid "1. Choose a Hoster"
+msgstr "1. 호스터 선택"
+
+#: src/gui/dialogs/account_add_dialog.rs:53
+msgid "Search"
+msgstr "검색"
+
+#: src/gui/dialogs/account_add_dialog.rs:63
+msgid "Domain"
+msgstr "도메인"
+
+#: src/gui/dialogs/account_add_dialog.rs:78
+msgid "2. Enter your Login Information"
+msgstr "2. 로그인 정보 입력"
+
+#: src/gui/dialogs/account_add_dialog.rs:85
+msgid "Name:"
+msgstr "이름:"
+
+#: src/gui/dialogs/account_add_dialog.rs:86
+#: src/jd/plugins/hoster/onefichiercom.rs:56
+msgid "Pass:"
+msgstr "비밀번호:"
+
+#: src/gui/dialogs/account_add_dialog.rs:91
+msgid "Enter Username..."
+msgstr "사용자 이름 입력..."
+
+#: src/gui/dialogs/account_add_dialog.rs:96
+#: src/jd/plugins/hoster/onefichiercom.rs:61
+msgid "Enter password..."
+msgstr "비밀번호 입력..."
+
+#: src/gui/dialogs/account_add_dialog.rs:115
+#: src/gui/dialogs/packagizer_rule_dialog.rs:444
+#: src/gui/dialogs/script_edit_dialog.rs:97
+msgid "Save"
+msgstr "저장"
+
+#: src/gui/dialogs/account_add_dialog.rs:163
+msgid "2. Enter your {} Login Information"
+msgstr "2. {} 로그인 정보 입력"
+
+#: src/gui/dialogs/account_add_dialog.rs:253
+msgid "Adding account..."
+msgstr "계정을 추가하는 중..."
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:21
+msgid "Contains"
+msgstr "포함"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:22
+msgid "Equals"
+msgstr "같음"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:23
+msgid "Does not contain"
+msgstr "포함하지 않음"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:24
+msgid "Does not equal"
+msgstr "같지 않음"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:48
+msgid "Regex"
+msgstr "정규식"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:210
+msgid "Package Manager Rule"
+msgstr "패키지 관리자 규칙"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:231
+msgid "Rule name"
+msgstr "규칙 이름"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:239
+msgid "Always matches"
+msgstr "항상 일치"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:241
+#: src/gui/dialogs/packagizer_rule_dialog.rs:384
+msgid "Filename"
+msgstr "파일 이름"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:242
+#: src/gui/dialogs/packagizer_rule_dialog.rs:382
+#: src/gui/properties_panel.rs:240
+msgid "Package name"
+msgstr "패키지 이름"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:244
+msgid "Hoster / URL"
+msgstr "호스터 / URL"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:245
+msgid "Source URL"
+msgstr "원본 URL"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:250
+msgid "Between"
+msgstr "범위"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:251
+msgid "Not between"
+msgstr "범위 아님"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:270
+#: src/gui/dialogs/packagizer_rule_dialog.rs:272
+msgid "MiB"
+msgstr "MiB"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:273
+msgid "File size"
+msgstr "파일 크기"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:289
+msgid "Is"
+msgstr "다음임"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:290
+msgid "Is not"
+msgstr "다음이 아님"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:293
+msgid "Video"
+msgstr "동영상"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:294
+msgid "Audio"
+msgstr "오디오"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:295
+msgid "Archives"
+msgstr "압축 파일"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:296
+msgid "Images"
+msgstr "이미지"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:297
+msgid "Documents"
+msgstr "문서"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:298
+msgid "Subtitles"
+msgstr "자막"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:299
+msgid "Executables"
+msgstr "실행 파일"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:300
+msgid "Hash files"
+msgstr "해시 파일"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:303
+msgid "Custom extensions (e.g. iso,bin)"
+msgstr "사용자 지정 확장자 (예: iso,bin)"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:329
+msgid "File type"
+msgstr "파일 형식"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:353
+msgid "If"
+msgstr "조건"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:354
+msgid "Match downloads based on these conditions."
+msgstr "다음 조건을 기준으로 다운로드를 일치시킵니다."
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:363
+msgid "Destination Folder"
+msgstr "대상 폴더"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:367
+msgid "Highest"
+msgstr "최고"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:368
+msgid "Higher"
+msgstr "더 높음"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:369
+msgid "High"
+msgstr "높음"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:370
+msgid "Default"
+msgstr "기본"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:371
+msgid "Low"
+msgstr "낮음"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:372
+msgid "Lower"
+msgstr "더 낮음"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:373
+msgid "Lowest"
+msgstr "최저"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:376
+msgid "Priority"
+msgstr "우선순위"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:383
+msgid "Package key"
+msgstr "패키지 키"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:397
+msgid "Auto extract"
+msgstr "자동 압축 해제"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:398
+msgid "Auto add"
+msgstr "자동 추가"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:399
+msgid "Autostart"
+msgstr "자동 시작"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:400
+msgid "Forced start"
+msgstr "강제 시작"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:401
+msgid "Link enabled"
+msgstr "링크 활성화"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:405
+msgid "Then"
+msgstr "그러면"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:414
+msgid "Move to"
+msgstr "이동 위치"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:415
+msgid "Rename to"
+msgstr "이름 변경"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:419
+msgid "...and do"
+msgstr "...그리고 수행"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:430
+msgid "Stop processing further rules if this rule matches"
+msgstr "이 규칙이 일치하면 이후 규칙 처리를 중단"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:449
+msgid "This is a predefined rule and cannot be modified."
+msgstr "이것은 사전 정의된 규칙이며 수정할 수 없습니다."
+
+#: src/gui/dialogs/script_edit_dialog.rs:18
+msgid "Edit Script"
+msgstr "스크립트 편집"
+
+#: src/gui/dialogs/script_edit_dialog.rs:50
+msgid "Run synchronously"
+msgstr "동기적으로 실행"
+
+#: src/gui/dialogs/script_edit_dialog.rs:57
+msgid "Interval (ms)"
+msgstr "간격 (ms)"
+
+#: src/gui/dialogs/script_edit_dialog.rs:61
+msgid "Trigger"
+msgstr "트리거"
+
+#: src/gui/dialogs/script_edit_dialog.rs:62
+msgid "Choose when this script should run."
+msgstr "이 스크립트를 실행할 시점을 선택하세요."
+
+#: src/gui/dialogs/script_edit_dialog.rs:67
+msgid "Script (JavaScript)"
+msgstr "스크립트 (JavaScript)"
+
+#: src/gui/donate.rs:11
+msgid "The JDownloader project needs your help!"
+msgstr "JDownloader 프로젝트에 여러분의 도움이 필요합니다!"
+
+#: src/gui/donate.rs:13
+msgid ""
+"If you are a satisfied user of JDownloader, please think about contributing "
+"to this project. JDownloader is the result of daily hard work since more "
+"than %s1 years. We need your help to keep it free of charge, free of "
+"advertising, free of installer bundles and to improve JDownloader even more. "
+"Moreover, donating is a good way to tell us what modules we should focus our "
+"work on."
+msgstr ""
+"JDownloader의 만족스러운 사용자라면 이 프로젝트에 기여하는 것을 고려해 주세"
+"요. JDownloader는 %s1년 넘게 매일 이어진 노력의 결과물입니다. 무료로, 광고 없"
+"이, 설치 번들 없이 유지하고 JDownloader를 더욱 개선하려면 여러분의 도움이 필"
+"요합니다. 또한 기부는 우리가 어떤 모듈에 집중해야 할지 알려주는 좋은 방법이기"
+"도 합니다."
+
+#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:104
+msgid "Start downloads"
+msgstr "다운로드 시작"
+
+#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:118
+msgid "Pause downloads"
+msgstr "다운로드 일시 중지"
+
+#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:111
+msgid "Stop downloads"
+msgstr "다운로드 중지"
+
+#. Move actions
+#: src/gui/main_tool_bar.rs:144
+msgid "Move to top"
+msgstr "맨 위로 이동"
+
+#: src/gui/main_tool_bar.rs:150
+msgid "Move bottom"
+msgstr "맨 아래로 이동"
+
+#: src/gui/main_tool_bar.rs:158
+msgid "Clipboard monitoring"
+msgstr "클립보드 모니터링"
+
+#: src/gui/main_tool_bar.rs:163
+msgid "Auto reconnect"
+msgstr "자동 재연결"
+
+#: src/gui/main_tool_bar.rs:171
+msgid "Use premium accounts"
+msgstr "프리미엄 계정 사용"
+
+#: src/gui/main_tool_bar.rs:176
+msgid "Silent mode"
+msgstr "무음 모드"
+
+#. Misc
+#: src/gui/main_tool_bar.rs:183
+msgid "Reconnect"
+msgstr "재연결"
+
+#: src/gui/main_tool_bar.rs:191
+msgid "Check for updates"
+msgstr "업데이트 확인"
+
+#: src/gui/properties_panel.rs:86
+msgid "Highest priority"
+msgstr "최고 우선순위"
+
+#: src/gui/properties_panel.rs:87
+msgid "Higher priority"
+msgstr "더 높은 우선순위"
+
+#: src/gui/properties_panel.rs:88
+msgid "High priority"
+msgstr "높은 우선순위"
+
+#: src/gui/properties_panel.rs:89
+msgid "Low priority"
+msgstr "낮은 우선순위"
+
+#: src/gui/properties_panel.rs:90
+msgid "Lower priority"
+msgstr "더 낮은 우선순위"
+
+#: src/gui/properties_panel.rs:91
+msgid "Lowest priority"
+msgstr "최저 우선순위"
+
+#: src/gui/properties_panel.rs:92
+msgid "Default priority"
+msgstr "기본 우선순위"
+
+#: src/gui/properties_panel.rs:235
+msgid "Package name:"
+msgstr "패키지 이름:"
+
+#: src/gui/properties_panel.rs:249
+msgid "File name:"
+msgstr "파일 이름:"
+
+#: src/gui/properties_panel.rs:254
+msgid "File name"
+msgstr "파일 이름"
+
+#: src/gui/properties_panel.rs:260
+msgid "Browse…"
+msgstr "찾아보기…"
+
+#: src/gui/properties_panel.rs:266
+msgid "Save to:"
+msgstr "저장 위치:"
+
+#: src/gui/properties_panel.rs:271
+msgid "Save to"
+msgstr "저장 위치"
+
+#: src/gui/properties_panel.rs:278
+msgid "Source:"
+msgstr "원본:"
+
+#: src/gui/properties_panel.rs:283
+msgid "Source"
+msgstr "원본"
+
+#: src/gui/properties_panel.rs:289
+msgid "Comment:"
+msgstr "설명:"
+
+#: src/gui/properties_panel.rs:490
+msgid "File Properties: {}"
+msgstr "파일 속성: {}"
+
+#: src/gui/window.rs:174
+msgid "Waiting for JDownloader to exit..."
+msgstr "JDownloader가 종료되기를 기다리는 중..."
+
+#: src/gui/mod.rs:116
+msgid "The power of JDownloader, the elegance of GNOME"
+msgstr ""
+
+#: src/gui/mod.rs:199 src/gui/mod.rs:221
+msgid "Start Downloads"
+msgstr "다운로드 시작"
+
+#: src/gui/mod.rs:204 src/gui/mod.rs:228
+msgid "Start All Downloads"
+msgstr "모든 다운로드 시작"
+
+#. Status bar.
+#: src/gui/mod.rs:463
+msgid "Ready"
+msgstr "준비됨"
+
+#: src/gui/mod.rs:519
+msgid "JDownloader started"
+msgstr "JDownloader가 시작되었습니다"
+
+#: src/gui/mod.rs:554
+msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
+msgstr "JDownloader.jar를 찾을 수 없습니다. JDOWNLOADER_JAR를 설정하세요."
+
+#: src/jd/jar.rs:74
+msgid "Unable to create local JDownloader directory {}: {}"
+msgstr "로컬 JDownloader 디렉터리 {}를 생성할 수 없습니다: {}"
+
+#: src/jd/jar.rs:88
+msgid "Unable to copy JDownloader.jar to {}: {}"
+msgstr "JDownloader.jar를 {}로 복사할 수 없습니다: {}"
+
+#: src/jd/log_watcher.rs:62
+msgid "JDownloader starting, please wait..."
+msgstr "JDownloader가 시작되는 중입니다. 잠시 기다려 주세요..."
+
+#: src/jd/log_watcher.rs:68
+msgid "Restarting after update"
+msgstr "업데이트 후 재시작하는 중"
+
+#: src/jd/log_watcher.rs:73
+msgid "Update"
+msgstr "업데이트"
+
+#: src/jd/log_watcher.rs:78
+msgid "JDownloader starting"
+msgstr "JDownloader 시작 중"
+
+#: src/jd/log_watcher.rs:83
+msgid "Initialization"
+msgstr "초기화"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:21
+msgid "Account Type:"
+msgstr "계정 유형:"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:25
+msgid "Premium Account | API Login [Recommended]"
+msgstr "프리미엄 계정 | API 로그인 [권장]"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:26
+msgid "Premium GOLD Account | API Login [Recommended]"
+msgstr "프리미엄 GOLD 계정 | API 로그인 [권장]"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:27
+msgid "Premium Account | Website Login"
+msgstr "프리미엄 계정 | 웹사이트 로그인"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:28
+msgid "Premium GOLD Account | Website Login"
+msgstr "프리미엄 GOLD 계정 | 웹사이트 로그인"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:29
+msgid "Free Account with paid CDN credits"
+msgstr "유료 CDN 크레딧이 있는 무료 계정"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:30
+msgid "Free Account"
+msgstr "무료 계정"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:41
+msgid "Premium API Key:"
+msgstr "프리미엄 API 키:"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:46
+msgid "Enter API key (click here to find it)"
+msgstr "API 키 입력 (여기를 클릭하여 확인)"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:51
+msgid "E-Mail:"
+msgstr "이메일:"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:55
+msgid "Enter e-mail..."
+msgstr "이메일 입력..."
+
+#: src/jd/process.rs:24
+msgid "JDownloader is already running"
+msgstr "JDownloader가 이미 실행 중입니다"
+
+#: src/jd/process.rs:29
+msgid "JDownloader.jar has no parent directory"
+msgstr "JDownloader.jar에 상위 디렉터리가 없습니다"
+
+#: src/jd/process.rs:32
+msgid "JDownloader.jar has no file name"
+msgstr "JDownloader.jar에 파일 이름이 없습니다"
+
+#~ msgid "JDownloader for GNOME"
+#~ msgstr "GNOME용 JDownloader"

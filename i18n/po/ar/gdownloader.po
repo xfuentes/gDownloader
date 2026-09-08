@@ -1,0 +1,1349 @@
+# Arabic translations for gdownloader package.
+# Copyright (C) 2026 THE gdownloader'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gdownloader package.
+# Xavier Fuentes <xfuentes-dev@serviam.cc>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gdownloader 0.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-08 05:50+0000\n"
+"PO-Revision-Date: 2026-09-07 17:48+0200\n"
+"Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
+"Language-Team: Arabic <(nothing)>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+
+#: src/app.rs:18
+msgid "Error: {}"
+msgstr "خطأ: {}"
+
+#: src/app.rs:39
+msgid "JDownloader did not respond in time"
+msgstr "لم يستجب JDownloader في الوقت المحدد"
+
+#: src/gui/overview_panel.rs:114 src/gui/properties_panel.rs:201
+msgid "Choose visible fields"
+msgstr "اختر الحقول المرئية"
+
+#: src/gui/clipboard.rs:208
+msgid "New links from clipboard"
+msgstr "روابط جديدة من الحافظة"
+
+#: src/gui/clipboard.rs:210
+msgid "New links from clipboard ({})"
+msgstr "روابط جديدة من الحافظة ({})"
+
+#: src/gui/clipboard.rs:212
+msgid "One link captured"
+msgid_plural "{n} links captured"
+msgstr[0] "لم يتم التقاط أي رابط"
+msgstr[1] "تم التقاط رابط واحد"
+msgstr[2] "تم التقاط رابطين"
+msgstr[3] "تم التقاط {n} روابط"
+msgstr[4] "تم التقاط {n} رابطًا"
+msgstr[5] "تم التقاط {n} رابط"
+
+#: src/gui/clipboard.rs:225
+msgid "Show"
+msgstr "إظهار"
+
+#: src/gui/settings_panel.rs:32 src/gui/settings_panel.rs:50
+msgid "General"
+msgstr "عام"
+
+#: src/gui/settings_panel.rs:35 src/gui/settings_panel.rs:53
+#: src/gui/components/settings/account_manager.rs:43
+msgid "Account Manager"
+msgstr "إدارة الحسابات"
+
+#: src/gui/settings_panel.rs:39 src/gui/settings_panel.rs:57
+#: src/gui/components/settings/package_manager.rs:54
+msgid "Package Manager"
+msgstr "إدارة الحزم"
+
+#: src/gui/settings_panel.rs:43 src/gui/settings_panel.rs:61
+#: src/gui/components/settings/extension_manager.rs:69
+msgid "Extension Manager"
+msgstr "إدارة الإضافات"
+
+#: src/gui/settings_panel.rs:45 src/gui/settings_panel.rs:63
+#: src/gui/components/settings/scripts.rs:51
+msgid "Scripts"
+msgstr "النصوص البرمجية"
+
+#: src/gui/settings_panel.rs:72 src/gui/settings_panel.rs:123
+#: src/gui/settings_panel.rs:138 src/gui/main_menu_bar.rs:37
+#: src/gui/menus/settings.rs:10 src/gui/menus/settings.rs:46
+#: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
+msgid "Settings"
+msgstr "الإعدادات"
+
+#: src/gui/link_grabber_panel.rs:132 src/gui/downloads_panel.rs:168
+msgid "Packages"
+msgstr "الحزم"
+
+#: src/gui/link_grabber_panel.rs:138 src/gui/downloads_panel.rs:174
+msgid "Links"
+msgstr "الروابط"
+
+#: src/gui/link_grabber_panel.rs:144 src/gui/link_grabber_panel.rs:715
+#: src/gui/link_grabber_panel.rs:720 src/gui/downloads_panel.rs:180
+#: src/gui/downloads_panel.rs:725 src/gui/downloads_panel.rs:730
+msgid "Size"
+msgstr "الحجم"
+
+#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1888
+msgid "Online"
+msgstr "متصل"
+
+#: src/gui/link_grabber_panel.rs:156 src/gui/link_grabber_panel.rs:786
+#: src/gui/link_grabber_panel.rs:788 src/gui/downloads_panel.rs:737
+#: src/gui/downloads_panel.rs:739 src/gui/components/account_table.rs:182
+msgid "Hoster"
+msgstr "المستضيف"
+
+#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1892
+msgid "Offline"
+msgstr "غير متصل"
+
+#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1900
+msgid "Unknown"
+msgstr "غير معروف"
+
+#: src/gui/link_grabber_panel.rs:483 src/gui/main_menu_bar.rs:36
+msgid "File"
+msgstr "ملف"
+
+#: src/gui/link_grabber_panel.rs:692 src/gui/link_grabber_panel.rs:694
+msgid "Variant"
+msgstr "متغير"
+
+#: src/gui/link_grabber_panel.rs:702 src/gui/link_grabber_panel.rs:707
+#: src/gui/downloads_panel.rs:895 src/gui/downloads_panel.rs:900
+msgid "Save To"
+msgstr "حفظ في"
+
+#: src/gui/link_grabber_panel.rs:795 src/gui/link_grabber_panel.rs:799
+msgid "Availability"
+msgstr "التوفر"
+
+#: src/gui/link_grabber_panel.rs:824 src/gui/downloads_panel.rs:936
+msgid "Choose visible columns"
+msgstr "اختر الأعمدة المرئية"
+
+#: src/gui/link_grabber_panel.rs:1019 src/gui/link_grabber_panel.rs:1194
+#: src/gui/downloads_panel.rs:1056 src/gui/downloads_panel.rs:1194
+#: src/gui/components/account_table.rs:248
+msgid "Overview"
+msgstr "نظرة عامة"
+
+#: src/gui/link_grabber_panel.rs:1054 src/gui/downloads_panel.rs:1098
+msgid "Add links to linkgrabber"
+msgstr "إضافة روابط إلى ملتقط الروابط"
+
+#: src/gui/link_grabber_panel.rs:1063 src/gui/downloads_panel.rs:1107
+msgid "Add links"
+msgstr "إضافة روابط"
+
+#: src/gui/link_grabber_panel.rs:1063 src/gui/downloads_panel.rs:1107
+msgid "Add container"
+msgstr "إضافة حزمة روابط"
+
+#: src/gui/link_grabber_panel.rs:1063 src/gui/downloads_panel.rs:1107
+msgid "Paste links"
+msgstr "لصق الروابط"
+
+#: src/gui/link_grabber_panel.rs:1086
+msgid "Clear linkgrabber"
+msgstr "مسح ملتقط الروابط"
+
+#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:210 src/gui/mod.rs:234
+#: src/gui/mod.rs:287 src/gui/mod.rs:296
+msgid "Delete"
+msgstr "حذف"
+
+#: src/gui/link_grabber_panel.rs:1105 src/gui/downloads_panel.rs:1144
+msgid "Delete disabled"
+msgstr "حذف المعطّلة"
+
+#: src/gui/link_grabber_panel.rs:1106 src/gui/downloads_panel.rs:1147
+msgid "Delete offline"
+msgstr "حذف غير المتصلة"
+
+#: src/gui/link_grabber_panel.rs:1107
+msgid "Remove incomplete archives"
+msgstr "إزالة الأرشيفات غير المكتملة"
+
+#: src/gui/link_grabber_panel.rs:1108
+msgid "Clear filtered links"
+msgstr "مسح الروابط المصفّاة"
+
+#: src/gui/link_grabber_panel.rs:1129 src/gui/downloads_panel.rs:1171
+msgid "Filter"
+msgstr "تصفية"
+
+#: src/gui/link_grabber_panel.rs:1138
+msgid "Add filtered stuff"
+msgstr "إضافة العناصر المصفّاة"
+
+#: src/gui/link_grabber_panel.rs:1148
+msgid "Add to download list"
+msgstr "إضافة إلى قائمة التنزيل"
+
+#: src/gui/link_grabber_panel.rs:1160
+msgid "Add and start all"
+msgstr "إضافة وبدء الكل"
+
+#: src/gui/link_grabber_panel.rs:1161
+msgid "Add and start selected"
+msgstr "إضافة وبدء المحدد"
+
+#: src/gui/link_grabber_panel.rs:1162
+msgid "Add all"
+msgstr "إضافة الكل"
+
+#: src/gui/link_grabber_panel.rs:1163
+msgid "Add selected"
+msgstr "إضافة المحدد"
+
+#: src/gui/link_grabber_panel.rs:1189
+msgid "Add at top"
+msgstr "إضافة في الأعلى"
+
+#: src/gui/link_grabber_panel.rs:1190
+msgid "Auto confirm"
+msgstr "تأكيد تلقائي"
+
+#: src/gui/link_grabber_panel.rs:1191
+msgid "Auto start"
+msgstr "بدء تلقائي"
+
+#: src/gui/link_grabber_panel.rs:1192
+msgid "Link filter"
+msgstr "مرشح الروابط"
+
+#: src/gui/link_grabber_panel.rs:1193 src/gui/downloads_panel.rs:1193
+msgid "Properties"
+msgstr "الخصائص"
+
+#: src/gui/link_grabber_panel.rs:1195
+msgid "Sidebar"
+msgstr "الشريط الجانبي"
+
+#: src/gui/link_grabber_panel.rs:1196 src/gui/downloads_panel.rs:1195
+msgid "Bottom bar manager"
+msgstr "إدارة الشريط السفلي"
+
+#: src/gui/link_grabber_panel.rs:1617 src/gui/downloads_panel.rs:1664
+msgid "Are you sure?"
+msgstr "هل أنت متأكد؟"
+
+#: src/gui/link_grabber_panel.rs:1639 src/gui/downloads_panel.rs:1686
+msgid "Do you really want to perform this clean up action:"
+msgstr "هل تريد بالفعل تنفيذ إجراء التنظيف هذا:"
+
+#: src/gui/link_grabber_panel.rs:1640
+msgid "Delete Selected Links?"
+msgstr "حذف الروابط المحددة؟"
+
+#: src/gui/link_grabber_panel.rs:1647 src/gui/downloads_panel.rs:1694
+msgid "Tasks to do:"
+msgstr "المهام المطلوب تنفيذها:"
+
+#: src/gui/link_grabber_panel.rs:1656 src/gui/downloads_panel.rs:1703
+msgid "Delete selected link"
+msgid_plural "Delete selected links"
+msgstr[0] "حذف الروابط المحددة"
+msgstr[1] "حذف الرابط المحدد"
+msgstr[2] "حذف الرابطين المحددين"
+msgstr[3] "حذف الروابط المحددة"
+msgstr[4] "حذف الروابط المحددة"
+msgstr[5] "حذف الروابط المحددة"
+
+#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
+msgid "{n} link remaining"
+msgid_plural "{n} links remaining"
+msgstr[0] "لا روابط متبقية"
+msgstr[1] "يتبقى رابط واحد"
+msgstr[2] "يتبقى رابطان"
+msgstr[3] "يتبقى {n} روابط"
+msgstr[4] "يتبقى {n} رابطًا"
+msgstr[5] "يتبقى {n} رابط"
+
+#: src/gui/link_grabber_panel.rs:1674 src/gui/downloads_panel.rs:1745
+msgid "Don't show this again"
+msgstr "عدم إظهار هذا مرة أخرى"
+
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.2.0)  #-#-#-#-#
+#. Buttons
+#: src/gui/link_grabber_panel.rs:1680 src/gui/downloads_panel.rs:1751
+#: src/gui/dialogs/account_add_dialog.rs:114
+#: src/gui/dialogs/packagizer_rule_dialog.rs:443
+#: src/gui/dialogs/script_edit_dialog.rs:96 src/gui/donate.rs:33
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: src/gui/link_grabber_panel.rs:1681 src/gui/downloads_panel.rs:1752
+#: src/gui/donate.rs:37
+msgid "Continue"
+msgstr "استمرار"
+
+#: src/gui/link_grabber_panel.rs:1896
+msgid "Temporarily Unknown"
+msgstr "غير معروف مؤقتًا"
+
+#: src/gui/downloads_panel.rs:186 src/gui/downloads_panel.rs:856
+#: src/gui/downloads_panel.rs:861
+msgid "Speed"
+msgstr "السرعة"
+
+#: src/gui/downloads_panel.rs:192 src/gui/downloads_panel.rs:882
+#: src/gui/downloads_panel.rs:887
+msgid "Loaded"
+msgstr "المحمّل"
+
+#: src/gui/downloads_panel.rs:198
+msgid "Remaining"
+msgstr "المتبقي"
+
+#: src/gui/downloads_panel.rs:204 src/gui/downloads_panel.rs:869
+#: src/gui/downloads_panel.rs:874
+msgid "ETA"
+msgstr "الوقت المتبقي"
+
+#: src/gui/downloads_panel.rs:210
+msgid "Running downloads"
+msgstr "التنزيلات الجارية"
+
+#: src/gui/downloads_panel.rs:216
+msgid "Finished downloads"
+msgstr "التنزيلات المكتملة"
+
+#: src/gui/downloads_panel.rs:222
+msgid "Skipped downloads"
+msgstr "التنزيلات المتجاوزة"
+
+#: src/gui/downloads_panel.rs:228
+msgid "Failed downloads"
+msgstr "التنزيلات الفاشلة"
+
+#: src/gui/downloads_panel.rs:677
+#: src/gui/components/settings/package_manager.rs:115
+#: src/gui/components/settings/scripts.rs:104
+#: src/gui/dialogs/script_edit_dialog.rs:40
+msgid "Name"
+msgstr "الاسم"
+
+#: src/gui/downloads_panel.rs:689 src/gui/downloads_panel.rs:716
+msgid "Progress"
+msgstr "التقدم"
+
+#: src/gui/downloads_panel.rs:791 src/gui/downloads_panel.rs:794
+msgid "Connection"
+msgstr "الاتصال"
+
+#: src/gui/downloads_panel.rs:845 src/gui/downloads_panel.rs:848
+#: src/gui/components/account_table.rs:183
+msgid "Status"
+msgstr "الحالة"
+
+#: src/gui/downloads_panel.rs:908 src/gui/downloads_panel.rs:913
+#: src/gui/dialogs/packagizer_rule_dialog.rs:243
+#: src/gui/dialogs/packagizer_rule_dialog.rs:385
+#: src/gui/properties_panel.rs:305
+msgid "Comment"
+msgstr "تعليق"
+
+#: src/gui/downloads_panel.rs:1134
+msgid "Delete all"
+msgstr "حذف الكل"
+
+#: src/gui/downloads_panel.rs:1145
+msgid "Delete failed"
+msgstr "حذف الفاشلة"
+
+#: src/gui/downloads_panel.rs:1146
+msgid "Delete finished"
+msgstr "حذف المكتملة"
+
+#: src/gui/downloads_panel.rs:1189
+#: src/gui/dialogs/packagizer_rule_dialog.rs:391
+msgid "Chunks"
+msgstr "الأجزاء"
+
+#: src/gui/downloads_panel.rs:1190
+msgid "Parallel downloads"
+msgstr "التنزيلات المتوازية"
+
+#: src/gui/downloads_panel.rs:1191
+msgid "Parallel per host"
+msgstr "التنزيلات المتوازية لكل مستضيف"
+
+#: src/gui/downloads_panel.rs:1192
+msgid "Speed limit"
+msgstr "حد السرعة"
+
+#: src/gui/downloads_panel.rs:1345
+msgid "Downloads complete"
+msgstr "اكتملت التنزيلات"
+
+#: src/gui/downloads_panel.rs:1346
+msgid "One file downloaded successfully"
+msgid_plural "{n} files downloaded successfully"
+msgstr[0] "لم يتم تنزيل أي ملف بنجاح"
+msgstr[1] "تم تنزيل ملف واحد بنجاح"
+msgstr[2] "تم تنزيل ملفين بنجاح"
+msgstr[3] "تم تنزيل {n} ملفات بنجاح"
+msgstr[4] "تم تنزيل {n} ملفًا بنجاح"
+msgstr[5] "تم تنزيل {n} ملف بنجاح"
+
+#: src/gui/downloads_panel.rs:1687
+msgid "Delete Selected Downloads?"
+msgstr "حذف التنزيلات المحددة؟"
+
+#: src/gui/downloads_panel.rs:1709
+msgid "{n} file ({}) on disk"
+msgid_plural "{n} files ({}) on disk"
+msgstr[0] "لا ملفات ({}) على القرص"
+msgstr[1] "ملف واحد ({}) على القرص"
+msgstr[2] "ملفان ({}) على القرص"
+msgstr[3] "{n} ملفات ({}) على القرص"
+msgstr[4] "{n} ملفًا ({}) على القرص"
+msgstr[5] "{n} ملف ({}) على القرص"
+
+#: src/gui/downloads_panel.rs:1721
+msgid "Keep all downloaded files - just remove links from JDownloader"
+msgstr "الاحتفاظ بجميع الملفات المُنزّلة - إزالة الروابط من JDownloader فقط"
+
+#: src/gui/downloads_panel.rs:1722
+msgid "Move downloaded files to Trash & remove links from JDownloader"
+msgstr "نقل الملفات المُنزّلة إلى سلة المهملات وإزالة الروابط من JDownloader"
+
+#: src/gui/downloads_panel.rs:1723
+msgid ""
+"Delete downloaded files permanently from disk & remove links from JDownloader"
+msgstr "حذف الملفات المُنزّلة نهائيًا من القرص وإزالة الروابط من JDownloader"
+
+#: src/gui/main_menu_bar.rs:38
+msgid "Tools"
+msgstr "الأدوات"
+
+#: src/gui/main_menu_bar.rs:39
+msgid "Help"
+msgstr "المساعدة"
+
+#: src/gui/menus/file.rs:11 src/gui/menus/file.rs:23
+msgid "Backup all settings"
+msgstr "نسخ احتياطي لجميع الإعدادات"
+
+#: src/gui/menus/file.rs:16 src/gui/menus/file.rs:27
+msgid "Restore settings"
+msgstr "استعادة الإعدادات"
+
+#: src/gui/menus/file.rs:35 src/gui/menus/file.rs:69
+msgid "Analyse Text with Links"
+msgstr "تحليل نص يحتوي على روابط"
+
+#: src/gui/menus/file.rs:40 src/gui/menus/file.rs:73
+msgid "Add Container"
+msgstr "إضافة حزمة روابط"
+
+#: src/gui/menus/file.rs:48 src/gui/menus/file.rs:77
+msgid "Backup"
+msgstr "النسخ الاحتياطي"
+
+#: src/gui/menus/file.rs:56 src/gui/menus/file.rs:81
+msgid "Restart"
+msgstr "إعادة التشغيل"
+
+#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:126
+msgid "Exit"
+msgstr "خروج"
+
+#: src/gui/menus/help.rs:10 src/gui/menus/help.rs:49
+msgid "Online Help"
+msgstr "المساعدة عبر الإنترنت"
+
+#: src/gui/menus/help.rs:15 src/gui/menus/help.rs:53
+msgid "Create a Log"
+msgstr "إنشاء سجل"
+
+#: src/gui/menus/help.rs:23 src/gui/menus/help.rs:57
+msgid "Find Updates"
+msgstr "البحث عن التحديثات"
+
+#: src/gui/menus/help.rs:28 src/gui/menus/help.rs:61
+msgid "Changelog"
+msgstr "سجل التغييرات"
+
+#: src/gui/menus/help.rs:36 src/gui/menus/help.rs:65
+msgid "Contribute"
+msgstr "المساهمة"
+
+#: src/gui/menus/help.rs:41 src/gui/menus/help.rs:69
+msgid "About JDownloader"
+msgstr "حول JDownloader"
+
+#: src/gui/menus/settings.rs:15 src/gui/menus/settings.rs:50
+msgid "My.JDownloader"
+msgstr "My.JDownloader"
+
+#: src/gui/menus/settings.rs:23 src/gui/menus/settings.rs:54
+#: src/gui/components/settings/general.rs:186
+msgid "Max. Chunks per Download"
+msgstr "الحد الأقصى للأجزاء لكل تنزيل"
+
+#: src/gui/menus/settings.rs:28 src/gui/menus/settings.rs:58
+#: src/gui/components/settings/general.rs:170
+msgid "Max. simultaneous Downloads"
+msgstr "الحد الأقصى للتنزيلات المتزامنة"
+
+#: src/gui/menus/settings.rs:33 src/gui/menus/settings.rs:62
+msgid "Max. sim. Downloads per Hoster"
+msgstr "الحد الأقصى للتنزيلات المتزامنة لكل مستضيف"
+
+#: src/gui/menus/settings.rs:38 src/gui/menus/settings.rs:66
+msgid "Speed Limit"
+msgstr "حد السرعة"
+
+#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:125
+msgid "Download"
+msgstr "التنزيل"
+
+#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:129
+msgid "Link Collector"
+msgstr "ملتقط الروابط"
+
+#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:134
+msgid "Donate"
+msgstr "تبرع"
+
+#: src/gui/menus/tools.rs:54 src/gui/menus/tools.rs:61
+msgid "Windows"
+msgstr "النوافذ"
+
+#: src/gui/components/account_table.rs:31
+#: src/gui/dialogs/packagizer_rule_dialog.rs:107
+msgid "Disabled"
+msgstr "معطّل"
+
+#: src/gui/components/account_table.rs:37
+msgid "Invalid"
+msgstr "غير صالح"
+
+#: src/gui/components/account_table.rs:42
+msgid "Account is ok"
+msgstr "الحساب سليم"
+
+#: src/gui/components/account_table.rs:70
+msgid "Unlimited"
+msgstr "غير محدود"
+
+#. #-#-#-#-#  account_table.pot (gdownloader 0.2.0)  #-#-#-#-#
+#. Icon names and sizes from JDownloader's AccountListPanel.
+#: src/gui/components/account_table.rs:146
+#: src/gui/components/settings/package_manager.rs:81
+#: src/gui/components/settings/scripts.rs:78
+msgid "Add"
+msgstr "إضافة"
+
+#: src/gui/components/account_table.rs:147
+#: src/gui/components/settings/package_manager.rs:84
+#: src/gui/components/settings/scripts.rs:81
+msgid "Remove"
+msgstr "إزالة"
+
+#: src/gui/components/account_table.rs:148
+msgid "Buy"
+msgstr "شراء"
+
+#: src/gui/components/account_table.rs:149
+#: src/gui/components/settings/extension_manager.rs:75
+msgid "Refresh"
+msgstr "تحديث"
+
+#: src/gui/components/account_table.rs:152
+msgid "Buy premium account"
+msgstr "شراء حساب مميز"
+
+#: src/gui/components/account_table.rs:184
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#: src/gui/components/account_table.rs:185
+msgid "Password"
+msgstr "كلمة المرور"
+
+#: src/gui/components/account_table.rs:186
+msgid "Expire Date"
+msgstr "تاريخ الانتهاء"
+
+#: src/gui/components/account_table.rs:187
+msgid "Download Traffic left"
+msgstr "حركة التنزيل المتبقية"
+
+#: src/gui/components/settings/account_manager.rs:36
+msgid "Use Account(s) to download"
+msgstr "استخدام الحساب (الحسابات) للتنزيل"
+
+#: src/gui/components/settings/account_manager.rs:45
+msgid "Enter and manage all your Premium/Gold/Platinum accounts."
+msgstr "أدخل وأدر جميع حساباتك المميزة/الذهبية/البلاتينية."
+
+#: src/gui/components/settings/extension_manager.rs:70
+msgid "Enable, disable or install JDownloader extensions."
+msgstr "تمكين أو تعطيل أو تثبيت إضافات JDownloader."
+
+#: src/gui/components/settings/extension_manager.rs:87
+msgid "Loading extensions…"
+msgstr "جارٍ تحميل الإضافات…"
+
+#: src/gui/components/settings/extension_manager.rs:129
+msgid "No extensions found."
+msgstr "لم يتم العثور على إضافات."
+
+#: src/gui/components/settings/extension_manager.rs:203
+msgid "Install"
+msgstr "تثبيت"
+
+#: src/gui/components/settings/extension_manager.rs:211
+msgid "Installing…"
+msgstr "جارٍ التثبيت…"
+
+#: src/gui/components/settings/general.rs:143
+#: src/gui/dialogs/packagizer_rule_dialog.rs:154
+msgid "Browse"
+msgstr "استعراض"
+
+#: src/gui/components/settings/general.rs:152
+#: src/gui/components/settings/general.rs:156
+msgid "Download Folder"
+msgstr "مجلد التنزيل"
+
+#: src/gui/components/settings/general.rs:158
+msgid ""
+"Set the default download path here. Changing default path here, affects only "
+"new downloads."
+msgstr ""
+"حدد مسار التنزيل الافتراضي هنا. تغيير المسار الافتراضي هنا يؤثر فقط على "
+"التنزيلات الجديدة."
+
+#: src/gui/components/settings/general.rs:178
+msgid "Maximum of simultaneous downloads per host"
+msgstr "الحد الأقصى للتنزيلات المتزامنة لكل مستضيف"
+
+#: src/gui/components/settings/general.rs:195
+msgid "Immediate"
+msgstr "فوري"
+
+#: src/gui/components/settings/general.rs:196
+msgid "At start"
+msgstr "عند البدء"
+
+#: src/gui/components/settings/general.rs:197
+msgid "Package ready"
+msgstr "الحزمة جاهزة"
+
+#: src/gui/components/settings/general.rs:198
+#: src/gui/components/settings/general.rs:229
+msgid "Never"
+msgstr "أبدًا"
+
+#: src/gui/components/settings/general.rs:200
+msgid "Remove finished downloads"
+msgstr "إزالة التنزيلات المكتملة"
+
+#: src/gui/components/settings/general.rs:204
+msgid "Overwrite existing file"
+msgstr "استبدال الملف الموجود"
+
+#: src/gui/components/settings/general.rs:205
+msgid "Skip file"
+msgstr "تخطي الملف"
+
+#: src/gui/components/settings/general.rs:206
+msgid "Auto-rename"
+msgstr "إعادة تسمية تلقائية"
+
+#: src/gui/components/settings/general.rs:207
+msgid "Ask for each file"
+msgstr "السؤال عن كل ملف"
+
+#: src/gui/components/settings/general.rs:209
+msgid "If the file already exists"
+msgstr "إذا كان الملف موجودًا بالفعل"
+
+#: src/gui/components/settings/general.rs:213
+msgid "Download Management"
+msgstr "إدارة التنزيلات"
+
+#: src/gui/components/settings/general.rs:215
+msgid ""
+"Connection limits, Download order, Priorities, ... Set up the Download "
+"controller details."
+msgstr ""
+"حدود الاتصال، ترتيب التنزيل، الأولويات... اضبط تفاصيل وحدة تحكم التنزيل هنا."
+
+#: src/gui/components/settings/general.rs:227
+msgid "Always"
+msgstr "دائمًا"
+
+#: src/gui/components/settings/general.rs:228
+msgid "Only if downloads were running at last Session's end"
+msgstr "فقط إذا كانت التنزيلات تعمل في نهاية الجلسة الأخيرة"
+
+#: src/gui/components/settings/general.rs:232
+msgid "Autostart downloads at application start"
+msgstr "بدء التنزيلات تلقائيًا عند بدء التطبيق"
+
+#: src/gui/components/settings/general.rs:243
+msgid "Show Countdown (seconds)"
+msgstr "إظهار العد التنازلي (ثوانٍ)"
+
+#: src/gui/components/settings/general.rs:250
+msgid "Autostart Downloads"
+msgstr "بدء التنزيلات تلقائيًا"
+
+#: src/gui/components/settings/general.rs:252
+msgid ""
+"Choose if, and when JDownloader should start pending downloads without user "
+"interaction."
+msgstr ""
+"اختر إذا ومتى يجب على JDownloader بدء التنزيلات المعلقة دون تدخل المستخدم."
+
+#: src/gui/components/settings/general.rs:264
+msgid "Group single files in a Various package"
+msgstr "تجميع الملفات المفردة في حزمة متنوعة"
+
+#: src/gui/components/settings/general.rs:271
+msgid "LinkGrabber"
+msgstr "ملتقط الروابط"
+
+#: src/gui/components/settings/general.rs:282
+msgid "SFV / CRC check when possible"
+msgstr "فحص SFV / CRC عند الإمكان"
+
+#: src/gui/components/settings/general.rs:286
+msgid "Restart Downloads when SFV/CRC check fails"
+msgstr "إعادة تشغيل التنزيلات عند فشل فحص SFV/CRC"
+
+#: src/gui/components/settings/general.rs:293
+msgid "File Writing"
+msgstr "كتابة الملفات"
+
+#: src/gui/components/settings/general.rs:295
+msgid ""
+"JDownloader will verify your downloads for correctness after download using "
+"the hash/check option"
+msgstr ""
+"سيتحقق JDownloader من صحة تنزيلاتك بعد التنزيل باستخدام خيار التجزئة/الفحص"
+
+#: src/gui/components/settings/general.rs:307
+msgid "Auto open Link Containers (dlc,rsdf,...)"
+msgstr "فتح حزم الروابط تلقائيًا (dlc، rsdf، ...)"
+
+#: src/gui/components/settings/general.rs:314
+msgid "Miscellaneous"
+msgstr "متنوع"
+
+#: src/gui/components/settings/general.rs:337
+#: src/gui/dialogs/packagizer_rule_dialog.rs:161
+#: src/gui/properties_panel.rs:400
+msgid "Select Folder"
+msgstr "اختيار مجلد"
+
+#: src/gui/components/settings/package_manager.rs:50
+msgid "Enable Package Manager"
+msgstr "تمكين إدارة الحزم"
+
+#: src/gui/components/settings/package_manager.rs:56
+msgid ""
+"Rules that automatically set the download settings of files based on their "
+"properties."
+msgstr "قواعد تحدد تلقائيًا إعدادات تنزيل الملفات بناءً على خصائصها."
+
+#: src/gui/components/settings/package_manager.rs:82
+#: src/gui/components/settings/scripts.rs:79
+msgid "Edit"
+msgstr "تحرير"
+
+#: src/gui/components/settings/package_manager.rs:86
+msgid "Duplicate"
+msgstr "تكرار"
+
+#: src/gui/components/settings/package_manager.rs:88
+#: src/gui/main_tool_bar.rs:146
+msgid "Move up"
+msgstr "نقل للأعلى"
+
+#: src/gui/components/settings/package_manager.rs:90
+#: src/gui/main_tool_bar.rs:148
+msgid "Move down"
+msgstr "نقل للأسفل"
+
+#: src/gui/components/settings/package_manager.rs:107
+#: src/gui/components/settings/scripts.rs:96
+#: src/gui/dialogs/packagizer_rule_dialog.rs:106
+msgid "Enabled"
+msgstr "ممكّن"
+
+#: src/gui/components/settings/package_manager.rs:201
+msgid "New rule"
+msgstr "قاعدة جديدة"
+
+#: src/gui/components/settings/package_manager.rs:287
+msgid "copy"
+msgstr "نسخة"
+
+#: src/gui/components/settings/scripts.rs:53
+msgid ""
+"Run JavaScript automatically when a chosen event occurs (Eventscripter)."
+msgstr ""
+"تشغيل JavaScript تلقائيًا عند حدوث حدث محدد (محرر النصوص البرمجية للأحداث)."
+
+#: src/gui/components/settings/scripts.rs:113
+#: src/gui/dialogs/script_edit_dialog.rs:47
+msgid "Event trigger"
+msgstr "مُشغّل الحدث"
+
+#: src/gui/components/settings/scripts.rs:196
+msgid "New script"
+msgstr "نص برمجي جديد"
+
+#: src/gui/dialogs/account_add_dialog.rs:35
+msgid "Add new Account"
+msgstr "إضافة حساب جديد"
+
+#: src/gui/dialogs/account_add_dialog.rs:43
+msgid "1. Choose a Hoster"
+msgstr "1. اختر مستضيفًا"
+
+#: src/gui/dialogs/account_add_dialog.rs:53
+msgid "Search"
+msgstr "بحث"
+
+#: src/gui/dialogs/account_add_dialog.rs:63
+msgid "Domain"
+msgstr "المجال"
+
+#: src/gui/dialogs/account_add_dialog.rs:78
+msgid "2. Enter your Login Information"
+msgstr "2. أدخل معلومات تسجيل الدخول"
+
+#: src/gui/dialogs/account_add_dialog.rs:85
+msgid "Name:"
+msgstr "الاسم:"
+
+#: src/gui/dialogs/account_add_dialog.rs:86
+#: src/jd/plugins/hoster/onefichiercom.rs:56
+msgid "Pass:"
+msgstr "كلمة المرور:"
+
+#: src/gui/dialogs/account_add_dialog.rs:91
+msgid "Enter Username..."
+msgstr "أدخل اسم المستخدم..."
+
+#: src/gui/dialogs/account_add_dialog.rs:96
+#: src/jd/plugins/hoster/onefichiercom.rs:61
+msgid "Enter password..."
+msgstr "أدخل كلمة المرور..."
+
+#: src/gui/dialogs/account_add_dialog.rs:115
+#: src/gui/dialogs/packagizer_rule_dialog.rs:444
+#: src/gui/dialogs/script_edit_dialog.rs:97
+msgid "Save"
+msgstr "حفظ"
+
+#: src/gui/dialogs/account_add_dialog.rs:163
+msgid "2. Enter your {} Login Information"
+msgstr "2. أدخل معلومات تسجيل الدخول إلى {}"
+
+#: src/gui/dialogs/account_add_dialog.rs:253
+msgid "Adding account..."
+msgstr "جارٍ إضافة الحساب..."
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:21
+msgid "Contains"
+msgstr "يحتوي على"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:22
+msgid "Equals"
+msgstr "يساوي"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:23
+msgid "Does not contain"
+msgstr "لا يحتوي على"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:24
+msgid "Does not equal"
+msgstr "لا يساوي"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:48
+msgid "Regex"
+msgstr "تعبير نمطي"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:210
+msgid "Package Manager Rule"
+msgstr "قاعدة إدارة الحزم"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:231
+msgid "Rule name"
+msgstr "اسم القاعدة"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:239
+msgid "Always matches"
+msgstr "يتطابق دائمًا"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:241
+#: src/gui/dialogs/packagizer_rule_dialog.rs:384
+msgid "Filename"
+msgstr "اسم الملف"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:242
+#: src/gui/dialogs/packagizer_rule_dialog.rs:382
+#: src/gui/properties_panel.rs:240
+msgid "Package name"
+msgstr "اسم الحزمة"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:244
+msgid "Hoster / URL"
+msgstr "المستضيف / الرابط"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:245
+msgid "Source URL"
+msgstr "رابط المصدر"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:250
+msgid "Between"
+msgstr "بين"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:251
+msgid "Not between"
+msgstr "ليس بين"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:270
+#: src/gui/dialogs/packagizer_rule_dialog.rs:272
+msgid "MiB"
+msgstr "ميبيبايت"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:273
+msgid "File size"
+msgstr "حجم الملف"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:289
+msgid "Is"
+msgstr "هو"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:290
+msgid "Is not"
+msgstr "ليس"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:293
+msgid "Video"
+msgstr "فيديو"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:294
+msgid "Audio"
+msgstr "صوت"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:295
+msgid "Archives"
+msgstr "أرشيفات"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:296
+msgid "Images"
+msgstr "صور"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:297
+msgid "Documents"
+msgstr "مستندات"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:298
+msgid "Subtitles"
+msgstr "ترجمات"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:299
+msgid "Executables"
+msgstr "ملفات تنفيذية"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:300
+msgid "Hash files"
+msgstr "ملفات التجزئة"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:303
+msgid "Custom extensions (e.g. iso,bin)"
+msgstr "امتدادات مخصصة (مثل iso,bin)"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:329
+msgid "File type"
+msgstr "نوع الملف"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:353
+msgid "If"
+msgstr "إذا"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:354
+msgid "Match downloads based on these conditions."
+msgstr "مطابقة التنزيلات بناءً على هذه الشروط."
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:363
+msgid "Destination Folder"
+msgstr "مجلد الوجهة"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:367
+msgid "Highest"
+msgstr "الأعلى"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:368
+msgid "Higher"
+msgstr "أعلى"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:369
+msgid "High"
+msgstr "عالية"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:370
+msgid "Default"
+msgstr "افتراضي"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:371
+msgid "Low"
+msgstr "منخفضة"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:372
+msgid "Lower"
+msgstr "أدنى"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:373
+msgid "Lowest"
+msgstr "الأدنى"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:376
+msgid "Priority"
+msgstr "الأولوية"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:383
+msgid "Package key"
+msgstr "مفتاح الحزمة"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:397
+msgid "Auto extract"
+msgstr "استخراج تلقائي"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:398
+msgid "Auto add"
+msgstr "إضافة تلقائية"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:399
+msgid "Autostart"
+msgstr "بدء تلقائي"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:400
+msgid "Forced start"
+msgstr "بدء قسري"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:401
+msgid "Link enabled"
+msgstr "الرابط ممكّن"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:405
+msgid "Then"
+msgstr "ثم"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:414
+msgid "Move to"
+msgstr "نقل إلى"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:415
+msgid "Rename to"
+msgstr "إعادة تسمية إلى"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:419
+msgid "...and do"
+msgstr "...وتنفيذ"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:430
+msgid "Stop processing further rules if this rule matches"
+msgstr "إيقاف معالجة القواعد الأخرى إذا تطابقت هذه القاعدة"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:449
+msgid "This is a predefined rule and cannot be modified."
+msgstr "هذه قاعدة محددة مسبقًا ولا يمكن تعديلها."
+
+#: src/gui/dialogs/script_edit_dialog.rs:18
+msgid "Edit Script"
+msgstr "تحرير النص البرمجي"
+
+#: src/gui/dialogs/script_edit_dialog.rs:50
+msgid "Run synchronously"
+msgstr "تشغيل بشكل متزامن"
+
+#: src/gui/dialogs/script_edit_dialog.rs:57
+msgid "Interval (ms)"
+msgstr "الفترة (مللي ثانية)"
+
+#: src/gui/dialogs/script_edit_dialog.rs:61
+msgid "Trigger"
+msgstr "المُشغّل"
+
+#: src/gui/dialogs/script_edit_dialog.rs:62
+msgid "Choose when this script should run."
+msgstr "اختر متى يجب تشغيل هذا النص البرمجي."
+
+#: src/gui/dialogs/script_edit_dialog.rs:67
+msgid "Script (JavaScript)"
+msgstr "النص البرمجي (JavaScript)"
+
+#: src/gui/donate.rs:11
+msgid "The JDownloader project needs your help!"
+msgstr "مشروع JDownloader يحتاج إلى مساعدتك!"
+
+#: src/gui/donate.rs:13
+msgid ""
+"If you are a satisfied user of JDownloader, please think about contributing "
+"to this project. JDownloader is the result of daily hard work since more "
+"than %s1 years. We need your help to keep it free of charge, free of "
+"advertising, free of installer bundles and to improve JDownloader even more. "
+"Moreover, donating is a good way to tell us what modules we should focus our "
+"work on."
+msgstr ""
+"إذا كنت مستخدمًا راضيًا عن JDownloader، فيرجى التفكير في المساهمة في هذا "
+"المشروع. JDownloader هو نتيجة عمل يومي شاق منذ أكثر من %s1 عامًا. نحتاج إلى "
+"مساعدتك للحفاظ عليه مجانيًا، وخاليًا من الإعلانات، وخاليًا من حزم برامج "
+"التثبيت، ولتحسين JDownloader أكثر. علاوة على ذلك، يعد التبرع طريقة جيدة "
+"لإخبارنا بالوحدات التي يجب أن نركز عملنا عليها."
+
+#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:104
+msgid "Start downloads"
+msgstr "بدء التنزيلات"
+
+#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:118
+msgid "Pause downloads"
+msgstr "إيقاف التنزيلات مؤقتًا"
+
+#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:111
+msgid "Stop downloads"
+msgstr "إيقاف التنزيلات"
+
+#. Move actions
+#: src/gui/main_tool_bar.rs:144
+msgid "Move to top"
+msgstr "نقل إلى الأعلى"
+
+#: src/gui/main_tool_bar.rs:150
+msgid "Move bottom"
+msgstr "نقل إلى الأسفل"
+
+#: src/gui/main_tool_bar.rs:158
+msgid "Clipboard monitoring"
+msgstr "مراقبة الحافظة"
+
+#: src/gui/main_tool_bar.rs:163
+msgid "Auto reconnect"
+msgstr "إعادة الاتصال تلقائيًا"
+
+#: src/gui/main_tool_bar.rs:171
+msgid "Use premium accounts"
+msgstr "استخدام الحسابات المميزة"
+
+#: src/gui/main_tool_bar.rs:176
+msgid "Silent mode"
+msgstr "الوضع الصامت"
+
+#. Misc
+#: src/gui/main_tool_bar.rs:183
+msgid "Reconnect"
+msgstr "إعادة الاتصال"
+
+#: src/gui/main_tool_bar.rs:191
+msgid "Check for updates"
+msgstr "التحقق من التحديثات"
+
+#: src/gui/properties_panel.rs:86
+msgid "Highest priority"
+msgstr "الأولوية الأعلى"
+
+#: src/gui/properties_panel.rs:87
+msgid "Higher priority"
+msgstr "أولوية أعلى"
+
+#: src/gui/properties_panel.rs:88
+msgid "High priority"
+msgstr "أولوية عالية"
+
+#: src/gui/properties_panel.rs:89
+msgid "Low priority"
+msgstr "أولوية منخفضة"
+
+#: src/gui/properties_panel.rs:90
+msgid "Lower priority"
+msgstr "أولوية أدنى"
+
+#: src/gui/properties_panel.rs:91
+msgid "Lowest priority"
+msgstr "الأولوية الأدنى"
+
+#: src/gui/properties_panel.rs:92
+msgid "Default priority"
+msgstr "الأولوية الافتراضية"
+
+#: src/gui/properties_panel.rs:235
+msgid "Package name:"
+msgstr "اسم الحزمة:"
+
+#: src/gui/properties_panel.rs:249
+msgid "File name:"
+msgstr "اسم الملف:"
+
+#: src/gui/properties_panel.rs:254
+msgid "File name"
+msgstr "اسم الملف"
+
+#: src/gui/properties_panel.rs:260
+msgid "Browse…"
+msgstr "استعراض…"
+
+#: src/gui/properties_panel.rs:266
+msgid "Save to:"
+msgstr "حفظ في:"
+
+#: src/gui/properties_panel.rs:271
+msgid "Save to"
+msgstr "حفظ في"
+
+#: src/gui/properties_panel.rs:278
+msgid "Source:"
+msgstr "المصدر:"
+
+#: src/gui/properties_panel.rs:283
+msgid "Source"
+msgstr "المصدر"
+
+#: src/gui/properties_panel.rs:289
+msgid "Comment:"
+msgstr "تعليق:"
+
+#: src/gui/properties_panel.rs:490
+msgid "File Properties: {}"
+msgstr "خصائص الملف: {}"
+
+#: src/gui/window.rs:174
+msgid "Waiting for JDownloader to exit..."
+msgstr "في انتظار إغلاق JDownloader..."
+
+#: src/gui/mod.rs:116
+msgid "The power of JDownloader, the elegance of GNOME"
+msgstr ""
+
+#: src/gui/mod.rs:199 src/gui/mod.rs:221
+msgid "Start Downloads"
+msgstr "بدء التنزيلات"
+
+#: src/gui/mod.rs:204 src/gui/mod.rs:228
+msgid "Start All Downloads"
+msgstr "بدء جميع التنزيلات"
+
+#. Status bar.
+#: src/gui/mod.rs:463
+msgid "Ready"
+msgstr "جاهز"
+
+#: src/gui/mod.rs:519
+msgid "JDownloader started"
+msgstr "تم بدء JDownloader"
+
+#: src/gui/mod.rs:554
+msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
+msgstr "لم يتم العثور على JDownloader.jar. اضبط JDOWNLOADER_JAR."
+
+#: src/jd/jar.rs:74
+msgid "Unable to create local JDownloader directory {}: {}"
+msgstr "تعذّر إنشاء دليل JDownloader المحلي {}: {}"
+
+#: src/jd/jar.rs:88
+msgid "Unable to copy JDownloader.jar to {}: {}"
+msgstr "تعذّر نسخ JDownloader.jar إلى {}: {}"
+
+#: src/jd/log_watcher.rs:62
+msgid "JDownloader starting, please wait..."
+msgstr "JDownloader قيد التشغيل، يرجى الانتظار..."
+
+#: src/jd/log_watcher.rs:68
+msgid "Restarting after update"
+msgstr "إعادة التشغيل بعد التحديث"
+
+#: src/jd/log_watcher.rs:73
+msgid "Update"
+msgstr "تحديث"
+
+#: src/jd/log_watcher.rs:78
+msgid "JDownloader starting"
+msgstr "JDownloader قيد التشغيل"
+
+#: src/jd/log_watcher.rs:83
+msgid "Initialization"
+msgstr "التهيئة"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:21
+msgid "Account Type:"
+msgstr "نوع الحساب:"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:25
+msgid "Premium Account | API Login [Recommended]"
+msgstr "حساب مميز | تسجيل دخول عبر API [مُوصى به]"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:26
+msgid "Premium GOLD Account | API Login [Recommended]"
+msgstr "حساب ذهبي مميز | تسجيل دخول عبر API [مُوصى به]"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:27
+msgid "Premium Account | Website Login"
+msgstr "حساب مميز | تسجيل دخول عبر الموقع"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:28
+msgid "Premium GOLD Account | Website Login"
+msgstr "حساب ذهبي مميز | تسجيل دخول عبر الموقع"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:29
+msgid "Free Account with paid CDN credits"
+msgstr "حساب مجاني برصيد CDN مدفوع"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:30
+msgid "Free Account"
+msgstr "حساب مجاني"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:41
+msgid "Premium API Key:"
+msgstr "مفتاح API المميز:"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:46
+msgid "Enter API key (click here to find it)"
+msgstr "أدخل مفتاح API (انقر هنا للعثور عليه)"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:51
+msgid "E-Mail:"
+msgstr "البريد الإلكتروني:"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:55
+msgid "Enter e-mail..."
+msgstr "أدخل البريد الإلكتروني..."
+
+#: src/jd/process.rs:24
+msgid "JDownloader is already running"
+msgstr "JDownloader قيد التشغيل بالفعل"
+
+#: src/jd/process.rs:29
+msgid "JDownloader.jar has no parent directory"
+msgstr "JDownloader.jar لا يملك دليلًا أصليًا"
+
+#: src/jd/process.rs:32
+msgid "JDownloader.jar has no file name"
+msgstr "JDownloader.jar لا يملك اسم ملف"
+
+#~ msgid "JDownloader for GNOME"
+#~ msgstr "JDownloader لـ GNOME"

@@ -1,5 +1,8 @@
 fallback_language = "en"
 
 [gettext]
-target_languages = ["fr"]
+target_languages = [
+    "ar", "cs", "da", "de", "el", "es", "fi", "fr", "hu", "id", "it",
+    "ja", "ko", "nl", "no", "pl", "pt", "ru", "sv", "tr", "uk", "zh",
+]
 output_dir = "i18n"

@@ -68,9 +68,11 @@ impl JdProcess {
 
         let child = Command::new("java")
             .current_dir(cwd)
-            .env("LANG", "C")
+            .env("LANG", "C.UTF-8")
             .arg(JD_INTERNAL_FLAG)
             .arg("-Djava.awt.headless=true")
+            .arg("-Dfile.encoding=UTF-8")
+            .arg("-Dsun.jnu.encoding=UTF-8")
             .arg("-jar")
             .arg(jar_name)
             .arg("-n")

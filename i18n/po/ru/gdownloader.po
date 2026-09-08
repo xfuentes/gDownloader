@@ -1,0 +1,1345 @@
+# Russian translations for gdownloader package.
+# Copyright (C) 2026 THE gdownloader'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gdownloader package.
+# Xavier Fuentes <xfuentes-dev@serviam.cc>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gdownloader 0.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-08 05:50+0000\n"
+"PO-Revision-Date: 2026-09-07 17:48+0200\n"
+"Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
+"Language-Team: Russian <gnu@d07.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: src/app.rs:18
+msgid "Error: {}"
+msgstr "Ошибка: {}"
+
+#: src/app.rs:39
+msgid "JDownloader did not respond in time"
+msgstr "JDownloader не ответил вовремя"
+
+#: src/gui/overview_panel.rs:114 src/gui/properties_panel.rs:201
+msgid "Choose visible fields"
+msgstr "Выбрать видимые поля"
+
+#: src/gui/clipboard.rs:208
+msgid "New links from clipboard"
+msgstr "Новые ссылки из буфера обмена"
+
+#: src/gui/clipboard.rs:210
+msgid "New links from clipboard ({})"
+msgstr "Новые ссылки из буфера обмена ({})"
+
+#: src/gui/clipboard.rs:212
+msgid "One link captured"
+msgid_plural "{n} links captured"
+msgstr[0] "Захвачена {n} ссылка"
+msgstr[1] "Захвачено {n} ссылки"
+msgstr[2] "Захвачено {n} ссылок"
+
+#: src/gui/clipboard.rs:225
+msgid "Show"
+msgstr "Показать"
+
+#: src/gui/settings_panel.rs:32 src/gui/settings_panel.rs:50
+msgid "General"
+msgstr "Общие"
+
+#: src/gui/settings_panel.rs:35 src/gui/settings_panel.rs:53
+#: src/gui/components/settings/account_manager.rs:43
+msgid "Account Manager"
+msgstr "Менеджер учётных записей"
+
+#: src/gui/settings_panel.rs:39 src/gui/settings_panel.rs:57
+#: src/gui/components/settings/package_manager.rs:54
+msgid "Package Manager"
+msgstr "Менеджер пакетов"
+
+#: src/gui/settings_panel.rs:43 src/gui/settings_panel.rs:61
+#: src/gui/components/settings/extension_manager.rs:69
+msgid "Extension Manager"
+msgstr "Менеджер расширений"
+
+#: src/gui/settings_panel.rs:45 src/gui/settings_panel.rs:63
+#: src/gui/components/settings/scripts.rs:51
+msgid "Scripts"
+msgstr "Скрипты"
+
+#: src/gui/settings_panel.rs:72 src/gui/settings_panel.rs:123
+#: src/gui/settings_panel.rs:138 src/gui/main_menu_bar.rs:37
+#: src/gui/menus/settings.rs:10 src/gui/menus/settings.rs:46
+#: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
+msgid "Settings"
+msgstr "Настройки"
+
+#: src/gui/link_grabber_panel.rs:132 src/gui/downloads_panel.rs:168
+msgid "Packages"
+msgstr "Пакеты"
+
+#: src/gui/link_grabber_panel.rs:138 src/gui/downloads_panel.rs:174
+msgid "Links"
+msgstr "Ссылки"
+
+#: src/gui/link_grabber_panel.rs:144 src/gui/link_grabber_panel.rs:715
+#: src/gui/link_grabber_panel.rs:720 src/gui/downloads_panel.rs:180
+#: src/gui/downloads_panel.rs:725 src/gui/downloads_panel.rs:730
+msgid "Size"
+msgstr "Размер"
+
+#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1888
+msgid "Online"
+msgstr "В сети"
+
+#: src/gui/link_grabber_panel.rs:156 src/gui/link_grabber_panel.rs:786
+#: src/gui/link_grabber_panel.rs:788 src/gui/downloads_panel.rs:737
+#: src/gui/downloads_panel.rs:739 src/gui/components/account_table.rs:182
+msgid "Hoster"
+msgstr "Хостер"
+
+#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1892
+msgid "Offline"
+msgstr "Не в сети"
+
+#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1900
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: src/gui/link_grabber_panel.rs:483 src/gui/main_menu_bar.rs:36
+msgid "File"
+msgstr "Файл"
+
+#: src/gui/link_grabber_panel.rs:692 src/gui/link_grabber_panel.rs:694
+msgid "Variant"
+msgstr "Вариант"
+
+#: src/gui/link_grabber_panel.rs:702 src/gui/link_grabber_panel.rs:707
+#: src/gui/downloads_panel.rs:895 src/gui/downloads_panel.rs:900
+msgid "Save To"
+msgstr "Сохранить в"
+
+#: src/gui/link_grabber_panel.rs:795 src/gui/link_grabber_panel.rs:799
+msgid "Availability"
+msgstr "Доступность"
+
+#: src/gui/link_grabber_panel.rs:824 src/gui/downloads_panel.rs:936
+msgid "Choose visible columns"
+msgstr "Выбрать видимые столбцы"
+
+#: src/gui/link_grabber_panel.rs:1019 src/gui/link_grabber_panel.rs:1194
+#: src/gui/downloads_panel.rs:1056 src/gui/downloads_panel.rs:1194
+#: src/gui/components/account_table.rs:248
+msgid "Overview"
+msgstr "Обзор"
+
+#: src/gui/link_grabber_panel.rs:1054 src/gui/downloads_panel.rs:1098
+msgid "Add links to linkgrabber"
+msgstr "Добавить ссылки в сборщик ссылок"
+
+#: src/gui/link_grabber_panel.rs:1063 src/gui/downloads_panel.rs:1107
+msgid "Add links"
+msgstr "Добавить ссылки"
+
+#: src/gui/link_grabber_panel.rs:1063 src/gui/downloads_panel.rs:1107
+msgid "Add container"
+msgstr "Добавить контейнер"
+
+#: src/gui/link_grabber_panel.rs:1063 src/gui/downloads_panel.rs:1107
+msgid "Paste links"
+msgstr "Вставить ссылки"
+
+#: src/gui/link_grabber_panel.rs:1086
+msgid "Clear linkgrabber"
+msgstr "Очистить сборщик ссылок"
+
+#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:210 src/gui/mod.rs:234
+#: src/gui/mod.rs:287 src/gui/mod.rs:296
+msgid "Delete"
+msgstr "Удалить"
+
+#: src/gui/link_grabber_panel.rs:1105 src/gui/downloads_panel.rs:1144
+msgid "Delete disabled"
+msgstr "Удалить отключённые"
+
+#: src/gui/link_grabber_panel.rs:1106 src/gui/downloads_panel.rs:1147
+msgid "Delete offline"
+msgstr "Удалить недоступные"
+
+#: src/gui/link_grabber_panel.rs:1107
+msgid "Remove incomplete archives"
+msgstr "Удалить неполные архивы"
+
+#: src/gui/link_grabber_panel.rs:1108
+msgid "Clear filtered links"
+msgstr "Очистить отфильтрованные ссылки"
+
+#: src/gui/link_grabber_panel.rs:1129 src/gui/downloads_panel.rs:1171
+msgid "Filter"
+msgstr "Фильтр"
+
+#: src/gui/link_grabber_panel.rs:1138
+msgid "Add filtered stuff"
+msgstr "Добавить отфильтрованное"
+
+#: src/gui/link_grabber_panel.rs:1148
+msgid "Add to download list"
+msgstr "Добавить в список загрузок"
+
+#: src/gui/link_grabber_panel.rs:1160
+msgid "Add and start all"
+msgstr "Добавить и запустить всё"
+
+#: src/gui/link_grabber_panel.rs:1161
+msgid "Add and start selected"
+msgstr "Добавить и запустить выбранное"
+
+#: src/gui/link_grabber_panel.rs:1162
+msgid "Add all"
+msgstr "Добавить всё"
+
+#: src/gui/link_grabber_panel.rs:1163
+msgid "Add selected"
+msgstr "Добавить выбранное"
+
+#: src/gui/link_grabber_panel.rs:1189
+msgid "Add at top"
+msgstr "Добавить в начало"
+
+#: src/gui/link_grabber_panel.rs:1190
+msgid "Auto confirm"
+msgstr "Автоподтверждение"
+
+#: src/gui/link_grabber_panel.rs:1191
+msgid "Auto start"
+msgstr "Автозапуск"
+
+#: src/gui/link_grabber_panel.rs:1192
+msgid "Link filter"
+msgstr "Фильтр ссылок"
+
+#: src/gui/link_grabber_panel.rs:1193 src/gui/downloads_panel.rs:1193
+msgid "Properties"
+msgstr "Свойства"
+
+#: src/gui/link_grabber_panel.rs:1195
+msgid "Sidebar"
+msgstr "Боковая панель"
+
+#: src/gui/link_grabber_panel.rs:1196 src/gui/downloads_panel.rs:1195
+msgid "Bottom bar manager"
+msgstr "Управление нижней панелью"
+
+#: src/gui/link_grabber_panel.rs:1617 src/gui/downloads_panel.rs:1664
+msgid "Are you sure?"
+msgstr "Вы уверены?"
+
+#: src/gui/link_grabber_panel.rs:1639 src/gui/downloads_panel.rs:1686
+msgid "Do you really want to perform this clean up action:"
+msgstr "Вы действительно хотите выполнить это действие очистки:"
+
+#: src/gui/link_grabber_panel.rs:1640
+msgid "Delete Selected Links?"
+msgstr "Удалить выбранные ссылки?"
+
+#: src/gui/link_grabber_panel.rs:1647 src/gui/downloads_panel.rs:1694
+msgid "Tasks to do:"
+msgstr "Задачи для выполнения:"
+
+#: src/gui/link_grabber_panel.rs:1656 src/gui/downloads_panel.rs:1703
+msgid "Delete selected link"
+msgid_plural "Delete selected links"
+msgstr[0] "Удалить выбранную ссылку"
+msgstr[1] "Удалить выбранные ссылки"
+msgstr[2] "Удалить выбранные ссылки"
+
+#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
+msgid "{n} link remaining"
+msgid_plural "{n} links remaining"
+msgstr[0] "Осталась {n} ссылка"
+msgstr[1] "Осталось {n} ссылки"
+msgstr[2] "Осталось {n} ссылок"
+
+#: src/gui/link_grabber_panel.rs:1674 src/gui/downloads_panel.rs:1745
+msgid "Don't show this again"
+msgstr "Больше не показывать"
+
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.2.0)  #-#-#-#-#
+#. Buttons
+#: src/gui/link_grabber_panel.rs:1680 src/gui/downloads_panel.rs:1751
+#: src/gui/dialogs/account_add_dialog.rs:114
+#: src/gui/dialogs/packagizer_rule_dialog.rs:443
+#: src/gui/dialogs/script_edit_dialog.rs:96 src/gui/donate.rs:33
+msgid "Cancel"
+msgstr "Отмена"
+
+#: src/gui/link_grabber_panel.rs:1681 src/gui/downloads_panel.rs:1752
+#: src/gui/donate.rs:37
+msgid "Continue"
+msgstr "Продолжить"
+
+#: src/gui/link_grabber_panel.rs:1896
+msgid "Temporarily Unknown"
+msgstr "Временно неизвестно"
+
+#: src/gui/downloads_panel.rs:186 src/gui/downloads_panel.rs:856
+#: src/gui/downloads_panel.rs:861
+msgid "Speed"
+msgstr "Скорость"
+
+#: src/gui/downloads_panel.rs:192 src/gui/downloads_panel.rs:882
+#: src/gui/downloads_panel.rs:887
+msgid "Loaded"
+msgstr "Загружено"
+
+#: src/gui/downloads_panel.rs:198
+msgid "Remaining"
+msgstr "Осталось"
+
+#: src/gui/downloads_panel.rs:204 src/gui/downloads_panel.rs:869
+#: src/gui/downloads_panel.rs:874
+msgid "ETA"
+msgstr "Оставшееся время"
+
+#: src/gui/downloads_panel.rs:210
+msgid "Running downloads"
+msgstr "Активные загрузки"
+
+#: src/gui/downloads_panel.rs:216
+msgid "Finished downloads"
+msgstr "Завершённые загрузки"
+
+#: src/gui/downloads_panel.rs:222
+msgid "Skipped downloads"
+msgstr "Пропущенные загрузки"
+
+#: src/gui/downloads_panel.rs:228
+msgid "Failed downloads"
+msgstr "Неудачные загрузки"
+
+#: src/gui/downloads_panel.rs:677
+#: src/gui/components/settings/package_manager.rs:115
+#: src/gui/components/settings/scripts.rs:104
+#: src/gui/dialogs/script_edit_dialog.rs:40
+msgid "Name"
+msgstr "Имя"
+
+#: src/gui/downloads_panel.rs:689 src/gui/downloads_panel.rs:716
+msgid "Progress"
+msgstr "Прогресс"
+
+#: src/gui/downloads_panel.rs:791 src/gui/downloads_panel.rs:794
+msgid "Connection"
+msgstr "Соединение"
+
+#: src/gui/downloads_panel.rs:845 src/gui/downloads_panel.rs:848
+#: src/gui/components/account_table.rs:183
+msgid "Status"
+msgstr "Статус"
+
+#: src/gui/downloads_panel.rs:908 src/gui/downloads_panel.rs:913
+#: src/gui/dialogs/packagizer_rule_dialog.rs:243
+#: src/gui/dialogs/packagizer_rule_dialog.rs:385
+#: src/gui/properties_panel.rs:305
+msgid "Comment"
+msgstr "Комментарий"
+
+#: src/gui/downloads_panel.rs:1134
+msgid "Delete all"
+msgstr "Удалить всё"
+
+#: src/gui/downloads_panel.rs:1145
+msgid "Delete failed"
+msgstr "Удалить неудачные"
+
+#: src/gui/downloads_panel.rs:1146
+msgid "Delete finished"
+msgstr "Удалить завершённые"
+
+#: src/gui/downloads_panel.rs:1189
+#: src/gui/dialogs/packagizer_rule_dialog.rs:391
+msgid "Chunks"
+msgstr "Части"
+
+#: src/gui/downloads_panel.rs:1190
+msgid "Parallel downloads"
+msgstr "Параллельные загрузки"
+
+#: src/gui/downloads_panel.rs:1191
+msgid "Parallel per host"
+msgstr "Параллельно на хостера"
+
+#: src/gui/downloads_panel.rs:1192
+msgid "Speed limit"
+msgstr "Ограничение скорости"
+
+#: src/gui/downloads_panel.rs:1345
+msgid "Downloads complete"
+msgstr "Загрузки завершены"
+
+#: src/gui/downloads_panel.rs:1346
+msgid "One file downloaded successfully"
+msgid_plural "{n} files downloaded successfully"
+msgstr[0] "Успешно загружен {n} файл"
+msgstr[1] "Успешно загружено {n} файла"
+msgstr[2] "Успешно загружено {n} файлов"
+
+#: src/gui/downloads_panel.rs:1687
+msgid "Delete Selected Downloads?"
+msgstr "Удалить выбранные загрузки?"
+
+#: src/gui/downloads_panel.rs:1709
+msgid "{n} file ({}) on disk"
+msgid_plural "{n} files ({}) on disk"
+msgstr[0] "{n} файл ({}) на диске"
+msgstr[1] "{n} файла ({}) на диске"
+msgstr[2] "{n} файлов ({}) на диске"
+
+#: src/gui/downloads_panel.rs:1721
+msgid "Keep all downloaded files - just remove links from JDownloader"
+msgstr "Сохранить все загруженные файлы — только удалить ссылки из JDownloader"
+
+#: src/gui/downloads_panel.rs:1722
+msgid "Move downloaded files to Trash & remove links from JDownloader"
+msgstr ""
+"Переместить загруженные файлы в корзину и удалить ссылки из JDownloader"
+
+#: src/gui/downloads_panel.rs:1723
+msgid ""
+"Delete downloaded files permanently from disk & remove links from JDownloader"
+msgstr ""
+"Безвозвратно удалить загруженные файлы с диска и удалить ссылки из "
+"JDownloader"
+
+#: src/gui/main_menu_bar.rs:38
+msgid "Tools"
+msgstr "Инструменты"
+
+#: src/gui/main_menu_bar.rs:39
+msgid "Help"
+msgstr "Справка"
+
+#: src/gui/menus/file.rs:11 src/gui/menus/file.rs:23
+msgid "Backup all settings"
+msgstr "Резервное копирование всех настроек"
+
+#: src/gui/menus/file.rs:16 src/gui/menus/file.rs:27
+msgid "Restore settings"
+msgstr "Восстановить настройки"
+
+#: src/gui/menus/file.rs:35 src/gui/menus/file.rs:69
+msgid "Analyse Text with Links"
+msgstr "Анализ текста со ссылками"
+
+#: src/gui/menus/file.rs:40 src/gui/menus/file.rs:73
+msgid "Add Container"
+msgstr "Добавить контейнер"
+
+#: src/gui/menus/file.rs:48 src/gui/menus/file.rs:77
+msgid "Backup"
+msgstr "Резервная копия"
+
+#: src/gui/menus/file.rs:56 src/gui/menus/file.rs:81
+msgid "Restart"
+msgstr "Перезапуск"
+
+#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:126
+msgid "Exit"
+msgstr "Выход"
+
+#: src/gui/menus/help.rs:10 src/gui/menus/help.rs:49
+msgid "Online Help"
+msgstr "Онлайн-справка"
+
+#: src/gui/menus/help.rs:15 src/gui/menus/help.rs:53
+msgid "Create a Log"
+msgstr "Создать журнал"
+
+#: src/gui/menus/help.rs:23 src/gui/menus/help.rs:57
+msgid "Find Updates"
+msgstr "Проверить обновления"
+
+#: src/gui/menus/help.rs:28 src/gui/menus/help.rs:61
+msgid "Changelog"
+msgstr "Журнал изменений"
+
+#: src/gui/menus/help.rs:36 src/gui/menus/help.rs:65
+msgid "Contribute"
+msgstr "Внести вклад"
+
+#: src/gui/menus/help.rs:41 src/gui/menus/help.rs:69
+msgid "About JDownloader"
+msgstr "О JDownloader"
+
+#: src/gui/menus/settings.rs:15 src/gui/menus/settings.rs:50
+msgid "My.JDownloader"
+msgstr "My.JDownloader"
+
+#: src/gui/menus/settings.rs:23 src/gui/menus/settings.rs:54
+#: src/gui/components/settings/general.rs:186
+msgid "Max. Chunks per Download"
+msgstr "Макс. частей на загрузку"
+
+#: src/gui/menus/settings.rs:28 src/gui/menus/settings.rs:58
+#: src/gui/components/settings/general.rs:170
+msgid "Max. simultaneous Downloads"
+msgstr "Макс. одновременных загрузок"
+
+#: src/gui/menus/settings.rs:33 src/gui/menus/settings.rs:62
+msgid "Max. sim. Downloads per Hoster"
+msgstr "Макс. одновременных загрузок на хостера"
+
+#: src/gui/menus/settings.rs:38 src/gui/menus/settings.rs:66
+msgid "Speed Limit"
+msgstr "Ограничение скорости"
+
+#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:125
+msgid "Download"
+msgstr "Загрузка"
+
+#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:129
+msgid "Link Collector"
+msgstr "Сборщик ссылок"
+
+#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:134
+msgid "Donate"
+msgstr "Пожертвовать"
+
+#: src/gui/menus/tools.rs:54 src/gui/menus/tools.rs:61
+msgid "Windows"
+msgstr "Окна"
+
+#: src/gui/components/account_table.rs:31
+#: src/gui/dialogs/packagizer_rule_dialog.rs:107
+msgid "Disabled"
+msgstr "Отключено"
+
+#: src/gui/components/account_table.rs:37
+msgid "Invalid"
+msgstr "Недействительно"
+
+#: src/gui/components/account_table.rs:42
+msgid "Account is ok"
+msgstr "Учётная запись в порядке"
+
+#: src/gui/components/account_table.rs:70
+msgid "Unlimited"
+msgstr "Неограниченно"
+
+#. #-#-#-#-#  account_table.pot (gdownloader 0.2.0)  #-#-#-#-#
+#. Icon names and sizes from JDownloader's AccountListPanel.
+#: src/gui/components/account_table.rs:146
+#: src/gui/components/settings/package_manager.rs:81
+#: src/gui/components/settings/scripts.rs:78
+msgid "Add"
+msgstr "Добавить"
+
+#: src/gui/components/account_table.rs:147
+#: src/gui/components/settings/package_manager.rs:84
+#: src/gui/components/settings/scripts.rs:81
+msgid "Remove"
+msgstr "Удалить"
+
+#: src/gui/components/account_table.rs:148
+msgid "Buy"
+msgstr "Купить"
+
+#: src/gui/components/account_table.rs:149
+#: src/gui/components/settings/extension_manager.rs:75
+msgid "Refresh"
+msgstr "Обновить"
+
+#: src/gui/components/account_table.rs:152
+msgid "Buy premium account"
+msgstr "Купить премиум-аккаунт"
+
+#: src/gui/components/account_table.rs:184
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: src/gui/components/account_table.rs:185
+msgid "Password"
+msgstr "Пароль"
+
+#: src/gui/components/account_table.rs:186
+msgid "Expire Date"
+msgstr "Дата истечения"
+
+#: src/gui/components/account_table.rs:187
+msgid "Download Traffic left"
+msgstr "Осталось трафика загрузки"
+
+#: src/gui/components/settings/account_manager.rs:36
+msgid "Use Account(s) to download"
+msgstr "Использовать учётные записи для загрузки"
+
+#: src/gui/components/settings/account_manager.rs:45
+msgid "Enter and manage all your Premium/Gold/Platinum accounts."
+msgstr ""
+"Вводите и управляйте всеми вашими учётными записями Premium/Gold/Platinum."
+
+#: src/gui/components/settings/extension_manager.rs:70
+msgid "Enable, disable or install JDownloader extensions."
+msgstr "Включайте, отключайте или устанавливайте расширения JDownloader."
+
+#: src/gui/components/settings/extension_manager.rs:87
+msgid "Loading extensions…"
+msgstr "Загрузка расширений…"
+
+#: src/gui/components/settings/extension_manager.rs:129
+msgid "No extensions found."
+msgstr "Расширения не найдены."
+
+#: src/gui/components/settings/extension_manager.rs:203
+msgid "Install"
+msgstr "Установить"
+
+#: src/gui/components/settings/extension_manager.rs:211
+msgid "Installing…"
+msgstr "Установка…"
+
+#: src/gui/components/settings/general.rs:143
+#: src/gui/dialogs/packagizer_rule_dialog.rs:154
+msgid "Browse"
+msgstr "Обзор"
+
+#: src/gui/components/settings/general.rs:152
+#: src/gui/components/settings/general.rs:156
+msgid "Download Folder"
+msgstr "Папка загрузок"
+
+#: src/gui/components/settings/general.rs:158
+msgid ""
+"Set the default download path here. Changing default path here, affects only "
+"new downloads."
+msgstr ""
+"Здесь задайте путь загрузки по умолчанию. Изменение пути здесь влияет только "
+"на новые загрузки."
+
+#: src/gui/components/settings/general.rs:178
+msgid "Maximum of simultaneous downloads per host"
+msgstr "Максимум одновременных загрузок на хостера"
+
+#: src/gui/components/settings/general.rs:195
+msgid "Immediate"
+msgstr "Немедленно"
+
+#: src/gui/components/settings/general.rs:196
+msgid "At start"
+msgstr "При запуске"
+
+#: src/gui/components/settings/general.rs:197
+msgid "Package ready"
+msgstr "Пакет готов"
+
+#: src/gui/components/settings/general.rs:198
+#: src/gui/components/settings/general.rs:229
+msgid "Never"
+msgstr "Никогда"
+
+#: src/gui/components/settings/general.rs:200
+msgid "Remove finished downloads"
+msgstr "Удалять завершённые загрузки"
+
+#: src/gui/components/settings/general.rs:204
+msgid "Overwrite existing file"
+msgstr "Перезаписать существующий файл"
+
+#: src/gui/components/settings/general.rs:205
+msgid "Skip file"
+msgstr "Пропустить файл"
+
+#: src/gui/components/settings/general.rs:206
+msgid "Auto-rename"
+msgstr "Автоматическое переименование"
+
+#: src/gui/components/settings/general.rs:207
+msgid "Ask for each file"
+msgstr "Спрашивать для каждого файла"
+
+#: src/gui/components/settings/general.rs:209
+msgid "If the file already exists"
+msgstr "Если файл уже существует"
+
+#: src/gui/components/settings/general.rs:213
+msgid "Download Management"
+msgstr "Управление загрузками"
+
+#: src/gui/components/settings/general.rs:215
+msgid ""
+"Connection limits, Download order, Priorities, ... Set up the Download "
+"controller details."
+msgstr ""
+"Ограничения соединений, порядок загрузки, приоритеты... Настройте параметры "
+"контроллера загрузок."
+
+#: src/gui/components/settings/general.rs:227
+msgid "Always"
+msgstr "Всегда"
+
+#: src/gui/components/settings/general.rs:228
+msgid "Only if downloads were running at last Session's end"
+msgstr "Только если загрузки выполнялись в конце последнего сеанса"
+
+#: src/gui/components/settings/general.rs:232
+msgid "Autostart downloads at application start"
+msgstr "Автозапуск загрузок при старте приложения"
+
+#: src/gui/components/settings/general.rs:243
+msgid "Show Countdown (seconds)"
+msgstr "Показывать обратный отсчёт (секунды)"
+
+#: src/gui/components/settings/general.rs:250
+msgid "Autostart Downloads"
+msgstr "Автозапуск загрузок"
+
+#: src/gui/components/settings/general.rs:252
+msgid ""
+"Choose if, and when JDownloader should start pending downloads without user "
+"interaction."
+msgstr ""
+"Выберите, следует ли и когда JDownloader должен запускать ожидающие загрузки "
+"без участия пользователя."
+
+#: src/gui/components/settings/general.rs:264
+msgid "Group single files in a Various package"
+msgstr "Группировать отдельные файлы в пакет \"Разное\""
+
+#: src/gui/components/settings/general.rs:271
+msgid "LinkGrabber"
+msgstr "Сборщик ссылок"
+
+#: src/gui/components/settings/general.rs:282
+msgid "SFV / CRC check when possible"
+msgstr "Проверка SFV/CRC, когда это возможно"
+
+#: src/gui/components/settings/general.rs:286
+msgid "Restart Downloads when SFV/CRC check fails"
+msgstr "Перезапускать загрузки при ошибке проверки SFV/CRC"
+
+#: src/gui/components/settings/general.rs:293
+msgid "File Writing"
+msgstr "Запись файлов"
+
+#: src/gui/components/settings/general.rs:295
+msgid ""
+"JDownloader will verify your downloads for correctness after download using "
+"the hash/check option"
+msgstr ""
+"JDownloader проверит корректность ваших загрузок после завершения с помощью "
+"проверки хеша"
+
+#: src/gui/components/settings/general.rs:307
+msgid "Auto open Link Containers (dlc,rsdf,...)"
+msgstr "Автоматически открывать контейнеры ссылок (dlc, rsdf,...)"
+
+#: src/gui/components/settings/general.rs:314
+msgid "Miscellaneous"
+msgstr "Разное"
+
+#: src/gui/components/settings/general.rs:337
+#: src/gui/dialogs/packagizer_rule_dialog.rs:161
+#: src/gui/properties_panel.rs:400
+msgid "Select Folder"
+msgstr "Выбрать папку"
+
+#: src/gui/components/settings/package_manager.rs:50
+msgid "Enable Package Manager"
+msgstr "Включить менеджер пакетов"
+
+#: src/gui/components/settings/package_manager.rs:56
+msgid ""
+"Rules that automatically set the download settings of files based on their "
+"properties."
+msgstr ""
+"Правила, автоматически задающие настройки загрузки файлов на основе их "
+"свойств."
+
+#: src/gui/components/settings/package_manager.rs:82
+#: src/gui/components/settings/scripts.rs:79
+msgid "Edit"
+msgstr "Редактировать"
+
+#: src/gui/components/settings/package_manager.rs:86
+msgid "Duplicate"
+msgstr "Дублировать"
+
+#: src/gui/components/settings/package_manager.rs:88
+#: src/gui/main_tool_bar.rs:146
+msgid "Move up"
+msgstr "Переместить вверх"
+
+#: src/gui/components/settings/package_manager.rs:90
+#: src/gui/main_tool_bar.rs:148
+msgid "Move down"
+msgstr "Переместить вниз"
+
+#: src/gui/components/settings/package_manager.rs:107
+#: src/gui/components/settings/scripts.rs:96
+#: src/gui/dialogs/packagizer_rule_dialog.rs:106
+msgid "Enabled"
+msgstr "Включено"
+
+#: src/gui/components/settings/package_manager.rs:201
+msgid "New rule"
+msgstr "Новое правило"
+
+#: src/gui/components/settings/package_manager.rs:287
+msgid "copy"
+msgstr "копия"
+
+#: src/gui/components/settings/scripts.rs:53
+msgid ""
+"Run JavaScript automatically when a chosen event occurs (Eventscripter)."
+msgstr ""
+"Автоматически запускать JavaScript при наступлении выбранного события "
+"(Eventscripter)."
+
+#: src/gui/components/settings/scripts.rs:113
+#: src/gui/dialogs/script_edit_dialog.rs:47
+msgid "Event trigger"
+msgstr "Событие-триггер"
+
+#: src/gui/components/settings/scripts.rs:196
+msgid "New script"
+msgstr "Новый скрипт"
+
+#: src/gui/dialogs/account_add_dialog.rs:35
+msgid "Add new Account"
+msgstr "Добавить новую учётную запись"
+
+#: src/gui/dialogs/account_add_dialog.rs:43
+msgid "1. Choose a Hoster"
+msgstr "1. Выберите хостера"
+
+#: src/gui/dialogs/account_add_dialog.rs:53
+msgid "Search"
+msgstr "Поиск"
+
+#: src/gui/dialogs/account_add_dialog.rs:63
+msgid "Domain"
+msgstr "Домен"
+
+#: src/gui/dialogs/account_add_dialog.rs:78
+msgid "2. Enter your Login Information"
+msgstr "2. Введите данные для входа"
+
+#: src/gui/dialogs/account_add_dialog.rs:85
+msgid "Name:"
+msgstr "Имя:"
+
+#: src/gui/dialogs/account_add_dialog.rs:86
+#: src/jd/plugins/hoster/onefichiercom.rs:56
+msgid "Pass:"
+msgstr "Пароль:"
+
+#: src/gui/dialogs/account_add_dialog.rs:91
+msgid "Enter Username..."
+msgstr "Введите имя пользователя..."
+
+#: src/gui/dialogs/account_add_dialog.rs:96
+#: src/jd/plugins/hoster/onefichiercom.rs:61
+msgid "Enter password..."
+msgstr "Введите пароль..."
+
+#: src/gui/dialogs/account_add_dialog.rs:115
+#: src/gui/dialogs/packagizer_rule_dialog.rs:444
+#: src/gui/dialogs/script_edit_dialog.rs:97
+msgid "Save"
+msgstr "Сохранить"
+
+#: src/gui/dialogs/account_add_dialog.rs:163
+msgid "2. Enter your {} Login Information"
+msgstr "2. Введите данные для входа в {}"
+
+#: src/gui/dialogs/account_add_dialog.rs:253
+msgid "Adding account..."
+msgstr "Добавление учётной записи..."
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:21
+msgid "Contains"
+msgstr "Содержит"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:22
+msgid "Equals"
+msgstr "Равно"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:23
+msgid "Does not contain"
+msgstr "Не содержит"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:24
+msgid "Does not equal"
+msgstr "Не равно"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:48
+msgid "Regex"
+msgstr "Регулярное выражение"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:210
+msgid "Package Manager Rule"
+msgstr "Правило менеджера пакетов"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:231
+msgid "Rule name"
+msgstr "Название правила"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:239
+msgid "Always matches"
+msgstr "Всегда совпадает"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:241
+#: src/gui/dialogs/packagizer_rule_dialog.rs:384
+msgid "Filename"
+msgstr "Имя файла"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:242
+#: src/gui/dialogs/packagizer_rule_dialog.rs:382
+#: src/gui/properties_panel.rs:240
+msgid "Package name"
+msgstr "Имя пакета"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:244
+msgid "Hoster / URL"
+msgstr "Хостер / URL"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:245
+msgid "Source URL"
+msgstr "URL источника"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:250
+msgid "Between"
+msgstr "Между"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:251
+msgid "Not between"
+msgstr "Не между"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:270
+#: src/gui/dialogs/packagizer_rule_dialog.rs:272
+msgid "MiB"
+msgstr "МиБ"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:273
+msgid "File size"
+msgstr "Размер файла"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:289
+msgid "Is"
+msgstr "Является"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:290
+msgid "Is not"
+msgstr "Не является"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:293
+msgid "Video"
+msgstr "Видео"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:294
+msgid "Audio"
+msgstr "Аудио"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:295
+msgid "Archives"
+msgstr "Архивы"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:296
+msgid "Images"
+msgstr "Изображения"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:297
+msgid "Documents"
+msgstr "Документы"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:298
+msgid "Subtitles"
+msgstr "Субтитры"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:299
+msgid "Executables"
+msgstr "Исполняемые файлы"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:300
+msgid "Hash files"
+msgstr "Файлы хешей"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:303
+msgid "Custom extensions (e.g. iso,bin)"
+msgstr "Пользовательские расширения (напр. iso,bin)"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:329
+msgid "File type"
+msgstr "Тип файла"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:353
+msgid "If"
+msgstr "Если"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:354
+msgid "Match downloads based on these conditions."
+msgstr "Сопоставлять загрузки на основе этих условий."
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:363
+msgid "Destination Folder"
+msgstr "Папка назначения"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:367
+msgid "Highest"
+msgstr "Наивысший"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:368
+msgid "Higher"
+msgstr "Более высокий"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:369
+msgid "High"
+msgstr "Высокий"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:370
+msgid "Default"
+msgstr "По умолчанию"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:371
+msgid "Low"
+msgstr "Низкий"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:372
+msgid "Lower"
+msgstr "Более низкий"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:373
+msgid "Lowest"
+msgstr "Самый низкий"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:376
+msgid "Priority"
+msgstr "Приоритет"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:383
+msgid "Package key"
+msgstr "Ключ пакета"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:397
+msgid "Auto extract"
+msgstr "Автоизвлечение"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:398
+msgid "Auto add"
+msgstr "Автодобавление"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:399
+msgid "Autostart"
+msgstr "Автозапуск"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:400
+msgid "Forced start"
+msgstr "Принудительный запуск"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:401
+msgid "Link enabled"
+msgstr "Ссылка включена"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:405
+msgid "Then"
+msgstr "То"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:414
+msgid "Move to"
+msgstr "Переместить в"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:415
+msgid "Rename to"
+msgstr "Переименовать в"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:419
+msgid "...and do"
+msgstr "...и выполнить"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:430
+msgid "Stop processing further rules if this rule matches"
+msgstr "Прекратить обработку следующих правил, если это правило совпадает"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:449
+msgid "This is a predefined rule and cannot be modified."
+msgstr "Это предопределённое правило, и его нельзя изменить."
+
+#: src/gui/dialogs/script_edit_dialog.rs:18
+msgid "Edit Script"
+msgstr "Редактировать скрипт"
+
+#: src/gui/dialogs/script_edit_dialog.rs:50
+msgid "Run synchronously"
+msgstr "Выполнять синхронно"
+
+#: src/gui/dialogs/script_edit_dialog.rs:57
+msgid "Interval (ms)"
+msgstr "Интервал (мс)"
+
+#: src/gui/dialogs/script_edit_dialog.rs:61
+msgid "Trigger"
+msgstr "Триггер"
+
+#: src/gui/dialogs/script_edit_dialog.rs:62
+msgid "Choose when this script should run."
+msgstr "Выберите, когда должен выполняться этот скрипт."
+
+#: src/gui/dialogs/script_edit_dialog.rs:67
+msgid "Script (JavaScript)"
+msgstr "Скрипт (JavaScript)"
+
+#: src/gui/donate.rs:11
+msgid "The JDownloader project needs your help!"
+msgstr "Проекту JDownloader нужна ваша помощь!"
+
+#: src/gui/donate.rs:13
+msgid ""
+"If you are a satisfied user of JDownloader, please think about contributing "
+"to this project. JDownloader is the result of daily hard work since more "
+"than %s1 years. We need your help to keep it free of charge, free of "
+"advertising, free of installer bundles and to improve JDownloader even more. "
+"Moreover, donating is a good way to tell us what modules we should focus our "
+"work on."
+msgstr ""
+"Если вы довольны JDownloader, пожалуйста, подумайте о вкладе в этот проект. "
+"JDownloader — результат ежедневного упорного труда на протяжении более %s1 "
+"лет. Нам нужна ваша помощь, чтобы сохранить его бесплатным, без рекламы, без "
+"установочных пакетов сторонних программ и сделать JDownloader ещё лучше. "
+"Кроме того, пожертвование — хороший способ сообщить нам, на каких модулях "
+"нам следует сосредоточить работу."
+
+#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:104
+msgid "Start downloads"
+msgstr "Начать загрузки"
+
+#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:118
+msgid "Pause downloads"
+msgstr "Приостановить загрузки"
+
+#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:111
+msgid "Stop downloads"
+msgstr "Остановить загрузки"
+
+#. Move actions
+#: src/gui/main_tool_bar.rs:144
+msgid "Move to top"
+msgstr "Переместить в начало"
+
+#: src/gui/main_tool_bar.rs:150
+msgid "Move bottom"
+msgstr "Переместить в конец"
+
+#: src/gui/main_tool_bar.rs:158
+msgid "Clipboard monitoring"
+msgstr "Мониторинг буфера обмена"
+
+#: src/gui/main_tool_bar.rs:163
+msgid "Auto reconnect"
+msgstr "Автоматическое переподключение"
+
+#: src/gui/main_tool_bar.rs:171
+msgid "Use premium accounts"
+msgstr "Использовать премиум-аккаунты"
+
+#: src/gui/main_tool_bar.rs:176
+msgid "Silent mode"
+msgstr "Тихий режим"
+
+#. Misc
+#: src/gui/main_tool_bar.rs:183
+msgid "Reconnect"
+msgstr "Переподключиться"
+
+#: src/gui/main_tool_bar.rs:191
+msgid "Check for updates"
+msgstr "Проверить обновления"
+
+#: src/gui/properties_panel.rs:86
+msgid "Highest priority"
+msgstr "Наивысший приоритет"
+
+#: src/gui/properties_panel.rs:87
+msgid "Higher priority"
+msgstr "Более высокий приоритет"
+
+#: src/gui/properties_panel.rs:88
+msgid "High priority"
+msgstr "Высокий приоритет"
+
+#: src/gui/properties_panel.rs:89
+msgid "Low priority"
+msgstr "Низкий приоритет"
+
+#: src/gui/properties_panel.rs:90
+msgid "Lower priority"
+msgstr "Более низкий приоритет"
+
+#: src/gui/properties_panel.rs:91
+msgid "Lowest priority"
+msgstr "Самый низкий приоритет"
+
+#: src/gui/properties_panel.rs:92
+msgid "Default priority"
+msgstr "Приоритет по умолчанию"
+
+#: src/gui/properties_panel.rs:235
+msgid "Package name:"
+msgstr "Имя пакета:"
+
+#: src/gui/properties_panel.rs:249
+msgid "File name:"
+msgstr "Имя файла:"
+
+#: src/gui/properties_panel.rs:254
+msgid "File name"
+msgstr "Имя файла"
+
+#: src/gui/properties_panel.rs:260
+msgid "Browse…"
+msgstr "Обзор…"
+
+#: src/gui/properties_panel.rs:266
+msgid "Save to:"
+msgstr "Сохранить в:"
+
+#: src/gui/properties_panel.rs:271
+msgid "Save to"
+msgstr "Сохранить в"
+
+#: src/gui/properties_panel.rs:278
+msgid "Source:"
+msgstr "Источник:"
+
+#: src/gui/properties_panel.rs:283
+msgid "Source"
+msgstr "Источник"
+
+#: src/gui/properties_panel.rs:289
+msgid "Comment:"
+msgstr "Комментарий:"
+
+#: src/gui/properties_panel.rs:490
+msgid "File Properties: {}"
+msgstr "Свойства файла: {}"
+
+#: src/gui/window.rs:174
+msgid "Waiting for JDownloader to exit..."
+msgstr "Ожидание завершения работы JDownloader..."
+
+#: src/gui/mod.rs:116
+msgid "The power of JDownloader, the elegance of GNOME"
+msgstr ""
+
+#: src/gui/mod.rs:199 src/gui/mod.rs:221
+msgid "Start Downloads"
+msgstr "Начать загрузки"
+
+#: src/gui/mod.rs:204 src/gui/mod.rs:228
+msgid "Start All Downloads"
+msgstr "Начать все загрузки"
+
+#. Status bar.
+#: src/gui/mod.rs:463
+msgid "Ready"
+msgstr "Готово"
+
+#: src/gui/mod.rs:519
+msgid "JDownloader started"
+msgstr "JDownloader запущен"
+
+#: src/gui/mod.rs:554
+msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
+msgstr "JDownloader.jar не найден. Установите переменную JDOWNLOADER_JAR."
+
+#: src/jd/jar.rs:74
+msgid "Unable to create local JDownloader directory {}: {}"
+msgstr "Не удалось создать локальный каталог JDownloader {}: {}"
+
+#: src/jd/jar.rs:88
+msgid "Unable to copy JDownloader.jar to {}: {}"
+msgstr "Не удалось скопировать JDownloader.jar в {}: {}"
+
+#: src/jd/log_watcher.rs:62
+msgid "JDownloader starting, please wait..."
+msgstr "JDownloader запускается, подождите..."
+
+#: src/jd/log_watcher.rs:68
+msgid "Restarting after update"
+msgstr "Перезапуск после обновления"
+
+#: src/jd/log_watcher.rs:73
+msgid "Update"
+msgstr "Обновление"
+
+#: src/jd/log_watcher.rs:78
+msgid "JDownloader starting"
+msgstr "JDownloader запускается"
+
+#: src/jd/log_watcher.rs:83
+msgid "Initialization"
+msgstr "Инициализация"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:21
+msgid "Account Type:"
+msgstr "Тип учётной записи:"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:25
+msgid "Premium Account | API Login [Recommended]"
+msgstr "Премиум-аккаунт | Вход через API [Рекомендуется]"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:26
+msgid "Premium GOLD Account | API Login [Recommended]"
+msgstr "Премиум GOLD-аккаунт | Вход через API [Рекомендуется]"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:27
+msgid "Premium Account | Website Login"
+msgstr "Премиум-аккаунт | Вход через сайт"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:28
+msgid "Premium GOLD Account | Website Login"
+msgstr "Премиум GOLD-аккаунт | Вход через сайт"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:29
+msgid "Free Account with paid CDN credits"
+msgstr "Бесплатный аккаунт с платными кредитами CDN"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:30
+msgid "Free Account"
+msgstr "Бесплатный аккаунт"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:41
+msgid "Premium API Key:"
+msgstr "Премиум API-ключ:"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:46
+msgid "Enter API key (click here to find it)"
+msgstr "Введите API-ключ (нажмите здесь, чтобы найти его)"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:51
+msgid "E-Mail:"
+msgstr "Эл. почта:"
+
+#: src/jd/plugins/hoster/onefichiercom.rs:55
+msgid "Enter e-mail..."
+msgstr "Введите эл. почту..."
+
+#: src/jd/process.rs:24
+msgid "JDownloader is already running"
+msgstr "JDownloader уже запущен"
+
+#: src/jd/process.rs:29
+msgid "JDownloader.jar has no parent directory"
+msgstr "У JDownloader.jar нет родительского каталога"
+
+#: src/jd/process.rs:32
+msgid "JDownloader.jar has no file name"
+msgstr "У JDownloader.jar нет имени файла"
+
+#~ msgid "JDownloader for GNOME"
+#~ msgstr "JDownloader для GNOME"

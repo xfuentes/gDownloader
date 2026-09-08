@@ -8,7 +8,7 @@ use crate::gui::menus;
 pub struct MainMenuBar;
 
 impl MainMenuBar {
-    pub fn build(window: &adw::ApplicationWindow, on_settings: Rc<dyn Fn()>) -> gtk4::Box {
+    pub fn build(window: &adw::ApplicationWindow, on_settings: Rc<dyn Fn()>) -> gtk4::PopoverMenuBar {
         let action_group = gio::SimpleActionGroup::new();
 
         let settings_action = gio::SimpleAction::new("settings", None);
@@ -27,19 +27,26 @@ impl MainMenuBar {
 
         window.insert_action_group("win", Some(&action_group));
 
-        let file_popover = menus::file::build();
-        let settings_popover = menus::settings::build();
-        let tools_popover = menus::tools::build();
-        let help_popover = menus::help::build();
+        let (file_menu, file_children) = menus::file::build();
+        let (settings_menu, settings_children) = menus::settings::build();
+        let (tools_menu, tools_children) = menus::tools::build();
+        let (help_menu, help_children) = menus::help::build();
 
-        let bar = gtk4::Box::new(gtk4::Orientation::Horizontal, 0);
-        bar.append(&menus::top_menu_button(tr!("File").as_ref(), &file_popover));
-        bar.append(&menus::top_menu_button(
-            tr!("Settings").as_ref(),
-            &settings_popover,
-        ));
-        bar.append(&menus::top_menu_button(tr!("Tools").as_ref(), &tools_popover));
-        bar.append(&menus::top_menu_button(tr!("Help").as_ref(), &help_popover));
+        let bar_menu = gio::Menu::new();
+        bar_menu.append_submenu(Some(tr!("File").as_ref()), &file_menu);
+        bar_menu.append_submenu(Some(tr!("Settings").as_ref()), &settings_menu);
+        bar_menu.append_submenu(Some(tr!("Tools").as_ref()), &tools_menu);
+        bar_menu.append_submenu(Some(tr!("Help").as_ref()), &help_menu);
+
+        let bar = gtk4::PopoverMenuBar::from_model(Some(&bar_menu));
+        for (widget, id) in file_children
+            .into_iter()
+            .chain(settings_children)
+            .chain(tools_children)
+            .chain(help_children)
+        {
+            bar.add_child(&widget, &id);
+        }
 
         bar
     }

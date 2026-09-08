@@ -111,19 +111,37 @@ impl AccountAddDialog {
 
         vbox.append(&login_container);
 
-        let button_box = gtk4::Box::new(gtk4::Orientation::Horizontal, 12);
-        button_box.set_halign(gtk4::Align::End);
-
         let cancel_btn = gtk4::Button::with_label(tr!("Cancel").as_ref());
         let save_btn = gtk4::Button::with_label(tr!("Save").as_ref());
         save_btn.set_sensitive(false);
 
-        button_box.append(&cancel_btn);
+        let button_size_group = gtk4::SizeGroup::new(gtk4::SizeGroupMode::Horizontal);
+        button_size_group.add_widget(&cancel_btn);
+        button_size_group.add_widget(&save_btn);
+
+        let button_box = gtk4::Box::new(gtk4::Orientation::Horizontal, 12);
+        button_box.set_halign(gtk4::Align::End);
         button_box.append(&save_btn);
+        button_box.append(&cancel_btn);
 
         vbox.append(&button_box);
 
         dialog.set_child(Some(&vbox));
+        dialog.set_default_widget(Some(&save_btn));
+
+        let escape_controller = gtk4::EventControllerKey::new();
+        escape_controller.connect_key_pressed({
+            let cancel_btn = cancel_btn.clone();
+            move |_, key, _, _| {
+                if key == gtk4::gdk::Key::Escape {
+                    cancel_btn.activate();
+                    glib::Propagation::Stop
+                } else {
+                    glib::Propagation::Proceed
+                }
+            }
+        });
+        dialog.add_controller(escape_controller);
 
         // Selection handling.
         let login_label_c = login_label.clone();
@@ -262,5 +280,6 @@ impl AccountAddDialog {
         });
 
         dialog.present();
+        save_btn.grab_focus();
     }
 }

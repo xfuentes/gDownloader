@@ -75,6 +75,21 @@ pub fn show(parent: &adw::ApplicationWindow) {
     dialog.set_default_size(800, -1);
     dialog.set_resizable(false);
     dialog.set_child(Some(&page));
+    dialog.set_default_widget(Some(&continue_btn));
+
+    let escape_controller = gtk4::EventControllerKey::new();
+    escape_controller.connect_key_pressed({
+        let cancel_btn = cancel_btn.clone();
+        move |_, key, _, _| {
+            if key == gtk4::gdk::Key::Escape {
+                cancel_btn.activate();
+                glib::Propagation::Stop
+            } else {
+                glib::Propagation::Proceed
+            }
+        }
+    });
+    dialog.add_controller(escape_controller);
 
     let parent = parent.clone();
     cancel_btn.connect_clicked({
@@ -97,4 +112,5 @@ pub fn show(parent: &adw::ApplicationWindow) {
     });
 
     dialog.present();
+    continue_btn.grab_focus();
 }

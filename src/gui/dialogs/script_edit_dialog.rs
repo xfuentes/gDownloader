@@ -1,0 +1,184 @@
+use adw::prelude::*;
+use gtk4::glib;
+use std::rc::Rc;
+
+use crate::gui::components::{ConfigSection, ConfigSectionForm};
+use crate::gui::fields::ellipsize_dropdown;
+use crate::jd::{EventTrigger, ScriptEntry};
+
+pub struct ScriptEditDialog;
+
+impl ScriptEditDialog {
+    pub fn show(parent: &gtk4::Window, entry: ScriptEntry, on_save: Rc<dyn Fn(ScriptEntry)>) {
+        let dialog = gtk4::Window::new();
+        dialog.set_transient_for(Some(parent));
+        dialog.set_modal(true);
+        dialog.set_resizable(true);
+        dialog.set_default_size(720, 640);
+        dialog.set_title(Some(tr!("Edit Script").as_ref()));
+
+        let outer = gtk4::Box::new(gtk4::Orientation::Vertical, 0);
+        outer.set_vexpand(true);
+        outer.set_hexpand(true);
+
+        let page_box = gtk4::Box::new(gtk4::Orientation::Vertical, 15);
+        page_box.set_margin_top(15);
+        page_box.set_margin_bottom(15);
+        page_box.set_margin_start(15);
+        page_box.set_margin_end(15);
+        page_box.set_vexpand(true);
+
+        let label_size_group = gtk4::SizeGroup::new(gtk4::SizeGroupMode::Horizontal);
+        let checkbox_size_group = gtk4::SizeGroup::new(gtk4::SizeGroupMode::Horizontal);
+        let input_size_group = gtk4::SizeGroup::new(gtk4::SizeGroupMode::Horizontal);
+
+        let form =
+            ConfigSectionForm::new(&label_size_group, &checkbox_size_group, &input_size_group);
+
+        let name_entry = gtk4::Entry::new();
+        name_entry.set_hexpand(true);
+        form.add_row(tr!("Name").as_ref(), None, &name_entry);
+
+        let trigger_model = gtk4::StringList::new(&[]);
+        for t in EventTrigger::ALL {
+            trigger_model.append(t.label());
+        }
+        let trigger_dropdown = ellipsize_dropdown(trigger_model);
+        form.add_row(tr!("Event trigger").as_ref(), None, &trigger_dropdown);
+
+        let sync_switch = gtk4::Switch::new();
+        form.add_row(tr!("Run synchronously").as_ref(), None, &sync_switch);
+
+        let interval_spin = gtk4::SpinButton::new(
+            Some(&gtk4::Adjustment::new(1000.0, 100.0, 3_600_000.0, 100.0, 1000.0, 0.0)),
+            1.0,
+            0,
+        );
+        form.add_row(tr!("Interval (ms)").as_ref(), None, &interval_spin);
+
+        let section = ConfigSection::new(
+            crate::gui::icon_key::ICON_EVENT,
+            tr!("Trigger").as_ref(),
+            Some(tr!("Choose when this script should run.").as_ref()),
+            &form,
+        );
+        page_box.append(section.widget());
+
+        let script_label = gtk4::Label::new(Some(tr!("Script (JavaScript)").as_ref()));
+        script_label.set_halign(gtk4::Align::Start);
+        script_label.add_css_class("heading");
+        page_box.append(&script_label);
+
+        let text_view = gtk4::TextView::new();
+        text_view.set_monospace(true);
+        text_view.set_top_margin(6);
+        text_view.set_bottom_margin(6);
+        text_view.set_left_margin(6);
+        text_view.set_right_margin(6);
+        let buffer = text_view.buffer();
+
+        let script_scroll = gtk4::ScrolledWindow::builder()
+            .child(&text_view)
+            .vexpand(true)
+            .hexpand(true)
+            .min_content_height(220)
+            .propagate_natural_height(true)
+            .build();
+        script_scroll.add_css_class("card");
+        page_box.append(&script_scroll);
+
+        let scrolled = gtk4::ScrolledWindow::new();
+        scrolled.set_child(Some(&page_box));
+        scrolled.set_vexpand(true);
+        scrolled.set_hexpand(true);
+        outer.append(&scrolled);
+
+        let cancel_btn = gtk4::Button::with_label(tr!("Cancel").as_ref());
+        let save_btn = gtk4::Button::with_label(tr!("Save").as_ref());
+        save_btn.add_css_class("suggested-action");
+
+        let button_size_group = gtk4::SizeGroup::new(gtk4::SizeGroupMode::Horizontal);
+        button_size_group.add_widget(&cancel_btn);
+        button_size_group.add_widget(&save_btn);
+
+        let button_box = gtk4::Box::new(gtk4::Orientation::Horizontal, 12);
+        button_box.set_halign(gtk4::Align::End);
+        button_box.set_margin_top(6);
+        button_box.set_margin_bottom(12);
+        button_box.set_margin_start(15);
+        button_box.set_margin_end(15);
+        button_box.append(&save_btn);
+        button_box.append(&cancel_btn);
+        outer.append(&button_box);
+
+        dialog.set_child(Some(&outer));
+        dialog.set_default_widget(Some(&save_btn));
+
+        let escape_controller = gtk4::EventControllerKey::new();
+        escape_controller.connect_key_pressed({
+            let cancel_btn = cancel_btn.clone();
+            move |_, key, _, _| {
+                if key == gtk4::gdk::Key::Escape {
+                    cancel_btn.activate();
+                    glib::Propagation::Stop
+                } else {
+                    glib::Propagation::Proceed
+                }
+            }
+        });
+        dialog.add_controller(escape_controller);
+
+        // Populate from the current entry.
+        name_entry.set_text(entry.name.as_deref().unwrap_or(""));
+        buffer.set_text(entry.script.as_deref().unwrap_or(""));
+        if let Some(idx) = EventTrigger::ALL.iter().position(|t| *t == entry.event_trigger) {
+            trigger_dropdown.set_selected(idx as u32);
+        }
+        sync_switch.set_active(entry.is_synchronous());
+        interval_spin.set_value(entry.interval_ms() as f64);
+
+        fn update_trigger_sensitivity(
+            trigger: EventTrigger,
+            sync_switch: &gtk4::Switch,
+            interval_spin: &gtk4::SpinButton,
+        ) {
+            sync_switch.set_sensitive(trigger.supports_synchronous());
+            interval_spin.set_sensitive(trigger.is_interval());
+        }
+        update_trigger_sensitivity(entry.event_trigger, &sync_switch, &interval_spin);
+
+        let sync_switch_c = sync_switch.clone();
+        let interval_spin_c = interval_spin.clone();
+        trigger_dropdown.connect_selected_notify(move |d| {
+            let idx = d.selected() as usize;
+            if let Some(trigger) = EventTrigger::ALL.get(idx).copied() {
+                update_trigger_sensitivity(trigger, &sync_switch_c, &interval_spin_c);
+            }
+        });
+
+        cancel_btn.connect_clicked({
+            let dialog = dialog.clone();
+            move |_| dialog.close()
+        });
+
+        let dialog_c = dialog.clone();
+        save_btn.connect_clicked(move |_| {
+            let mut e = entry.clone();
+            e.name = Some(name_entry.text().to_string());
+            let text = buffer.text(&buffer.start_iter(), &buffer.end_iter(), false);
+            e.script = Some(text.to_string());
+            let idx = trigger_dropdown.selected() as usize;
+            e.event_trigger = EventTrigger::ALL.get(idx).copied().unwrap_or_default();
+            e.set_synchronous(sync_switch.is_active());
+            if e.event_trigger.is_interval() {
+                e.set_interval_ms(interval_spin.value() as i64);
+            }
+
+            on_save(e);
+            dialog_c.close();
+        });
+
+        dialog.present();
+        save_btn.grab_focus();
+    }
+}

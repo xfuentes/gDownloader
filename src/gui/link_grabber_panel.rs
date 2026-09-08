@@ -99,13 +99,95 @@ pub struct LinkGrabberPanel {
     pub child_stores: Rc<RefCell<HashMap<i64, gio::ListStore>>>,
     pub selection: gtk4::MultiSelection,
     pub view: gtk4::ColumnView,
-    pub properties: Rc<crate::gui::properties_panel::PropertiesPanel>,
-    pub overview_labels: Vec<gtk4::Label>,
+    pub overview: Rc<crate::gui::overview_panel::OverviewPanel>,
     /// Shared with `start_refresh`, which consults it to avoid ever
     /// splicing an *expanded* package's own row back into `store` (that
     /// would discard its `TreeListRow`'s expanded state — see
     /// `downloads_panel::sync_store_keep_expanded`).
     expanded_state: Rc<RefCell<HashMap<i64, bool>>>,
+}
+
+/// Keys identifying each Overview stat, passed to
+/// `overview_panel::OverviewPanel::set_value`.
+const OVERVIEW_PACKAGES: &str = "packages";
+const OVERVIEW_LINKS: &str = "links";
+const OVERVIEW_SIZE: &str = "size";
+const OVERVIEW_ONLINE: &str = "online";
+const OVERVIEW_HOSTER: &str = "hoster";
+const OVERVIEW_OFFLINE: &str = "offline";
+const OVERVIEW_UNKNOWN: &str = "unknown";
+
+/// Overview stats and their JDownloader `GraphicalUserInterfaceSettings`
+/// visibility flags (JDownloader's own key names, reused verbatim), in
+/// `LinkgrabberOverview.createDataEntries()`'s declaration order — that
+/// order drives the 2-row grid packing (see `overview_panel::relayout`).
+/// Defaults mirror JDownloader's `@DefaultBooleanValue` on each
+/// `is...Visible()`.
+fn overview_field_defs() -> Vec<crate::gui::overview_panel::OverviewFieldDef> {
+    use crate::gui::overview_panel::OverviewFieldDef;
+    vec![
+        OverviewFieldDef::new(
+            OVERVIEW_PACKAGES,
+            "OverviewPanelLinkgrabberPackageCountVisible",
+            tr!("Packages").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_LINKS,
+            "OverviewPanelLinkgrabberLinksCountVisible",
+            tr!("Links").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_SIZE,
+            "OverviewPanelLinkgrabberTotalBytesVisible",
+            tr!("Size").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_ONLINE,
+            "OverviewPanelLinkgrabberStatusOnlineVisible",
+            tr!("Online").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_HOSTER,
+            "OverviewPanelLinkgrabberHosterCountVisible",
+            tr!("Hoster").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_OFFLINE,
+            "OverviewPanelLinkgrabberStatusOfflineVisible",
+            tr!("Offline").to_string(),
+            true,
+        ),
+        OverviewFieldDef::new(
+            OVERVIEW_UNKNOWN,
+            "OverviewPanelLinkgrabberStatusUnknownVisible",
+            tr!("Unknown").to_string(),
+            true,
+        ),
+    ]
+}
+
+/// Maps an overview stat key to its JDownloader config key.
+fn overview_cfg_key(field: &str) -> Option<&'static str> {
+    overview_field_defs().into_iter().find(|d| d.key == field).map(|d| d.cfg_key)
+}
+
+fn overview_actions(gui_settings: GraphicalUserInterfaceSettings) -> crate::gui::overview_panel::OverviewActions {
+    crate::gui::overview_panel::OverviewActions {
+        set_field_visible: Box::new(move |field, visible| {
+            let Some(cfg_key) = overview_cfg_key(field) else {
+                return;
+            };
+            let gui_settings = gui_settings.clone();
+            crate::gui::spawn::api_fire(move || {
+                let _ = gui_settings.set_flag(cfg_key, visible);
+            });
+        }),
+    }
 }
 
 /// `GraphicalUserInterfaceSettings` config keys backing this panel's "visible
@@ -457,7 +539,10 @@ impl LinkGrabberPanel {
                         if tree_row.depth() == 0 {
                             return;
                         }
-                        let link_id: i64 = obj.borrow::<LinkGrabberRow>().uuid.parse().unwrap_or(0);
+                        let row = obj.borrow::<LinkGrabberRow>();
+                        let link_id: i64 = row.uuid.parse().unwrap_or(0);
+                        let current_variant_id = row.variant_id.clone();
+                        drop(row);
                         if link_id == 0 {
                             return;
                         }
@@ -479,22 +564,44 @@ impl LinkGrabberPanel {
                                     log::warn!("No variants returned for link {}", link_id);
                                     return;
                                 }
-                                let list_box = gtk4::Box::new(gtk4::Orientation::Vertical, 2);
+                                // A ListBox rather than a plain Box: its rows
+                                // pick up the usual hover/active highlight of
+                                // menu entries, which a bare CheckButton
+                                // doesn't get. The radio indicator itself is
+                                // set non-target-able so pointer events hit
+                                // the row (and its hover style) instead of
+                                // being absorbed by the CheckButton.
+                                let list_box = gtk4::ListBox::new();
+                                list_box.set_selection_mode(gtk4::SelectionMode::None);
+                                list_box.add_css_class("boxed-list");
                                 list_box.set_margin_start(4);
                                 list_box.set_margin_end(4);
                                 list_box.set_margin_top(4);
                                 list_box.set_margin_bottom(4);
+                                // Grouped CheckButtons, one per variant, so
+                                // the currently active variant shows
+                                // pre-selected — mirroring JDownloader's
+                                // variant chooser.
+                                let mut group: Option<gtk4::CheckButton> = None;
                                 for v in &variants {
                                     let id = v.get("id").and_then(Value::as_str).unwrap_or("").to_string();
                                     let name = v.get("name").and_then(Value::as_str).unwrap_or("");
-                                    let row_btn = gtk4::Button::builder()
-                                        .label(name)
-                                        .has_frame(false)
-                                        .halign(gtk4::Align::Start)
+                                    let check = gtk4::CheckButton::builder()
+                                        .can_target(false)
+                                        .can_focus(false)
+                                        .active(id == current_variant_id)
                                         .build();
+                                    if let Some(leader) = &group {
+                                        check.set_group(Some(leader));
+                                    } else {
+                                        group = Some(check.clone());
+                                    }
                                     let api = api.clone();
                                     let popover_for_click = popover.clone();
-                                    row_btn.connect_clicked(move |_| {
+                                    check.connect_toggled(move |check| {
+                                        if !check.is_active() {
+                                            return;
+                                        }
                                         let api = api.clone();
                                         let id = id.clone();
                                         crate::gui::spawn::api_fire(move || {
@@ -502,8 +609,34 @@ impl LinkGrabberPanel {
                                         });
                                         popover_for_click.popdown();
                                     });
-                                    list_box.append(&row_btn);
+
+                                    let label = gtk4::Label::new(Some(name));
+                                    label.set_halign(gtk4::Align::Start);
+                                    label.set_hexpand(true);
+
+                                    let hbox = gtk4::Box::new(gtk4::Orientation::Horizontal, 6);
+                                    hbox.set_margin_start(4);
+                                    hbox.set_margin_end(4);
+                                    hbox.set_margin_top(2);
+                                    hbox.set_margin_bottom(2);
+                                    hbox.append(&check);
+                                    hbox.append(&label);
+
+                                    let list_row = gtk4::ListBoxRow::new();
+                                    list_row.set_child(Some(&hbox));
+                                    list_box.append(&list_row);
                                 }
+                                list_box.connect_row_activated(move |_, row| {
+                                    let Some(hbox) = row.child().and_downcast::<gtk4::Box>() else {
+                                        return;
+                                    };
+                                    let Some(check) =
+                                        hbox.first_child().and_downcast::<gtk4::CheckButton>()
+                                    else {
+                                        return;
+                                    };
+                                    check.set_active(true);
+                                });
                                 // Scroll instead of growing unbounded: some
                                 // hosts (e.g. YouTube) return dozens of
                                 // variants, which without a cap render an
@@ -732,7 +865,6 @@ impl LinkGrabberPanel {
         sidebar.set_margin_end(6);
         sidebar.set_margin_top(6);
         sidebar.set_margin_bottom(6);
-        sidebar.set_size_request(200, -1);
 
         let exceptions_frame = gtk4::Frame::new(Some("Exceptions"));
         let exceptions_list = gtk4::ListBox::new();
@@ -779,22 +911,30 @@ impl LinkGrabberPanel {
         hoster_frame.set_child(Some(&hoster_list));
         sidebar.append(&hoster_frame);
 
+        // Fixed-width right panel: 220px min and max, not user-resizable.
+        // `set_size_request` is the authoritative floor here — GTK guarantees
+        // natural size >= requested minimum, so this alone forces exactly
+        // 220px for the current (narrow) content; `min/max-content-width` +
+        // `propagate-natural-width` additionally cap it at 220px should the
+        // filter lists ever contain wider content.
         let sidebar_scroll = gtk4::ScrolledWindow::builder()
             .child(&sidebar)
             .vexpand(true)
+            .hexpand(false)
             .hscrollbar_policy(gtk4::PolicyType::Never)
+            .min_content_width(220)
+            .max_content_width(220)
+            .propagate_natural_width(true)
             .build();
+        sidebar_scroll.set_size_request(220, -1);
 
-        let paned = gtk4::Paned::new(gtk4::Orientation::Horizontal);
-        paned.set_start_child(Some(&table_overlay));
-        paned.set_end_child(Some(&sidebar_scroll));
-        paned.set_shrink_start_child(false);
-        paned.set_shrink_end_child(false);
-        paned.set_position(600);
-        paned.set_vexpand(true);
-        paned.set_hexpand(true);
+        let content_row = gtk4::Box::new(gtk4::Orientation::Horizontal, 0);
+        content_row.set_vexpand(true);
+        content_row.set_hexpand(true);
+        content_row.append(&table_overlay);
+        content_row.append(&sidebar_scroll);
 
-        page.append(&paned);
+        page.append(&content_row);
 
         // Properties panel: shown for the selected link, hidden otherwise.
         let properties = Rc::new(crate::gui::properties_panel::PropertiesPanel::build(
@@ -804,7 +944,9 @@ impl LinkGrabberPanel {
         crate::gui::properties_panel::restore_field_visibility(properties.clone(), {
             let gui_settings = gui_settings.clone();
             move || gui_settings.is_ready()
-        }, move || {
+        }, {
+            let gui_settings = gui_settings.clone();
+            move || {
             vec![
                 (
                     crate::gui::properties_panel::FIELD_PACKAGE_NAME,
@@ -827,6 +969,7 @@ impl LinkGrabberPanel {
                     gui_settings.get_flag(CFG_COMMENT_VISIBLE, true).unwrap_or(true),
                 ),
             ]
+            }
         });
         // Properties panel only supports link-level detail for now: package
         // selections hide it, matching "no data to show" rather than guessing.
@@ -872,43 +1015,32 @@ impl LinkGrabberPanel {
         });
 
         // Overview
-        let overview = gtk4::Box::new(gtk4::Orientation::Vertical, 6);
-        overview.set_margin_start(12);
-        overview.set_margin_end(12);
-        overview.set_margin_top(6);
-        overview.set_margin_bottom(6);
-
-        let overview_grid = gtk4::Grid::new();
-        overview_grid.set_row_spacing(4);
-        overview_grid.set_column_spacing(12);
-        overview_grid.set_halign(gtk4::Align::Start);
-
-        let stats = [
-            ("Packages", "0"),
-            ("Links", "0"),
-            ("Offline", "0"),
-            ("Filtered", "0"),
-            ("Total size", "0 B"),
-        ];
-
-        let mut overview_labels = Vec::new();
-
-        for (col, (name, value)) in stats.iter().enumerate() {
-            let name_label = gtk4::Label::new(Some(*name));
-            name_label.add_css_class("caption");
-            let value_label = gtk4::Label::new(Some(*value));
-            value_label.add_css_class("body");
-            overview_grid.attach(&name_label, col as i32, 0, 1, 1);
-            overview_grid.attach(&value_label, col as i32, 1, 1, 1);
-            overview_labels.push(value_label);
-        }
-
-        overview.append(&overview_grid);
-
-        let overview_frame = gtk4::Frame::new(Some(tr!("Overview").as_ref()));
-        overview_frame.set_child(Some(&overview));
-
-        page.append(&overview_frame);
+        let overview = Rc::new(crate::gui::overview_panel::OverviewPanel::build(
+            tr!("Overview").as_ref(),
+            crate::gui::icon_key::ICON_LINKGRABBER,
+            overview_field_defs(),
+            overview_actions(gui_settings.clone()),
+        ));
+        page.append(&overview.widget);
+        crate::gui::overview_panel::restore_field_visibility(
+            overview.clone(),
+            {
+                let gui_settings = gui_settings.clone();
+                move || gui_settings.is_ready()
+            },
+            {
+                let gui_settings = gui_settings.clone();
+                move || {
+                    overview_field_defs()
+                        .into_iter()
+                        .map(|d| {
+                            let visible = gui_settings.get_flag(d.cfg_key, d.default_visible).unwrap_or(d.default_visible);
+                            (d.key, visible)
+                        })
+                        .collect()
+                }
+            },
+        );
 
         // Bottom bar split left/right
         let left_bar = gtk4::Box::new(gtk4::Orientation::Horizontal, 2);
@@ -1100,8 +1232,7 @@ impl LinkGrabberPanel {
             child_stores,
             selection,
             view,
-            properties,
-            overview_labels,
+            overview,
             expanded_state,
         }
     }
@@ -1112,10 +1243,11 @@ impl LinkGrabberPanel {
     /// tree. Triggers favicon downloads in the background for hosts not yet
     /// cached.
     pub fn start_refresh(&self, api: Arc<JdApi>) {
+        let view = self.view.clone();
         let store = self.store.clone();
         let child_stores = self.child_stores.clone();
         let selection = self.selection.clone();
-        let overview_labels = self.overview_labels.clone();
+        let overview = self.overview.clone();
         let expanded_state = self.expanded_state.clone();
         let last_packages: Rc<RefCell<Vec<LinkGrabberPackageRow>>> =
             Rc::new(RefCell::new(Vec::new()));
@@ -1128,12 +1260,13 @@ impl LinkGrabberPanel {
 
         glib::source::timeout_add_local(Duration::from_secs(2), move || {
             let api = api.clone();
+            let view = view.clone();
             let store = store.clone();
             let child_stores = child_stores.clone();
             let selection = selection.clone();
             let fetching = fetching.clone();
             let variant_fetching = variant_fetching.clone();
-            let overview_labels = overview_labels.clone();
+            let overview = overview.clone();
             let expanded_state = expanded_state.clone();
             let last_packages = last_packages.clone();
             let last_links_by_package = last_links_by_package.clone();
@@ -1148,12 +1281,7 @@ impl LinkGrabberPanel {
 
             glib::MainContext::default().spawn_local(async move {
                 if let Ok((packages_json, links_json)) = rx.recv().await {
-                    if let Some(label) = overview_labels.first() {
-                        label.set_text(&packages_json.len().to_string());
-                    }
-                    if let Some(label) = overview_labels.get(1) {
-                        label.set_text(&links_json.len().to_string());
-                    }
+                    update_overview_values(&overview, packages_json.len(), &links_json);
                     let new_packages: Vec<LinkGrabberPackageRow> =
                         packages_json.iter().map(package_row_from_json).collect();
                     let new_links: Vec<LinkGrabberRow> =
@@ -1247,6 +1375,18 @@ impl LinkGrabberPanel {
                         links_by_package.entry(row.package_uuid).or_default().push(row);
                     }
 
+                    // sync_store/sync_store_keep_expanded rebuild rows via
+                    // remove_all()+re-append when the list changes, which
+                    // tears down the GtkListItem holding keyboard focus (if
+                    // the user had clicked a row). GTK doesn't reassign focus
+                    // on its own, so without this the Delete shortcut (wired
+                    // on `view` in mod.rs) silently stops receiving events a
+                    // few seconds after the row is touched.
+                    let had_focus = view
+                        .root()
+                        .and_then(|r| r.focus())
+                        .is_some_and(|f| f == view.clone().upcast::<gtk4::Widget>() || f.is_ancestor(&view));
+
                     super::downloads_panel::sync_store_keep_expanded(
                         &store,
                         &mut last_packages.borrow_mut(),
@@ -1310,6 +1450,10 @@ impl LinkGrabberPanel {
                             }
                         }
                     }
+
+                    if had_focus {
+                        view.grab_focus();
+                    }
                 }
             });
             glib::ControlFlow::Continue
@@ -1350,23 +1494,39 @@ impl LinkGrabberPanel {
     }
 }
 
-/// Walks the flattened tree and collects the uuid of every currently
-/// selected *link* row (package-row selections are ignored: they aren't
-/// individually deletable as a single link id).
-fn selected_uuids(selection: &gtk4::MultiSelection) -> std::collections::HashSet<String> {
+/// Walks the flattened tree and collects the uuid of every link that should
+/// be removed for the current selection: individually selected link rows,
+/// plus (mirroring JDownloader) every link belonging to a selected package
+/// row, since deleting a package deletes all files inside it.
+fn selected_uuids(
+    selection: &gtk4::MultiSelection,
+    child_stores: &Rc<RefCell<HashMap<i64, gio::ListStore>>>,
+) -> std::collections::HashSet<String> {
     let bitset = selection.selection();
-    (0..bitset.size())
-        .filter_map(|i| {
-            let pos = bitset.nth(i as u32);
-            let tree_row = selection.item(pos).and_downcast::<gtk4::TreeListRow>()?;
-            if tree_row.depth() == 0 {
-                return None;
+    let stores = child_stores.borrow();
+    let mut uuids = std::collections::HashSet::new();
+    for i in 0..bitset.size() {
+        let pos = bitset.nth(i as u32);
+        let Some(tree_row) = selection.item(pos).and_downcast::<gtk4::TreeListRow>() else {
+            continue;
+        };
+        if tree_row.depth() == 0 {
+            let Some(obj) = tree_row.item().and_downcast::<glib::BoxedAnyObject>() else {
+                continue;
+            };
+            let package_uuid = obj.borrow::<LinkGrabberPackageRow>().uuid;
+            if let Some(store) = stores.get(&package_uuid) {
+                for cpos in 0..store.n_items() {
+                    if let Some(child) = store.item(cpos).and_downcast::<glib::BoxedAnyObject>() {
+                        uuids.insert(child.borrow::<LinkGrabberRow>().uuid.clone());
+                    }
+                }
             }
-            let obj = tree_row.item()?.downcast::<glib::BoxedAnyObject>().ok()?;
-            let uuid = obj.borrow::<LinkGrabberRow>().uuid.clone();
-            Some(uuid)
-        })
-        .collect()
+        } else if let Some(obj) = tree_row.item().and_downcast::<glib::BoxedAnyObject>() {
+            uuids.insert(obj.borrow::<LinkGrabberRow>().uuid.clone());
+        }
+    }
+    uuids
 }
 
 /// Removes link rows matching `uuids` from whichever per-package child store
@@ -1388,29 +1548,264 @@ fn remove_rows_by_uuid(
     }
 }
 
+/// Removes from the top-level store any package whose child store is now
+/// empty, so a package that was fully deleted disappears immediately
+/// instead of lingering as an empty row until the next periodic refresh.
+fn prune_empty_packages(
+    store: &gio::ListStore,
+    child_stores: &Rc<RefCell<HashMap<i64, gio::ListStore>>>,
+) {
+    let mut pos = store.n_items();
+    while pos > 0 {
+        pos -= 1;
+        if let Some(obj) = store.item(pos).and_downcast::<glib::BoxedAnyObject>() {
+            let uuid = obj.borrow::<LinkGrabberPackageRow>().uuid;
+            let empty = child_stores
+                .borrow()
+                .get(&uuid)
+                .is_some_and(|s| s.n_items() == 0);
+            if empty {
+                store.remove(pos);
+                child_stores.borrow_mut().remove(&uuid);
+            }
+        }
+    }
+}
+
+/// Config key for the "Don't show this again" checkbox on this dialog
+/// (mirrors JDownloader's per-dialog dont-show-again registry, keyed there
+/// by `GenericResetLinkgrabberRlyDialog.getDontShowAgainKey()`).
+const SKIP_CONFIRM_KEY: &str = "skip_confirm_linkgrabber_remove";
+
+/// Shows JDownloader's "Are you sure?" removal dialog for the link grabber
+/// (mirrors `GenericResetLinkgrabberRlyDialog`). Collected links haven't
+/// been downloaded yet, so unlike the downloads list there is no
+/// recycle/delete-on-disk choice. Always shown (even for a single link) as
+/// JDownloader does, unless the user previously ticked "Don't show this
+/// again". Calls `on_confirm` if the user confirms (or if the dialog is
+/// currently skipped).
+///
+/// Uses a plain `gtk4::Window` rather than `adw::AlertDialog` so the "Don't
+/// show this again" checkbox can sit on the same row as the Continue/Cancel
+/// buttons, matching JDownloader's layout (`AlertDialog`'s response row is
+/// fixed and can't host extra widgets).
+fn confirm_remove<W: IsA<gtk4::Widget> + Clone + 'static>(
+    parent: &W,
+    link_count: usize,
+    links_left: usize,
+    on_confirm: impl FnOnce() + 'static,
+) {
+    if crate::config::get_bool_map("dialog_prefs")
+        .get(SKIP_CONFIRM_KEY)
+        .copied()
+        .unwrap_or(false)
+    {
+        on_confirm();
+        return;
+    }
+
+    let Some(parent_window) = parent.root().and_then(|r| r.downcast::<gtk4::Window>().ok())
+    else {
+        on_confirm();
+        return;
+    };
+
+    let dialog = gtk4::Window::new();
+    dialog.set_transient_for(Some(&parent_window));
+    dialog.set_modal(true);
+    dialog.set_resizable(false);
+    dialog.set_title(Some(tr!("Are you sure?").as_ref()));
+
+    let outer = gtk4::Box::new(gtk4::Orientation::Vertical, 0);
+
+    let content = gtk4::Box::new(gtk4::Orientation::Horizontal, 12);
+    content.set_margin_top(18);
+    content.set_margin_bottom(12);
+    content.set_margin_start(18);
+    content.set_margin_end(18);
+
+    let robot = gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(
+        crate::gui::icon_key::ICON_BOTTY_ROBOT_DEL,
+    ));
+    robot.set_pixel_size(100);
+    robot.set_valign(gtk4::Align::Start);
+    content.append(&robot);
+
+    let text_box = gtk4::Box::new(gtk4::Orientation::Vertical, 10);
+    text_box.set_hexpand(true);
+
+    let intro_label = gtk4::Label::new(Some(&format!(
+        "{}\n{}",
+        tr!("Do you really want to perform this clean up action:"),
+        tr!("Delete Selected Links?")
+    )));
+    intro_label.set_halign(gtk4::Align::Start);
+    intro_label.set_xalign(0.0);
+    intro_label.set_wrap(true);
+    text_box.append(&intro_label);
+
+    let tasks_label = gtk4::Label::new(Some(tr!("Tasks to do:").as_ref()));
+    tasks_label.set_halign(gtk4::Align::Start);
+    tasks_label.set_xalign(0.0);
+    tasks_label.add_css_class("heading");
+    tasks_label.set_margin_top(6);
+    text_box.append(&tasks_label);
+
+    let task_text = format!(
+        "{} — {}",
+        tr!("Delete selected link" | "Delete selected links" % link_count),
+        tr!("{n} link remaining" | "{n} links remaining" % links_left),
+    );
+    let task_label = gtk4::Label::new(Some(&task_text));
+    task_label.set_halign(gtk4::Align::Start);
+    task_label.set_xalign(0.0);
+    task_label.set_wrap(true);
+    text_box.append(&task_label);
+
+    content.append(&text_box);
+    outer.append(&content);
+
+    let button_row = gtk4::Box::new(gtk4::Orientation::Horizontal, 12);
+    button_row.set_margin_top(6);
+    button_row.set_margin_bottom(12);
+    button_row.set_margin_start(18);
+    button_row.set_margin_end(18);
+
+    let dont_show_again = gtk4::CheckButton::with_label(tr!("Don't show this again").as_ref());
+    dont_show_again.set_valign(gtk4::Align::Center);
+    dont_show_again.set_hexpand(true);
+    dont_show_again.set_halign(gtk4::Align::Start);
+    button_row.append(&dont_show_again);
+
+    let cancel_btn = gtk4::Button::with_label(tr!("Cancel").as_ref());
+    let continue_btn = gtk4::Button::with_label(tr!("Continue").as_ref());
+    continue_btn.add_css_class("suggested-action");
+
+    let button_size_group = gtk4::SizeGroup::new(gtk4::SizeGroupMode::Horizontal);
+    button_size_group.add_widget(&cancel_btn);
+    button_size_group.add_widget(&continue_btn);
+
+    let buttons_box = gtk4::Box::new(gtk4::Orientation::Horizontal, 12);
+    buttons_box.set_halign(gtk4::Align::End);
+    buttons_box.append(&continue_btn);
+    buttons_box.append(&cancel_btn);
+    button_row.append(&buttons_box);
+    outer.append(&button_row);
+
+    dialog.set_child(Some(&outer));
+    dialog.set_default_widget(Some(&continue_btn));
+
+    let escape_controller = gtk4::EventControllerKey::new();
+    escape_controller.connect_key_pressed({
+        let cancel_btn = cancel_btn.clone();
+        move |_, key, _, _| {
+            if key == gtk4::gdk::Key::Escape {
+                cancel_btn.activate();
+                glib::Propagation::Stop
+            } else {
+                glib::Propagation::Proceed
+            }
+        }
+    });
+    dialog.add_controller(escape_controller);
+
+    cancel_btn.connect_clicked({
+        let dialog = dialog.clone();
+        move |_| dialog.close()
+    });
+
+    let on_confirm = Rc::new(RefCell::new(Some(on_confirm)));
+    let dialog_c = dialog.clone();
+    continue_btn.connect_clicked(move |_| {
+        if dont_show_again.is_active() {
+            crate::config::set_bool_entry("dialog_prefs", SKIP_CONFIRM_KEY, true);
+        }
+        if let Some(f) = on_confirm.borrow_mut().take() {
+            f();
+        }
+        dialog_c.close();
+    });
+
+    dialog.present();
+    continue_btn.grab_focus();
+}
+
 /// Removes the selected links from the link collector, mirroring
-/// JDownloader's "Remove" action. Since collected links have not been
-/// downloaded yet, this needs no confirmation.
+/// JDownloader's "Remove" action: prompts for confirmation (as JDownloader
+/// always does, regardless of selection size) before removing the links.
 pub fn remove_selected(
     api: &Arc<JdApi>,
     selection: &gtk4::MultiSelection,
+    store: &gio::ListStore,
     child_stores: &Rc<RefCell<HashMap<i64, gio::ListStore>>>,
+    view: &gtk4::ColumnView,
 ) {
-    let uuids = selected_uuids(selection);
+    let uuids = selected_uuids(selection, child_stores);
     if uuids.is_empty() {
         return;
     }
-    let ids: Vec<i64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
+    let link_count = uuids.len();
+    let links_left: usize = child_stores
+        .borrow()
+        .values()
+        .map(|s| s.n_items() as usize)
+        .sum::<usize>()
+        - link_count;
+
+    // Lowest flattened-tree position among the rows about to be removed:
+    // once they're gone, the row that slides up into this position is the
+    // one immediately below the deleted selection.
+    let focus_pos = selection.selection().minimum();
+
     let api = api.clone();
+    let store = store.clone();
     let child_stores = child_stores.clone();
-    crate::gui::spawn::api_call(
-        move || {
-            let _ = api.remove_linkgrabber_links(&ids);
-        },
-        move |_| {
-            remove_rows_by_uuid(&child_stores, &uuids);
-        },
-    );
+    let selection = selection.clone();
+    let view = view.clone();
+    confirm_remove(&view.clone(), link_count, links_left, move || {
+        let ids: Vec<i64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
+        crate::gui::spawn::api_call(
+            move || {
+                let _ = api.remove_linkgrabber_links(&ids);
+            },
+            move |_| {
+                remove_rows_by_uuid(&child_stores, &uuids);
+                prune_empty_packages(&store, &child_stores);
+                super::downloads_panel::select_and_focus_row(&view, &selection, focus_pos);
+            },
+        );
+    });
+}
+
+/// Recomputes every Overview stat from the flat list of collected links
+/// (mirrors JDownloader's `AggregatedCrawlerNumbers`), and pushes the
+/// results into `overview`.
+fn update_overview_values(overview: &crate::gui::overview_panel::OverviewPanel, packages_len: usize, links_json: &[Value]) {
+    let mut bytes_total: i64 = 0;
+    let mut online = 0i64;
+    let mut offline = 0i64;
+    let mut unknown = 0i64;
+    let mut hosters: std::collections::HashSet<String> = std::collections::HashSet::new();
+    for link in links_json {
+        bytes_total += super::downloads_panel::get_num_at(link, "bytesTotal").unwrap_or(0);
+        let host = super::downloads_panel::get_str_at(link, "host");
+        if !host.is_empty() {
+            hosters.insert(host);
+        }
+        match super::downloads_panel::get_str_at(link, "availability").as_str() {
+            "ONLINE" | "Online" => online += 1,
+            "OFFLINE" | "Offline" => offline += 1,
+            _ => unknown += 1,
+        }
+    }
+
+    overview.set_value(OVERVIEW_PACKAGES, &packages_len.to_string());
+    overview.set_value(OVERVIEW_LINKS, &links_json.len().to_string());
+    overview.set_value(OVERVIEW_SIZE, &super::downloads_panel::format_size_jd(bytes_total));
+    overview.set_value(OVERVIEW_ONLINE, &online.to_string());
+    overview.set_value(OVERVIEW_HOSTER, &hosters.len().to_string());
+    overview.set_value(OVERVIEW_OFFLINE, &offline.to_string());
+    overview.set_value(OVERVIEW_UNKNOWN, &unknown.to_string());
 }
 
 fn package_row_from_json(pkg: &Value) -> LinkGrabberPackageRow {

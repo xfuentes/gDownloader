@@ -81,11 +81,11 @@ pub fn setup(
             display
                 .clipboard()
                 .read_text_async(gtk4::gio::Cancellable::NONE, move |res| {
-                    log::info!(
-                        "read_text_async completed: {:?}",
-                        res.as_ref().map(|o| o.as_ref().map(|s| &s[..s.len().min(80)]))
-                    );
                     let Ok(Some(text)) = res else {
+                        // Expected whenever the clipboard's new content isn't
+                        // text (an image, a file, ...) — nothing to extract
+                        // links from, so this isn't an error worth `warn!`.
+                        log::debug!("Clipboard change has no text content: {:?}", res);
                         return;
                     };
                     if text == *last_clipboard.borrow() {

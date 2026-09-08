@@ -1,0 +1,50 @@
+name: package linux
+
+on:
+  push:
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
+  workflow_dispatch:
+
+jobs:
+  release:
+    permissions:
+      contents: write
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, ubuntu-24.04-arm]
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v6
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential pkg-config libgtk-4-dev libadwaita-1-dev
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build (release)
+        run: cargo build --release
+
+      - name: Test
+        run: cargo test --release
+
+      - name: Install cargo-deb
+        run: cargo install cargo-deb --locked
+
+      - name: Package .deb
+        run: cargo deb --no-build
+
+      - name: Publish to GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: target/debian/*.deb
