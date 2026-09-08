@@ -2,30 +2,7 @@
 
 All notable changes to gDownloader are documented in this file.
 
-## [Unreleased]
-
-### Added
-- Full UI translation into 23 languages (Arabic, Czech, Danish, German,
-  Greek, English, Spanish, Finnish, French, Hungarian, Indonesian, Italian,
-  Japanese, Korean, Dutch, Norwegian, Polish, Portuguese, Russian, Swedish,
-  Turkish, Ukrainian, Chinese), up from English/French only.
-- Linux CI: automated build/test on every push and packaged `.deb` releases
-  (amd64/arm64) attached to GitHub Releases on tag push.
-- Published as a `.deb` package through a personal APT repository
-  (`apt.serviam.cc`), updated automatically on every release.
-
-### Fixed
-- Delete/Suppr in the Downloads and Link Grabber lists no longer silently
-  stops working a few seconds after the list is touched (the periodic
-  refresh was tearing down the focused row without restoring keyboard
-  focus).
-- Deleting selected downloads/links now selects and focuses the row that
-  slides into their place, instead of leaving nothing selected/focused.
-- Download folder paths with accented characters (e.g. "Vidéos") were
-  written to disk with `?` instead of the accented letter, because
-  JDownloader's JVM was launched with an ASCII locale (`LANG=C`).
-
-## [0.2.0] - 2026-09-03
+## [0.2.0] - 2026-09-08
 
 ### Added
 - Downloads and Link Grabber panels rebuilt on GTK4 `ColumnView`, with an
@@ -53,6 +30,14 @@ All notable changes to gDownloader are documented in this file.
 - gDownloader-local settings store (`src/config.rs`) for preferences with
   no JDownloader config equivalent, such as per-package expand/collapse
   state.
+- Full UI translation into 23 languages (Arabic, Czech, Danish, German,
+  Greek, English, Spanish, Finnish, French, Hungarian, Indonesian, Italian,
+  Japanese, Korean, Dutch, Norwegian, Polish, Portuguese, Russian, Swedish,
+  Turkish, Ukrainian, Chinese), up from English/French only.
+- Linux CI: automated build/test on every push and packaged `.deb` releases
+  (amd64/arm64) attached to GitHub Releases on tag push.
+- Published as a `.deb` package through a personal APT repository
+  (`apt.serviam.cc`), updated automatically on every release.
 
 ### Fixed
 - Link Grabber context menu's "Start Downloads" did nothing after the
@@ -70,3 +55,12 @@ All notable changes to gDownloader are documented in this file.
 - Link Grabber "Variant" column: dropdown arrow now uses JDownloader's
   actual combobox icon instead of a list-reorder icon, and variant
   thumbnail icons resolve correctly instead of failing to load.
+- Delete/Suppr in the Downloads and Link Grabber lists no longer silently
+  stops working a few seconds after the list is touched (the periodic
+  refresh was tearing down the focused row without restoring keyboard
+  focus).
+- Deleting selected downloads/links now selects and focuses the row that
+  slides into their place, instead of leaving nothing selected/focused.
+- Download folder paths with accented characters (e.g. "Vidéos") were
+  written to disk with `?` instead of the accented letter, because
+  JDownloader's JVM was launched with an ASCII locale (`LANG=C`).

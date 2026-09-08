@@ -400,7 +400,8 @@ msgstr "将已下载文件移至回收站并从 JDownloader 中移除链接"
 
 #: src/gui/downloads_panel.rs:1723
 msgid ""
-"Delete downloaded files permanently from disk & remove links from JDownloader"
+"Delete downloaded files permanently from disk & remove links from "
+"JDownloader"
 msgstr "从磁盘永久删除已下载文件并从 JDownloader 中移除链接"
 
 #: src/gui/main_menu_bar.rs:38
@@ -601,8 +602,8 @@ msgstr "下载文件夹"
 
 #: src/gui/components/settings/general.rs:158
 msgid ""
-"Set the default download path here. Changing default path here, affects only "
-"new downloads."
+"Set the default download path here. Changing default path here, affects only"
+" new downloads."
 msgstr "在此设置默认下载路径。更改此默认路径仅影响新的下载任务。"
 
 #: src/gui/components/settings/general.rs:178
@@ -1076,14 +1077,13 @@ msgid ""
 "If you are a satisfied user of JDownloader, please think about contributing "
 "to this project. JDownloader is the result of daily hard work since more "
 "than %s1 years. We need your help to keep it free of charge, free of "
-"advertising, free of installer bundles and to improve JDownloader even more. "
-"Moreover, donating is a good way to tell us what modules we should focus our "
-"work on."
+"advertising, free of installer bundles and to improve JDownloader even more."
+" Moreover, donating is a good way to tell us what modules we should focus "
+"our work on."
 msgstr ""
-"如果您是 JDownloader 的满意用户，请考虑为本项目做出贡献。JDownloader 是过去 "
-"%s1 多年来每日辛勤工作的成果。我们需要您的帮助，以保持它免费、无广告、无安装"
-"捆绑包，并进一步改进 JDownloader。此外，捐赠也是告诉我们应将工作重点放在哪些"
-"模块上的好方式。"
+"如果您是 JDownloader 的满意用户，请考虑为本项目做出贡献。JDownloader 是过去 %s1 "
+"多年来每日辛勤工作的成果。我们需要您的帮助，以保持它免费、无广告、无安装捆绑包，并进一步改进 "
+"JDownloader。此外，捐赠也是告诉我们应将工作重点放在哪些模块上的好方式。"
 
 #: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:104
 msgid "Start downloads"
@@ -1205,7 +1205,7 @@ msgstr "正在等待 JDownloader 退出…"
 
 #: src/gui/mod.rs:116
 msgid "The power of JDownloader, the elegance of GNOME"
-msgstr ""
+msgstr "JDownloader 的强大，GNOME 的优雅"
 
 #: src/gui/mod.rs:199 src/gui/mod.rs:221
 msgid "Start Downloads"

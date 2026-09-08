@@ -400,9 +400,9 @@ msgstr "다운로드한 파일을 휴지통으로 이동하고 JDownloader에서
 
 #: src/gui/downloads_panel.rs:1723
 msgid ""
-"Delete downloaded files permanently from disk & remove links from JDownloader"
-msgstr ""
-"다운로드한 파일을 디스크에서 영구적으로 삭제하고 JDownloader에서 링크 제거"
+"Delete downloaded files permanently from disk & remove links from "
+"JDownloader"
+msgstr "다운로드한 파일을 디스크에서 영구적으로 삭제하고 JDownloader에서 링크 제거"
 
 #: src/gui/main_menu_bar.rs:38
 msgid "Tools"
@@ -602,11 +602,9 @@ msgstr "다운로드 폴더"
 
 #: src/gui/components/settings/general.rs:158
 msgid ""
-"Set the default download path here. Changing default path here, affects only "
-"new downloads."
-msgstr ""
-"기본 다운로드 경로를 여기서 설정하세요. 이 경로를 변경해도 새 다운로드에만 적"
-"용됩니다."
+"Set the default download path here. Changing default path here, affects only"
+" new downloads."
+msgstr "기본 다운로드 경로를 여기서 설정하세요. 이 경로를 변경해도 새 다운로드에만 적용됩니다."
 
 #: src/gui/components/settings/general.rs:178
 msgid "Maximum of simultaneous downloads per host"
@@ -661,9 +659,7 @@ msgstr "다운로드 관리"
 msgid ""
 "Connection limits, Download order, Priorities, ... Set up the Download "
 "controller details."
-msgstr ""
-"연결 제한, 다운로드 순서, 우선순위 등 다운로드 컨트롤러의 세부 사항을 설정합"
-"니다."
+msgstr "연결 제한, 다운로드 순서, 우선순위 등 다운로드 컨트롤러의 세부 사항을 설정합니다."
 
 #: src/gui/components/settings/general.rs:227
 msgid "Always"
@@ -689,9 +685,7 @@ msgstr "다운로드 자동 시작"
 msgid ""
 "Choose if, and when JDownloader should start pending downloads without user "
 "interaction."
-msgstr ""
-"JDownloader가 사용자 개입 없이 대기 중인 다운로드를 시작할지, 언제 시작할지 "
-"선택하세요."
+msgstr "JDownloader가 사용자 개입 없이 대기 중인 다운로드를 시작할지, 언제 시작할지 선택하세요."
 
 #: src/gui/components/settings/general.rs:264
 msgid "Group single files in a Various package"
@@ -717,9 +711,7 @@ msgstr "파일 기록"
 msgid ""
 "JDownloader will verify your downloads for correctness after download using "
 "the hash/check option"
-msgstr ""
-"JDownloader는 해시/검사 옵션을 사용하여 다운로드 후 다운로드의 무결성을 확인"
-"합니다"
+msgstr "JDownloader는 해시/검사 옵션을 사용하여 다운로드 후 다운로드의 무결성을 확인합니다"
 
 #: src/gui/components/settings/general.rs:307
 msgid "Auto open Link Containers (dlc,rsdf,...)"
@@ -781,8 +773,7 @@ msgstr "복사본"
 #: src/gui/components/settings/scripts.rs:53
 msgid ""
 "Run JavaScript automatically when a chosen event occurs (Eventscripter)."
-msgstr ""
-"선택한 이벤트가 발생하면 자동으로 JavaScript를 실행합니다 (이벤트 스크립터)."
+msgstr "선택한 이벤트가 발생하면 자동으로 JavaScript를 실행합니다 (이벤트 스크립터)."
 
 #: src/gui/components/settings/scripts.rs:113
 #: src/gui/dialogs/script_edit_dialog.rs:47
@@ -1086,15 +1077,13 @@ msgid ""
 "If you are a satisfied user of JDownloader, please think about contributing "
 "to this project. JDownloader is the result of daily hard work since more "
 "than %s1 years. We need your help to keep it free of charge, free of "
-"advertising, free of installer bundles and to improve JDownloader even more. "
-"Moreover, donating is a good way to tell us what modules we should focus our "
-"work on."
+"advertising, free of installer bundles and to improve JDownloader even more."
+" Moreover, donating is a good way to tell us what modules we should focus "
+"our work on."
 msgstr ""
-"JDownloader의 만족스러운 사용자라면 이 프로젝트에 기여하는 것을 고려해 주세"
-"요. JDownloader는 %s1년 넘게 매일 이어진 노력의 결과물입니다. 무료로, 광고 없"
-"이, 설치 번들 없이 유지하고 JDownloader를 더욱 개선하려면 여러분의 도움이 필"
-"요합니다. 또한 기부는 우리가 어떤 모듈에 집중해야 할지 알려주는 좋은 방법이기"
-"도 합니다."
+"JDownloader의 만족스러운 사용자라면 이 프로젝트에 기여하는 것을 고려해 주세요. JDownloader는 %s1년 넘게 매일 "
+"이어진 노력의 결과물입니다. 무료로, 광고 없이, 설치 번들 없이 유지하고 JDownloader를 더욱 개선하려면 여러분의 도움이 "
+"필요합니다. 또한 기부는 우리가 어떤 모듈에 집중해야 할지 알려주는 좋은 방법이기도 합니다."
 
 #: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:104
 msgid "Start downloads"
@@ -1216,7 +1205,7 @@ msgstr "JDownloader가 종료되기를 기다리는 중..."
 
 #: src/gui/mod.rs:116
 msgid "The power of JDownloader, the elegance of GNOME"
-msgstr ""
+msgstr "JDownloader의 강력함, GNOME의 우아함"
 
 #: src/gui/mod.rs:199 src/gui/mod.rs:221
 msgid "Start Downloads"
