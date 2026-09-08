@@ -15,6 +15,7 @@ pub mod main_tool_bar;
 pub mod menus;
 pub mod notifications;
 pub mod overview_panel;
+pub mod pending_jd_dialogs;
 pub mod properties_panel;
 pub mod settings_panel;
 pub mod tray;
@@ -31,7 +32,10 @@ use gtk4::gio;
 use gtk4::glib;
 
 use crate::app::{JdMessage, start_jd};
-use crate::jd::{find_jar, GraphicalUserInterfaceSettings, JdApi, JdProcess, INTERNAL_JD_PORT};
+use crate::jd::{
+    find_jar, GeneralSettings, GraphicalUserInterfaceSettings, JdApi, JdProcess,
+    ReconnectSettings, INTERNAL_JD_PORT,
+};
 use crate::gui::downloads_panel::DownloadsPanel;
 use crate::gui::link_grabber_panel::LinkGrabberPanel;
 use crate::gui::main_menu_bar::MainMenuBar;
@@ -96,6 +100,62 @@ pub fn build_ui(app: &adw::Application) {
                         let api = api.clone();
                         std::thread::spawn(move || { let _ = api.toggle_pause_downloads(); });
                     }
+                    tray::TrayMessage::OpenDownloadFolder => {
+                        let api = api.clone();
+                        spawn::api_call(
+                            move || {
+                                let folder = GeneralSettings::new(api).get_default_download_folder().unwrap_or_default();
+                                // Mirrors JDownloader's own behavior (`OpenDefaultDownloadFolderAction`):
+                                // open the folder itself, walking up to the nearest
+                                // existing ancestor if it (or a dynamic-tag subpath) doesn't exist yet.
+                                let mut path = std::path::PathBuf::from(folder);
+                                while !path.as_os_str().is_empty() && !path.exists() {
+                                    if !path.pop() {
+                                        break;
+                                    }
+                                }
+                                path
+                            },
+                            |path| {
+                                if path.as_os_str().is_empty() {
+                                    log::warn!("No download folder configured, can't open it");
+                                    return;
+                                }
+                                let uri = gio::File::for_path(&path).uri();
+                                if let Err(e) = gio::AppInfo::launch_default_for_uri(
+                                    &uri,
+                                    gio::AppLaunchContext::NONE,
+                                ) {
+                                    log::warn!("Failed to open download folder {:?}: {}", path, e);
+                                }
+                            },
+                        );
+                    }
+                    tray::TrayMessage::ToggleClipboardMonitoring => {
+                        let api = api.clone();
+                        std::thread::spawn(move || {
+                            let settings = GraphicalUserInterfaceSettings::new(api);
+                            if let Ok(current) = settings.get_clipboard_monitored() {
+                                let _ = settings.set_clipboard_monitored(!current);
+                            }
+                        });
+                    }
+                    tray::TrayMessage::ToggleAutoReconnect => {
+                        let api = api.clone();
+                        std::thread::spawn(move || {
+                            let Ok(status) = api.get_toolbar_status() else { return };
+                            let settings = ReconnectSettings::new(api);
+                            let _ = settings.set_auto_reconnect_enabled(!status.auto_reconnect);
+                        });
+                    }
+                    tray::TrayMessage::TogglePremium => {
+                        let api = api.clone();
+                        std::thread::spawn(move || {
+                            let Ok(status) = api.get_toolbar_status() else { return };
+                            let settings = GeneralSettings::new(api);
+                            let _ = settings.set_use_available_accounts(!status.use_premium_accounts);
+                        });
+                    }
                     tray::TrayMessage::Exit => window.close(),
                 }
             }
@@ -107,7 +167,7 @@ pub fn build_ui(app: &adw::Application) {
     let tool_bar = MainToolBar::build();
     let downloads = Rc::new(DownloadsPanel::build(Arc::clone(&api), gui_settings.clone()));
     let collector = Rc::new(LinkGrabberPanel::build(Arc::clone(&api), gui_settings.clone()));
-    let settings = SettingsPanel::build();
+    let settings = SettingsPanel::build(Arc::clone(&process), jar_path.clone());
 
     // ── Tab view ─────────────────────────────────────────────────────────────
     let header = adw::HeaderBar::new();
@@ -401,6 +461,7 @@ pub fn build_ui(app: &adw::Application) {
             tab_view.clone(),
             download_tab.clone(),
             collector_tab.clone(),
+            Arc::clone(&tray_handle),
         );
 
         // Refresh loops.
@@ -411,6 +472,7 @@ pub fn build_ui(app: &adw::Application) {
             toast_overlay.clone(),
         );
         collector.start_refresh(Arc::clone(&api));
+        pending_jd_dialogs::start(Arc::clone(&api), window.clone());
 
         // Restore settings tab state from JD config on startup.
         {

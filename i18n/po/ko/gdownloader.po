@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-08 05:50+0000\n"
+"POT-Creation-Date: 2026-09-08 19:04+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Korean <translation-team-ko@googlegroups.com>\n"
@@ -29,6 +29,22 @@ msgstr "JDownloader가 제시간에 응답하지 않았습니다"
 msgid "Choose visible fields"
 msgstr "표시할 필드 선택"
 
+#: src/gui/pending_jd_dialogs.rs:61
+msgid "JDownloader"
+msgstr "JDownloader"
+
+#: src/gui/pending_jd_dialogs.rs:114
+msgid "Don't ask again for this"
+msgstr "이 항목에 대해 다시 묻지 않음"
+
+#: src/gui/pending_jd_dialogs.rs:120
+msgid "Deny"
+msgstr "거부"
+
+#: src/gui/pending_jd_dialogs.rs:121
+msgid "Allow"
+msgstr "허용"
+
 #: src/gui/clipboard.rs:208
 msgid "New links from clipboard"
 msgstr "클립보드에서 새 링크"
@@ -46,32 +62,32 @@ msgstr[0] "{n}개의 링크를 수집했습니다"
 msgid "Show"
 msgstr "표시"
 
-#: src/gui/settings_panel.rs:32 src/gui/settings_panel.rs:50
+#: src/gui/settings_panel.rs:80 src/gui/settings_panel.rs:101
 msgid "General"
 msgstr "일반"
 
-#: src/gui/settings_panel.rs:35 src/gui/settings_panel.rs:53
+#: src/gui/settings_panel.rs:83 src/gui/settings_panel.rs:104
 #: src/gui/components/settings/account_manager.rs:43
 msgid "Account Manager"
 msgstr "계정 관리자"
 
-#: src/gui/settings_panel.rs:39 src/gui/settings_panel.rs:57
+#: src/gui/settings_panel.rs:87 src/gui/settings_panel.rs:108
 #: src/gui/components/settings/package_manager.rs:54
 msgid "Package Manager"
 msgstr "패키지 관리자"
 
-#: src/gui/settings_panel.rs:43 src/gui/settings_panel.rs:61
-#: src/gui/components/settings/extension_manager.rs:69
+#: src/gui/settings_panel.rs:91 src/gui/settings_panel.rs:112
+#: src/gui/components/settings/extension_manager.rs:171
 msgid "Extension Manager"
 msgstr "확장 관리자"
 
-#: src/gui/settings_panel.rs:45 src/gui/settings_panel.rs:63
-#: src/gui/components/settings/scripts.rs:51
+#: src/gui/settings_panel.rs:93 src/gui/settings_panel.rs:98
+#: src/gui/components/settings/scripts.rs:84
 msgid "Scripts"
 msgstr "스크립트"
 
-#: src/gui/settings_panel.rs:72 src/gui/settings_panel.rs:123
-#: src/gui/settings_panel.rs:138 src/gui/main_menu_bar.rs:37
+#: src/gui/settings_panel.rs:180 src/gui/settings_panel.rs:231
+#: src/gui/settings_panel.rs:246 src/gui/main_menu_bar.rs:37
 #: src/gui/menus/settings.rs:10 src/gui/menus/settings.rs:46
 #: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
 msgid "Settings"
@@ -91,7 +107,7 @@ msgstr "링크"
 msgid "Size"
 msgstr "크기"
 
-#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1888
+#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1890
 msgid "Online"
 msgstr "온라인"
 
@@ -101,11 +117,11 @@ msgstr "온라인"
 msgid "Hoster"
 msgstr "호스터"
 
-#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1892
+#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1894
 msgid "Offline"
 msgstr "오프라인"
 
-#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1900
+#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1902
 msgid "Unknown"
 msgstr "알 수 없음"
 
@@ -156,8 +172,8 @@ msgstr "링크 붙여넣기"
 msgid "Clear linkgrabber"
 msgstr "링크그래버 비우기"
 
-#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:210 src/gui/mod.rs:234
-#: src/gui/mod.rs:287 src/gui/mod.rs:296
+#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:270 src/gui/mod.rs:294
+#: src/gui/mod.rs:347 src/gui/mod.rs:356
 msgid "Delete"
 msgstr "삭제"
 
@@ -245,39 +261,39 @@ msgstr "이 정리 작업을 정말로 수행하시겠습니까:"
 msgid "Delete Selected Links?"
 msgstr "선택한 링크를 삭제하시겠습니까?"
 
-#: src/gui/link_grabber_panel.rs:1647 src/gui/downloads_panel.rs:1694
+#: src/gui/link_grabber_panel.rs:1648 src/gui/downloads_panel.rs:1695
 msgid "Tasks to do:"
 msgstr "수행할 작업:"
 
-#: src/gui/link_grabber_panel.rs:1656 src/gui/downloads_panel.rs:1703
+#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
 msgid "Delete selected link"
 msgid_plural "Delete selected links"
 msgstr[0] "선택한 링크 삭제"
 
-#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
+#: src/gui/link_grabber_panel.rs:1658 src/gui/downloads_panel.rs:1705
 msgid "{n} link remaining"
 msgid_plural "{n} links remaining"
 msgstr[0] "{n}개의 링크 남음"
 
-#: src/gui/link_grabber_panel.rs:1674 src/gui/downloads_panel.rs:1745
+#: src/gui/link_grabber_panel.rs:1676 src/gui/downloads_panel.rs:1747
 msgid "Don't show this again"
 msgstr "다시 표시하지 않음"
 
 #. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.2.0)  #-#-#-#-#
 #. Buttons
-#: src/gui/link_grabber_panel.rs:1680 src/gui/downloads_panel.rs:1751
+#: src/gui/link_grabber_panel.rs:1682 src/gui/downloads_panel.rs:1753
 #: src/gui/dialogs/account_add_dialog.rs:114
 #: src/gui/dialogs/packagizer_rule_dialog.rs:443
-#: src/gui/dialogs/script_edit_dialog.rs:96 src/gui/donate.rs:33
+#: src/gui/dialogs/script_edit_dialog.rs:119 src/gui/donate.rs:34
 msgid "Cancel"
 msgstr "취소"
 
-#: src/gui/link_grabber_panel.rs:1681 src/gui/downloads_panel.rs:1752
-#: src/gui/donate.rs:37
+#: src/gui/link_grabber_panel.rs:1683 src/gui/downloads_panel.rs:1754
+#: src/gui/donate.rs:38
 msgid "Continue"
 msgstr "계속"
 
-#: src/gui/link_grabber_panel.rs:1896
+#: src/gui/link_grabber_panel.rs:1898
 msgid "Temporarily Unknown"
 msgstr "일시적으로 알 수 없음"
 
@@ -318,8 +334,8 @@ msgstr "실패한 다운로드"
 
 #: src/gui/downloads_panel.rs:677
 #: src/gui/components/settings/package_manager.rs:115
-#: src/gui/components/settings/scripts.rs:104
-#: src/gui/dialogs/script_edit_dialog.rs:40
+#: src/gui/components/settings/scripts.rs:166
+#: src/gui/dialogs/script_edit_dialog.rs:41
 msgid "Name"
 msgstr "이름"
 
@@ -385,24 +401,24 @@ msgstr[0] "파일 {n}개를 성공적으로 다운로드했습니다"
 msgid "Delete Selected Downloads?"
 msgstr "선택한 다운로드를 삭제하시겠습니까?"
 
-#: src/gui/downloads_panel.rs:1709
+#: src/gui/downloads_panel.rs:1710
 msgid "{n} file ({}) on disk"
 msgid_plural "{n} files ({}) on disk"
 msgstr[0] "디스크에 파일 {n}개 ({})"
 
-#: src/gui/downloads_panel.rs:1721
+#: src/gui/downloads_panel.rs:1723
 msgid "Keep all downloaded files - just remove links from JDownloader"
 msgstr "다운로드한 모든 파일 유지 - JDownloader에서 링크만 제거"
 
-#: src/gui/downloads_panel.rs:1722
+#: src/gui/downloads_panel.rs:1724
 msgid "Move downloaded files to Trash & remove links from JDownloader"
 msgstr "다운로드한 파일을 휴지통으로 이동하고 JDownloader에서 링크 제거"
 
-#: src/gui/downloads_panel.rs:1723
+#: src/gui/downloads_panel.rs:1725
 msgid ""
-"Delete downloaded files permanently from disk & remove links from "
-"JDownloader"
-msgstr "다운로드한 파일을 디스크에서 영구적으로 삭제하고 JDownloader에서 링크 제거"
+"Delete downloaded files permanently from disk & remove links from JDownloader"
+msgstr ""
+"다운로드한 파일을 디스크에서 영구적으로 삭제하고 JDownloader에서 링크 제거"
 
 #: src/gui/main_menu_bar.rs:38
 msgid "Tools"
@@ -436,7 +452,7 @@ msgstr "백업"
 msgid "Restart"
 msgstr "재시작"
 
-#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:126
+#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:203
 msgid "Exit"
 msgstr "종료"
 
@@ -486,15 +502,15 @@ msgstr "호스터당 최대 동시 다운로드 수"
 msgid "Speed Limit"
 msgstr "속도 제한"
 
-#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:125
+#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:185
 msgid "Download"
 msgstr "다운로드"
 
-#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:129
+#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:189
 msgid "Link Collector"
 msgstr "링크 수집기"
 
-#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:134
+#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:194
 msgid "Donate"
 msgstr "기부"
 
@@ -523,13 +539,14 @@ msgstr "무제한"
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
-#: src/gui/components/settings/scripts.rs:78
+#: src/gui/components/settings/scripts.rs:125
 msgid "Add"
 msgstr "추가"
 
 #: src/gui/components/account_table.rs:147
+#: src/gui/components/settings/extension_manager.rs:324
 #: src/gui/components/settings/package_manager.rs:84
-#: src/gui/components/settings/scripts.rs:81
+#: src/gui/components/settings/scripts.rs:128
 msgid "Remove"
 msgstr "제거"
 
@@ -538,7 +555,7 @@ msgid "Buy"
 msgstr "구매"
 
 #: src/gui/components/account_table.rs:149
-#: src/gui/components/settings/extension_manager.rs:75
+#: src/gui/components/settings/extension_manager.rs:177
 msgid "Refresh"
 msgstr "새로고침"
 
@@ -570,25 +587,33 @@ msgstr "계정을 사용하여 다운로드"
 msgid "Enter and manage all your Premium/Gold/Platinum accounts."
 msgstr "모든 프리미엄/골드/플래티넘 계정을 입력하고 관리하세요."
 
-#: src/gui/components/settings/extension_manager.rs:70
+#: src/gui/components/settings/extension_manager.rs:172
 msgid "Enable, disable or install JDownloader extensions."
 msgstr "JDownloader 확장 기능을 활성화, 비활성화 또는 설치합니다."
 
-#: src/gui/components/settings/extension_manager.rs:87
+#: src/gui/components/settings/extension_manager.rs:193
 msgid "Loading extensions…"
 msgstr "확장 기능을 불러오는 중…"
 
-#: src/gui/components/settings/extension_manager.rs:129
+#: src/gui/components/settings/extension_manager.rs:234
 msgid "No extensions found."
 msgstr "확장 기능을 찾을 수 없습니다."
 
-#: src/gui/components/settings/extension_manager.rs:203
+#: src/gui/components/settings/extension_manager.rs:337
+msgid "Removing extension…"
+msgstr "확장 기능 제거 중…"
+
+#: src/gui/components/settings/extension_manager.rs:361
+msgid "This extension is built into JDownloader and cannot be removed."
+msgstr "이 확장 기능은 JDownloader에 내장되어 있어 제거할 수 없습니다."
+
+#: src/gui/components/settings/extension_manager.rs:368
 msgid "Install"
 msgstr "설치"
 
-#: src/gui/components/settings/extension_manager.rs:211
-msgid "Installing…"
-msgstr "설치하는 중…"
+#: src/gui/components/settings/extension_manager.rs:379
+msgid "Installing extension…"
+msgstr "확장 기능 설치 중…"
 
 #: src/gui/components/settings/general.rs:143
 #: src/gui/dialogs/packagizer_rule_dialog.rs:154
@@ -602,9 +627,11 @@ msgstr "다운로드 폴더"
 
 #: src/gui/components/settings/general.rs:158
 msgid ""
-"Set the default download path here. Changing default path here, affects only"
-" new downloads."
-msgstr "기본 다운로드 경로를 여기서 설정하세요. 이 경로를 변경해도 새 다운로드에만 적용됩니다."
+"Set the default download path here. Changing default path here, affects only "
+"new downloads."
+msgstr ""
+"기본 다운로드 경로를 여기서 설정하세요. 이 경로를 변경해도 새 다운로드에만 적"
+"용됩니다."
 
 #: src/gui/components/settings/general.rs:178
 msgid "Maximum of simultaneous downloads per host"
@@ -659,7 +686,9 @@ msgstr "다운로드 관리"
 msgid ""
 "Connection limits, Download order, Priorities, ... Set up the Download "
 "controller details."
-msgstr "연결 제한, 다운로드 순서, 우선순위 등 다운로드 컨트롤러의 세부 사항을 설정합니다."
+msgstr ""
+"연결 제한, 다운로드 순서, 우선순위 등 다운로드 컨트롤러의 세부 사항을 설정합"
+"니다."
 
 #: src/gui/components/settings/general.rs:227
 msgid "Always"
@@ -685,7 +714,9 @@ msgstr "다운로드 자동 시작"
 msgid ""
 "Choose if, and when JDownloader should start pending downloads without user "
 "interaction."
-msgstr "JDownloader가 사용자 개입 없이 대기 중인 다운로드를 시작할지, 언제 시작할지 선택하세요."
+msgstr ""
+"JDownloader가 사용자 개입 없이 대기 중인 다운로드를 시작할지, 언제 시작할지 "
+"선택하세요."
 
 #: src/gui/components/settings/general.rs:264
 msgid "Group single files in a Various package"
@@ -711,7 +742,9 @@ msgstr "파일 기록"
 msgid ""
 "JDownloader will verify your downloads for correctness after download using "
 "the hash/check option"
-msgstr "JDownloader는 해시/검사 옵션을 사용하여 다운로드 후 다운로드의 무결성을 확인합니다"
+msgstr ""
+"JDownloader는 해시/검사 옵션을 사용하여 다운로드 후 다운로드의 무결성을 확인"
+"합니다"
 
 #: src/gui/components/settings/general.rs:307
 msgid "Auto open Link Containers (dlc,rsdf,...)"
@@ -738,7 +771,7 @@ msgid ""
 msgstr "파일 속성에 따라 다운로드 설정을 자동으로 지정하는 규칙입니다."
 
 #: src/gui/components/settings/package_manager.rs:82
-#: src/gui/components/settings/scripts.rs:79
+#: src/gui/components/settings/scripts.rs:126
 msgid "Edit"
 msgstr "편집"
 
@@ -757,7 +790,7 @@ msgid "Move down"
 msgstr "아래로 이동"
 
 #: src/gui/components/settings/package_manager.rs:107
-#: src/gui/components/settings/scripts.rs:96
+#: src/gui/components/settings/scripts.rs:158
 #: src/gui/dialogs/packagizer_rule_dialog.rs:106
 msgid "Enabled"
 msgstr "활성화됨"
@@ -770,17 +803,38 @@ msgstr "새 규칙"
 msgid "copy"
 msgstr "복사본"
 
-#: src/gui/components/settings/scripts.rs:53
+#: src/gui/components/settings/scripts.rs:26
+msgid "Create an Info-File in the Download-Folder with detailed information"
+msgstr "다운로드 폴더에 상세 정보가 담긴 정보 파일 생성"
+
+#: src/gui/components/settings/scripts.rs:32
+msgid "Play a Wav File"
+msgstr "Wav 파일 재생"
+
+#: src/gui/components/settings/scripts.rs:37
+msgid "Play a Sound (Wav) when downloads and extraction stopped"
+msgstr "다운로드와 압축 해제가 멈추면 소리(Wav) 재생"
+
+#: src/gui/components/settings/scripts.rs:44
+msgid "Reset a Download if the speed is low"
+msgstr "속도가 낮으면 다운로드 재설정"
+
+#: src/gui/components/settings/scripts.rs:86
 msgid ""
 "Run JavaScript automatically when a chosen event occurs (Eventscripter)."
-msgstr "선택한 이벤트가 발생하면 자동으로 JavaScript를 실행합니다 (이벤트 스크립터)."
+msgstr ""
+"선택한 이벤트가 발생하면 자동으로 JavaScript를 실행합니다 (이벤트 스크립터)."
 
-#: src/gui/components/settings/scripts.rs:113
-#: src/gui/dialogs/script_edit_dialog.rs:47
+#: src/gui/components/settings/scripts.rs:131
+msgid "Example Scripts"
+msgstr "예제 스크립트"
+
+#: src/gui/components/settings/scripts.rs:175
+#: src/gui/dialogs/script_edit_dialog.rs:48
 msgid "Event trigger"
 msgstr "이벤트 트리거"
 
-#: src/gui/components/settings/scripts.rs:196
+#: src/gui/components/settings/scripts.rs:289
 msgid "New script"
 msgstr "새 스크립트"
 
@@ -824,7 +878,7 @@ msgstr "비밀번호 입력..."
 
 #: src/gui/dialogs/account_add_dialog.rs:115
 #: src/gui/dialogs/packagizer_rule_dialog.rs:444
-#: src/gui/dialogs/script_edit_dialog.rs:97
+#: src/gui/dialogs/script_edit_dialog.rs:120
 msgid "Save"
 msgstr "저장"
 
@@ -1044,27 +1098,27 @@ msgstr "이 규칙이 일치하면 이후 규칙 처리를 중단"
 msgid "This is a predefined rule and cannot be modified."
 msgstr "이것은 사전 정의된 규칙이며 수정할 수 없습니다."
 
-#: src/gui/dialogs/script_edit_dialog.rs:18
+#: src/gui/dialogs/script_edit_dialog.rs:19
 msgid "Edit Script"
 msgstr "스크립트 편집"
 
-#: src/gui/dialogs/script_edit_dialog.rs:50
+#: src/gui/dialogs/script_edit_dialog.rs:59
 msgid "Run synchronously"
 msgstr "동기적으로 실행"
 
-#: src/gui/dialogs/script_edit_dialog.rs:57
+#: src/gui/dialogs/script_edit_dialog.rs:66
 msgid "Interval (ms)"
 msgstr "간격 (ms)"
 
-#: src/gui/dialogs/script_edit_dialog.rs:61
+#: src/gui/dialogs/script_edit_dialog.rs:70
 msgid "Trigger"
 msgstr "트리거"
 
-#: src/gui/dialogs/script_edit_dialog.rs:62
+#: src/gui/dialogs/script_edit_dialog.rs:71
 msgid "Choose when this script should run."
 msgstr "이 스크립트를 실행할 시점을 선택하세요."
 
-#: src/gui/dialogs/script_edit_dialog.rs:67
+#: src/gui/dialogs/script_edit_dialog.rs:76
 msgid "Script (JavaScript)"
 msgstr "스크립트 (JavaScript)"
 
@@ -1077,23 +1131,25 @@ msgid ""
 "If you are a satisfied user of JDownloader, please think about contributing "
 "to this project. JDownloader is the result of daily hard work since more "
 "than %s1 years. We need your help to keep it free of charge, free of "
-"advertising, free of installer bundles and to improve JDownloader even more."
-" Moreover, donating is a good way to tell us what modules we should focus "
-"our work on."
+"advertising, free of installer bundles and to improve JDownloader even more. "
+"Moreover, donating is a good way to tell us what modules we should focus our "
+"work on."
 msgstr ""
-"JDownloader의 만족스러운 사용자라면 이 프로젝트에 기여하는 것을 고려해 주세요. JDownloader는 %s1년 넘게 매일 "
-"이어진 노력의 결과물입니다. 무료로, 광고 없이, 설치 번들 없이 유지하고 JDownloader를 더욱 개선하려면 여러분의 도움이 "
-"필요합니다. 또한 기부는 우리가 어떤 모듈에 집중해야 할지 알려주는 좋은 방법이기도 합니다."
+"JDownloader의 만족스러운 사용자라면 이 프로젝트에 기여하는 것을 고려해 주세"
+"요. JDownloader는 %s1년 넘게 매일 이어진 노력의 결과물입니다. 무료로, 광고 없"
+"이, 설치 번들 없이 유지하고 JDownloader를 더욱 개선하려면 여러분의 도움이 필"
+"요합니다. 또한 기부는 우리가 어떤 모듈에 집중해야 할지 알려주는 좋은 방법이기"
+"도 합니다."
 
-#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:104
+#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:143
 msgid "Start downloads"
 msgstr "다운로드 시작"
 
-#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:118
+#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:159
 msgid "Pause downloads"
 msgstr "다운로드 일시 중지"
 
-#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:111
+#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:151
 msgid "Stop downloads"
 msgstr "다운로드 중지"
 
@@ -1106,15 +1162,15 @@ msgstr "맨 위로 이동"
 msgid "Move bottom"
 msgstr "맨 아래로 이동"
 
-#: src/gui/main_tool_bar.rs:158
+#: src/gui/main_tool_bar.rs:158 src/gui/tray.rs:177
 msgid "Clipboard monitoring"
 msgstr "클립보드 모니터링"
 
-#: src/gui/main_tool_bar.rs:163
+#: src/gui/main_tool_bar.rs:163 src/gui/tray.rs:185
 msgid "Auto reconnect"
 msgstr "자동 재연결"
 
-#: src/gui/main_tool_bar.rs:171
+#: src/gui/main_tool_bar.rs:171 src/gui/tray.rs:194
 msgid "Use premium accounts"
 msgstr "프리미엄 계정 사용"
 
@@ -1199,32 +1255,38 @@ msgstr "설명:"
 msgid "File Properties: {}"
 msgstr "파일 속성: {}"
 
-#: src/gui/window.rs:174
+#. Mirrors JDownloader's own tray menu entry
+#. (`TrayOpenDefaultDownloadDirectory` / `IconKey.ICON_SAVE`).
+#: src/gui/tray.rs:170
+msgid "Open download folder"
+msgstr "다운로드 폴더 열기"
+
+#: src/gui/window.rs:179
 msgid "Waiting for JDownloader to exit..."
 msgstr "JDownloader가 종료되기를 기다리는 중..."
 
-#: src/gui/mod.rs:116
+#: src/gui/mod.rs:176
 msgid "The power of JDownloader, the elegance of GNOME"
 msgstr "JDownloader의 강력함, GNOME의 우아함"
 
-#: src/gui/mod.rs:199 src/gui/mod.rs:221
+#: src/gui/mod.rs:259 src/gui/mod.rs:281
 msgid "Start Downloads"
 msgstr "다운로드 시작"
 
-#: src/gui/mod.rs:204 src/gui/mod.rs:228
+#: src/gui/mod.rs:264 src/gui/mod.rs:288
 msgid "Start All Downloads"
 msgstr "모든 다운로드 시작"
 
 #. Status bar.
-#: src/gui/mod.rs:463
+#: src/gui/mod.rs:525
 msgid "Ready"
 msgstr "준비됨"
 
-#: src/gui/mod.rs:519
+#: src/gui/mod.rs:581 src/jd/settings/event_scripter_settings.rs:138
 msgid "JDownloader started"
 msgstr "JDownloader가 시작되었습니다"
 
-#: src/gui/mod.rs:554
+#: src/gui/mod.rs:616
 msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
 msgstr "JDownloader.jar를 찾을 수 없습니다. JDOWNLOADER_JAR를 설정하세요."
 
@@ -1311,6 +1373,117 @@ msgstr "JDownloader.jar에 상위 디렉터리가 없습니다"
 #: src/jd/process.rs:32
 msgid "JDownloader.jar has no file name"
 msgstr "JDownloader.jar에 파일 이름이 없습니다"
+
+#: src/jd/settings/event_scripter_settings.rs:133
+msgid "A Download started"
+msgstr "다운로드가 시작됨"
+
+#: src/jd/settings/event_scripter_settings.rs:134
+msgid "A Download stopped"
+msgstr "다운로드가 중지됨"
+
+#: src/jd/settings/event_scripter_settings.rs:135
+msgid "Package finished"
+msgstr "패키지 완료됨"
+
+#: src/jd/settings/event_scripter_settings.rs:136
+msgid "Any Extraction Event"
+msgstr "모든 압축 해제 이벤트"
+
+#: src/jd/settings/event_scripter_settings.rs:137
+msgid "Archive extraction finished"
+msgstr "압축 파일 해제 완료됨"
+
+#: src/jd/settings/event_scripter_settings.rs:139
+msgid "None"
+msgstr "없음"
+
+#: src/jd/settings/event_scripter_settings.rs:140
+msgid "Remote API Event fired"
+msgstr "원격 API 이벤트 발생함"
+
+#: src/jd/settings/event_scripter_settings.rs:141
+msgid "A new file has been created"
+msgstr "새 파일이 생성됨"
+
+#: src/jd/settings/event_scripter_settings.rs:142
+msgid "New Crawler Job"
+msgstr "새 크롤러 작업"
+
+#: src/jd/settings/event_scripter_settings.rs:143
+msgid "Finished Crawler Job"
+msgstr "크롤러 작업 완료됨"
+
+#: src/jd/settings/event_scripter_settings.rs:144
+msgid "A new link has been added"
+msgstr "새 링크가 추가됨"
+
+#: src/jd/settings/event_scripter_settings.rs:145
+msgid "Packagizer Hook"
+msgstr "Packagizer 후크"
+
+#: src/jd/settings/event_scripter_settings.rs:146
+msgid "Download Controller paused"
+msgstr "다운로드 컨트롤러 일시 중지됨"
+
+#: src/jd/settings/event_scripter_settings.rs:147
+msgid "Download Controller started"
+msgstr "다운로드 컨트롤러 시작됨"
+
+#: src/jd/settings/event_scripter_settings.rs:148
+msgid "Download Controller stopped"
+msgstr "다운로드 컨트롤러 중지됨"
+
+#: src/jd/settings/event_scripter_settings.rs:149
+msgid "Before a Reconnect"
+msgstr "재연결 전"
+
+#: src/jd/settings/event_scripter_settings.rs:150
+msgid "After a Reconnect"
+msgstr "재연결 후"
+
+#: src/jd/settings/event_scripter_settings.rs:151
+msgid "Before a Captcha Challenge"
+msgstr "캡차 확인 전"
+
+#: src/jd/settings/event_scripter_settings.rs:152
+msgid "After a Captcha Challenge"
+msgstr "캡차 확인 후"
+
+#: src/jd/settings/event_scripter_settings.rs:153
+msgid "Interval"
+msgstr "간격"
+
+#: src/jd/settings/event_scripter_settings.rs:154
+msgid "Toolbar Button Pressed"
+msgstr "도구 모음 버튼 눌림"
+
+#: src/jd/settings/event_scripter_settings.rs:155
+msgid "Main Menu Button Pressed"
+msgstr "메인 메뉴 버튼 눌림"
+
+#: src/jd/settings/event_scripter_settings.rs:157
+msgid "Downloadlist Contextmenu Button Pressed"
+msgstr "다운로드 목록 상황에 맞는 메뉴 버튼 눌림"
+
+#: src/jd/settings/event_scripter_settings.rs:160
+msgid "Linkgrabber Contextmenu Button Pressed"
+msgstr "링크그래버 상황에 맞는 메뉴 버튼 눌림"
+
+#: src/jd/settings/event_scripter_settings.rs:163
+msgid "Downloadlist Bottombar Button Pressed"
+msgstr "다운로드 목록 하단 바 버튼 눌림"
+
+#: src/jd/settings/event_scripter_settings.rs:166
+msgid "Linkgrabber Bottombar Button Pressed"
+msgstr "링크그래버 하단 바 버튼 눌림"
+
+#: src/jd/settings/event_scripter_settings.rs:168
+msgid "Traymenu Button Pressed"
+msgstr "트레이 메뉴 버튼 눌림"
+
+#~ msgid "Installing…"
+#~ msgstr "설치하는 중…"
 
 #~ msgid "JDownloader for GNOME"
 #~ msgstr "GNOME용 JDownloader"

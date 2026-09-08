@@ -54,6 +54,7 @@ impl ConfigSection {
             desc_label.set_xalign(0.0);
             desc_label.set_halign(gtk4::Align::Fill);
             desc_label.set_wrap(true);
+            desc_label.set_natural_wrap_mode(gtk4::NaturalWrapMode::Word);
             right.append(&desc_label);
         }
 

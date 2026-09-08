@@ -1,5 +1,6 @@
 pub mod accounts;
 pub mod api;
+pub mod dialogs;
 pub mod extensions;
 pub mod jar;
 pub mod log_watcher;
@@ -9,6 +10,7 @@ pub mod settings;
 
 pub use accounts::{AccountQuery, AccountStorable, JdAccounts};
 pub use api::JdApi;
+pub use dialogs::{JdDialogs, PendingDialogInfo};
 pub use extensions::{ExtensionQuery, ExtensionStorable, JdExtensions};
 pub use jar::find_jar;
 pub use log_watcher::LogWatcher;

@@ -84,24 +84,55 @@ impl JdProcess {
         Ok(())
     }
 
-    pub fn stop(&mut self) -> anyhow::Result<()> {
+    /// Stops the process. `graceful` should be `true` whenever the caller
+    /// already asked JDownloader to shut down via the RemoteAPI
+    /// (`JdApi::system_exit`) — that call returns almost immediately, since
+    /// it only *starts* an internal async thread that flushes pending
+    /// config writes (delayed writes are on by default when headless,
+    /// which is how we launch JDownloader) before calling `System.exit()`
+    /// itself.
+    ///
+    /// Sending our own SIGTERM right away, as this used to do
+    /// unconditionally, races that thread: the JVM's default SIGTERM
+    /// handling runs JDownloader's own shutdown hook too, but a guard flag
+    /// makes it a no-op since the internal async exit already claimed it —
+    /// so the JVM can halt while that internal thread is still mid-flush,
+    /// silently dropping whatever was just saved (e.g. a script just added
+    /// in the Scripts page). So when `graceful` is true, wait for
+    /// JDownloader to exit *on its own* first, and only escalate to
+    /// SIGTERM/SIGKILL if it doesn't. Pass `false` when no such graceful
+    /// request was made (e.g. JDownloader never came up in the first
+    /// place), where waiting could only add dead time.
+    pub fn stop(&mut self, graceful: bool) -> anyhow::Result<()> {
         if let Some(mut child) = self.child.take() {
-            // Gracefully ask JDownloader to shut down so JsonConfig has time to
-            // flush pending changes to disk.
-            let _ = Command::new("pkill")
-                .arg("-TERM")
-                .arg("-f")
-                .arg(JD_INTERNAL_PKILL)
-                .output();
-            let start = Instant::now();
-            while start.elapsed() < Duration::from_secs(5) {
-                if child.try_wait()?.is_some() {
-                    break;
+            let mut exited = false;
+            if graceful {
+                let natural_exit_deadline = Instant::now() + Duration::from_secs(8);
+                while Instant::now() < natural_exit_deadline {
+                    if child.try_wait()?.is_some() {
+                        exited = true;
+                        break;
+                    }
+                    std::thread::sleep(Duration::from_millis(200));
                 }
-                std::thread::sleep(Duration::from_millis(200));
             }
-            if child.try_wait()?.is_none() {
-                let _ = child.kill();
+
+            if !exited {
+                let _ = Command::new("pkill")
+                    .arg("-TERM")
+                    .arg("-f")
+                    .arg(JD_INTERNAL_PKILL)
+                    .output();
+                let start = Instant::now();
+                while start.elapsed() < Duration::from_secs(5) {
+                    if child.try_wait()?.is_some() {
+                        break;
+                    }
+                    std::thread::sleep(Duration::from_millis(200));
+                }
+                if child.try_wait()?.is_none() {
+                    let _ = child.kill();
+                }
             }
             let _ = child.wait();
         }

@@ -1,6 +1,6 @@
 use std::cell::Cell;
 use std::rc::Rc;
-use std::sync::Arc;
+use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
 use adw::prelude::*;
@@ -227,6 +227,7 @@ impl MainToolBar {
         tab_view: adw::TabView,
         download_tab: adw::TabPage,
         collector_tab: adw::TabPage,
+        tray_handle: Arc<Mutex<Option<ksni::blocking::Handle<crate::gui::tray::GDownloaderTray>>>>,
     ) {
         let general_settings = GeneralSettings::new(Arc::clone(&api));
         let reconnect_settings = ReconnectSettings::new(Arc::clone(&api));
@@ -447,6 +448,7 @@ impl MainToolBar {
             let silent_mode_badge = self.silent_mode_badge.clone();
             let reconnect_btn = self.reconnect_btn.clone();
             let update_icon = self.update_icon.clone();
+            let tray_handle = tray_handle.clone();
 
             glib::source::timeout_add_local(Duration::from_secs(2), move || {
                 let api = api.clone();
@@ -465,6 +467,7 @@ impl MainToolBar {
                 let silent_mode_badge = silent_mode_badge.clone();
                 let reconnect_btn = reconnect_btn.clone();
                 let update_icon = update_icon.clone();
+                let tray_handle = tray_handle.clone();
 
                 spawn::api_call(
                     move || {
@@ -482,6 +485,19 @@ impl MainToolBar {
                         pause_btn.set_sensitive(status.running || status.pause);
                         pause_btn.set_active(status.pause);
                         stop_btn.set_sensitive(status.running);
+
+                        if let Some(handle) = tray_handle.lock().unwrap().clone() {
+                            let _ = handle.update(|tray| {
+                                tray.set_status(
+                                    status.running,
+                                    status.pause,
+                                    status.clipboard_monitored,
+                                    status.auto_reconnect,
+                                    reconnect_configured,
+                                    status.use_premium_accounts,
+                                )
+                            });
+                        }
 
                         clipboard_toggle.set_active(status.clipboard_monitored);
                         set_badge(&clipboard_badge, status.clipboard_monitored);

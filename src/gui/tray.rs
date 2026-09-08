@@ -22,6 +22,10 @@ pub enum TrayMessage {
     StartDownloads,
     StopDownloads,
     TogglePause,
+    OpenDownloadFolder,
+    ToggleClipboardMonitoring,
+    ToggleAutoReconnect,
+    TogglePremium,
     Exit,
 }
 
@@ -31,6 +35,12 @@ pub struct GDownloaderTray {
     tx: async_channel::Sender<TrayMessage>,
     alert: bool,
     alert_until: Option<Instant>,
+    running: bool,
+    paused: bool,
+    clipboard_monitored: bool,
+    auto_reconnect_enabled: bool,
+    auto_reconnect_available: bool,
+    use_premium_accounts: bool,
 }
 
 impl GDownloaderTray {
@@ -39,11 +49,39 @@ impl GDownloaderTray {
             tx,
             alert: false,
             alert_until: None,
+            running: false,
+            paused: false,
+            clipboard_monitored: false,
+            auto_reconnect_enabled: false,
+            auto_reconnect_available: false,
+            use_premium_accounts: false,
         }
     }
 
     fn send(&self, msg: TrayMessage) {
         let _ = self.tx.try_send(msg);
+    }
+
+    /// Updates the running/paused state used to show/hide the start/pause/
+    /// stop menu entries, and the clipboard/auto-reconnect/premium toggle
+    /// states, mirroring the toolbar's own rules (`MainToolBar::wire`'s
+    /// status poll).
+    #[allow(clippy::too_many_arguments)]
+    pub fn set_status(
+        &mut self,
+        running: bool,
+        paused: bool,
+        clipboard_monitored: bool,
+        auto_reconnect_enabled: bool,
+        auto_reconnect_available: bool,
+        use_premium_accounts: bool,
+    ) {
+        self.running = running;
+        self.paused = paused;
+        self.clipboard_monitored = clipboard_monitored;
+        self.auto_reconnect_enabled = auto_reconnect_enabled;
+        self.auto_reconnect_available = auto_reconnect_available;
+        self.use_premium_accounts = use_premium_accounts;
     }
 
     /// Start blinking the tray icon for the given duration.
@@ -96,6 +134,7 @@ impl ksni::Tray for GDownloaderTray {
                 // sans-serif bold letters, centering is not supported.
                 label: "        𝗴𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿        ".into(),
                 disposition: ksni::menu::Disposition::Informative,
+                activate: Box::new(|tray: &mut Self| tray.send(TrayMessage::ShowWindow)),
                 ..Default::default()
             }
             .into(),
@@ -103,6 +142,7 @@ impl ksni::Tray for GDownloaderTray {
             StandardItem {
                 label: tr!("Start downloads").to_string(),
                 icon_data: Self::jd_icon_data(crate::gui::icon_key::ICON_MEDIA_PLAYBACK_START),
+                visible: !self.running,
                 activate: Box::new(|tray: &mut Self| tray.send(TrayMessage::StartDownloads)),
                 ..Default::default()
             }
@@ -110,6 +150,7 @@ impl ksni::Tray for GDownloaderTray {
             StandardItem {
                 label: tr!("Stop downloads").to_string(),
                 icon_data: Self::jd_icon_data(crate::gui::icon_key::ICON_MEDIA_PLAYBACK_STOP),
+                visible: self.running,
                 activate: Box::new(|tray: &mut Self| tray.send(TrayMessage::StopDownloads)),
                 ..Default::default()
             }
@@ -117,7 +158,43 @@ impl ksni::Tray for GDownloaderTray {
             StandardItem {
                 label: tr!("Pause downloads").to_string(),
                 icon_data: Self::jd_icon_data(crate::gui::icon_key::ICON_MEDIA_PLAYBACK_PAUSE),
+                visible: self.running || self.paused,
                 activate: Box::new(|tray: &mut Self| tray.send(TrayMessage::TogglePause)),
+                ..Default::default()
+            }
+            .into(),
+            MenuItem::Separator,
+            StandardItem {
+                // Mirrors JDownloader's own tray menu entry
+                // (`TrayOpenDefaultDownloadDirectory` / `IconKey.ICON_SAVE`).
+                label: tr!("Open download folder").to_string(),
+                icon_data: Self::jd_icon_data(crate::gui::icon_key::ICON_SAVE),
+                activate: Box::new(|tray: &mut Self| tray.send(TrayMessage::OpenDownloadFolder)),
+                ..Default::default()
+            }
+            .into(),
+            CheckmarkItem {
+                label: tr!("Clipboard monitoring").to_string(),
+                icon_data: Self::jd_icon_data(crate::gui::icon_key::ICON_CLIPBOARD),
+                checked: self.clipboard_monitored,
+                activate: Box::new(|tray: &mut Self| tray.send(TrayMessage::ToggleClipboardMonitoring)),
+                ..Default::default()
+            }
+            .into(),
+            CheckmarkItem {
+                label: tr!("Auto reconnect").to_string(),
+                icon_data: Self::jd_icon_data(crate::gui::icon_key::ICON_AUTO_RECONNECT),
+                checked: self.auto_reconnect_enabled,
+                enabled: self.auto_reconnect_available,
+                activate: Box::new(|tray: &mut Self| tray.send(TrayMessage::ToggleAutoReconnect)),
+                ..Default::default()
+            }
+            .into(),
+            CheckmarkItem {
+                label: tr!("Use premium accounts").to_string(),
+                icon_data: Self::jd_icon_data(crate::gui::icon_key::ICON_PREMIUM),
+                checked: self.use_premium_accounts,
+                activate: Box::new(|tray: &mut Self| tray.send(TrayMessage::TogglePremium)),
                 ..Default::default()
             }
             .into(),

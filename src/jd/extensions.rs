@@ -74,7 +74,6 @@ impl JdExtensions {
         Ok(serde_json::from_value(value)?)
     }
 
-    #[allow(dead_code)]
     pub fn is_enabled(&self, classname: &str) -> Result<bool> {
         let value = self.api.call("extensions/isEnabled", &[classname])?;
         Ok(value.as_bool().unwrap_or(false))
@@ -86,7 +85,6 @@ impl JdExtensions {
         Ok(value.as_bool().unwrap_or(false))
     }
 
-    #[allow(dead_code)]
     pub fn is_installed(&self, id: &str) -> Result<bool> {
         let value = self.api.call("extensions/isInstalled", &[id])?;
         Ok(value.as_bool().unwrap_or(false))

@@ -22,6 +22,7 @@ tr = { version = "0.1.11", default-features = false }
 i18n-embed = { version = "0.16.0", features = ["gettext-system", "desktop-requester"] }
 rust-embed = "8.0.0"
 ksni = { version = "0.3", default-features = false, features = ["async-io", "blocking"] }
+sourceview5 = { version = "0.11", features = ["v5_18"] }
 
 [package.metadata.deb]
 maintainer = "Xavier Fuentes <xfuentes-dev@serviam.cc>"

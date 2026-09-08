@@ -34,7 +34,7 @@ pub fn start_jd(path: PathBuf, process: Arc<Mutex<JdProcess>>, tx: async_channel
             thread::sleep(Duration::from_millis(250));
         }
 
-        let _ = process.lock().unwrap().stop();
+        let _ = process.lock().unwrap().stop(false);
         let _ = tx.try_send(JdMessage::Error(
             tr!("JDownloader did not respond in time").to_string(),
         ));

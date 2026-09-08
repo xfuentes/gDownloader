@@ -121,13 +121,19 @@ impl JdApi {
 }
 
 /// JDownloader's deprecated API always wraps the response in an
-/// `ObjectData`/`DataObject`: `{"data": <value>, "rid": -1, ...}`.
-/// This function extracts the `data` field when present.
+/// `ObjectData`/`DataObject`: `{"data": <value>, "rid": -1, ...}`. This
+/// function extracts the `data` field.
+///
+/// When the underlying value is Java `null` (e.g. a config key that was
+/// never set), JDownloader serializes the whole envelope as a bare `{}`
+/// with no `data` field at all, rather than `{"data": null, ...}` —
+/// confirmed against a running instance. Without this, that case fell
+/// through and returned the empty envelope object itself unchanged, which
+/// callers expecting e.g. an array (`serde_json::from_value::<Vec<_>>`)
+/// would then fail to deserialize.
 pub(super) fn unwrap_value(mut value: Value) -> Value {
     if let Value::Object(ref mut m) = value {
-        if let Some(v) = m.remove("data") {
-            return v;
-        }
+        return m.remove("data").unwrap_or(Value::Null);
     }
     value
 }

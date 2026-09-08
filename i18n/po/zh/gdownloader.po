@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-08 05:50+0000\n"
+"POT-Creation-Date: 2026-09-08 19:04+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Chinese\n"
@@ -29,6 +29,22 @@ msgstr "JDownloader 未及时响应"
 msgid "Choose visible fields"
 msgstr "选择可见字段"
 
+#: src/gui/pending_jd_dialogs.rs:61
+msgid "JDownloader"
+msgstr "JDownloader"
+
+#: src/gui/pending_jd_dialogs.rs:114
+msgid "Don't ask again for this"
+msgstr "不再询问此项"
+
+#: src/gui/pending_jd_dialogs.rs:120
+msgid "Deny"
+msgstr "拒绝"
+
+#: src/gui/pending_jd_dialogs.rs:121
+msgid "Allow"
+msgstr "允许"
+
 #: src/gui/clipboard.rs:208
 msgid "New links from clipboard"
 msgstr "剪贴板中的新链接"
@@ -46,32 +62,32 @@ msgstr[0] "已捕获 {n} 个链接"
 msgid "Show"
 msgstr "显示"
 
-#: src/gui/settings_panel.rs:32 src/gui/settings_panel.rs:50
+#: src/gui/settings_panel.rs:80 src/gui/settings_panel.rs:101
 msgid "General"
 msgstr "常规"
 
-#: src/gui/settings_panel.rs:35 src/gui/settings_panel.rs:53
+#: src/gui/settings_panel.rs:83 src/gui/settings_panel.rs:104
 #: src/gui/components/settings/account_manager.rs:43
 msgid "Account Manager"
 msgstr "账户管理器"
 
-#: src/gui/settings_panel.rs:39 src/gui/settings_panel.rs:57
+#: src/gui/settings_panel.rs:87 src/gui/settings_panel.rs:108
 #: src/gui/components/settings/package_manager.rs:54
 msgid "Package Manager"
 msgstr "包管理器"
 
-#: src/gui/settings_panel.rs:43 src/gui/settings_panel.rs:61
-#: src/gui/components/settings/extension_manager.rs:69
+#: src/gui/settings_panel.rs:91 src/gui/settings_panel.rs:112
+#: src/gui/components/settings/extension_manager.rs:171
 msgid "Extension Manager"
 msgstr "扩展管理器"
 
-#: src/gui/settings_panel.rs:45 src/gui/settings_panel.rs:63
-#: src/gui/components/settings/scripts.rs:51
+#: src/gui/settings_panel.rs:93 src/gui/settings_panel.rs:98
+#: src/gui/components/settings/scripts.rs:84
 msgid "Scripts"
 msgstr "脚本"
 
-#: src/gui/settings_panel.rs:72 src/gui/settings_panel.rs:123
-#: src/gui/settings_panel.rs:138 src/gui/main_menu_bar.rs:37
+#: src/gui/settings_panel.rs:180 src/gui/settings_panel.rs:231
+#: src/gui/settings_panel.rs:246 src/gui/main_menu_bar.rs:37
 #: src/gui/menus/settings.rs:10 src/gui/menus/settings.rs:46
 #: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
 msgid "Settings"
@@ -91,7 +107,7 @@ msgstr "链接"
 msgid "Size"
 msgstr "大小"
 
-#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1888
+#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1890
 msgid "Online"
 msgstr "在线"
 
@@ -101,11 +117,11 @@ msgstr "在线"
 msgid "Hoster"
 msgstr "托管商"
 
-#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1892
+#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1894
 msgid "Offline"
 msgstr "离线"
 
-#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1900
+#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1902
 msgid "Unknown"
 msgstr "未知"
 
@@ -156,8 +172,8 @@ msgstr "粘贴链接"
 msgid "Clear linkgrabber"
 msgstr "清空链接采集器"
 
-#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:210 src/gui/mod.rs:234
-#: src/gui/mod.rs:287 src/gui/mod.rs:296
+#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:270 src/gui/mod.rs:294
+#: src/gui/mod.rs:347 src/gui/mod.rs:356
 msgid "Delete"
 msgstr "删除"
 
@@ -245,39 +261,39 @@ msgstr "您确定要执行此清理操作吗："
 msgid "Delete Selected Links?"
 msgstr "删除所选链接？"
 
-#: src/gui/link_grabber_panel.rs:1647 src/gui/downloads_panel.rs:1694
+#: src/gui/link_grabber_panel.rs:1648 src/gui/downloads_panel.rs:1695
 msgid "Tasks to do:"
 msgstr "待执行任务："
 
-#: src/gui/link_grabber_panel.rs:1656 src/gui/downloads_panel.rs:1703
+#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
 msgid "Delete selected link"
 msgid_plural "Delete selected links"
 msgstr[0] "删除所选链接"
 
-#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
+#: src/gui/link_grabber_panel.rs:1658 src/gui/downloads_panel.rs:1705
 msgid "{n} link remaining"
 msgid_plural "{n} links remaining"
 msgstr[0] "还剩 {n} 个链接"
 
-#: src/gui/link_grabber_panel.rs:1674 src/gui/downloads_panel.rs:1745
+#: src/gui/link_grabber_panel.rs:1676 src/gui/downloads_panel.rs:1747
 msgid "Don't show this again"
 msgstr "不再显示"
 
 #. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.2.0)  #-#-#-#-#
 #. Buttons
-#: src/gui/link_grabber_panel.rs:1680 src/gui/downloads_panel.rs:1751
+#: src/gui/link_grabber_panel.rs:1682 src/gui/downloads_panel.rs:1753
 #: src/gui/dialogs/account_add_dialog.rs:114
 #: src/gui/dialogs/packagizer_rule_dialog.rs:443
-#: src/gui/dialogs/script_edit_dialog.rs:96 src/gui/donate.rs:33
+#: src/gui/dialogs/script_edit_dialog.rs:119 src/gui/donate.rs:34
 msgid "Cancel"
 msgstr "取消"
 
-#: src/gui/link_grabber_panel.rs:1681 src/gui/downloads_panel.rs:1752
-#: src/gui/donate.rs:37
+#: src/gui/link_grabber_panel.rs:1683 src/gui/downloads_panel.rs:1754
+#: src/gui/donate.rs:38
 msgid "Continue"
 msgstr "继续"
 
-#: src/gui/link_grabber_panel.rs:1896
+#: src/gui/link_grabber_panel.rs:1898
 msgid "Temporarily Unknown"
 msgstr "暂时未知"
 
@@ -318,8 +334,8 @@ msgstr "失败的下载"
 
 #: src/gui/downloads_panel.rs:677
 #: src/gui/components/settings/package_manager.rs:115
-#: src/gui/components/settings/scripts.rs:104
-#: src/gui/dialogs/script_edit_dialog.rs:40
+#: src/gui/components/settings/scripts.rs:166
+#: src/gui/dialogs/script_edit_dialog.rs:41
 msgid "Name"
 msgstr "名称"
 
@@ -385,23 +401,22 @@ msgstr[0] "已成功下载 {n} 个文件"
 msgid "Delete Selected Downloads?"
 msgstr "删除所选下载项？"
 
-#: src/gui/downloads_panel.rs:1709
+#: src/gui/downloads_panel.rs:1710
 msgid "{n} file ({}) on disk"
 msgid_plural "{n} files ({}) on disk"
 msgstr[0] "磁盘上有 {n} 个文件（{}）"
 
-#: src/gui/downloads_panel.rs:1721
+#: src/gui/downloads_panel.rs:1723
 msgid "Keep all downloaded files - just remove links from JDownloader"
 msgstr "保留所有已下载文件，仅从 JDownloader 中移除链接"
 
-#: src/gui/downloads_panel.rs:1722
+#: src/gui/downloads_panel.rs:1724
 msgid "Move downloaded files to Trash & remove links from JDownloader"
 msgstr "将已下载文件移至回收站并从 JDownloader 中移除链接"
 
-#: src/gui/downloads_panel.rs:1723
+#: src/gui/downloads_panel.rs:1725
 msgid ""
-"Delete downloaded files permanently from disk & remove links from "
-"JDownloader"
+"Delete downloaded files permanently from disk & remove links from JDownloader"
 msgstr "从磁盘永久删除已下载文件并从 JDownloader 中移除链接"
 
 #: src/gui/main_menu_bar.rs:38
@@ -436,7 +451,7 @@ msgstr "备份"
 msgid "Restart"
 msgstr "重启"
 
-#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:126
+#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:203
 msgid "Exit"
 msgstr "退出"
 
@@ -486,15 +501,15 @@ msgstr "每个托管商的最大同时下载数"
 msgid "Speed Limit"
 msgstr "速度限制"
 
-#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:125
+#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:185
 msgid "Download"
 msgstr "下载"
 
-#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:129
+#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:189
 msgid "Link Collector"
 msgstr "链接采集器"
 
-#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:134
+#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:194
 msgid "Donate"
 msgstr "捐赠"
 
@@ -523,13 +538,14 @@ msgstr "无限制"
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
-#: src/gui/components/settings/scripts.rs:78
+#: src/gui/components/settings/scripts.rs:125
 msgid "Add"
 msgstr "添加"
 
 #: src/gui/components/account_table.rs:147
+#: src/gui/components/settings/extension_manager.rs:324
 #: src/gui/components/settings/package_manager.rs:84
-#: src/gui/components/settings/scripts.rs:81
+#: src/gui/components/settings/scripts.rs:128
 msgid "Remove"
 msgstr "移除"
 
@@ -538,7 +554,7 @@ msgid "Buy"
 msgstr "购买"
 
 #: src/gui/components/account_table.rs:149
-#: src/gui/components/settings/extension_manager.rs:75
+#: src/gui/components/settings/extension_manager.rs:177
 msgid "Refresh"
 msgstr "刷新"
 
@@ -570,25 +586,33 @@ msgstr "使用账户下载"
 msgid "Enter and manage all your Premium/Gold/Platinum accounts."
 msgstr "输入并管理您所有的 Premium/Gold/Platinum 账户。"
 
-#: src/gui/components/settings/extension_manager.rs:70
+#: src/gui/components/settings/extension_manager.rs:172
 msgid "Enable, disable or install JDownloader extensions."
 msgstr "启用、禁用或安装 JDownloader 扩展。"
 
-#: src/gui/components/settings/extension_manager.rs:87
+#: src/gui/components/settings/extension_manager.rs:193
 msgid "Loading extensions…"
 msgstr "正在加载扩展…"
 
-#: src/gui/components/settings/extension_manager.rs:129
+#: src/gui/components/settings/extension_manager.rs:234
 msgid "No extensions found."
 msgstr "未找到扩展。"
 
-#: src/gui/components/settings/extension_manager.rs:203
+#: src/gui/components/settings/extension_manager.rs:337
+msgid "Removing extension…"
+msgstr "正在移除扩展…"
+
+#: src/gui/components/settings/extension_manager.rs:361
+msgid "This extension is built into JDownloader and cannot be removed."
+msgstr "此扩展是 JDownloader 的内置组件，无法移除。"
+
+#: src/gui/components/settings/extension_manager.rs:368
 msgid "Install"
 msgstr "安装"
 
-#: src/gui/components/settings/extension_manager.rs:211
-msgid "Installing…"
-msgstr "正在安装…"
+#: src/gui/components/settings/extension_manager.rs:379
+msgid "Installing extension…"
+msgstr "正在安装扩展…"
 
 #: src/gui/components/settings/general.rs:143
 #: src/gui/dialogs/packagizer_rule_dialog.rs:154
@@ -602,8 +626,8 @@ msgstr "下载文件夹"
 
 #: src/gui/components/settings/general.rs:158
 msgid ""
-"Set the default download path here. Changing default path here, affects only"
-" new downloads."
+"Set the default download path here. Changing default path here, affects only "
+"new downloads."
 msgstr "在此设置默认下载路径。更改此默认路径仅影响新的下载任务。"
 
 #: src/gui/components/settings/general.rs:178
@@ -738,7 +762,7 @@ msgid ""
 msgstr "根据文件属性自动设置下载参数的规则。"
 
 #: src/gui/components/settings/package_manager.rs:82
-#: src/gui/components/settings/scripts.rs:79
+#: src/gui/components/settings/scripts.rs:126
 msgid "Edit"
 msgstr "编辑"
 
@@ -757,7 +781,7 @@ msgid "Move down"
 msgstr "下移"
 
 #: src/gui/components/settings/package_manager.rs:107
-#: src/gui/components/settings/scripts.rs:96
+#: src/gui/components/settings/scripts.rs:158
 #: src/gui/dialogs/packagizer_rule_dialog.rs:106
 msgid "Enabled"
 msgstr "已启用"
@@ -770,17 +794,37 @@ msgstr "新规则"
 msgid "copy"
 msgstr "副本"
 
-#: src/gui/components/settings/scripts.rs:53
+#: src/gui/components/settings/scripts.rs:26
+msgid "Create an Info-File in the Download-Folder with detailed information"
+msgstr "在下载文件夹中创建包含详细信息的信息文件"
+
+#: src/gui/components/settings/scripts.rs:32
+msgid "Play a Wav File"
+msgstr "播放 Wav 文件"
+
+#: src/gui/components/settings/scripts.rs:37
+msgid "Play a Sound (Wav) when downloads and extraction stopped"
+msgstr "下载和解压停止时播放声音 (Wav)"
+
+#: src/gui/components/settings/scripts.rs:44
+msgid "Reset a Download if the speed is low"
+msgstr "如果速度过低则重置下载"
+
+#: src/gui/components/settings/scripts.rs:86
 msgid ""
 "Run JavaScript automatically when a chosen event occurs (Eventscripter)."
 msgstr "当选定事件发生时自动运行 JavaScript（事件脚本）。"
 
-#: src/gui/components/settings/scripts.rs:113
-#: src/gui/dialogs/script_edit_dialog.rs:47
+#: src/gui/components/settings/scripts.rs:131
+msgid "Example Scripts"
+msgstr "示例脚本"
+
+#: src/gui/components/settings/scripts.rs:175
+#: src/gui/dialogs/script_edit_dialog.rs:48
 msgid "Event trigger"
 msgstr "事件触发器"
 
-#: src/gui/components/settings/scripts.rs:196
+#: src/gui/components/settings/scripts.rs:289
 msgid "New script"
 msgstr "新脚本"
 
@@ -824,7 +868,7 @@ msgstr "输入密码…"
 
 #: src/gui/dialogs/account_add_dialog.rs:115
 #: src/gui/dialogs/packagizer_rule_dialog.rs:444
-#: src/gui/dialogs/script_edit_dialog.rs:97
+#: src/gui/dialogs/script_edit_dialog.rs:120
 msgid "Save"
 msgstr "保存"
 
@@ -1044,27 +1088,27 @@ msgstr "若此规则匹配，则停止处理后续规则"
 msgid "This is a predefined rule and cannot be modified."
 msgstr "这是预定义规则，无法修改。"
 
-#: src/gui/dialogs/script_edit_dialog.rs:18
+#: src/gui/dialogs/script_edit_dialog.rs:19
 msgid "Edit Script"
 msgstr "编辑脚本"
 
-#: src/gui/dialogs/script_edit_dialog.rs:50
+#: src/gui/dialogs/script_edit_dialog.rs:59
 msgid "Run synchronously"
 msgstr "同步运行"
 
-#: src/gui/dialogs/script_edit_dialog.rs:57
+#: src/gui/dialogs/script_edit_dialog.rs:66
 msgid "Interval (ms)"
 msgstr "间隔（毫秒）"
 
-#: src/gui/dialogs/script_edit_dialog.rs:61
+#: src/gui/dialogs/script_edit_dialog.rs:70
 msgid "Trigger"
 msgstr "触发器"
 
-#: src/gui/dialogs/script_edit_dialog.rs:62
+#: src/gui/dialogs/script_edit_dialog.rs:71
 msgid "Choose when this script should run."
 msgstr "选择此脚本的运行时机。"
 
-#: src/gui/dialogs/script_edit_dialog.rs:67
+#: src/gui/dialogs/script_edit_dialog.rs:76
 msgid "Script (JavaScript)"
 msgstr "脚本（JavaScript）"
 
@@ -1077,23 +1121,24 @@ msgid ""
 "If you are a satisfied user of JDownloader, please think about contributing "
 "to this project. JDownloader is the result of daily hard work since more "
 "than %s1 years. We need your help to keep it free of charge, free of "
-"advertising, free of installer bundles and to improve JDownloader even more."
-" Moreover, donating is a good way to tell us what modules we should focus "
-"our work on."
+"advertising, free of installer bundles and to improve JDownloader even more. "
+"Moreover, donating is a good way to tell us what modules we should focus our "
+"work on."
 msgstr ""
-"如果您是 JDownloader 的满意用户，请考虑为本项目做出贡献。JDownloader 是过去 %s1 "
-"多年来每日辛勤工作的成果。我们需要您的帮助，以保持它免费、无广告、无安装捆绑包，并进一步改进 "
-"JDownloader。此外，捐赠也是告诉我们应将工作重点放在哪些模块上的好方式。"
+"如果您是 JDownloader 的满意用户，请考虑为本项目做出贡献。JDownloader 是过去 "
+"%s1 多年来每日辛勤工作的成果。我们需要您的帮助，以保持它免费、无广告、无安装"
+"捆绑包，并进一步改进 JDownloader。此外，捐赠也是告诉我们应将工作重点放在哪些"
+"模块上的好方式。"
 
-#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:104
+#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:143
 msgid "Start downloads"
 msgstr "开始下载"
 
-#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:118
+#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:159
 msgid "Pause downloads"
 msgstr "暂停下载"
 
-#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:111
+#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:151
 msgid "Stop downloads"
 msgstr "停止下载"
 
@@ -1106,15 +1151,15 @@ msgstr "移到顶部"
 msgid "Move bottom"
 msgstr "移到底部"
 
-#: src/gui/main_tool_bar.rs:158
+#: src/gui/main_tool_bar.rs:158 src/gui/tray.rs:177
 msgid "Clipboard monitoring"
 msgstr "剪贴板监控"
 
-#: src/gui/main_tool_bar.rs:163
+#: src/gui/main_tool_bar.rs:163 src/gui/tray.rs:185
 msgid "Auto reconnect"
 msgstr "自动重新连接"
 
-#: src/gui/main_tool_bar.rs:171
+#: src/gui/main_tool_bar.rs:171 src/gui/tray.rs:194
 msgid "Use premium accounts"
 msgstr "使用高级账户"
 
@@ -1199,32 +1244,38 @@ msgstr "备注："
 msgid "File Properties: {}"
 msgstr "文件属性：{}"
 
-#: src/gui/window.rs:174
+#. Mirrors JDownloader's own tray menu entry
+#. (`TrayOpenDefaultDownloadDirectory` / `IconKey.ICON_SAVE`).
+#: src/gui/tray.rs:170
+msgid "Open download folder"
+msgstr "打开下载文件夹"
+
+#: src/gui/window.rs:179
 msgid "Waiting for JDownloader to exit..."
 msgstr "正在等待 JDownloader 退出…"
 
-#: src/gui/mod.rs:116
+#: src/gui/mod.rs:176
 msgid "The power of JDownloader, the elegance of GNOME"
 msgstr "JDownloader 的强大，GNOME 的优雅"
 
-#: src/gui/mod.rs:199 src/gui/mod.rs:221
+#: src/gui/mod.rs:259 src/gui/mod.rs:281
 msgid "Start Downloads"
 msgstr "开始下载"
 
-#: src/gui/mod.rs:204 src/gui/mod.rs:228
+#: src/gui/mod.rs:264 src/gui/mod.rs:288
 msgid "Start All Downloads"
 msgstr "开始所有下载"
 
 #. Status bar.
-#: src/gui/mod.rs:463
+#: src/gui/mod.rs:525
 msgid "Ready"
 msgstr "就绪"
 
-#: src/gui/mod.rs:519
+#: src/gui/mod.rs:581 src/jd/settings/event_scripter_settings.rs:138
 msgid "JDownloader started"
 msgstr "JDownloader 已启动"
 
-#: src/gui/mod.rs:554
+#: src/gui/mod.rs:616
 msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
 msgstr "未找到 JDownloader.jar。请设置 JDOWNLOADER_JAR。"
 
@@ -1311,6 +1362,117 @@ msgstr "JDownloader.jar 没有父目录"
 #: src/jd/process.rs:32
 msgid "JDownloader.jar has no file name"
 msgstr "JDownloader.jar 没有文件名"
+
+#: src/jd/settings/event_scripter_settings.rs:133
+msgid "A Download started"
+msgstr "下载已开始"
+
+#: src/jd/settings/event_scripter_settings.rs:134
+msgid "A Download stopped"
+msgstr "下载已停止"
+
+#: src/jd/settings/event_scripter_settings.rs:135
+msgid "Package finished"
+msgstr "包已完成"
+
+#: src/jd/settings/event_scripter_settings.rs:136
+msgid "Any Extraction Event"
+msgstr "任意解压事件"
+
+#: src/jd/settings/event_scripter_settings.rs:137
+msgid "Archive extraction finished"
+msgstr "压缩包解压完成"
+
+#: src/jd/settings/event_scripter_settings.rs:139
+msgid "None"
+msgstr "无"
+
+#: src/jd/settings/event_scripter_settings.rs:140
+msgid "Remote API Event fired"
+msgstr "远程 API 事件已触发"
+
+#: src/jd/settings/event_scripter_settings.rs:141
+msgid "A new file has been created"
+msgstr "已创建新文件"
+
+#: src/jd/settings/event_scripter_settings.rs:142
+msgid "New Crawler Job"
+msgstr "新的抓取任务"
+
+#: src/jd/settings/event_scripter_settings.rs:143
+msgid "Finished Crawler Job"
+msgstr "抓取任务已完成"
+
+#: src/jd/settings/event_scripter_settings.rs:144
+msgid "A new link has been added"
+msgstr "已添加新链接"
+
+#: src/jd/settings/event_scripter_settings.rs:145
+msgid "Packagizer Hook"
+msgstr "Packagizer 挂钩"
+
+#: src/jd/settings/event_scripter_settings.rs:146
+msgid "Download Controller paused"
+msgstr "下载控制器已暂停"
+
+#: src/jd/settings/event_scripter_settings.rs:147
+msgid "Download Controller started"
+msgstr "下载控制器已启动"
+
+#: src/jd/settings/event_scripter_settings.rs:148
+msgid "Download Controller stopped"
+msgstr "下载控制器已停止"
+
+#: src/jd/settings/event_scripter_settings.rs:149
+msgid "Before a Reconnect"
+msgstr "重新连接之前"
+
+#: src/jd/settings/event_scripter_settings.rs:150
+msgid "After a Reconnect"
+msgstr "重新连接之后"
+
+#: src/jd/settings/event_scripter_settings.rs:151
+msgid "Before a Captcha Challenge"
+msgstr "验证码挑战之前"
+
+#: src/jd/settings/event_scripter_settings.rs:152
+msgid "After a Captcha Challenge"
+msgstr "验证码挑战之后"
+
+#: src/jd/settings/event_scripter_settings.rs:153
+msgid "Interval"
+msgstr "间隔"
+
+#: src/jd/settings/event_scripter_settings.rs:154
+msgid "Toolbar Button Pressed"
+msgstr "已按下工具栏按钮"
+
+#: src/jd/settings/event_scripter_settings.rs:155
+msgid "Main Menu Button Pressed"
+msgstr "已按下主菜单按钮"
+
+#: src/jd/settings/event_scripter_settings.rs:157
+msgid "Downloadlist Contextmenu Button Pressed"
+msgstr "已按下下载列表右键菜单按钮"
+
+#: src/jd/settings/event_scripter_settings.rs:160
+msgid "Linkgrabber Contextmenu Button Pressed"
+msgstr "已按下链接采集器右键菜单按钮"
+
+#: src/jd/settings/event_scripter_settings.rs:163
+msgid "Downloadlist Bottombar Button Pressed"
+msgstr "已按下下载列表底部栏按钮"
+
+#: src/jd/settings/event_scripter_settings.rs:166
+msgid "Linkgrabber Bottombar Button Pressed"
+msgstr "已按下链接采集器底部栏按钮"
+
+#: src/jd/settings/event_scripter_settings.rs:168
+msgid "Traymenu Button Pressed"
+msgstr "已按下系统托盘菜单按钮"
+
+#~ msgid "Installing…"
+#~ msgstr "正在安装…"
 
 #~ msgid "JDownloader for GNOME"
 #~ msgstr "适用于 GNOME 的 JDownloader"

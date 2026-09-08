@@ -1,5 +1,6 @@
 use adw::prelude::*;
 use gtk4::glib;
+use sourceview5::prelude::*;
 use std::rc::Rc;
 
 use crate::gui::components::{ConfigSection, ConfigSectionForm};
@@ -41,20 +42,28 @@ impl ScriptEditDialog {
 
         let trigger_model = gtk4::StringList::new(&[]);
         for t in EventTrigger::ALL {
-            trigger_model.append(t.label());
+            trigger_model.append(&t.label());
         }
         let trigger_dropdown = ellipsize_dropdown(trigger_model);
         form.add_row(tr!("Event trigger").as_ref(), None, &trigger_dropdown);
 
+        // JDownloader only ever *shows* these two rows when the selected
+        // trigger actually supports them (`EventTrigger.createSettingsPanel`
+        // only adds the synchronous checkbox when `isSynchronousSupported()`,
+        // and only the INTERVAL trigger's override adds the interval
+        // spinner at all) — it doesn't just gray them out. `add_row`
+        // returns each row's widgets so we can hide the whole row the same
+        // way (a GtkGrid row with every widget invisible collapses to zero
+        // height on its own).
         let sync_switch = gtk4::Switch::new();
-        form.add_row(tr!("Run synchronously").as_ref(), None, &sync_switch);
+        let sync_row = form.add_row(tr!("Run synchronously").as_ref(), None, &sync_switch);
 
         let interval_spin = gtk4::SpinButton::new(
             Some(&gtk4::Adjustment::new(1000.0, 100.0, 3_600_000.0, 100.0, 1000.0, 0.0)),
             1.0,
             0,
         );
-        form.add_row(tr!("Interval (ms)").as_ref(), None, &interval_spin);
+        let interval_row = form.add_row(tr!("Interval (ms)").as_ref(), None, &interval_spin);
 
         let section = ConfigSection::new(
             crate::gui::icon_key::ICON_EVENT,
@@ -69,13 +78,27 @@ impl ScriptEditDialog {
         script_label.add_css_class("heading");
         page_box.append(&script_label);
 
-        let text_view = gtk4::TextView::new();
+        let buffer = sourceview5::Buffer::new(None);
+        if let Some(lang) = sourceview5::LanguageManager::default().language("js") {
+            buffer.set_language(Some(&lang));
+        }
+        buffer.set_highlight_syntax(true);
+        let scheme_id = if adw::StyleManager::default().is_dark() {
+            "Adwaita-dark"
+        } else {
+            "Adwaita"
+        };
+        if let Some(scheme) = sourceview5::StyleSchemeManager::default().scheme(scheme_id) {
+            buffer.set_style_scheme(Some(&scheme));
+        }
+
+        let text_view = sourceview5::View::with_buffer(&buffer);
         text_view.set_monospace(true);
+        text_view.set_show_line_numbers(true);
         text_view.set_top_margin(6);
         text_view.set_bottom_margin(6);
         text_view.set_left_margin(6);
         text_view.set_right_margin(6);
-        let buffer = text_view.buffer();
 
         let script_scroll = gtk4::ScrolledWindow::builder()
             .child(&text_view)
@@ -137,22 +160,28 @@ impl ScriptEditDialog {
         sync_switch.set_active(entry.is_synchronous());
         interval_spin.set_value(entry.interval_ms() as f64);
 
-        fn update_trigger_sensitivity(
-            trigger: EventTrigger,
-            sync_switch: &gtk4::Switch,
-            interval_spin: &gtk4::SpinButton,
-        ) {
-            sync_switch.set_sensitive(trigger.supports_synchronous());
-            interval_spin.set_sensitive(trigger.is_interval());
+        fn set_row_visible(row: &[gtk4::Widget], visible: bool) {
+            for w in row {
+                w.set_visible(visible);
+            }
         }
-        update_trigger_sensitivity(entry.event_trigger, &sync_switch, &interval_spin);
 
-        let sync_switch_c = sync_switch.clone();
-        let interval_spin_c = interval_spin.clone();
+        fn update_trigger_row_visibility(
+            trigger: EventTrigger,
+            sync_row: &[gtk4::Widget],
+            interval_row: &[gtk4::Widget],
+        ) {
+            set_row_visible(sync_row, trigger.supports_synchronous());
+            set_row_visible(interval_row, trigger.is_interval());
+        }
+        update_trigger_row_visibility(entry.event_trigger, &sync_row, &interval_row);
+
+        let sync_row_c = sync_row.clone();
+        let interval_row_c = interval_row.clone();
         trigger_dropdown.connect_selected_notify(move |d| {
             let idx = d.selected() as usize;
             if let Some(trigger) = EventTrigger::ALL.get(idx).copied() {
-                update_trigger_sensitivity(trigger, &sync_switch_c, &interval_spin_c);
+                update_trigger_row_visibility(trigger, &sync_row_c, &interval_row_c);
             }
         });
 

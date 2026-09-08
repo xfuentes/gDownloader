@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-08 05:50+0000\n"
+"POT-Creation-Date: 2026-09-08 19:04+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -29,6 +29,22 @@ msgstr "JDownloader non ha risposto in tempo"
 msgid "Choose visible fields"
 msgstr "Scegli i campi visibili"
 
+#: src/gui/pending_jd_dialogs.rs:61
+msgid "JDownloader"
+msgstr "JDownloader"
+
+#: src/gui/pending_jd_dialogs.rs:114
+msgid "Don't ask again for this"
+msgstr "Non chiedere più per questo"
+
+#: src/gui/pending_jd_dialogs.rs:120
+msgid "Deny"
+msgstr "Nega"
+
+#: src/gui/pending_jd_dialogs.rs:121
+msgid "Allow"
+msgstr "Consenti"
+
 #: src/gui/clipboard.rs:208
 msgid "New links from clipboard"
 msgstr "Nuovi link dagli appunti"
@@ -47,32 +63,32 @@ msgstr[1] "{n} link acquisiti"
 msgid "Show"
 msgstr "Mostra"
 
-#: src/gui/settings_panel.rs:32 src/gui/settings_panel.rs:50
+#: src/gui/settings_panel.rs:80 src/gui/settings_panel.rs:101
 msgid "General"
 msgstr "Generale"
 
-#: src/gui/settings_panel.rs:35 src/gui/settings_panel.rs:53
+#: src/gui/settings_panel.rs:83 src/gui/settings_panel.rs:104
 #: src/gui/components/settings/account_manager.rs:43
 msgid "Account Manager"
 msgstr "Gestione account"
 
-#: src/gui/settings_panel.rs:39 src/gui/settings_panel.rs:57
+#: src/gui/settings_panel.rs:87 src/gui/settings_panel.rs:108
 #: src/gui/components/settings/package_manager.rs:54
 msgid "Package Manager"
 msgstr "Gestione pacchetti"
 
-#: src/gui/settings_panel.rs:43 src/gui/settings_panel.rs:61
-#: src/gui/components/settings/extension_manager.rs:69
+#: src/gui/settings_panel.rs:91 src/gui/settings_panel.rs:112
+#: src/gui/components/settings/extension_manager.rs:171
 msgid "Extension Manager"
 msgstr "Gestione estensioni"
 
-#: src/gui/settings_panel.rs:45 src/gui/settings_panel.rs:63
-#: src/gui/components/settings/scripts.rs:51
+#: src/gui/settings_panel.rs:93 src/gui/settings_panel.rs:98
+#: src/gui/components/settings/scripts.rs:84
 msgid "Scripts"
 msgstr "Script"
 
-#: src/gui/settings_panel.rs:72 src/gui/settings_panel.rs:123
-#: src/gui/settings_panel.rs:138 src/gui/main_menu_bar.rs:37
+#: src/gui/settings_panel.rs:180 src/gui/settings_panel.rs:231
+#: src/gui/settings_panel.rs:246 src/gui/main_menu_bar.rs:37
 #: src/gui/menus/settings.rs:10 src/gui/menus/settings.rs:46
 #: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
 msgid "Settings"
@@ -92,7 +108,7 @@ msgstr "Link"
 msgid "Size"
 msgstr "Dimensione"
 
-#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1888
+#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1890
 msgid "Online"
 msgstr "Online"
 
@@ -102,11 +118,11 @@ msgstr "Online"
 msgid "Hoster"
 msgstr "Hoster"
 
-#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1892
+#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1894
 msgid "Offline"
 msgstr "Offline"
 
-#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1900
+#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1902
 msgid "Unknown"
 msgstr "Sconosciuto"
 
@@ -157,8 +173,8 @@ msgstr "Incolla link"
 msgid "Clear linkgrabber"
 msgstr "Svuota il Link Collector"
 
-#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:210 src/gui/mod.rs:234
-#: src/gui/mod.rs:287 src/gui/mod.rs:296
+#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:270 src/gui/mod.rs:294
+#: src/gui/mod.rs:347 src/gui/mod.rs:356
 msgid "Delete"
 msgstr "Elimina"
 
@@ -246,41 +262,41 @@ msgstr "Vuoi davvero eseguire questa operazione di pulizia:"
 msgid "Delete Selected Links?"
 msgstr "Eliminare i link selezionati?"
 
-#: src/gui/link_grabber_panel.rs:1647 src/gui/downloads_panel.rs:1694
+#: src/gui/link_grabber_panel.rs:1648 src/gui/downloads_panel.rs:1695
 msgid "Tasks to do:"
 msgstr "Operazioni da eseguire:"
 
-#: src/gui/link_grabber_panel.rs:1656 src/gui/downloads_panel.rs:1703
+#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
 msgid "Delete selected link"
 msgid_plural "Delete selected links"
 msgstr[0] "Elimina link selezionato"
 msgstr[1] "Elimina link selezionati"
 
-#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
+#: src/gui/link_grabber_panel.rs:1658 src/gui/downloads_panel.rs:1705
 msgid "{n} link remaining"
 msgid_plural "{n} links remaining"
 msgstr[0] "{n} link rimanente"
 msgstr[1] "{n} link rimanenti"
 
-#: src/gui/link_grabber_panel.rs:1674 src/gui/downloads_panel.rs:1745
+#: src/gui/link_grabber_panel.rs:1676 src/gui/downloads_panel.rs:1747
 msgid "Don't show this again"
 msgstr "Non mostrare più questo messaggio"
 
 #. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.2.0)  #-#-#-#-#
 #. Buttons
-#: src/gui/link_grabber_panel.rs:1680 src/gui/downloads_panel.rs:1751
+#: src/gui/link_grabber_panel.rs:1682 src/gui/downloads_panel.rs:1753
 #: src/gui/dialogs/account_add_dialog.rs:114
 #: src/gui/dialogs/packagizer_rule_dialog.rs:443
-#: src/gui/dialogs/script_edit_dialog.rs:96 src/gui/donate.rs:33
+#: src/gui/dialogs/script_edit_dialog.rs:119 src/gui/donate.rs:34
 msgid "Cancel"
 msgstr "Annulla"
 
-#: src/gui/link_grabber_panel.rs:1681 src/gui/downloads_panel.rs:1752
-#: src/gui/donate.rs:37
+#: src/gui/link_grabber_panel.rs:1683 src/gui/downloads_panel.rs:1754
+#: src/gui/donate.rs:38
 msgid "Continue"
 msgstr "Continua"
 
-#: src/gui/link_grabber_panel.rs:1896
+#: src/gui/link_grabber_panel.rs:1898
 msgid "Temporarily Unknown"
 msgstr "Temporaneamente sconosciuto"
 
@@ -321,8 +337,8 @@ msgstr "Download falliti"
 
 #: src/gui/downloads_panel.rs:677
 #: src/gui/components/settings/package_manager.rs:115
-#: src/gui/components/settings/scripts.rs:104
-#: src/gui/dialogs/script_edit_dialog.rs:40
+#: src/gui/components/settings/scripts.rs:166
+#: src/gui/dialogs/script_edit_dialog.rs:41
 msgid "Name"
 msgstr "Nome"
 
@@ -389,24 +405,23 @@ msgstr[1] "{n} file scaricati con successo"
 msgid "Delete Selected Downloads?"
 msgstr "Eliminare i download selezionati?"
 
-#: src/gui/downloads_panel.rs:1709
+#: src/gui/downloads_panel.rs:1710
 msgid "{n} file ({}) on disk"
 msgid_plural "{n} files ({}) on disk"
 msgstr[0] "{n} file ({}) sul disco"
 msgstr[1] "{n} file ({}) sul disco"
 
-#: src/gui/downloads_panel.rs:1721
+#: src/gui/downloads_panel.rs:1723
 msgid "Keep all downloaded files - just remove links from JDownloader"
 msgstr "Mantieni tutti i file scaricati - rimuovi solo i link da JDownloader"
 
-#: src/gui/downloads_panel.rs:1722
+#: src/gui/downloads_panel.rs:1724
 msgid "Move downloaded files to Trash & remove links from JDownloader"
 msgstr "Sposta i file scaricati nel Cestino e rimuovi i link da JDownloader"
 
-#: src/gui/downloads_panel.rs:1723
+#: src/gui/downloads_panel.rs:1725
 msgid ""
-"Delete downloaded files permanently from disk & remove links from "
-"JDownloader"
+"Delete downloaded files permanently from disk & remove links from JDownloader"
 msgstr ""
 "Elimina definitivamente i file scaricati dal disco e rimuovi i link da "
 "JDownloader"
@@ -443,7 +458,7 @@ msgstr "Backup"
 msgid "Restart"
 msgstr "Riavvia"
 
-#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:126
+#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:203
 msgid "Exit"
 msgstr "Esci"
 
@@ -493,15 +508,15 @@ msgstr "Download simultanei max. per hoster"
 msgid "Speed Limit"
 msgstr "Limite di velocità"
 
-#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:125
+#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:185
 msgid "Download"
 msgstr "Download"
 
-#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:129
+#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:189
 msgid "Link Collector"
 msgstr "Link Collector"
 
-#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:134
+#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:194
 msgid "Donate"
 msgstr "Dona"
 
@@ -530,13 +545,14 @@ msgstr "Illimitato"
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
-#: src/gui/components/settings/scripts.rs:78
+#: src/gui/components/settings/scripts.rs:125
 msgid "Add"
 msgstr "Aggiungi"
 
 #: src/gui/components/account_table.rs:147
+#: src/gui/components/settings/extension_manager.rs:324
 #: src/gui/components/settings/package_manager.rs:84
-#: src/gui/components/settings/scripts.rs:81
+#: src/gui/components/settings/scripts.rs:128
 msgid "Remove"
 msgstr "Rimuovi"
 
@@ -545,7 +561,7 @@ msgid "Buy"
 msgstr "Acquista"
 
 #: src/gui/components/account_table.rs:149
-#: src/gui/components/settings/extension_manager.rs:75
+#: src/gui/components/settings/extension_manager.rs:177
 msgid "Refresh"
 msgstr "Aggiorna"
 
@@ -577,25 +593,33 @@ msgstr "Usa account per scaricare"
 msgid "Enter and manage all your Premium/Gold/Platinum accounts."
 msgstr "Inserisci e gestisci tutti i tuoi account Premium/Gold/Platinum."
 
-#: src/gui/components/settings/extension_manager.rs:70
+#: src/gui/components/settings/extension_manager.rs:172
 msgid "Enable, disable or install JDownloader extensions."
 msgstr "Abilita, disabilita o installa le estensioni di JDownloader."
 
-#: src/gui/components/settings/extension_manager.rs:87
+#: src/gui/components/settings/extension_manager.rs:193
 msgid "Loading extensions…"
 msgstr "Caricamento estensioni…"
 
-#: src/gui/components/settings/extension_manager.rs:129
+#: src/gui/components/settings/extension_manager.rs:234
 msgid "No extensions found."
 msgstr "Nessuna estensione trovata."
 
-#: src/gui/components/settings/extension_manager.rs:203
+#: src/gui/components/settings/extension_manager.rs:337
+msgid "Removing extension…"
+msgstr "Rimozione dell'estensione…"
+
+#: src/gui/components/settings/extension_manager.rs:361
+msgid "This extension is built into JDownloader and cannot be removed."
+msgstr "Questa estensione fa parte di JDownloader e non può essere rimossa."
+
+#: src/gui/components/settings/extension_manager.rs:368
 msgid "Install"
 msgstr "Installa"
 
-#: src/gui/components/settings/extension_manager.rs:211
-msgid "Installing…"
-msgstr "Installazione…"
+#: src/gui/components/settings/extension_manager.rs:379
+msgid "Installing extension…"
+msgstr "Installazione dell'estensione…"
 
 #: src/gui/components/settings/general.rs:143
 #: src/gui/dialogs/packagizer_rule_dialog.rs:154
@@ -609,11 +633,11 @@ msgstr "Cartella di download"
 
 #: src/gui/components/settings/general.rs:158
 msgid ""
-"Set the default download path here. Changing default path here, affects only"
-" new downloads."
+"Set the default download path here. Changing default path here, affects only "
+"new downloads."
 msgstr ""
-"Imposta qui il percorso di download predefinito. La modifica ha effetto solo"
-" sui nuovi download."
+"Imposta qui il percorso di download predefinito. La modifica ha effetto solo "
+"sui nuovi download."
 
 #: src/gui/components/settings/general.rs:178
 msgid "Maximum of simultaneous downloads per host"
@@ -669,8 +693,8 @@ msgid ""
 "Connection limits, Download order, Priorities, ... Set up the Download "
 "controller details."
 msgstr ""
-"Limiti di connessione, ordine dei download, priorità... Configura i dettagli"
-" del controller dei download."
+"Limiti di connessione, ordine dei download, priorità... Configura i dettagli "
+"del controller dei download."
 
 #: src/gui/components/settings/general.rs:227
 msgid "Always"
@@ -725,8 +749,8 @@ msgid ""
 "JDownloader will verify your downloads for correctness after download using "
 "the hash/check option"
 msgstr ""
-"JDownloader verificherà la correttezza dei download tramite l'opzione "
-"hash/controllo dopo il download"
+"JDownloader verificherà la correttezza dei download tramite l'opzione hash/"
+"controllo dopo il download"
 
 #: src/gui/components/settings/general.rs:307
 msgid "Auto open Link Containers (dlc,rsdf,...)"
@@ -751,11 +775,11 @@ msgid ""
 "Rules that automatically set the download settings of files based on their "
 "properties."
 msgstr ""
-"Regole che impostano automaticamente le opzioni di download dei file in base"
-" alle loro proprietà."
+"Regole che impostano automaticamente le opzioni di download dei file in base "
+"alle loro proprietà."
 
 #: src/gui/components/settings/package_manager.rs:82
-#: src/gui/components/settings/scripts.rs:79
+#: src/gui/components/settings/scripts.rs:126
 msgid "Edit"
 msgstr "Modifica"
 
@@ -774,7 +798,7 @@ msgid "Move down"
 msgstr "Sposta giù"
 
 #: src/gui/components/settings/package_manager.rs:107
-#: src/gui/components/settings/scripts.rs:96
+#: src/gui/components/settings/scripts.rs:158
 #: src/gui/dialogs/packagizer_rule_dialog.rs:106
 msgid "Enabled"
 msgstr "Abilitato"
@@ -787,19 +811,41 @@ msgstr "Nuova regola"
 msgid "copy"
 msgstr "copia"
 
-#: src/gui/components/settings/scripts.rs:53
+#: src/gui/components/settings/scripts.rs:26
+msgid "Create an Info-File in the Download-Folder with detailed information"
+msgstr ""
+"Crea un file informativo nella cartella di download con informazioni "
+"dettagliate"
+
+#: src/gui/components/settings/scripts.rs:32
+msgid "Play a Wav File"
+msgstr "Riproduci un file Wav"
+
+#: src/gui/components/settings/scripts.rs:37
+msgid "Play a Sound (Wav) when downloads and extraction stopped"
+msgstr "Riproduci un suono (Wav) quando i download e l'estrazione si fermano"
+
+#: src/gui/components/settings/scripts.rs:44
+msgid "Reset a Download if the speed is low"
+msgstr "Reimposta un download se la velocità è bassa"
+
+#: src/gui/components/settings/scripts.rs:86
 msgid ""
 "Run JavaScript automatically when a chosen event occurs (Eventscripter)."
 msgstr ""
 "Esegui automaticamente JavaScript quando si verifica un evento scelto "
 "(Eventscripter)."
 
-#: src/gui/components/settings/scripts.rs:113
-#: src/gui/dialogs/script_edit_dialog.rs:47
+#: src/gui/components/settings/scripts.rs:131
+msgid "Example Scripts"
+msgstr "Script di esempio"
+
+#: src/gui/components/settings/scripts.rs:175
+#: src/gui/dialogs/script_edit_dialog.rs:48
 msgid "Event trigger"
 msgstr "Evento scatenante"
 
-#: src/gui/components/settings/scripts.rs:196
+#: src/gui/components/settings/scripts.rs:289
 msgid "New script"
 msgstr "Nuovo script"
 
@@ -843,7 +889,7 @@ msgstr "Inserisci la password..."
 
 #: src/gui/dialogs/account_add_dialog.rs:115
 #: src/gui/dialogs/packagizer_rule_dialog.rs:444
-#: src/gui/dialogs/script_edit_dialog.rs:97
+#: src/gui/dialogs/script_edit_dialog.rs:120
 msgid "Save"
 msgstr "Salva"
 
@@ -1064,27 +1110,27 @@ msgstr ""
 msgid "This is a predefined rule and cannot be modified."
 msgstr "Questa è una regola predefinita e non può essere modificata."
 
-#: src/gui/dialogs/script_edit_dialog.rs:18
+#: src/gui/dialogs/script_edit_dialog.rs:19
 msgid "Edit Script"
 msgstr "Modifica script"
 
-#: src/gui/dialogs/script_edit_dialog.rs:50
+#: src/gui/dialogs/script_edit_dialog.rs:59
 msgid "Run synchronously"
 msgstr "Esegui in modo sincrono"
 
-#: src/gui/dialogs/script_edit_dialog.rs:57
+#: src/gui/dialogs/script_edit_dialog.rs:66
 msgid "Interval (ms)"
 msgstr "Intervallo (ms)"
 
-#: src/gui/dialogs/script_edit_dialog.rs:61
+#: src/gui/dialogs/script_edit_dialog.rs:70
 msgid "Trigger"
 msgstr "Evento scatenante"
 
-#: src/gui/dialogs/script_edit_dialog.rs:62
+#: src/gui/dialogs/script_edit_dialog.rs:71
 msgid "Choose when this script should run."
 msgstr "Scegli quando questo script deve essere eseguito."
 
-#: src/gui/dialogs/script_edit_dialog.rs:67
+#: src/gui/dialogs/script_edit_dialog.rs:76
 msgid "Script (JavaScript)"
 msgstr "Script (JavaScript)"
 
@@ -1097,9 +1143,9 @@ msgid ""
 "If you are a satisfied user of JDownloader, please think about contributing "
 "to this project. JDownloader is the result of daily hard work since more "
 "than %s1 years. We need your help to keep it free of charge, free of "
-"advertising, free of installer bundles and to improve JDownloader even more."
-" Moreover, donating is a good way to tell us what modules we should focus "
-"our work on."
+"advertising, free of installer bundles and to improve JDownloader even more. "
+"Moreover, donating is a good way to tell us what modules we should focus our "
+"work on."
 msgstr ""
 "Se sei un utente soddisfatto di JDownloader, pensa a contribuire a questo "
 "progetto. JDownloader è il risultato di un duro lavoro quotidiano da oltre "
@@ -1108,15 +1154,15 @@ msgstr ""
 "Inoltre, donare è un buon modo per dirci su quali moduli dovremmo "
 "concentrare il nostro lavoro."
 
-#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:104
+#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:143
 msgid "Start downloads"
 msgstr "Avvia download"
 
-#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:118
+#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:159
 msgid "Pause downloads"
 msgstr "Metti in pausa i download"
 
-#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:111
+#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:151
 msgid "Stop downloads"
 msgstr "Ferma i download"
 
@@ -1129,15 +1175,15 @@ msgstr "Sposta in cima"
 msgid "Move bottom"
 msgstr "Sposta in fondo"
 
-#: src/gui/main_tool_bar.rs:158
+#: src/gui/main_tool_bar.rs:158 src/gui/tray.rs:177
 msgid "Clipboard monitoring"
 msgstr "Monitoraggio appunti"
 
-#: src/gui/main_tool_bar.rs:163
+#: src/gui/main_tool_bar.rs:163 src/gui/tray.rs:185
 msgid "Auto reconnect"
 msgstr "Riconnessione automatica"
 
-#: src/gui/main_tool_bar.rs:171
+#: src/gui/main_tool_bar.rs:171 src/gui/tray.rs:194
 msgid "Use premium accounts"
 msgstr "Usa account premium"
 
@@ -1222,32 +1268,38 @@ msgstr "Commento:"
 msgid "File Properties: {}"
 msgstr "Proprietà del file: {}"
 
-#: src/gui/window.rs:174
+#. Mirrors JDownloader's own tray menu entry
+#. (`TrayOpenDefaultDownloadDirectory` / `IconKey.ICON_SAVE`).
+#: src/gui/tray.rs:170
+msgid "Open download folder"
+msgstr "Apri cartella di download"
+
+#: src/gui/window.rs:179
 msgid "Waiting for JDownloader to exit..."
 msgstr "In attesa che JDownloader si chiuda..."
 
-#: src/gui/mod.rs:116
+#: src/gui/mod.rs:176
 msgid "The power of JDownloader, the elegance of GNOME"
 msgstr "La potenza di JDownloader, l'eleganza di GNOME"
 
-#: src/gui/mod.rs:199 src/gui/mod.rs:221
+#: src/gui/mod.rs:259 src/gui/mod.rs:281
 msgid "Start Downloads"
 msgstr "Avvia download"
 
-#: src/gui/mod.rs:204 src/gui/mod.rs:228
+#: src/gui/mod.rs:264 src/gui/mod.rs:288
 msgid "Start All Downloads"
 msgstr "Avvia tutti i download"
 
 #. Status bar.
-#: src/gui/mod.rs:463
+#: src/gui/mod.rs:525
 msgid "Ready"
 msgstr "Pronto"
 
-#: src/gui/mod.rs:519
+#: src/gui/mod.rs:581 src/jd/settings/event_scripter_settings.rs:138
 msgid "JDownloader started"
 msgstr "JDownloader avviato"
 
-#: src/gui/mod.rs:554
+#: src/gui/mod.rs:616
 msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
 msgstr "JDownloader.jar non trovato. Imposta JDOWNLOADER_JAR."
 
@@ -1334,6 +1386,117 @@ msgstr "JDownloader.jar non ha una directory padre"
 #: src/jd/process.rs:32
 msgid "JDownloader.jar has no file name"
 msgstr "JDownloader.jar non ha un nome file"
+
+#: src/jd/settings/event_scripter_settings.rs:133
+msgid "A Download started"
+msgstr "È iniziato un download"
+
+#: src/jd/settings/event_scripter_settings.rs:134
+msgid "A Download stopped"
+msgstr "Si è fermato un download"
+
+#: src/jd/settings/event_scripter_settings.rs:135
+msgid "Package finished"
+msgstr "Pacchetto completato"
+
+#: src/jd/settings/event_scripter_settings.rs:136
+msgid "Any Extraction Event"
+msgstr "Qualsiasi evento di estrazione"
+
+#: src/jd/settings/event_scripter_settings.rs:137
+msgid "Archive extraction finished"
+msgstr "Estrazione archivio completata"
+
+#: src/jd/settings/event_scripter_settings.rs:139
+msgid "None"
+msgstr "Nessuno"
+
+#: src/jd/settings/event_scripter_settings.rs:140
+msgid "Remote API Event fired"
+msgstr "Evento API remota generato"
+
+#: src/jd/settings/event_scripter_settings.rs:141
+msgid "A new file has been created"
+msgstr "È stato creato un nuovo file"
+
+#: src/jd/settings/event_scripter_settings.rs:142
+msgid "New Crawler Job"
+msgstr "Nuovo lavoro del crawler"
+
+#: src/jd/settings/event_scripter_settings.rs:143
+msgid "Finished Crawler Job"
+msgstr "Lavoro del crawler completato"
+
+#: src/jd/settings/event_scripter_settings.rs:144
+msgid "A new link has been added"
+msgstr "È stato aggiunto un nuovo link"
+
+#: src/jd/settings/event_scripter_settings.rs:145
+msgid "Packagizer Hook"
+msgstr "Hook del Packagizer"
+
+#: src/jd/settings/event_scripter_settings.rs:146
+msgid "Download Controller paused"
+msgstr "Controller dei download in pausa"
+
+#: src/jd/settings/event_scripter_settings.rs:147
+msgid "Download Controller started"
+msgstr "Controller dei download avviato"
+
+#: src/jd/settings/event_scripter_settings.rs:148
+msgid "Download Controller stopped"
+msgstr "Controller dei download fermato"
+
+#: src/jd/settings/event_scripter_settings.rs:149
+msgid "Before a Reconnect"
+msgstr "Prima di una riconnessione"
+
+#: src/jd/settings/event_scripter_settings.rs:150
+msgid "After a Reconnect"
+msgstr "Dopo una riconnessione"
+
+#: src/jd/settings/event_scripter_settings.rs:151
+msgid "Before a Captcha Challenge"
+msgstr "Prima di una verifica captcha"
+
+#: src/jd/settings/event_scripter_settings.rs:152
+msgid "After a Captcha Challenge"
+msgstr "Dopo una verifica captcha"
+
+#: src/jd/settings/event_scripter_settings.rs:153
+msgid "Interval"
+msgstr "Intervallo"
+
+#: src/jd/settings/event_scripter_settings.rs:154
+msgid "Toolbar Button Pressed"
+msgstr "Pulsante della barra degli strumenti premuto"
+
+#: src/jd/settings/event_scripter_settings.rs:155
+msgid "Main Menu Button Pressed"
+msgstr "Pulsante del menu principale premuto"
+
+#: src/jd/settings/event_scripter_settings.rs:157
+msgid "Downloadlist Contextmenu Button Pressed"
+msgstr "Pulsante del menu contestuale della lista download premuto"
+
+#: src/jd/settings/event_scripter_settings.rs:160
+msgid "Linkgrabber Contextmenu Button Pressed"
+msgstr "Pulsante del menu contestuale del linkgrabber premuto"
+
+#: src/jd/settings/event_scripter_settings.rs:163
+msgid "Downloadlist Bottombar Button Pressed"
+msgstr "Pulsante della barra inferiore della lista download premuto"
+
+#: src/jd/settings/event_scripter_settings.rs:166
+msgid "Linkgrabber Bottombar Button Pressed"
+msgstr "Pulsante della barra inferiore del linkgrabber premuto"
+
+#: src/jd/settings/event_scripter_settings.rs:168
+msgid "Traymenu Button Pressed"
+msgstr "Pulsante del menu del vassoio premuto"
+
+#~ msgid "Installing…"
+#~ msgstr "Installazione…"
 
 #~ msgid "JDownloader for GNOME"
 #~ msgstr "JDownloader per GNOME"

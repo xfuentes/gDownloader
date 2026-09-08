@@ -1689,6 +1689,7 @@ fn confirm_remove<W: IsA<gtk4::Widget> + Clone + 'static>(
     intro_label.set_halign(gtk4::Align::Start);
     intro_label.set_xalign(0.0);
     intro_label.set_wrap(true);
+    intro_label.set_natural_wrap_mode(gtk4::NaturalWrapMode::Word);
     text_box.append(&intro_label);
 
     let tasks_label = gtk4::Label::new(Some(tr!("Tasks to do:").as_ref()));
@@ -1714,6 +1715,7 @@ fn confirm_remove<W: IsA<gtk4::Widget> + Clone + 'static>(
     task_label.set_halign(gtk4::Align::Start);
     task_label.set_xalign(0.0);
     task_label.set_wrap(true);
+    task_label.set_natural_wrap_mode(gtk4::NaturalWrapMode::Word);
     text_box.append(&task_label);
 
     let mode_dropdown = if bytes_loaded > 0 {

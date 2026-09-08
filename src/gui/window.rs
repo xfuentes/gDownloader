@@ -77,13 +77,18 @@ pub fn setup_css() {
     let compact_css = gtk4::CssProvider::new();
     compact_css.load_from_string(
         "window { font-size: 0.92em; }\n\
-         button, entry, dropdown, spinbutton { min-height: 22px; padding: 2px 6px; }\n\
+         button, entry, dropdown { min-height: 22px; padding: 2px 6px; }\n\
          dropdown { margin: 0; padding: 0px; }\n\
          dropdown button, dropdown box, dropdown arrow { min-height: 0; margin: 0; padding: 2px 6px; }\n\
          dropdown button.toggle { padding: 0 0 1px 0; }\n\
          columnview > listview > row { min-height: 24px; }\n\
          columnview > listview > row > cell { padding: 1px; }\n\
-         columnview header button { min-height: 22px; padding: 2px 6px; }",
+         columnview header button { min-height: 22px; padding: 2px 6px; }\n\
+         switch { min-width: 34px; min-height: 18px; padding: 1px; }\n\
+         switch slider { min-width: 16px; min-height: 16px; }\n\
+         spinbutton { min-height: 0; padding: 0; }\n\
+         spinbutton text { min-height: 18px; padding: 2px 4px; }\n\
+         spinbutton button { min-width: 18px; min-height: 18px; padding: 0; }",
     );
     if let Some(display) = gtk4::gdk::Display::default() {
         gtk4::style_context_add_provider_for_display(
@@ -180,7 +185,7 @@ pub fn setup_close_handler(
             std::thread::spawn(move || {
                 let _ = api_thread.system_exit();
                 if let Ok(mut p) = process_thread.lock() {
-                    let _ = p.stop();
+                    let _ = p.stop(true);
                 }
                 let _ = tx.try_send(());
             });

@@ -12,7 +12,40 @@ use crate::gui::components::{ConfigSection, ConfigSectionForm};
 use crate::gui::dialogs::ScriptEditDialog;
 use crate::gui::jd_icon;
 use crate::gui::spawn::api_fire;
-use crate::jd::{EventScripterSettings, JdApi, ScriptEntry, INTERNAL_JD_PORT};
+use crate::jd::{EventScripterSettings, EventTrigger, JdApi, ScriptEntry, INTERNAL_JD_PORT};
+
+/// Mirrors `EventScripterConfigPanel`'s "Example Scripts" menu
+/// (`btnDefault`): a handful of ready-made scripts bundled with
+/// JDownloader itself (`org/jdownloader/extensions/eventscripter/examples/*.js`),
+/// offered as a quick way to add a working script instead of starting from
+/// a blank one.
+fn example_scripts() -> Vec<(EventTrigger, String, &'static str)> {
+    vec![
+        (
+            EventTrigger::OnPackageFinished,
+            tr!("Create an Info-File in the Download-Folder with detailed information")
+                .to_string(),
+            include_str!("../../../../data/resources/jd/eventscripter_examples/infofile.js"),
+        ),
+        (
+            EventTrigger::OnDownloadControllerStopped,
+            tr!("Play a Wav File").to_string(),
+            include_str!("../../../../data/resources/jd/eventscripter_examples/playsound.js"),
+        ),
+        (
+            EventTrigger::Interval,
+            tr!("Play a Sound (Wav) when downloads and extraction stopped").to_string(),
+            include_str!(
+                "../../../../data/resources/jd/eventscripter_examples/playWavWhenInactive.js"
+            ),
+        ),
+        (
+            EventTrigger::Interval,
+            tr!("Reset a Download if the speed is low").to_string(),
+            include_str!("../../../../data/resources/jd/eventscripter_examples/speedReset.js"),
+        ),
+    ]
+}
 
 fn wait_ready(scripts: &EventScripterSettings) -> bool {
     let start = std::time::Instant::now();
@@ -71,6 +104,20 @@ impl ScriptsPage {
             btn
         }
 
+        fn icon_menu_button(icon: &str, label: &str, size_group: &gtk4::SizeGroup) -> gtk4::MenuButton {
+            let bx = gtk4::Box::new(gtk4::Orientation::Horizontal, 6);
+            bx.set_halign(gtk4::Align::Center);
+            let img = gtk4::Image::from_gicon(&jd_icon::resolve(icon));
+            img.set_pixel_size(16);
+            bx.append(&img);
+            bx.append(&gtk4::Label::new(Some(label)));
+            let btn = gtk4::MenuButton::new();
+            btn.set_child(Some(&bx));
+            btn.set_has_frame(false);
+            size_group.add_widget(&btn);
+            btn
+        }
+
         let toolbar = gtk4::Box::new(gtk4::Orientation::Horizontal, 6);
         toolbar.set_halign(gtk4::Align::Start);
         let button_size_group = gtk4::SizeGroup::new(gtk4::SizeGroupMode::Horizontal);
@@ -79,10 +126,25 @@ impl ScriptsPage {
         let edit_btn = icon_button(crate::gui::icon_key::ICON_EDIT, tr!("Edit").as_ref(), &button_size_group);
         let remove_btn =
             icon_button(crate::gui::icon_key::ICON_REMOVE, tr!("Remove").as_ref(), &button_size_group);
+        let examples_btn = icon_menu_button(
+            crate::gui::icon_key::ICON_WIZARD,
+            tr!("Example Scripts").as_ref(),
+            &button_size_group,
+        );
 
         toolbar.append(&add_btn);
         toolbar.append(&edit_btn);
         toolbar.append(&remove_btn);
+        toolbar.append(&examples_btn);
+
+        let examples_popover_box = gtk4::Box::new(gtk4::Orientation::Vertical, 4);
+        examples_popover_box.set_margin_start(8);
+        examples_popover_box.set_margin_end(8);
+        examples_popover_box.set_margin_top(8);
+        examples_popover_box.set_margin_bottom(8);
+        let examples_popover = gtk4::Popover::new();
+        examples_popover.set_child(Some(&examples_popover_box));
+        examples_btn.set_popover(Some(&examples_popover));
 
         // Script table: [enabled, name, trigger]
         let store =
@@ -155,6 +217,37 @@ impl ScriptsPage {
             api_fire(move || {
                 let _ = s.set_scripts(&scripts);
             });
+        }
+
+        // Same sort order as JDownloader's own menu (by the full "@Trigger:
+        // description" label).
+        let mut examples = example_scripts()
+            .into_iter()
+            .map(|(trigger, description, content)| {
+                (format!("@{}: {}", trigger.label(), description), trigger, description, content)
+            })
+            .collect::<Vec<_>>();
+        examples.sort_by(|a, b| a.0.cmp(&b.0));
+        for (label, trigger, description, content) in examples {
+            let row = gtk4::Button::builder()
+                .label(&label)
+                .has_frame(false)
+                .halign(gtk4::Align::Start)
+                .build();
+            let scripts_c = scripts.clone();
+            let scripter_c = scripter.clone();
+            let store_c = store.clone();
+            let examples_popover_c = examples_popover.clone();
+            row.connect_clicked(move |_| {
+                let mut entry = ScriptEntry::new(&description);
+                entry.event_trigger = trigger;
+                entry.script = Some(content.to_string());
+                scripts_c.borrow_mut().push(entry);
+                refresh_store(&store_c, &scripts_c.borrow());
+                save(&scripter_c, &scripts_c.borrow());
+                examples_popover_c.popdown();
+            });
+            examples_popover_box.append(&row);
         }
 
         fn selected_index(tree: &gtk4::TreeView) -> Option<usize> {

@@ -7,6 +7,17 @@ use serde_json::{Map, Value};
 use crate::jd::JdApi;
 
 const INTERFACE: &str = "org.jdownloader.extensions.eventscripter.EventScripterConfig";
+/// `AbstractExtension.buildStore()` files an extension's config under
+/// `cfg/<extension classname>` rather than `cfg/<config interface name>`,
+/// which JDownloader's `StorageHandler` then registers under this (not
+/// `"null"`) storage id — confirmed against a running instance via
+/// `/config/list?pattern=.*eventscripter.*&returnValues=true`, which reports
+/// exactly this string for both of `EventScripterConfig`'s keys. Getting
+/// this wrong doesn't error, it just silently finds no key handler and
+/// acts like the value/save never existed — which is what made scripts
+/// added via the Scripts page appear to load fine but never actually
+/// persist.
+const STORAGE: &str = "cfg/org.jdownloader.extensions.eventscripter.EventScripterExtension";
 const SCRIPTS_KEY: &str = "Scripts";
 const API_PANEL_VISIBLE_KEY: &str = "APIPanelVisible";
 
@@ -113,39 +124,50 @@ impl EventTrigger {
         EventTrigger::TrayButton,
     ];
 
-    /// English label. JDownloader's own translations for these keys were not
-    /// available to port verbatim; these mirror the trigger's meaning.
-    pub fn label(&self) -> &'static str {
+    /// Mirrors `EventTrigger.getLabel()` — these are JDownloader's own
+    /// English strings verbatim (`EventScripterTranslation`'s `@Default`
+    /// values), not an approximation, so the trigger names match exactly
+    /// what a JDownloader user already knows.
+    pub fn label(&self) -> String {
         match self {
-            EventTrigger::OnDownloadControllerStart => "Download controller started",
-            EventTrigger::OnDownloadControllerStopped => "Download controller stopped",
-            EventTrigger::OnPackageFinished => "Package finished",
-            EventTrigger::OnGenericExtraction => "Extraction event",
-            EventTrigger::OnArchiveExtracted => "Archive extracted",
-            EventTrigger::OnJdownloaderStarted => "JDownloader started",
-            EventTrigger::None => "None",
-            EventTrigger::OnOutgoingRemoteApiEvent => "Outgoing RemoteAPI event",
-            EventTrigger::OnNewFile => "New file",
-            EventTrigger::OnNewCrawlerJob => "New crawler job",
-            EventTrigger::OnFinishedCrawlerJob => "Crawler job finished",
-            EventTrigger::OnNewLink => "New link",
-            EventTrigger::OnPackagizer => "Packagizer",
-            EventTrigger::OnDownloadsPause => "Downloads paused",
-            EventTrigger::OnDownloadsRunning => "Downloads running",
-            EventTrigger::OnDownloadsStopped => "Downloads stopped",
-            EventTrigger::ReconnectBefore => "Before reconnect",
-            EventTrigger::ReconnectAfter => "After reconnect",
-            EventTrigger::CaptchaChallengeBefore => "Before captcha challenge",
-            EventTrigger::CaptchaChallengeAfter => "After captcha challenge",
-            EventTrigger::Interval => "Interval (timer)",
-            EventTrigger::ToolbarButton => "Toolbar button",
-            EventTrigger::MainMenuButton => "Main menu button",
-            EventTrigger::DownloadTableContextMenuButton => "Download list context menu button",
-            EventTrigger::LinkgrabberTableContextMenuButton => "Linkgrabber context menu button",
-            EventTrigger::DownloadTableBottomBarButton => "Download list bottom bar button",
-            EventTrigger::LinkgrabberBottomBarButton => "Linkgrabber bottom bar button",
-            EventTrigger::TrayButton => "Tray menu button",
+            EventTrigger::OnDownloadControllerStart => tr!("A Download started"),
+            EventTrigger::OnDownloadControllerStopped => tr!("A Download stopped"),
+            EventTrigger::OnPackageFinished => tr!("Package finished"),
+            EventTrigger::OnGenericExtraction => tr!("Any Extraction Event"),
+            EventTrigger::OnArchiveExtracted => tr!("Archive extraction finished"),
+            EventTrigger::OnJdownloaderStarted => tr!("JDownloader started"),
+            EventTrigger::None => tr!("None"),
+            EventTrigger::OnOutgoingRemoteApiEvent => tr!("Remote API Event fired"),
+            EventTrigger::OnNewFile => tr!("A new file has been created"),
+            EventTrigger::OnNewCrawlerJob => tr!("New Crawler Job"),
+            EventTrigger::OnFinishedCrawlerJob => tr!("Finished Crawler Job"),
+            EventTrigger::OnNewLink => tr!("A new link has been added"),
+            EventTrigger::OnPackagizer => tr!("Packagizer Hook"),
+            EventTrigger::OnDownloadsPause => tr!("Download Controller paused"),
+            EventTrigger::OnDownloadsRunning => tr!("Download Controller started"),
+            EventTrigger::OnDownloadsStopped => tr!("Download Controller stopped"),
+            EventTrigger::ReconnectBefore => tr!("Before a Reconnect"),
+            EventTrigger::ReconnectAfter => tr!("After a Reconnect"),
+            EventTrigger::CaptchaChallengeBefore => tr!("Before a Captcha Challenge"),
+            EventTrigger::CaptchaChallengeAfter => tr!("After a Captcha Challenge"),
+            EventTrigger::Interval => tr!("Interval"),
+            EventTrigger::ToolbarButton => tr!("Toolbar Button Pressed"),
+            EventTrigger::MainMenuButton => tr!("Main Menu Button Pressed"),
+            EventTrigger::DownloadTableContextMenuButton => {
+                tr!("Downloadlist Contextmenu Button Pressed")
+            }
+            EventTrigger::LinkgrabberTableContextMenuButton => {
+                tr!("Linkgrabber Contextmenu Button Pressed")
+            }
+            EventTrigger::DownloadTableBottomBarButton => {
+                tr!("Downloadlist Bottombar Button Pressed")
+            }
+            EventTrigger::LinkgrabberBottomBarButton => {
+                tr!("Linkgrabber Bottombar Button Pressed")
+            }
+            EventTrigger::TrayButton => tr!("Traymenu Button Pressed"),
         }
+        .to_string()
     }
 
     /// Mirrors `EventTrigger.isSynchronousSupported()`.
@@ -190,7 +212,14 @@ impl EventTrigger {
 /// Mirrors `org.jdownloader.extensions.eventscripter.ScriptEntry`.
 #[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
 pub struct ScriptEntry {
-    #[serde(default = "now_millis", rename = "ID")]
+    // Despite the getter being `getID()` (which standard Java bean
+    // introspection would keep as "ID", preserving the all-caps run),
+    // JDownloader's own AppWork `Storable` JSON layer actually emits/reads
+    // it as "id" — confirmed by round-tripping a script through a live
+    // instance's RemoteAPI. Renaming to "ID" here silently desynced from
+    // JDownloader's own serialization: every save id JDownloader read back
+    // went unrecognized and got replaced with a freshly generated one.
+    #[serde(default = "now_millis", rename = "id")]
     pub id: i64,
     #[serde(default)]
     pub enabled: bool,
@@ -270,7 +299,7 @@ impl EventScripterSettings {
     }
 
     pub fn get_scripts(&self) -> anyhow::Result<Vec<ScriptEntry>> {
-        let value = self.api.get_config(INTERFACE, SCRIPTS_KEY)?;
+        let value = self.api.get_config_with_storage(INTERFACE, STORAGE, SCRIPTS_KEY)?;
         if value.is_null() {
             return Ok(Vec::new());
         }
@@ -279,14 +308,14 @@ impl EventScripterSettings {
 
     pub fn set_scripts(&self, scripts: &[ScriptEntry]) -> anyhow::Result<bool> {
         let value = serde_json::to_value(scripts)?;
-        self.api.set_config(INTERFACE, SCRIPTS_KEY, &value)
+        self.api.set_config_with_storage(INTERFACE, STORAGE, SCRIPTS_KEY, &value)
     }
 
     #[allow(dead_code)]
     pub fn get_api_panel_visible(&self) -> anyhow::Result<bool> {
         Ok(self
             .api
-            .get_config(INTERFACE, API_PANEL_VISIBLE_KEY)?
+            .get_config_with_storage(INTERFACE, STORAGE, API_PANEL_VISIBLE_KEY)?
             .as_bool()
             .unwrap_or(true))
     }
@@ -294,6 +323,7 @@ impl EventScripterSettings {
     #[allow(dead_code)]
     pub fn set_api_panel_visible(&self, value: bool) -> anyhow::Result<bool> {
         let v = serde_json::to_value(value)?;
-        self.api.set_config(INTERFACE, API_PANEL_VISIBLE_KEY, &v)
+        self.api
+            .set_config_with_storage(INTERFACE, STORAGE, API_PANEL_VISIBLE_KEY, &v)
     }
 }

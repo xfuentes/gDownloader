@@ -2,6 +2,39 @@
 
 All notable changes to gDownloader are documented in this file.
 
+## [Unreleased]
+
+### Added
+- Scripts page: JavaScript syntax highlighting in the script editor, and an
+  "Example Scripts" menu offering JDownloader's own bundled example scripts
+  (info file writer, play a sound, play a sound when inactive, reset a slow
+  download) as a starting point.
+- Settings sidebar: the Scripts tab now shows an enable/disable badge for
+  the EventScripter extension itself, mirroring JDownloader's own settings
+  tree.
+- gDownloader now answers JDownloader's own dialogs (e.g. an EventScripter
+  script asking to run an external program) with a native GTK Allow/Deny
+  window instead of silently hanging — JDownloader runs headless, so it
+  can't show these itself, but exposes them through its RemoteAPI for a
+  client to answer on its behalf.
+
+### Changed
+- Scripts page: the "Run synchronously" and "Interval (ms)" fields are now
+  only shown when the selected event trigger actually supports them
+  (matching JDownloader), instead of being grayed out.
+
+### Fixed
+- Extension Manager: enable/disable now uses a proper checkbox column
+  (locked and unchecked for extensions that aren't installed) followed by
+  an Install/Remove button, matching JDownloader's own layout. Installing
+  or removing an extension shows a modal indeterminate-progress dialog and
+  restarts the local JDownloader process, as required for the change to
+  take effect.
+- Fixed a race condition where restarting the local JDownloader process
+  (after installing/removing an extension, or on app close) could kill it
+  before it finished flushing just-made changes (e.g. a newly added
+  script) to disk, silently losing them.
+
 ## [0.2.0] - 2026-09-08
 
 ### Added

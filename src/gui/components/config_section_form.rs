@@ -32,14 +32,20 @@ impl ConfigSectionForm {
         }
     }
 
+    /// Adds a row and returns every widget the row is made of (label,
+    /// checkbox-or-placeholder, input container), so a caller that needs to
+    /// hide the whole row later (e.g. a settings field that only applies to
+    /// some choice of another field) can do so — a `GtkGrid` collapses a
+    /// row's height on its own once every widget in it is invisible.
     pub fn add_row<'a>(
         &self,
         label: impl Into<Option<&'a str>>,
         checkbox: Option<&gtk4::Switch>,
         input: &impl IsA<gtk4::Widget>,
-    ) {
+    ) -> Vec<gtk4::Widget> {
         let row = self.next_row.get();
         let label = label.into();
+        let mut row_widgets: Vec<gtk4::Widget> = Vec::with_capacity(3);
 
         let mut next_col = 0;
         let mut input_col = 0;
@@ -53,8 +59,10 @@ impl ConfigSectionForm {
             label.set_halign(gtk4::Align::Fill);
             label.set_hexpand(true);
             label.set_wrap(true);
+            label.set_natural_wrap_mode(gtk4::NaturalWrapMode::Word);
             self.label_size_group.add_widget(&label);
             self.grid.attach(&label, 0, row, 1, 1);
+            row_widgets.push(label.upcast());
             next_col = 1;
             input_col = 1;
             input_width = 2;
@@ -66,6 +74,7 @@ impl ConfigSectionForm {
             cb.set_halign(gtk4::Align::Center);
             self.checkbox_size_group.add_widget(cb);
             self.grid.attach(cb, next_col, row, 1, 1);
+            row_widgets.push(cb.clone().upcast());
             next_col += 1;
             input_col = next_col;
             input_width = 3 - next_col;
@@ -76,6 +85,7 @@ impl ConfigSectionForm {
             placeholder.set_halign(gtk4::Align::Center);
             self.checkbox_size_group.add_widget(&placeholder);
             self.grid.attach(&placeholder, next_col, row, 1, 1);
+            row_widgets.push(placeholder.upcast());
             next_col += 1;
             input_col = next_col;
             input_width = 3 - next_col;
@@ -99,8 +109,10 @@ impl ConfigSectionForm {
 
         self.input_size_group.add_widget(&input_box);
         self.grid.attach(&input_box, input_col, row, input_width, 1);
+        row_widgets.push(input_box.upcast());
 
         self.next_row.set(row + 1);
+        row_widgets
     }
 
     pub fn widget(&self) -> &gtk4::Grid {

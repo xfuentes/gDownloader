@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-08 05:50+0000\n"
+"POT-Creation-Date: 2026-09-08 19:04+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Norwegian\n"
@@ -29,6 +29,22 @@ msgstr "JDownloader svarte ikke i tide"
 msgid "Choose visible fields"
 msgstr "Velg synlige felt"
 
+#: src/gui/pending_jd_dialogs.rs:61
+msgid "JDownloader"
+msgstr "JDownloader"
+
+#: src/gui/pending_jd_dialogs.rs:114
+msgid "Don't ask again for this"
+msgstr "Ikke spør igjen for dette"
+
+#: src/gui/pending_jd_dialogs.rs:120
+msgid "Deny"
+msgstr "Avslå"
+
+#: src/gui/pending_jd_dialogs.rs:121
+msgid "Allow"
+msgstr "Tillat"
+
 #: src/gui/clipboard.rs:208
 msgid "New links from clipboard"
 msgstr "Nye lenker fra utklippstavlen"
@@ -47,32 +63,32 @@ msgstr[1] "{n} lenker fanget"
 msgid "Show"
 msgstr "Vis"
 
-#: src/gui/settings_panel.rs:32 src/gui/settings_panel.rs:50
+#: src/gui/settings_panel.rs:80 src/gui/settings_panel.rs:101
 msgid "General"
 msgstr "Generelt"
 
-#: src/gui/settings_panel.rs:35 src/gui/settings_panel.rs:53
+#: src/gui/settings_panel.rs:83 src/gui/settings_panel.rs:104
 #: src/gui/components/settings/account_manager.rs:43
 msgid "Account Manager"
 msgstr "Kontobehandling"
 
-#: src/gui/settings_panel.rs:39 src/gui/settings_panel.rs:57
+#: src/gui/settings_panel.rs:87 src/gui/settings_panel.rs:108
 #: src/gui/components/settings/package_manager.rs:54
 msgid "Package Manager"
 msgstr "Pakkebehandling"
 
-#: src/gui/settings_panel.rs:43 src/gui/settings_panel.rs:61
-#: src/gui/components/settings/extension_manager.rs:69
+#: src/gui/settings_panel.rs:91 src/gui/settings_panel.rs:112
+#: src/gui/components/settings/extension_manager.rs:171
 msgid "Extension Manager"
 msgstr "Utvidelsesbehandling"
 
-#: src/gui/settings_panel.rs:45 src/gui/settings_panel.rs:63
-#: src/gui/components/settings/scripts.rs:51
+#: src/gui/settings_panel.rs:93 src/gui/settings_panel.rs:98
+#: src/gui/components/settings/scripts.rs:84
 msgid "Scripts"
 msgstr "Skript"
 
-#: src/gui/settings_panel.rs:72 src/gui/settings_panel.rs:123
-#: src/gui/settings_panel.rs:138 src/gui/main_menu_bar.rs:37
+#: src/gui/settings_panel.rs:180 src/gui/settings_panel.rs:231
+#: src/gui/settings_panel.rs:246 src/gui/main_menu_bar.rs:37
 #: src/gui/menus/settings.rs:10 src/gui/menus/settings.rs:46
 #: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
 msgid "Settings"
@@ -92,7 +108,7 @@ msgstr "Lenker"
 msgid "Size"
 msgstr "Størrelse"
 
-#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1888
+#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1890
 msgid "Online"
 msgstr "Online"
 
@@ -102,11 +118,11 @@ msgstr "Online"
 msgid "Hoster"
 msgstr "Hoster"
 
-#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1892
+#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1894
 msgid "Offline"
 msgstr "Offline"
 
-#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1900
+#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1902
 msgid "Unknown"
 msgstr "Ukjent"
 
@@ -157,8 +173,8 @@ msgstr "Lim inn lenker"
 msgid "Clear linkgrabber"
 msgstr "Tøm linksamleren"
 
-#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:210 src/gui/mod.rs:234
-#: src/gui/mod.rs:287 src/gui/mod.rs:296
+#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:270 src/gui/mod.rs:294
+#: src/gui/mod.rs:347 src/gui/mod.rs:356
 msgid "Delete"
 msgstr "Slett"
 
@@ -246,41 +262,41 @@ msgstr "Vil du virkelig utføre denne opprydningshandlingen:"
 msgid "Delete Selected Links?"
 msgstr "Slette valgte lenker?"
 
-#: src/gui/link_grabber_panel.rs:1647 src/gui/downloads_panel.rs:1694
+#: src/gui/link_grabber_panel.rs:1648 src/gui/downloads_panel.rs:1695
 msgid "Tasks to do:"
 msgstr "Oppgaver som skal utføres:"
 
-#: src/gui/link_grabber_panel.rs:1656 src/gui/downloads_panel.rs:1703
+#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
 msgid "Delete selected link"
 msgid_plural "Delete selected links"
 msgstr[0] "Slett valgt lenke"
 msgstr[1] "Slett valgte lenker"
 
-#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
+#: src/gui/link_grabber_panel.rs:1658 src/gui/downloads_panel.rs:1705
 msgid "{n} link remaining"
 msgid_plural "{n} links remaining"
 msgstr[0] "{n} lenke gjenstår"
 msgstr[1] "{n} lenker gjenstår"
 
-#: src/gui/link_grabber_panel.rs:1674 src/gui/downloads_panel.rs:1745
+#: src/gui/link_grabber_panel.rs:1676 src/gui/downloads_panel.rs:1747
 msgid "Don't show this again"
 msgstr "Ikke vis dette igjen"
 
 #. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.2.0)  #-#-#-#-#
 #. Buttons
-#: src/gui/link_grabber_panel.rs:1680 src/gui/downloads_panel.rs:1751
+#: src/gui/link_grabber_panel.rs:1682 src/gui/downloads_panel.rs:1753
 #: src/gui/dialogs/account_add_dialog.rs:114
 #: src/gui/dialogs/packagizer_rule_dialog.rs:443
-#: src/gui/dialogs/script_edit_dialog.rs:96 src/gui/donate.rs:33
+#: src/gui/dialogs/script_edit_dialog.rs:119 src/gui/donate.rs:34
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/gui/link_grabber_panel.rs:1681 src/gui/downloads_panel.rs:1752
-#: src/gui/donate.rs:37
+#: src/gui/link_grabber_panel.rs:1683 src/gui/downloads_panel.rs:1754
+#: src/gui/donate.rs:38
 msgid "Continue"
 msgstr "Fortsett"
 
-#: src/gui/link_grabber_panel.rs:1896
+#: src/gui/link_grabber_panel.rs:1898
 msgid "Temporarily Unknown"
 msgstr "Midlertidig ukjent"
 
@@ -321,8 +337,8 @@ msgstr "Mislykkede nedlastinger"
 
 #: src/gui/downloads_panel.rs:677
 #: src/gui/components/settings/package_manager.rs:115
-#: src/gui/components/settings/scripts.rs:104
-#: src/gui/dialogs/script_edit_dialog.rs:40
+#: src/gui/components/settings/scripts.rs:166
+#: src/gui/dialogs/script_edit_dialog.rs:41
 msgid "Name"
 msgstr "Navn"
 
@@ -389,25 +405,23 @@ msgstr[1] "{n} filer lastet ned"
 msgid "Delete Selected Downloads?"
 msgstr "Slette valgte nedlastinger?"
 
-#: src/gui/downloads_panel.rs:1709
+#: src/gui/downloads_panel.rs:1710
 msgid "{n} file ({}) on disk"
 msgid_plural "{n} files ({}) on disk"
 msgstr[0] "{n} fil ({}) på disk"
 msgstr[1] "{n} filer ({}) på disk"
 
-#: src/gui/downloads_panel.rs:1721
+#: src/gui/downloads_panel.rs:1723
 msgid "Keep all downloaded files - just remove links from JDownloader"
 msgstr "Behold alle nedlastede filer – bare fjern lenker fra JDownloader"
 
-#: src/gui/downloads_panel.rs:1722
+#: src/gui/downloads_panel.rs:1724
 msgid "Move downloaded files to Trash & remove links from JDownloader"
-msgstr ""
-"Flytt nedlastede filer til papirkurven og fjern lenker fra JDownloader"
+msgstr "Flytt nedlastede filer til papirkurven og fjern lenker fra JDownloader"
 
-#: src/gui/downloads_panel.rs:1723
+#: src/gui/downloads_panel.rs:1725
 msgid ""
-"Delete downloaded files permanently from disk & remove links from "
-"JDownloader"
+"Delete downloaded files permanently from disk & remove links from JDownloader"
 msgstr ""
 "Slett nedlastede filer permanent fra disk og fjern lenker fra JDownloader"
 
@@ -443,7 +457,7 @@ msgstr "Sikkerhetskopi"
 msgid "Restart"
 msgstr "Start på nytt"
 
-#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:126
+#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:203
 msgid "Exit"
 msgstr "Avslutt"
 
@@ -493,15 +507,15 @@ msgstr "Maks. samt. nedlastinger per hoster"
 msgid "Speed Limit"
 msgstr "Hastighetsgrense"
 
-#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:125
+#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:185
 msgid "Download"
 msgstr "Nedlasting"
 
-#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:129
+#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:189
 msgid "Link Collector"
 msgstr "Lenkesamler"
 
-#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:134
+#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:194
 msgid "Donate"
 msgstr "Doner"
 
@@ -530,13 +544,14 @@ msgstr "Ubegrenset"
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
-#: src/gui/components/settings/scripts.rs:78
+#: src/gui/components/settings/scripts.rs:125
 msgid "Add"
 msgstr "Legg til"
 
 #: src/gui/components/account_table.rs:147
+#: src/gui/components/settings/extension_manager.rs:324
 #: src/gui/components/settings/package_manager.rs:84
-#: src/gui/components/settings/scripts.rs:81
+#: src/gui/components/settings/scripts.rs:128
 msgid "Remove"
 msgstr "Fjern"
 
@@ -545,7 +560,7 @@ msgid "Buy"
 msgstr "Kjøp"
 
 #: src/gui/components/account_table.rs:149
-#: src/gui/components/settings/extension_manager.rs:75
+#: src/gui/components/settings/extension_manager.rs:177
 msgid "Refresh"
 msgstr "Oppdater"
 
@@ -577,25 +592,33 @@ msgstr "Bruk konto(er) til nedlasting"
 msgid "Enter and manage all your Premium/Gold/Platinum accounts."
 msgstr "Angi og administrer alle dine Premium/Gold/Platinum-kontoer."
 
-#: src/gui/components/settings/extension_manager.rs:70
+#: src/gui/components/settings/extension_manager.rs:172
 msgid "Enable, disable or install JDownloader extensions."
 msgstr "Aktiver, deaktiver eller installer JDownloader-utvidelser."
 
-#: src/gui/components/settings/extension_manager.rs:87
+#: src/gui/components/settings/extension_manager.rs:193
 msgid "Loading extensions…"
 msgstr "Laster utvidelser…"
 
-#: src/gui/components/settings/extension_manager.rs:129
+#: src/gui/components/settings/extension_manager.rs:234
 msgid "No extensions found."
 msgstr "Ingen utvidelser funnet."
 
-#: src/gui/components/settings/extension_manager.rs:203
+#: src/gui/components/settings/extension_manager.rs:337
+msgid "Removing extension…"
+msgstr "Fjerner utvidelse…"
+
+#: src/gui/components/settings/extension_manager.rs:361
+msgid "This extension is built into JDownloader and cannot be removed."
+msgstr "Denne utvidelsen er innebygd i JDownloader og kan ikke fjernes."
+
+#: src/gui/components/settings/extension_manager.rs:368
 msgid "Install"
 msgstr "Installer"
 
-#: src/gui/components/settings/extension_manager.rs:211
-msgid "Installing…"
-msgstr "Installerer…"
+#: src/gui/components/settings/extension_manager.rs:379
+msgid "Installing extension…"
+msgstr "Installerer utvidelse…"
 
 #: src/gui/components/settings/general.rs:143
 #: src/gui/dialogs/packagizer_rule_dialog.rs:154
@@ -609,11 +632,11 @@ msgstr "Nedlastingsmappe"
 
 #: src/gui/components/settings/general.rs:158
 msgid ""
-"Set the default download path here. Changing default path here, affects only"
-" new downloads."
+"Set the default download path here. Changing default path here, affects only "
+"new downloads."
 msgstr ""
-"Angi standard nedlastingsbane her. Endring av standardbanen her påvirker kun"
-" nye nedlastinger."
+"Angi standard nedlastingsbane her. Endring av standardbanen her påvirker kun "
+"nye nedlastinger."
 
 #: src/gui/components/settings/general.rs:178
 msgid "Maximum of simultaneous downloads per host"
@@ -755,7 +778,7 @@ msgstr ""
 "egenskapene deres."
 
 #: src/gui/components/settings/package_manager.rs:82
-#: src/gui/components/settings/scripts.rs:79
+#: src/gui/components/settings/scripts.rs:126
 msgid "Edit"
 msgstr "Rediger"
 
@@ -774,7 +797,7 @@ msgid "Move down"
 msgstr "Flytt ned"
 
 #: src/gui/components/settings/package_manager.rs:107
-#: src/gui/components/settings/scripts.rs:96
+#: src/gui/components/settings/scripts.rs:158
 #: src/gui/dialogs/packagizer_rule_dialog.rs:106
 msgid "Enabled"
 msgstr "Aktivert"
@@ -787,18 +810,38 @@ msgstr "Ny regel"
 msgid "copy"
 msgstr "kopi"
 
-#: src/gui/components/settings/scripts.rs:53
+#: src/gui/components/settings/scripts.rs:26
+msgid "Create an Info-File in the Download-Folder with detailed information"
+msgstr "Opprett en infofil i nedlastingsmappen med detaljert informasjon"
+
+#: src/gui/components/settings/scripts.rs:32
+msgid "Play a Wav File"
+msgstr "Spill av en Wav-fil"
+
+#: src/gui/components/settings/scripts.rs:37
+msgid "Play a Sound (Wav) when downloads and extraction stopped"
+msgstr "Spill av en lyd (Wav) når nedlastinger og utpakking stopper"
+
+#: src/gui/components/settings/scripts.rs:44
+msgid "Reset a Download if the speed is low"
+msgstr "Tilbakestill en nedlasting hvis hastigheten er lav"
+
+#: src/gui/components/settings/scripts.rs:86
 msgid ""
 "Run JavaScript automatically when a chosen event occurs (Eventscripter)."
 msgstr ""
 "Kjør JavaScript automatisk når en valgt hendelse inntreffer (Eventscripter)."
 
-#: src/gui/components/settings/scripts.rs:113
-#: src/gui/dialogs/script_edit_dialog.rs:47
+#: src/gui/components/settings/scripts.rs:131
+msgid "Example Scripts"
+msgstr "Eksempelskript"
+
+#: src/gui/components/settings/scripts.rs:175
+#: src/gui/dialogs/script_edit_dialog.rs:48
 msgid "Event trigger"
 msgstr "Hendelsesutløser"
 
-#: src/gui/components/settings/scripts.rs:196
+#: src/gui/components/settings/scripts.rs:289
 msgid "New script"
 msgstr "Nytt skript"
 
@@ -842,7 +885,7 @@ msgstr "Angi passord..."
 
 #: src/gui/dialogs/account_add_dialog.rs:115
 #: src/gui/dialogs/packagizer_rule_dialog.rs:444
-#: src/gui/dialogs/script_edit_dialog.rs:97
+#: src/gui/dialogs/script_edit_dialog.rs:120
 msgid "Save"
 msgstr "Lagre"
 
@@ -1062,27 +1105,27 @@ msgstr "Stopp behandling av flere regler hvis denne regelen samsvarer"
 msgid "This is a predefined rule and cannot be modified."
 msgstr "Dette er en forhåndsdefinert regel og kan ikke endres."
 
-#: src/gui/dialogs/script_edit_dialog.rs:18
+#: src/gui/dialogs/script_edit_dialog.rs:19
 msgid "Edit Script"
 msgstr "Rediger skript"
 
-#: src/gui/dialogs/script_edit_dialog.rs:50
+#: src/gui/dialogs/script_edit_dialog.rs:59
 msgid "Run synchronously"
 msgstr "Kjør synkront"
 
-#: src/gui/dialogs/script_edit_dialog.rs:57
+#: src/gui/dialogs/script_edit_dialog.rs:66
 msgid "Interval (ms)"
 msgstr "Intervall (ms)"
 
-#: src/gui/dialogs/script_edit_dialog.rs:61
+#: src/gui/dialogs/script_edit_dialog.rs:70
 msgid "Trigger"
 msgstr "Utløser"
 
-#: src/gui/dialogs/script_edit_dialog.rs:62
+#: src/gui/dialogs/script_edit_dialog.rs:71
 msgid "Choose when this script should run."
 msgstr "Velg når dette skriptet skal kjøres."
 
-#: src/gui/dialogs/script_edit_dialog.rs:67
+#: src/gui/dialogs/script_edit_dialog.rs:76
 msgid "Script (JavaScript)"
 msgstr "Skript (JavaScript)"
 
@@ -1095,26 +1138,26 @@ msgid ""
 "If you are a satisfied user of JDownloader, please think about contributing "
 "to this project. JDownloader is the result of daily hard work since more "
 "than %s1 years. We need your help to keep it free of charge, free of "
-"advertising, free of installer bundles and to improve JDownloader even more."
-" Moreover, donating is a good way to tell us what modules we should focus "
-"our work on."
+"advertising, free of installer bundles and to improve JDownloader even more. "
+"Moreover, donating is a good way to tell us what modules we should focus our "
+"work on."
 msgstr ""
 "Hvis du er en fornøyd bruker av JDownloader, bør du vurdere å bidra til "
-"dette prosjektet. JDownloader er resultatet av daglig hardt arbeid i mer enn"
-" %s1 år. Vi trenger din hjelp for å holde det gratis, uten reklame, uten "
+"dette prosjektet. JDownloader er resultatet av daglig hardt arbeid i mer enn "
+"%s1 år. Vi trenger din hjelp for å holde det gratis, uten reklame, uten "
 "installasjonspakker, og for å forbedre JDownloader enda mer. Å donere er "
 "dessuten en god måte å fortelle oss hvilke moduler vi bør fokusere arbeidet "
 "vårt på."
 
-#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:104
+#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:143
 msgid "Start downloads"
 msgstr "Start nedlastinger"
 
-#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:118
+#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:159
 msgid "Pause downloads"
 msgstr "Sett nedlastinger på pause"
 
-#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:111
+#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:151
 msgid "Stop downloads"
 msgstr "Stopp nedlastinger"
 
@@ -1127,15 +1170,15 @@ msgstr "Flytt til toppen"
 msgid "Move bottom"
 msgstr "Flytt til bunnen"
 
-#: src/gui/main_tool_bar.rs:158
+#: src/gui/main_tool_bar.rs:158 src/gui/tray.rs:177
 msgid "Clipboard monitoring"
 msgstr "Overvåking av utklippstavle"
 
-#: src/gui/main_tool_bar.rs:163
+#: src/gui/main_tool_bar.rs:163 src/gui/tray.rs:185
 msgid "Auto reconnect"
 msgstr "Automatisk tilkobling på nytt"
 
-#: src/gui/main_tool_bar.rs:171
+#: src/gui/main_tool_bar.rs:171 src/gui/tray.rs:194
 msgid "Use premium accounts"
 msgstr "Bruk premiumkontoer"
 
@@ -1220,32 +1263,38 @@ msgstr "Kommentar:"
 msgid "File Properties: {}"
 msgstr "Filegenskaper: {}"
 
-#: src/gui/window.rs:174
+#. Mirrors JDownloader's own tray menu entry
+#. (`TrayOpenDefaultDownloadDirectory` / `IconKey.ICON_SAVE`).
+#: src/gui/tray.rs:170
+msgid "Open download folder"
+msgstr "Åpne nedlastingsmappe"
+
+#: src/gui/window.rs:179
 msgid "Waiting for JDownloader to exit..."
 msgstr "Venter på at JDownloader skal avsluttes..."
 
-#: src/gui/mod.rs:116
+#: src/gui/mod.rs:176
 msgid "The power of JDownloader, the elegance of GNOME"
 msgstr "Kraften til JDownloader, eleganse fra GNOME"
 
-#: src/gui/mod.rs:199 src/gui/mod.rs:221
+#: src/gui/mod.rs:259 src/gui/mod.rs:281
 msgid "Start Downloads"
 msgstr "Start nedlastinger"
 
-#: src/gui/mod.rs:204 src/gui/mod.rs:228
+#: src/gui/mod.rs:264 src/gui/mod.rs:288
 msgid "Start All Downloads"
 msgstr "Start alle nedlastinger"
 
 #. Status bar.
-#: src/gui/mod.rs:463
+#: src/gui/mod.rs:525
 msgid "Ready"
 msgstr "Klar"
 
-#: src/gui/mod.rs:519
+#: src/gui/mod.rs:581 src/jd/settings/event_scripter_settings.rs:138
 msgid "JDownloader started"
 msgstr "JDownloader startet"
 
-#: src/gui/mod.rs:554
+#: src/gui/mod.rs:616
 msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
 msgstr "Fant ikke JDownloader.jar. Angi JDOWNLOADER_JAR."
 
@@ -1332,6 +1381,117 @@ msgstr "JDownloader.jar har ingen overordnet mappe"
 #: src/jd/process.rs:32
 msgid "JDownloader.jar has no file name"
 msgstr "JDownloader.jar har ikke noe filnavn"
+
+#: src/jd/settings/event_scripter_settings.rs:133
+msgid "A Download started"
+msgstr "En nedlasting startet"
+
+#: src/jd/settings/event_scripter_settings.rs:134
+msgid "A Download stopped"
+msgstr "En nedlasting stoppet"
+
+#: src/jd/settings/event_scripter_settings.rs:135
+msgid "Package finished"
+msgstr "Pakke fullført"
+
+#: src/jd/settings/event_scripter_settings.rs:136
+msgid "Any Extraction Event"
+msgstr "Enhver utpakkingshendelse"
+
+#: src/jd/settings/event_scripter_settings.rs:137
+msgid "Archive extraction finished"
+msgstr "Arkivutpakking fullført"
+
+#: src/jd/settings/event_scripter_settings.rs:139
+msgid "None"
+msgstr "Ingen"
+
+#: src/jd/settings/event_scripter_settings.rs:140
+msgid "Remote API Event fired"
+msgstr "Ekstern API-hendelse utløst"
+
+#: src/jd/settings/event_scripter_settings.rs:141
+msgid "A new file has been created"
+msgstr "En ny fil er opprettet"
+
+#: src/jd/settings/event_scripter_settings.rs:142
+msgid "New Crawler Job"
+msgstr "Ny crawler-jobb"
+
+#: src/jd/settings/event_scripter_settings.rs:143
+msgid "Finished Crawler Job"
+msgstr "Crawler-jobb fullført"
+
+#: src/jd/settings/event_scripter_settings.rs:144
+msgid "A new link has been added"
+msgstr "En ny lenke er lagt til"
+
+#: src/jd/settings/event_scripter_settings.rs:145
+msgid "Packagizer Hook"
+msgstr "Packagizer-hook"
+
+#: src/jd/settings/event_scripter_settings.rs:146
+msgid "Download Controller paused"
+msgstr "Nedlastingskontroller pauset"
+
+#: src/jd/settings/event_scripter_settings.rs:147
+msgid "Download Controller started"
+msgstr "Nedlastingskontroller startet"
+
+#: src/jd/settings/event_scripter_settings.rs:148
+msgid "Download Controller stopped"
+msgstr "Nedlastingskontroller stoppet"
+
+#: src/jd/settings/event_scripter_settings.rs:149
+msgid "Before a Reconnect"
+msgstr "Før en gjentilkobling"
+
+#: src/jd/settings/event_scripter_settings.rs:150
+msgid "After a Reconnect"
+msgstr "Etter en gjentilkobling"
+
+#: src/jd/settings/event_scripter_settings.rs:151
+msgid "Before a Captcha Challenge"
+msgstr "Før en captcha-utfordring"
+
+#: src/jd/settings/event_scripter_settings.rs:152
+msgid "After a Captcha Challenge"
+msgstr "Etter en captcha-utfordring"
+
+#: src/jd/settings/event_scripter_settings.rs:153
+msgid "Interval"
+msgstr "Intervall"
+
+#: src/jd/settings/event_scripter_settings.rs:154
+msgid "Toolbar Button Pressed"
+msgstr "Verktøylinjeknapp trykket"
+
+#: src/jd/settings/event_scripter_settings.rs:155
+msgid "Main Menu Button Pressed"
+msgstr "Hovedmenyknapp trykket"
+
+#: src/jd/settings/event_scripter_settings.rs:157
+msgid "Downloadlist Contextmenu Button Pressed"
+msgstr "Kontekstmenyknapp for nedlastingsliste trykket"
+
+#: src/jd/settings/event_scripter_settings.rs:160
+msgid "Linkgrabber Contextmenu Button Pressed"
+msgstr "Kontekstmenyknapp for lenkesamler trykket"
+
+#: src/jd/settings/event_scripter_settings.rs:163
+msgid "Downloadlist Bottombar Button Pressed"
+msgstr "Bunnlinjeknapp for nedlastingsliste trykket"
+
+#: src/jd/settings/event_scripter_settings.rs:166
+msgid "Linkgrabber Bottombar Button Pressed"
+msgstr "Bunnlinjeknapp for lenkesamler trykket"
+
+#: src/jd/settings/event_scripter_settings.rs:168
+msgid "Traymenu Button Pressed"
+msgstr "Systemstatusfelt-menyknapp trykket"
+
+#~ msgid "Installing…"
+#~ msgstr "Installerer…"
 
 #~ msgid "JDownloader for GNOME"
 #~ msgstr "JDownloader for GNOME"

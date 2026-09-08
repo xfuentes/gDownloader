@@ -21,6 +21,7 @@ pub fn show(parent: &adw::ApplicationWindow) {
 
     let text = gtk4::Label::new(Some(&body));
     text.set_wrap(true);
+    text.set_natural_wrap_mode(gtk4::NaturalWrapMode::Word);
     text.set_halign(gtk4::Align::Fill);
     text.set_hexpand(true);
     text.set_xalign(0.0);

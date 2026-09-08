@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-08 05:50+0000\n"
+"POT-Creation-Date: 2026-09-08 19:04+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -29,6 +29,22 @@ msgstr "JDownloader zamanında yanıt vermedi"
 msgid "Choose visible fields"
 msgstr "Görünür alanları seçin"
 
+#: src/gui/pending_jd_dialogs.rs:61
+msgid "JDownloader"
+msgstr "JDownloader"
+
+#: src/gui/pending_jd_dialogs.rs:114
+msgid "Don't ask again for this"
+msgstr "Bunun için tekrar sorma"
+
+#: src/gui/pending_jd_dialogs.rs:120
+msgid "Deny"
+msgstr "Reddet"
+
+#: src/gui/pending_jd_dialogs.rs:121
+msgid "Allow"
+msgstr "İzin Ver"
+
 #: src/gui/clipboard.rs:208
 msgid "New links from clipboard"
 msgstr "Panodan yeni bağlantılar"
@@ -47,32 +63,32 @@ msgstr[1] "{n} bağlantı yakalandı"
 msgid "Show"
 msgstr "Göster"
 
-#: src/gui/settings_panel.rs:32 src/gui/settings_panel.rs:50
+#: src/gui/settings_panel.rs:80 src/gui/settings_panel.rs:101
 msgid "General"
 msgstr "Genel"
 
-#: src/gui/settings_panel.rs:35 src/gui/settings_panel.rs:53
+#: src/gui/settings_panel.rs:83 src/gui/settings_panel.rs:104
 #: src/gui/components/settings/account_manager.rs:43
 msgid "Account Manager"
 msgstr "Hesap Yöneticisi"
 
-#: src/gui/settings_panel.rs:39 src/gui/settings_panel.rs:57
+#: src/gui/settings_panel.rs:87 src/gui/settings_panel.rs:108
 #: src/gui/components/settings/package_manager.rs:54
 msgid "Package Manager"
 msgstr "Paket Yöneticisi"
 
-#: src/gui/settings_panel.rs:43 src/gui/settings_panel.rs:61
-#: src/gui/components/settings/extension_manager.rs:69
+#: src/gui/settings_panel.rs:91 src/gui/settings_panel.rs:112
+#: src/gui/components/settings/extension_manager.rs:171
 msgid "Extension Manager"
 msgstr "Uzantı Yöneticisi"
 
-#: src/gui/settings_panel.rs:45 src/gui/settings_panel.rs:63
-#: src/gui/components/settings/scripts.rs:51
+#: src/gui/settings_panel.rs:93 src/gui/settings_panel.rs:98
+#: src/gui/components/settings/scripts.rs:84
 msgid "Scripts"
 msgstr "Betikler"
 
-#: src/gui/settings_panel.rs:72 src/gui/settings_panel.rs:123
-#: src/gui/settings_panel.rs:138 src/gui/main_menu_bar.rs:37
+#: src/gui/settings_panel.rs:180 src/gui/settings_panel.rs:231
+#: src/gui/settings_panel.rs:246 src/gui/main_menu_bar.rs:37
 #: src/gui/menus/settings.rs:10 src/gui/menus/settings.rs:46
 #: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
 msgid "Settings"
@@ -92,7 +108,7 @@ msgstr "Bağlantılar"
 msgid "Size"
 msgstr "Boyut"
 
-#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1888
+#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1890
 msgid "Online"
 msgstr "Çevrimiçi"
 
@@ -102,11 +118,11 @@ msgstr "Çevrimiçi"
 msgid "Hoster"
 msgstr "Sunucu"
 
-#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1892
+#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1894
 msgid "Offline"
 msgstr "Çevrimdışı"
 
-#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1900
+#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1902
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
@@ -157,8 +173,8 @@ msgstr "Bağlantıları yapıştır"
 msgid "Clear linkgrabber"
 msgstr "Bağlantı toplayıcıyı temizle"
 
-#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:210 src/gui/mod.rs:234
-#: src/gui/mod.rs:287 src/gui/mod.rs:296
+#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:270 src/gui/mod.rs:294
+#: src/gui/mod.rs:347 src/gui/mod.rs:356
 msgid "Delete"
 msgstr "Sil"
 
@@ -246,41 +262,41 @@ msgstr "Bu temizleme işlemini gerçekleştirmek istediğinizden emin misiniz:"
 msgid "Delete Selected Links?"
 msgstr "Seçilen bağlantılar silinsin mi?"
 
-#: src/gui/link_grabber_panel.rs:1647 src/gui/downloads_panel.rs:1694
+#: src/gui/link_grabber_panel.rs:1648 src/gui/downloads_panel.rs:1695
 msgid "Tasks to do:"
 msgstr "Yapılacak işlemler:"
 
-#: src/gui/link_grabber_panel.rs:1656 src/gui/downloads_panel.rs:1703
+#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
 msgid "Delete selected link"
 msgid_plural "Delete selected links"
 msgstr[0] "Seçilen bağlantıyı sil"
 msgstr[1] "Seçilen bağlantıları sil"
 
-#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
+#: src/gui/link_grabber_panel.rs:1658 src/gui/downloads_panel.rs:1705
 msgid "{n} link remaining"
 msgid_plural "{n} links remaining"
 msgstr[0] "{n} bağlantı kaldı"
 msgstr[1] "{n} bağlantı kaldı"
 
-#: src/gui/link_grabber_panel.rs:1674 src/gui/downloads_panel.rs:1745
+#: src/gui/link_grabber_panel.rs:1676 src/gui/downloads_panel.rs:1747
 msgid "Don't show this again"
 msgstr "Bunu bir daha gösterme"
 
 #. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.2.0)  #-#-#-#-#
 #. Buttons
-#: src/gui/link_grabber_panel.rs:1680 src/gui/downloads_panel.rs:1751
+#: src/gui/link_grabber_panel.rs:1682 src/gui/downloads_panel.rs:1753
 #: src/gui/dialogs/account_add_dialog.rs:114
 #: src/gui/dialogs/packagizer_rule_dialog.rs:443
-#: src/gui/dialogs/script_edit_dialog.rs:96 src/gui/donate.rs:33
+#: src/gui/dialogs/script_edit_dialog.rs:119 src/gui/donate.rs:34
 msgid "Cancel"
 msgstr "İptal"
 
-#: src/gui/link_grabber_panel.rs:1681 src/gui/downloads_panel.rs:1752
-#: src/gui/donate.rs:37
+#: src/gui/link_grabber_panel.rs:1683 src/gui/downloads_panel.rs:1754
+#: src/gui/donate.rs:38
 msgid "Continue"
 msgstr "Devam"
 
-#: src/gui/link_grabber_panel.rs:1896
+#: src/gui/link_grabber_panel.rs:1898
 msgid "Temporarily Unknown"
 msgstr "Geçici olarak bilinmiyor"
 
@@ -321,8 +337,8 @@ msgstr "Başarısız indirmeler"
 
 #: src/gui/downloads_panel.rs:677
 #: src/gui/components/settings/package_manager.rs:115
-#: src/gui/components/settings/scripts.rs:104
-#: src/gui/dialogs/script_edit_dialog.rs:40
+#: src/gui/components/settings/scripts.rs:166
+#: src/gui/dialogs/script_edit_dialog.rs:41
 msgid "Name"
 msgstr "Ad"
 
@@ -389,26 +405,25 @@ msgstr[1] "{n} dosya başarıyla indirildi"
 msgid "Delete Selected Downloads?"
 msgstr "Seçilen indirmeler silinsin mi?"
 
-#: src/gui/downloads_panel.rs:1709
+#: src/gui/downloads_panel.rs:1710
 msgid "{n} file ({}) on disk"
 msgid_plural "{n} files ({}) on disk"
 msgstr[0] "{n} dosya ({}) diskte"
 msgstr[1] "{n} dosya ({}) diskte"
 
-#: src/gui/downloads_panel.rs:1721
+#: src/gui/downloads_panel.rs:1723
 msgid "Keep all downloaded files - just remove links from JDownloader"
 msgstr ""
 "İndirilen tüm dosyaları koru - yalnızca bağlantıları JDownloader'dan kaldır"
 
-#: src/gui/downloads_panel.rs:1722
+#: src/gui/downloads_panel.rs:1724
 msgid "Move downloaded files to Trash & remove links from JDownloader"
 msgstr ""
 "İndirilen dosyaları Çöp Kutusuna taşı ve bağlantıları JDownloader'dan kaldır"
 
-#: src/gui/downloads_panel.rs:1723
+#: src/gui/downloads_panel.rs:1725
 msgid ""
-"Delete downloaded files permanently from disk & remove links from "
-"JDownloader"
+"Delete downloaded files permanently from disk & remove links from JDownloader"
 msgstr ""
 "İndirilen dosyaları diskten kalıcı olarak sil ve bağlantıları "
 "JDownloader'dan kaldır"
@@ -445,7 +460,7 @@ msgstr "Yedekle"
 msgid "Restart"
 msgstr "Yeniden başlat"
 
-#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:126
+#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:203
 msgid "Exit"
 msgstr "Çıkış"
 
@@ -495,15 +510,15 @@ msgstr "Sunucu Başına Maks. Eşzamanlı İndirme"
 msgid "Speed Limit"
 msgstr "Hız Sınırı"
 
-#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:125
+#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:185
 msgid "Download"
 msgstr "İndirme"
 
-#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:129
+#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:189
 msgid "Link Collector"
 msgstr "Bağlantı Toplayıcı"
 
-#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:134
+#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:194
 msgid "Donate"
 msgstr "Bağış Yap"
 
@@ -532,13 +547,14 @@ msgstr "Sınırsız"
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
-#: src/gui/components/settings/scripts.rs:78
+#: src/gui/components/settings/scripts.rs:125
 msgid "Add"
 msgstr "Ekle"
 
 #: src/gui/components/account_table.rs:147
+#: src/gui/components/settings/extension_manager.rs:324
 #: src/gui/components/settings/package_manager.rs:84
-#: src/gui/components/settings/scripts.rs:81
+#: src/gui/components/settings/scripts.rs:128
 msgid "Remove"
 msgstr "Kaldır"
 
@@ -547,7 +563,7 @@ msgid "Buy"
 msgstr "Satın Al"
 
 #: src/gui/components/account_table.rs:149
-#: src/gui/components/settings/extension_manager.rs:75
+#: src/gui/components/settings/extension_manager.rs:177
 msgid "Refresh"
 msgstr "Yenile"
 
@@ -579,26 +595,34 @@ msgstr "İndirme için hesap(lar)ı kullan"
 msgid "Enter and manage all your Premium/Gold/Platinum accounts."
 msgstr "Tüm Premium/Gold/Platinum hesaplarınızı girin ve yönetin."
 
-#: src/gui/components/settings/extension_manager.rs:70
+#: src/gui/components/settings/extension_manager.rs:172
 msgid "Enable, disable or install JDownloader extensions."
 msgstr ""
 "JDownloader uzantılarını etkinleştirin, devre dışı bırakın veya yükleyin."
 
-#: src/gui/components/settings/extension_manager.rs:87
+#: src/gui/components/settings/extension_manager.rs:193
 msgid "Loading extensions…"
 msgstr "Uzantılar yükleniyor…"
 
-#: src/gui/components/settings/extension_manager.rs:129
+#: src/gui/components/settings/extension_manager.rs:234
 msgid "No extensions found."
 msgstr "Uzantı bulunamadı."
 
-#: src/gui/components/settings/extension_manager.rs:203
+#: src/gui/components/settings/extension_manager.rs:337
+msgid "Removing extension…"
+msgstr "Uzantı kaldırılıyor…"
+
+#: src/gui/components/settings/extension_manager.rs:361
+msgid "This extension is built into JDownloader and cannot be removed."
+msgstr "Bu uzantı JDownloader'a yerleşiktir ve kaldırılamaz."
+
+#: src/gui/components/settings/extension_manager.rs:368
 msgid "Install"
 msgstr "Yükle"
 
-#: src/gui/components/settings/extension_manager.rs:211
-msgid "Installing…"
-msgstr "Yükleniyor…"
+#: src/gui/components/settings/extension_manager.rs:379
+msgid "Installing extension…"
+msgstr "Uzantı yükleniyor…"
 
 #: src/gui/components/settings/general.rs:143
 #: src/gui/dialogs/packagizer_rule_dialog.rs:154
@@ -612,8 +636,8 @@ msgstr "İndirme Klasörü"
 
 #: src/gui/components/settings/general.rs:158
 msgid ""
-"Set the default download path here. Changing default path here, affects only"
-" new downloads."
+"Set the default download path here. Changing default path here, affects only "
+"new downloads."
 msgstr ""
 "Varsayılan indirme yolunu burada ayarlayın. Buradaki değişiklik yalnızca "
 "yeni indirmeleri etkiler."
@@ -728,8 +752,8 @@ msgid ""
 "JDownloader will verify your downloads for correctness after download using "
 "the hash/check option"
 msgstr ""
-"JDownloader, hash/kontrol seçeneğini kullanarak indirmelerinizin doğruluğunu"
-" indirme sonrasında doğrulayacaktır"
+"JDownloader, hash/kontrol seçeneğini kullanarak indirmelerinizin doğruluğunu "
+"indirme sonrasında doğrulayacaktır"
 
 #: src/gui/components/settings/general.rs:307
 msgid "Auto open Link Containers (dlc,rsdf,...)"
@@ -758,7 +782,7 @@ msgstr ""
 "kurallar."
 
 #: src/gui/components/settings/package_manager.rs:82
-#: src/gui/components/settings/scripts.rs:79
+#: src/gui/components/settings/scripts.rs:126
 msgid "Edit"
 msgstr "Düzenle"
 
@@ -777,7 +801,7 @@ msgid "Move down"
 msgstr "Aşağı taşı"
 
 #: src/gui/components/settings/package_manager.rs:107
-#: src/gui/components/settings/scripts.rs:96
+#: src/gui/components/settings/scripts.rs:158
 #: src/gui/dialogs/packagizer_rule_dialog.rs:106
 msgid "Enabled"
 msgstr "Etkin"
@@ -790,19 +814,39 @@ msgstr "Yeni kural"
 msgid "copy"
 msgstr "kopya"
 
-#: src/gui/components/settings/scripts.rs:53
+#: src/gui/components/settings/scripts.rs:26
+msgid "Create an Info-File in the Download-Folder with detailed information"
+msgstr "İndirme klasöründe ayrıntılı bilgi içeren bir bilgi dosyası oluştur"
+
+#: src/gui/components/settings/scripts.rs:32
+msgid "Play a Wav File"
+msgstr "Bir Wav dosyası çal"
+
+#: src/gui/components/settings/scripts.rs:37
+msgid "Play a Sound (Wav) when downloads and extraction stopped"
+msgstr "İndirmeler ve çıkarma durduğunda bir ses (Wav) çal"
+
+#: src/gui/components/settings/scripts.rs:44
+msgid "Reset a Download if the speed is low"
+msgstr "Hız düşükse indirmeyi sıfırla"
+
+#: src/gui/components/settings/scripts.rs:86
 msgid ""
 "Run JavaScript automatically when a chosen event occurs (Eventscripter)."
 msgstr ""
 "Seçilen bir olay gerçekleştiğinde JavaScript'i otomatik olarak çalıştır "
 "(Eventscripter)."
 
-#: src/gui/components/settings/scripts.rs:113
-#: src/gui/dialogs/script_edit_dialog.rs:47
+#: src/gui/components/settings/scripts.rs:131
+msgid "Example Scripts"
+msgstr "Örnek Betikler"
+
+#: src/gui/components/settings/scripts.rs:175
+#: src/gui/dialogs/script_edit_dialog.rs:48
 msgid "Event trigger"
 msgstr "Tetikleyici olay"
 
-#: src/gui/components/settings/scripts.rs:196
+#: src/gui/components/settings/scripts.rs:289
 msgid "New script"
 msgstr "Yeni betik"
 
@@ -846,7 +890,7 @@ msgstr "Parolayı girin..."
 
 #: src/gui/dialogs/account_add_dialog.rs:115
 #: src/gui/dialogs/packagizer_rule_dialog.rs:444
-#: src/gui/dialogs/script_edit_dialog.rs:97
+#: src/gui/dialogs/script_edit_dialog.rs:120
 msgid "Save"
 msgstr "Kaydet"
 
@@ -1066,27 +1110,27 @@ msgstr "Bu kural eşleşirse diğer kuralları işlemeyi durdur"
 msgid "This is a predefined rule and cannot be modified."
 msgstr "Bu, önceden tanımlanmış bir kuraldır ve değiştirilemez."
 
-#: src/gui/dialogs/script_edit_dialog.rs:18
+#: src/gui/dialogs/script_edit_dialog.rs:19
 msgid "Edit Script"
 msgstr "Betiği Düzenle"
 
-#: src/gui/dialogs/script_edit_dialog.rs:50
+#: src/gui/dialogs/script_edit_dialog.rs:59
 msgid "Run synchronously"
 msgstr "Eşzamanlı çalıştır"
 
-#: src/gui/dialogs/script_edit_dialog.rs:57
+#: src/gui/dialogs/script_edit_dialog.rs:66
 msgid "Interval (ms)"
 msgstr "Aralık (ms)"
 
-#: src/gui/dialogs/script_edit_dialog.rs:61
+#: src/gui/dialogs/script_edit_dialog.rs:70
 msgid "Trigger"
 msgstr "Tetikleyici"
 
-#: src/gui/dialogs/script_edit_dialog.rs:62
+#: src/gui/dialogs/script_edit_dialog.rs:71
 msgid "Choose when this script should run."
 msgstr "Bu betiğin ne zaman çalışacağını seçin."
 
-#: src/gui/dialogs/script_edit_dialog.rs:67
+#: src/gui/dialogs/script_edit_dialog.rs:76
 msgid "Script (JavaScript)"
 msgstr "Betik (JavaScript)"
 
@@ -1099,26 +1143,26 @@ msgid ""
 "If you are a satisfied user of JDownloader, please think about contributing "
 "to this project. JDownloader is the result of daily hard work since more "
 "than %s1 years. We need your help to keep it free of charge, free of "
-"advertising, free of installer bundles and to improve JDownloader even more."
-" Moreover, donating is a good way to tell us what modules we should focus "
-"our work on."
+"advertising, free of installer bundles and to improve JDownloader even more. "
+"Moreover, donating is a good way to tell us what modules we should focus our "
+"work on."
 msgstr ""
 "JDownloader'dan memnun bir kullanıcıysanız, lütfen bu projeye katkıda "
 "bulunmayı düşünün. JDownloader, %s1 yıldan uzun süredir sürdürülen günlük "
-"yoğun çalışmanın sonucudur. Onu ücretsiz, reklamsız, yükleyici paketlerinden"
-" arınmış tutmak ve JDownloader'ı daha da geliştirmek için yardımınıza "
+"yoğun çalışmanın sonucudur. Onu ücretsiz, reklamsız, yükleyici paketlerinden "
+"arınmış tutmak ve JDownloader'ı daha da geliştirmek için yardımınıza "
 "ihtiyacımız var. Ayrıca bağış yapmak, hangi modüllere odaklanmamız "
 "gerektiğini bize söylemenin iyi bir yoludur."
 
-#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:104
+#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:143
 msgid "Start downloads"
 msgstr "İndirmeleri başlat"
 
-#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:118
+#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:159
 msgid "Pause downloads"
 msgstr "İndirmeleri duraklat"
 
-#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:111
+#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:151
 msgid "Stop downloads"
 msgstr "İndirmeleri durdur"
 
@@ -1131,15 +1175,15 @@ msgstr "En üste taşı"
 msgid "Move bottom"
 msgstr "En alta taşı"
 
-#: src/gui/main_tool_bar.rs:158
+#: src/gui/main_tool_bar.rs:158 src/gui/tray.rs:177
 msgid "Clipboard monitoring"
 msgstr "Pano izleme"
 
-#: src/gui/main_tool_bar.rs:163
+#: src/gui/main_tool_bar.rs:163 src/gui/tray.rs:185
 msgid "Auto reconnect"
 msgstr "Otomatik yeniden bağlan"
 
-#: src/gui/main_tool_bar.rs:171
+#: src/gui/main_tool_bar.rs:171 src/gui/tray.rs:194
 msgid "Use premium accounts"
 msgstr "Premium hesapları kullan"
 
@@ -1224,32 +1268,38 @@ msgstr "Yorum:"
 msgid "File Properties: {}"
 msgstr "Dosya Özellikleri: {}"
 
-#: src/gui/window.rs:174
+#. Mirrors JDownloader's own tray menu entry
+#. (`TrayOpenDefaultDownloadDirectory` / `IconKey.ICON_SAVE`).
+#: src/gui/tray.rs:170
+msgid "Open download folder"
+msgstr "İndirme klasörünü aç"
+
+#: src/gui/window.rs:179
 msgid "Waiting for JDownloader to exit..."
 msgstr "JDownloader'ın kapanması bekleniyor..."
 
-#: src/gui/mod.rs:116
+#: src/gui/mod.rs:176
 msgid "The power of JDownloader, the elegance of GNOME"
 msgstr "JDownloader'ın gücü, GNOME'un zarafeti"
 
-#: src/gui/mod.rs:199 src/gui/mod.rs:221
+#: src/gui/mod.rs:259 src/gui/mod.rs:281
 msgid "Start Downloads"
 msgstr "İndirmeleri Başlat"
 
-#: src/gui/mod.rs:204 src/gui/mod.rs:228
+#: src/gui/mod.rs:264 src/gui/mod.rs:288
 msgid "Start All Downloads"
 msgstr "Tüm İndirmeleri Başlat"
 
 #. Status bar.
-#: src/gui/mod.rs:463
+#: src/gui/mod.rs:525
 msgid "Ready"
 msgstr "Hazır"
 
-#: src/gui/mod.rs:519
+#: src/gui/mod.rs:581 src/jd/settings/event_scripter_settings.rs:138
 msgid "JDownloader started"
 msgstr "JDownloader başlatıldı"
 
-#: src/gui/mod.rs:554
+#: src/gui/mod.rs:616
 msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
 msgstr "JDownloader.jar bulunamadı. JDOWNLOADER_JAR değişkenini ayarlayın."
 
@@ -1336,6 +1386,117 @@ msgstr "JDownloader.jar'ın üst dizini yok"
 #: src/jd/process.rs:32
 msgid "JDownloader.jar has no file name"
 msgstr "JDownloader.jar'ın dosya adı yok"
+
+#: src/jd/settings/event_scripter_settings.rs:133
+msgid "A Download started"
+msgstr "Bir indirme başladı"
+
+#: src/jd/settings/event_scripter_settings.rs:134
+msgid "A Download stopped"
+msgstr "Bir indirme durdu"
+
+#: src/jd/settings/event_scripter_settings.rs:135
+msgid "Package finished"
+msgstr "Paket tamamlandı"
+
+#: src/jd/settings/event_scripter_settings.rs:136
+msgid "Any Extraction Event"
+msgstr "Herhangi bir çıkarma olayı"
+
+#: src/jd/settings/event_scripter_settings.rs:137
+msgid "Archive extraction finished"
+msgstr "Arşiv çıkarma tamamlandı"
+
+#: src/jd/settings/event_scripter_settings.rs:139
+msgid "None"
+msgstr "Yok"
+
+#: src/jd/settings/event_scripter_settings.rs:140
+msgid "Remote API Event fired"
+msgstr "Uzak API olayı tetiklendi"
+
+#: src/jd/settings/event_scripter_settings.rs:141
+msgid "A new file has been created"
+msgstr "Yeni bir dosya oluşturuldu"
+
+#: src/jd/settings/event_scripter_settings.rs:142
+msgid "New Crawler Job"
+msgstr "Yeni tarayıcı görevi"
+
+#: src/jd/settings/event_scripter_settings.rs:143
+msgid "Finished Crawler Job"
+msgstr "Tarayıcı görevi tamamlandı"
+
+#: src/jd/settings/event_scripter_settings.rs:144
+msgid "A new link has been added"
+msgstr "Yeni bir bağlantı eklendi"
+
+#: src/jd/settings/event_scripter_settings.rs:145
+msgid "Packagizer Hook"
+msgstr "Packagizer kancası"
+
+#: src/jd/settings/event_scripter_settings.rs:146
+msgid "Download Controller paused"
+msgstr "İndirme denetleyicisi duraklatıldı"
+
+#: src/jd/settings/event_scripter_settings.rs:147
+msgid "Download Controller started"
+msgstr "İndirme denetleyicisi başlatıldı"
+
+#: src/jd/settings/event_scripter_settings.rs:148
+msgid "Download Controller stopped"
+msgstr "İndirme denetleyicisi durduruldu"
+
+#: src/jd/settings/event_scripter_settings.rs:149
+msgid "Before a Reconnect"
+msgstr "Yeniden bağlanmadan önce"
+
+#: src/jd/settings/event_scripter_settings.rs:150
+msgid "After a Reconnect"
+msgstr "Yeniden bağlandıktan sonra"
+
+#: src/jd/settings/event_scripter_settings.rs:151
+msgid "Before a Captcha Challenge"
+msgstr "Captcha sınamasından önce"
+
+#: src/jd/settings/event_scripter_settings.rs:152
+msgid "After a Captcha Challenge"
+msgstr "Captcha sınamasından sonra"
+
+#: src/jd/settings/event_scripter_settings.rs:153
+msgid "Interval"
+msgstr "Aralık"
+
+#: src/jd/settings/event_scripter_settings.rs:154
+msgid "Toolbar Button Pressed"
+msgstr "Araç çubuğu düğmesine basıldı"
+
+#: src/jd/settings/event_scripter_settings.rs:155
+msgid "Main Menu Button Pressed"
+msgstr "Ana menü düğmesine basıldı"
+
+#: src/jd/settings/event_scripter_settings.rs:157
+msgid "Downloadlist Contextmenu Button Pressed"
+msgstr "İndirme listesi bağlam menüsü düğmesine basıldı"
+
+#: src/jd/settings/event_scripter_settings.rs:160
+msgid "Linkgrabber Contextmenu Button Pressed"
+msgstr "Bağlantı toplayıcı bağlam menüsü düğmesine basıldı"
+
+#: src/jd/settings/event_scripter_settings.rs:163
+msgid "Downloadlist Bottombar Button Pressed"
+msgstr "İndirme listesi alt çubuğu düğmesine basıldı"
+
+#: src/jd/settings/event_scripter_settings.rs:166
+msgid "Linkgrabber Bottombar Button Pressed"
+msgstr "Bağlantı toplayıcı alt çubuğu düğmesine basıldı"
+
+#: src/jd/settings/event_scripter_settings.rs:168
+msgid "Traymenu Button Pressed"
+msgstr "Sistem tepsisi menü düğmesine basıldı"
+
+#~ msgid "Installing…"
+#~ msgstr "Yükleniyor…"
 
 #~ msgid "JDownloader for GNOME"
 #~ msgstr "GNOME için JDownloader"

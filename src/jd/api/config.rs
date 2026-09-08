@@ -26,9 +26,22 @@ impl JdApi {
     /// Reads a configuration value via `/config/get`.
     ///
     /// The call is of the form `/config/get?{interface}&{storage}&{key}`.
-    /// `storage` is `"null"` to use the default storage.
+    /// `storage` is `"null"` to use the default storage — true for
+    /// JDownloader's own top-level `@ConfigInterface`s, but *not* for a
+    /// config interface owned by an extension: `AbstractExtension.buildStore()`
+    /// stores those under `cfg/<extension classname>` rather than
+    /// `cfg/<config interface name>`, which JDownloader's `StorageHandler`
+    /// resolves into a non-null storage id (a relative path string) — use
+    /// [`Self::get_config_with_storage`] for those, or the request silently
+    /// finds no key handler and returns an empty value.
     pub fn get_config(&self, interface: &str, key: &str) -> Result<Value> {
-        let url = format!("{}/config/get?{}&null&{}", self.base_url, interface, key);
+        self.get_config_with_storage(interface, "null", key)
+    }
+
+    /// Like [`Self::get_config`], but for a config interface that isn't
+    /// registered under the default (`"null"`) storage — see its docs.
+    pub fn get_config_with_storage(&self, interface: &str, storage: &str, key: &str) -> Result<Value> {
+        let url = format!("{}/config/get?{}&{}&{}", self.base_url, interface, storage, key);
         debug!("JDownloader API request: {}", url);
         let response = self
             .client
@@ -50,19 +63,35 @@ impl JdApi {
     ///
     /// The call is of the form `/config/set?{interface}&{storage}&{key}&{value}`.
     /// `value` is JSON-encoded and passed as the last positional parameter.
+    /// See [`Self::get_config`] on why `storage` is hardcoded to `"null"`
+    /// here — use [`Self::set_config_with_storage`] for an extension-owned
+    /// config interface.
     pub fn set_config(&self, interface: &str, key: &str, value: &Value) -> Result<bool> {
+        self.set_config_with_storage(interface, "null", key, value)
+    }
+
+    /// Like [`Self::set_config`], but for a config interface that isn't
+    /// registered under the default (`"null"`) storage — see
+    /// [`Self::get_config`]'s docs.
+    pub fn set_config_with_storage(
+        &self,
+        interface: &str,
+        storage: &str,
+        key: &str,
+        value: &Value,
+    ) -> Result<bool> {
         let url = format!("{}/config/set", self.base_url);
         let value_json = value.to_string();
         debug!(
-            "JDownloader API set request: {}?{}&null&{}&{}",
-            url, interface, key, value_json
+            "JDownloader API set request: {}?{}&{}&{}&{}",
+            url, interface, storage, key, value_json
         );
         let response = self
             .client
             .get(&url)
             .query(&[
                 ("interface", interface),
-                ("storage", "null"),
+                ("storage", storage),
                 ("key", key),
                 ("value", &value_json),
             ])
