@@ -17,13 +17,41 @@ All notable changes to gDownloader are documented in this file.
   window instead of silently hanging — JDownloader runs headless, so it
   can't show these itself, but exposes them through its RemoteAPI for a
   client to answer on its behalf.
+- JDownloader's "file already exists" dialog (for a plain download conflict
+  or an archive-extraction conflict) now shows properly, with Skip/
+  Overwrite/Rename choices, the relevant file/package/archive details, and
+  a countdown, matching JDownloader's own dialog — previously it fell back
+  to a generic Allow/Deny prompt that always silently skipped the file
+  regardless of the choice made.
+- Downloads list: right-click "Archive(s)" menu for extraction actions
+  (Extract Now, Abort extraction, Auto Extract Enabled, Set Extraction
+  Path, Set Archive Password, Validate Archive(s), Cleanup after
+  Extraction), matching JDownloader's own context menu.
+- Progress column now tracks archive-extraction progress (resetting to 0%
+  and climbing as the archive decompresses) instead of staying frozen at
+  100% from the finished download.
 
 ### Changed
 - Scripts page: the "Run synchronously" and "Interval (ms)" fields are now
   only shown when the selected event trigger actually supports them
   (matching JDownloader), instead of being grayed out.
+- Downloads list Size column shows a package's file count (e.g. "[3] 1.2
+  GiB"), matching JDownloader.
+- Downloads list Connection column no longer shows an icon for finished or
+  disabled downloads, matching JDownloader (which leaves it blank there).
+- Downloads list Speed column turns red while a global download speed
+  limit is enabled, matching JDownloader.
+- Toolbar Pause button (and its tray menu entry) now shows the same on/off
+  checkbox indicator as the other toolbar toggles.
 
 ### Fixed
+- An expanded package row in the Downloads/Link Grabber tree could still go
+  visually stale in some cases (e.g. its only download finishing) even
+  though it no longer collapsed on refresh — now always repaints.
+- A headless JDownloader dialog that expired on its own (JDownloader
+  abandons an unanswered dialog after a short delay while running
+  headless) failed with an "Invalid ID" error instead of just being
+  dismissed.
 - Extension Manager: enable/disable now uses a proper checkbox column
   (locked and unchecked for extensions that aren't installed) followed by
   an Install/Remove button, matching JDownloader's own layout. Installing
