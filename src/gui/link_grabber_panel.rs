@@ -9,6 +9,9 @@ use gtk4::gio;
 use gtk4::glib;
 use serde_json::Value;
 
+use crate::gui::package_tree::{
+    build_name_column, sync_store, sync_store_keep_expanded, tree_item, PackageTree,
+};
 use crate::jd::{GraphicalUserInterfaceSettings, JdApi};
 
 #[derive(Clone, Debug)]
@@ -103,7 +106,7 @@ pub struct LinkGrabberPanel {
     /// Shared with `start_refresh`, which consults it to avoid ever
     /// splicing an *expanded* package's own row back into `store` (that
     /// would discard its `TreeListRow`'s expanded state — see
-    /// `downloads_panel::sync_store_keep_expanded`).
+    /// `package_tree::sync_store_keep_expanded`).
     expanded_state: Rc<RefCell<HashMap<i64, bool>>>,
 }
 
@@ -274,14 +277,6 @@ fn properties_actions(
     }
 }
 
-/// Returns the item at `list_item`'s position unwrapped from its
-/// `TreeListRow`, along with the row itself (for depth/expander access).
-fn tree_item(list_item: &gtk4::ListItem) -> Option<(gtk4::TreeListRow, glib::BoxedAnyObject)> {
-    let tree_row = list_item.item().and_downcast::<gtk4::TreeListRow>()?;
-    let obj = tree_row.item()?.downcast::<glib::BoxedAnyObject>().ok()?;
-    Some((tree_row, obj))
-}
-
 impl LinkGrabberPanel {
     #[allow(deprecated)]
     pub fn build(api: Arc<JdApi>, gui_settings: GraphicalUserInterfaceSettings) -> Self {
@@ -290,37 +285,14 @@ impl LinkGrabberPanel {
         page.set_hexpand(true);
 
         // Table
-        let store = gio::ListStore::builder()
-            .item_type(glib::BoxedAnyObject::static_type())
-            .build();
+        let PackageTree {
+            store,
+            child_stores,
+            expanded_state,
+            selection,
+            ..
+        } = PackageTree::build::<LinkGrabberPackageRow>("linkgrabber", |p| p.uuid);
 
-        let child_stores: Rc<RefCell<HashMap<i64, gio::ListStore>>> =
-            Rc::new(RefCell::new(HashMap::new()));
-
-        // Remembers each package's expand/collapse state across refreshes
-        // (packages start collapsed, like JDownloader).
-        let expanded_state: Rc<RefCell<HashMap<i64, bool>>> =
-            Rc::new(RefCell::new(crate::config::get_expanded_map("linkgrabber")));
-
-        let tree_model = {
-            let child_stores = child_stores.clone();
-            gtk4::TreeListModel::new(store.clone(), false, false, move |item| {
-                let obj = item.downcast_ref::<glib::BoxedAnyObject>()?;
-                let uuid = obj.try_borrow::<LinkGrabberPackageRow>().ok()?.uuid;
-                let child = child_stores
-                    .borrow_mut()
-                    .entry(uuid)
-                    .or_insert_with(|| {
-                        gio::ListStore::builder()
-                            .item_type(glib::BoxedAnyObject::static_type())
-                            .build()
-                    })
-                    .clone();
-                Some(child.upcast::<gio::ListModel>())
-            })
-        };
-
-        let selection = gtk4::MultiSelection::new(Some(tree_model));
         let view = gtk4::ColumnView::new(Some(selection.clone()));
         view.set_vexpand(true);
         view.set_hexpand(true);
@@ -386,104 +358,15 @@ impl LinkGrabberPanel {
 
         // File: TreeExpander (package/link indentation + expand triangle) + icon + label.
         {
-            let factory = gtk4::SignalListItemFactory::new();
-            factory.connect_setup(move |_, list_item| {
-                let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
-                let hbox = gtk4::Box::new(gtk4::Orientation::Horizontal, 6);
-                hbox.set_halign(gtk4::Align::Fill);
-                hbox.set_hexpand(true);
-                let icon = gtk4::Image::new();
-                icon.set_pixel_size(16);
-                icon.set_valign(gtk4::Align::Center);
-                let label = gtk4::Label::new(None);
-                label.set_halign(gtk4::Align::Fill);
-                label.set_xalign(0.0);
-                label.set_hexpand(true);
-                label.set_ellipsize(gtk4::pango::EllipsizeMode::End);
-                label.set_has_tooltip(true);
-                hbox.append(&icon);
-                hbox.append(&label);
-
-                let expander = gtk4::TreeExpander::new();
-                expander.set_hexpand(true);
-                expander.set_child(Some(&hbox));
-                list_item.set_child(Some(&expander));
-            });
-            factory.connect_bind({
-                let expanded_state = expanded_state.clone();
-                move |_, list_item| {
-                let expanded_state = expanded_state.clone();
-                let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
-                let Some(tree_row) = list_item.item().and_downcast::<gtk4::TreeListRow>() else {
-                    return;
-                };
-                let Some(obj) = tree_row
-                    .item()
-                    .and_then(|i| i.downcast::<glib::BoxedAnyObject>().ok())
-                else {
-                    return;
-                };
-                let Some(expander) = list_item.child().and_downcast::<gtk4::TreeExpander>()
-                else {
-                    return;
-                };
-                expander.set_list_row(Some(&tree_row));
-                let Some(hbox) = expander.child().and_downcast::<gtk4::Box>() else {
-                    return;
-                };
-                let Some(icon) = hbox.first_child().and_downcast::<gtk4::Image>() else {
-                    return;
-                };
-                let Some(label) = icon.next_sibling().and_downcast::<gtk4::Label>() else {
-                    return;
-                };
-                if tree_row.depth() == 0 {
-                    let uuid = obj.borrow::<LinkGrabberPackageRow>().uuid;
-                    let desired = expanded_state.borrow().get(&uuid).copied().unwrap_or(false);
-                    if tree_row.is_expanded() != desired {
-                        // Deferred to idle: this bind is itself running as
-                        // GTK processes the items-changed that just
-                        // recreated this row (e.g. a package's size changed
-                        // after picking a video variant, so `sync_store`
-                        // replaced its list item). Expanding synchronously
-                        // here re-enters the tree model mid-update and the
-                        // row can end up visually collapsed anyway.
-                        let deferred_row = tree_row.clone();
-                        glib::source::idle_add_local_once(move || {
-                            if deferred_row.is_expanded() != desired {
-                                deferred_row.set_expanded(desired);
-                            }
-                        });
-                    }
-                    icon.set_from_gicon(&super::downloads_panel::package_icon(
-                        tree_row.is_expanded(),
-                    ));
-                    tree_row.connect_expanded_notify({
-                        let expanded_state = expanded_state.clone();
-                        let icon = icon.clone();
-                        move |row| {
-                            expanded_state.borrow_mut().insert(uuid, row.is_expanded());
-                            crate::config::set_expanded("linkgrabber", uuid, row.is_expanded());
-                            icon.set_from_gicon(&super::downloads_panel::package_icon(
-                                row.is_expanded(),
-                            ));
-                        }
-                    });
-                    let pkg = obj.borrow::<LinkGrabberPackageRow>();
-                    label.set_text(&pkg.name);
-                    label.set_tooltip_text(Some(&pkg.name));
-                } else {
-                    let row = obj.borrow::<LinkGrabberRow>();
-                    icon.set_from_gicon(&row.file_icon);
-                    label.set_text(&row.file);
-                    label.set_tooltip_text(Some(&row.file));
-                }
-                }
-            });
-            let col = gtk4::ColumnViewColumn::new(Some(tr!("File").as_ref()), Some(factory));
-            col.set_fixed_width(140);
-            col.set_resizable(false);
-            col.set_expand(true);
+            let col = build_name_column::<LinkGrabberPackageRow, LinkGrabberRow>(
+                tr!("File").as_ref(),
+                140,
+                "linkgrabber",
+                expanded_state.clone(),
+                |p| p.uuid,
+                |p| &p.name,
+                (|r| &r.file_icon, |r| &r.file),
+            );
             view.append_column(&col);
         }
         // Variant: mirrors JDownloader's in-cell variant chooser (e.g. video
@@ -1387,12 +1270,16 @@ impl LinkGrabberPanel {
                         .and_then(|r| r.focus())
                         .is_some_and(|f| f == view.clone().upcast::<gtk4::Widget>() || f.is_ancestor(&view));
 
-                    super::downloads_panel::sync_store_keep_expanded(
+                    sync_store_keep_expanded(
                         &store,
                         &mut last_packages.borrow_mut(),
                         new_packages,
                         |p| p.uuid,
-                        |p| expanded_state.borrow().get(&p.uuid).copied().unwrap_or(false),
+                        |old, new| {
+                            expanded_state.borrow().get(&new.uuid).copied().unwrap_or(false)
+                                && old.finished == new.finished
+                        },
+                        |_| {},
                     );
 
                     // Drop child stores/history for packages that no longer exist.
@@ -1419,9 +1306,7 @@ impl LinkGrabberPanel {
                             .borrow_mut()
                             .remove(&package_uuid)
                             .unwrap_or_default();
-                        super::downloads_panel::sync_store(&child_store, &mut last, links, |l| {
-                            l.uuid.clone()
-                        });
+                        sync_store(&child_store, &mut last, links, |l| l.uuid.clone());
                         last_links_by_package.borrow_mut().insert(package_uuid, last);
                     }
 
@@ -1461,7 +1346,7 @@ impl LinkGrabberPanel {
     }
 
     /// All package uuids, top-to-bottom in the order JDownloader returned
-    /// them (== the order shown, since [`super::downloads_panel::sync_store`]
+    /// them (== the order shown, since [`crate::gui::package_tree::sync_store`]
     /// never reorders items on its own). Used by the toolbar's move actions
     /// to compute a target package for `movePackages`'s `afterDestPackageId`.
     pub fn all_package_uuids(&self) -> Vec<i64> {
@@ -1824,11 +1709,12 @@ fn package_row_from_json(pkg: &Value) -> LinkGrabberPackageRow {
             .unwrap_or(false)
     };
     let bytes_total = get_num("bytesTotal").unwrap_or(0);
+    let child_count = get_num("childCount").unwrap_or(0);
     LinkGrabberPackageRow {
         uuid: get_num("uuid").unwrap_or(0),
         name: get_str("name"),
         save_to: get_str("saveTo"),
-        child_count: get_num("childCount").unwrap_or(0),
+        child_count,
         bytes_total,
         size_text: super::downloads_panel::format_size_jd(bytes_total),
         enabled: get_bool("enabled"),

@@ -18,6 +18,7 @@ const HASH_CHECK_ENABLED_KEY: &str = "HashCheckEnabled";
 const HASH_RETRY_ENABLED_KEY: &str = "HashRetryEnabled";
 const AUTO_OPEN_CONTAINER_AFTER_DOWNLOAD_KEY: &str = "AutoOpenContainerAfterDownload";
 const USE_AVAILABLE_ACCOUNTS_KEY: &str = "UseAvailableAccounts";
+const DOWNLOAD_SPEED_LIMIT_ENABLED_KEY: &str = "DownloadSpeedLimitEnabled";
 
 #[derive(Clone)]
 /// Accessor for JDownloader's GeneralSettings.
@@ -180,5 +181,18 @@ impl GeneralSettings {
 
     pub fn set_use_available_accounts(&self, value: bool) -> anyhow::Result<bool> {
         self.set(USE_AVAILABLE_ACCOUNTS_KEY, value)
+    }
+
+    /// Whether a global download speed cap is active
+    /// (`GeneralSettings.isDownloadSpeedLimitEnabled`). Drives the
+    /// Speed column's red text in the downloads list, mirroring
+    /// `org.jdownloader.gui.views.downloads.columns.SpeedColumn`'s
+    /// `configureRendererComponent` — JD colors that column red whenever
+    /// this is on, regardless of the actual speed value.
+    pub fn get_download_speed_limit_enabled(&self) -> anyhow::Result<bool> {
+        Ok(self
+            .get(DOWNLOAD_SPEED_LIMIT_ENABLED_KEY)?
+            .as_bool()
+            .unwrap_or(false))
     }
 }

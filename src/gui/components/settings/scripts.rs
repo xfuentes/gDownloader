@@ -175,7 +175,45 @@ impl ScriptsPage {
         trigger_col.set_title(tr!("Event trigger").as_ref());
         trigger_col.pack_start(&trigger_renderer, true);
         trigger_col.add_attribute(&trigger_renderer, "text", 2);
+        // Twice the width GTK gives it by default (measured ~105px with the
+        // page's other columns present), since event trigger labels routinely
+        // run 35-40 characters (e.g. "Downloadlist Contextmenu Button
+        // Pressed") and were getting cut down to a handful of characters.
+        trigger_col.set_min_width(210);
         tree.append_column(&trigger_col);
+
+        // Longer trigger labels can still be ellipsized even at the wider
+        // column, so show the full label as a tooltip whenever the text
+        // doesn't fit — but only then, not on every hover.
+        tree.set_has_tooltip(true);
+        {
+            let store_c = store.clone();
+            let trigger_col_c = trigger_col.clone();
+            let trigger_renderer_c = trigger_renderer.clone();
+            tree.connect_query_tooltip(move |tree, x, y, _keyboard_mode, tooltip| {
+                let Some((Some(path), Some(column), _cx, _cy)) = tree.path_at_pos(x, y) else {
+                    return false;
+                };
+                if column != trigger_col_c {
+                    return false;
+                }
+                let Some(iter) = store_c.iter(&path) else {
+                    return false;
+                };
+                let text: String = store_c.get(&iter, 2);
+                if text.is_empty() {
+                    return false;
+                }
+                trigger_renderer_c.set_property("text", &text);
+                let natural_width = trigger_renderer_c.preferred_size(tree).1.width();
+                if natural_width > trigger_col_c.width() {
+                    tooltip.set_text(Some(&text));
+                    true
+                } else {
+                    false
+                }
+            });
+        }
 
         let selection = tree.selection();
         selection.set_mode(gtk4::SelectionMode::Single);

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-08 19:04+0000\n"
+"POT-Creation-Date: 2026-09-09 13:26+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
@@ -29,21 +29,105 @@ msgstr "JDownloader neodpověděl včas"
 msgid "Choose visible fields"
 msgstr "Vybrat viditelná pole"
 
-#: src/gui/pending_jd_dialogs.rs:61
+#: src/gui/pending_jd_dialogs.rs:302
 msgid "JDownloader"
 msgstr "JDownloader"
 
-#: src/gui/pending_jd_dialogs.rs:114
+#: src/gui/pending_jd_dialogs.rs:355
 msgid "Don't ask again for this"
 msgstr "Příště se na to už neptat"
 
-#: src/gui/pending_jd_dialogs.rs:120
+#: src/gui/pending_jd_dialogs.rs:361
 msgid "Deny"
 msgstr "Odmítnout"
 
-#: src/gui/pending_jd_dialogs.rs:121
+#: src/gui/pending_jd_dialogs.rs:362
 msgid "Allow"
 msgstr "Povolit"
+
+#: src/gui/pending_jd_dialogs.rs:487
+msgid "File already exists"
+msgstr "Soubor již existuje"
+
+#: src/gui/pending_jd_dialogs.rs:522
+msgid ""
+"There is a problem downloading a file!\n"
+"The file already exists on disk. What do you want to do?"
+msgstr ""
+"Došlo k problému se stahováním souboru!\n"
+"Soubor již na disku existuje. Co chcete udělat?"
+
+#: src/gui/pending_jd_dialogs.rs:525
+msgid ""
+"There is a problem extracting an archive.\n"
+"The file to extract already exists on your harddisk. Please choose what to "
+"do:"
+msgstr ""
+"Došlo k problému s rozbalováním archivu.\n"
+"Soubor k rozbalení již na vašem disku existuje. Vyberte, co se má udělat:"
+
+#: src/gui/pending_jd_dialogs.rs:545
+msgid "Filename:"
+msgstr "Název souboru:"
+
+#: src/gui/pending_jd_dialogs.rs:547
+msgid "New File's size:"
+msgstr "Velikost nového souboru:"
+
+#: src/gui/pending_jd_dialogs.rs:554
+msgid "Existing File's size:"
+msgstr "Velikost existujícího souboru:"
+
+#: src/gui/pending_jd_dialogs.rs:560
+msgid "Package:"
+msgstr "Balíček:"
+
+#: src/gui/pending_jd_dialogs.rs:563
+msgid "Hoster:"
+msgstr "Hostitel:"
+
+#: src/gui/pending_jd_dialogs.rs:566
+msgid "Archive:"
+msgstr "Archiv:"
+
+#: src/gui/pending_jd_dialogs.rs:600 src/gui/components/settings/general.rs:205
+msgid "Skip file"
+msgstr "Přeskočit soubor"
+
+#: src/gui/pending_jd_dialogs.rs:601 src/gui/components/settings/general.rs:204
+msgid "Overwrite existing file"
+msgstr "Přepsat stávající soubor"
+
+#: src/gui/pending_jd_dialogs.rs:603
+msgid "Rename file"
+msgstr "Přejmenovat soubor"
+
+#: src/gui/pending_jd_dialogs.rs:629
+msgid "New Name:"
+msgstr "Nový název:"
+
+#: src/gui/pending_jd_dialogs.rs:651
+msgid "Remember selection for this Package"
+msgstr "Zapamatovat výběr pro tento balíček"
+
+#: src/gui/pending_jd_dialogs.rs:653
+msgid "Don't show again for this archive"
+msgstr "Nezobrazovat znovu pro tento archiv"
+
+#: src/gui/pending_jd_dialogs.rs:661
+#: src/gui/dialogs/archive_password_dialog.rs:34
+msgid "OK"
+msgstr "OK"
+
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.2.0)  #-#-#-#-#
+#. Buttons
+#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:1564
+#: src/gui/downloads_panel.rs:1755 src/gui/dialogs/account_add_dialog.rs:114
+#: src/gui/dialogs/archive_password_dialog.rs:33
+#: src/gui/dialogs/packagizer_rule_dialog.rs:443
+#: src/gui/dialogs/script_edit_dialog.rs:119 src/gui/donate.rs:34
+msgid "Cancel"
+msgstr "Zrušit"
 
 #: src/gui/clipboard.rs:208
 msgid "New links from clipboard"
@@ -64,367 +148,358 @@ msgstr[2] "Zachyceno {n} odkazů"
 msgid "Show"
 msgstr "Zobrazit"
 
-#: src/gui/settings_panel.rs:80 src/gui/settings_panel.rs:101
+#: src/gui/settings_panel.rs:81 src/gui/settings_panel.rs:102
 msgid "General"
 msgstr "Obecné"
 
-#: src/gui/settings_panel.rs:83 src/gui/settings_panel.rs:104
+#: src/gui/settings_panel.rs:84 src/gui/settings_panel.rs:105
 #: src/gui/components/settings/account_manager.rs:43
 msgid "Account Manager"
 msgstr "Správa účtů"
 
-#: src/gui/settings_panel.rs:87 src/gui/settings_panel.rs:108
+#: src/gui/settings_panel.rs:88 src/gui/settings_panel.rs:109
 #: src/gui/components/settings/package_manager.rs:54
 msgid "Package Manager"
 msgstr "Správa balíčků"
 
-#: src/gui/settings_panel.rs:91 src/gui/settings_panel.rs:112
+#: src/gui/settings_panel.rs:92 src/gui/settings_panel.rs:113
 #: src/gui/components/settings/extension_manager.rs:171
 msgid "Extension Manager"
 msgstr "Správa rozšíření"
 
-#: src/gui/settings_panel.rs:93 src/gui/settings_panel.rs:98
+#: src/gui/settings_panel.rs:94 src/gui/settings_panel.rs:99
 #: src/gui/components/settings/scripts.rs:84
 msgid "Scripts"
 msgstr "Skripty"
 
-#: src/gui/settings_panel.rs:180 src/gui/settings_panel.rs:231
-#: src/gui/settings_panel.rs:246 src/gui/main_menu_bar.rs:37
+#: src/gui/settings_panel.rs:206 src/gui/settings_panel.rs:257
+#: src/gui/settings_panel.rs:272 src/gui/main_menu_bar.rs:37
 #: src/gui/menus/settings.rs:10 src/gui/menus/settings.rs:46
 #: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
 msgid "Settings"
 msgstr "Nastavení"
 
-#: src/gui/link_grabber_panel.rs:132 src/gui/downloads_panel.rs:168
+#: src/gui/link_grabber_panel.rs:135 src/gui/downloads_panel.rs:180
 msgid "Packages"
 msgstr "Balíčky"
 
-#: src/gui/link_grabber_panel.rs:138 src/gui/downloads_panel.rs:174
+#: src/gui/link_grabber_panel.rs:141 src/gui/downloads_panel.rs:186
 msgid "Links"
 msgstr "Odkazy"
 
-#: src/gui/link_grabber_panel.rs:144 src/gui/link_grabber_panel.rs:715
-#: src/gui/link_grabber_panel.rs:720 src/gui/downloads_panel.rs:180
-#: src/gui/downloads_panel.rs:725 src/gui/downloads_panel.rs:730
+#: src/gui/link_grabber_panel.rs:147 src/gui/link_grabber_panel.rs:598
+#: src/gui/link_grabber_panel.rs:603 src/gui/downloads_panel.rs:192
+#: src/gui/downloads_panel.rs:634 src/gui/downloads_panel.rs:640
 msgid "Size"
 msgstr "Velikost"
 
-#: src/gui/link_grabber_panel.rs:150 src/gui/link_grabber_panel.rs:1890
+#: src/gui/link_grabber_panel.rs:153 src/gui/link_grabber_panel.rs:1772
 msgid "Online"
 msgstr "Online"
 
-#: src/gui/link_grabber_panel.rs:156 src/gui/link_grabber_panel.rs:786
-#: src/gui/link_grabber_panel.rs:788 src/gui/downloads_panel.rs:737
-#: src/gui/downloads_panel.rs:739 src/gui/components/account_table.rs:182
+#: src/gui/link_grabber_panel.rs:159 src/gui/link_grabber_panel.rs:669
+#: src/gui/link_grabber_panel.rs:671 src/gui/downloads_panel.rs:648
+#: src/gui/downloads_panel.rs:650 src/gui/components/account_table.rs:182
 msgid "Hoster"
 msgstr "Hoster"
 
-#: src/gui/link_grabber_panel.rs:162 src/gui/link_grabber_panel.rs:1894
+#: src/gui/link_grabber_panel.rs:165 src/gui/link_grabber_panel.rs:1776
 msgid "Offline"
 msgstr "Offline"
 
-#: src/gui/link_grabber_panel.rs:168 src/gui/link_grabber_panel.rs:1902
+#: src/gui/link_grabber_panel.rs:171 src/gui/link_grabber_panel.rs:1784
 msgid "Unknown"
 msgstr "Neznámé"
 
-#: src/gui/link_grabber_panel.rs:483 src/gui/main_menu_bar.rs:36
+#: src/gui/link_grabber_panel.rs:362 src/gui/main_menu_bar.rs:36
 msgid "File"
 msgstr "Soubor"
 
-#: src/gui/link_grabber_panel.rs:692 src/gui/link_grabber_panel.rs:694
+#: src/gui/link_grabber_panel.rs:575 src/gui/link_grabber_panel.rs:577
 msgid "Variant"
 msgstr "Varianta"
 
-#: src/gui/link_grabber_panel.rs:702 src/gui/link_grabber_panel.rs:707
-#: src/gui/downloads_panel.rs:895 src/gui/downloads_panel.rs:900
+#: src/gui/link_grabber_panel.rs:585 src/gui/link_grabber_panel.rs:590
+#: src/gui/downloads_panel.rs:845 src/gui/downloads_panel.rs:851
 msgid "Save To"
 msgstr "Uložit do"
 
-#: src/gui/link_grabber_panel.rs:795 src/gui/link_grabber_panel.rs:799
+#: src/gui/link_grabber_panel.rs:678 src/gui/link_grabber_panel.rs:682
 msgid "Availability"
 msgstr "Dostupnost"
 
-#: src/gui/link_grabber_panel.rs:824 src/gui/downloads_panel.rs:936
+#: src/gui/link_grabber_panel.rs:707 src/gui/downloads_panel.rs:890
 msgid "Choose visible columns"
 msgstr "Vybrat viditelné sloupce"
 
-#: src/gui/link_grabber_panel.rs:1019 src/gui/link_grabber_panel.rs:1194
-#: src/gui/downloads_panel.rs:1056 src/gui/downloads_panel.rs:1194
+#: src/gui/link_grabber_panel.rs:902 src/gui/link_grabber_panel.rs:1077
+#: src/gui/downloads_panel.rs:1010 src/gui/downloads_panel.rs:1148
 #: src/gui/components/account_table.rs:248
 msgid "Overview"
 msgstr "Přehled"
 
-#: src/gui/link_grabber_panel.rs:1054 src/gui/downloads_panel.rs:1098
+#: src/gui/link_grabber_panel.rs:937 src/gui/downloads_panel.rs:1052
 msgid "Add links to linkgrabber"
 msgstr "Přidat odkazy do sběrače odkazů"
 
-#: src/gui/link_grabber_panel.rs:1063 src/gui/downloads_panel.rs:1107
+#: src/gui/link_grabber_panel.rs:946 src/gui/downloads_panel.rs:1061
 msgid "Add links"
 msgstr "Přidat odkazy"
 
-#: src/gui/link_grabber_panel.rs:1063 src/gui/downloads_panel.rs:1107
+#: src/gui/link_grabber_panel.rs:946 src/gui/downloads_panel.rs:1061
 msgid "Add container"
 msgstr "Přidat kontejner"
 
-#: src/gui/link_grabber_panel.rs:1063 src/gui/downloads_panel.rs:1107
+#: src/gui/link_grabber_panel.rs:946 src/gui/downloads_panel.rs:1061
 msgid "Paste links"
 msgstr "Vložit odkazy"
 
-#: src/gui/link_grabber_panel.rs:1086
+#: src/gui/link_grabber_panel.rs:969
 msgid "Clear linkgrabber"
 msgstr "Vymazat sběrač odkazů"
 
-#: src/gui/link_grabber_panel.rs:1095 src/gui/mod.rs:270 src/gui/mod.rs:294
-#: src/gui/mod.rs:347 src/gui/mod.rs:356
+#: src/gui/link_grabber_panel.rs:978 src/gui/mod.rs:272 src/gui/mod.rs:296
+#: src/gui/mod.rs:363 src/gui/mod.rs:379
 msgid "Delete"
 msgstr "Smazat"
 
-#: src/gui/link_grabber_panel.rs:1105 src/gui/downloads_panel.rs:1144
+#: src/gui/link_grabber_panel.rs:988 src/gui/downloads_panel.rs:1098
 msgid "Delete disabled"
 msgstr "Smazat zakázané"
 
-#: src/gui/link_grabber_panel.rs:1106 src/gui/downloads_panel.rs:1147
+#: src/gui/link_grabber_panel.rs:989 src/gui/downloads_panel.rs:1101
 msgid "Delete offline"
 msgstr "Smazat offline"
 
-#: src/gui/link_grabber_panel.rs:1107
+#: src/gui/link_grabber_panel.rs:990
 msgid "Remove incomplete archives"
 msgstr "Odstranit neúplné archivy"
 
-#: src/gui/link_grabber_panel.rs:1108
+#: src/gui/link_grabber_panel.rs:991
 msgid "Clear filtered links"
 msgstr "Vymazat filtrované odkazy"
 
-#: src/gui/link_grabber_panel.rs:1129 src/gui/downloads_panel.rs:1171
+#: src/gui/link_grabber_panel.rs:1012 src/gui/downloads_panel.rs:1125
 msgid "Filter"
 msgstr "Filtr"
 
-#: src/gui/link_grabber_panel.rs:1138
+#: src/gui/link_grabber_panel.rs:1021
 msgid "Add filtered stuff"
 msgstr "Přidat filtrované položky"
 
-#: src/gui/link_grabber_panel.rs:1148
+#: src/gui/link_grabber_panel.rs:1031
 msgid "Add to download list"
 msgstr "Přidat do seznamu stahování"
 
-#: src/gui/link_grabber_panel.rs:1160
+#: src/gui/link_grabber_panel.rs:1043
 msgid "Add and start all"
 msgstr "Přidat a spustit vše"
 
-#: src/gui/link_grabber_panel.rs:1161
+#: src/gui/link_grabber_panel.rs:1044
 msgid "Add and start selected"
 msgstr "Přidat a spustit vybrané"
 
-#: src/gui/link_grabber_panel.rs:1162
+#: src/gui/link_grabber_panel.rs:1045
 msgid "Add all"
 msgstr "Přidat vše"
 
-#: src/gui/link_grabber_panel.rs:1163
+#: src/gui/link_grabber_panel.rs:1046
 msgid "Add selected"
 msgstr "Přidat vybrané"
 
-#: src/gui/link_grabber_panel.rs:1189
+#: src/gui/link_grabber_panel.rs:1072
 msgid "Add at top"
 msgstr "Přidat na začátek"
 
-#: src/gui/link_grabber_panel.rs:1190
+#: src/gui/link_grabber_panel.rs:1073
 msgid "Auto confirm"
 msgstr "Automatické potvrzení"
 
-#: src/gui/link_grabber_panel.rs:1191
+#: src/gui/link_grabber_panel.rs:1074
 msgid "Auto start"
 msgstr "Automatické spuštění"
 
-#: src/gui/link_grabber_panel.rs:1192
+#: src/gui/link_grabber_panel.rs:1075
 msgid "Link filter"
 msgstr "Filtr odkazů"
 
-#: src/gui/link_grabber_panel.rs:1193 src/gui/downloads_panel.rs:1193
+#: src/gui/link_grabber_panel.rs:1076 src/gui/downloads_panel.rs:1147
 msgid "Properties"
 msgstr "Vlastnosti"
 
-#: src/gui/link_grabber_panel.rs:1195
+#: src/gui/link_grabber_panel.rs:1078
 msgid "Sidebar"
 msgstr "Postranní panel"
 
-#: src/gui/link_grabber_panel.rs:1196 src/gui/downloads_panel.rs:1195
+#: src/gui/link_grabber_panel.rs:1079 src/gui/downloads_panel.rs:1149
 msgid "Bottom bar manager"
 msgstr "Správa spodní lišty"
 
-#: src/gui/link_grabber_panel.rs:1617 src/gui/downloads_panel.rs:1664
+#: src/gui/link_grabber_panel.rs:1499 src/gui/downloads_panel.rs:1666
 msgid "Are you sure?"
 msgstr "Jste si jisti?"
 
-#: src/gui/link_grabber_panel.rs:1639 src/gui/downloads_panel.rs:1686
+#: src/gui/link_grabber_panel.rs:1521 src/gui/downloads_panel.rs:1688
 msgid "Do you really want to perform this clean up action:"
 msgstr "Opravdu chcete provést tuto akci vyčištění:"
 
-#: src/gui/link_grabber_panel.rs:1640
+#: src/gui/link_grabber_panel.rs:1522
 msgid "Delete Selected Links?"
 msgstr "Smazat vybrané odkazy?"
 
-#: src/gui/link_grabber_panel.rs:1648 src/gui/downloads_panel.rs:1695
+#: src/gui/link_grabber_panel.rs:1530 src/gui/downloads_panel.rs:1697
 msgid "Tasks to do:"
 msgstr "Úkoly k provedení:"
 
-#: src/gui/link_grabber_panel.rs:1657 src/gui/downloads_panel.rs:1704
+#: src/gui/link_grabber_panel.rs:1539 src/gui/downloads_panel.rs:1706
 msgid "Delete selected link"
 msgid_plural "Delete selected links"
 msgstr[0] "Smazat vybraný odkaz"
 msgstr[1] "Smazat vybrané odkazy"
 msgstr[2] "Smazat vybrané odkazy"
 
-#: src/gui/link_grabber_panel.rs:1658 src/gui/downloads_panel.rs:1705
+#: src/gui/link_grabber_panel.rs:1540 src/gui/downloads_panel.rs:1707
 msgid "{n} link remaining"
 msgid_plural "{n} links remaining"
 msgstr[0] "Zbývá {n} odkaz"
 msgstr[1] "Zbývají {n} odkazy"
 msgstr[2] "Zbývá {n} odkazů"
 
-#: src/gui/link_grabber_panel.rs:1676 src/gui/downloads_panel.rs:1747
+#: src/gui/link_grabber_panel.rs:1558 src/gui/downloads_panel.rs:1749
 msgid "Don't show this again"
 msgstr "Příště nezobrazovat"
 
-#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.2.0)  #-#-#-#-#
-#. Buttons
-#: src/gui/link_grabber_panel.rs:1682 src/gui/downloads_panel.rs:1753
-#: src/gui/dialogs/account_add_dialog.rs:114
-#: src/gui/dialogs/packagizer_rule_dialog.rs:443
-#: src/gui/dialogs/script_edit_dialog.rs:119 src/gui/donate.rs:34
-msgid "Cancel"
-msgstr "Zrušit"
-
-#: src/gui/link_grabber_panel.rs:1683 src/gui/downloads_panel.rs:1754
+#: src/gui/link_grabber_panel.rs:1565 src/gui/downloads_panel.rs:1756
 #: src/gui/donate.rs:38
 msgid "Continue"
 msgstr "Pokračovat"
 
-#: src/gui/link_grabber_panel.rs:1898
+#: src/gui/link_grabber_panel.rs:1780
 msgid "Temporarily Unknown"
 msgstr "Dočasně neznámé"
 
-#: src/gui/downloads_panel.rs:186 src/gui/downloads_panel.rs:856
-#: src/gui/downloads_panel.rs:861
+#: src/gui/downloads_panel.rs:198 src/gui/downloads_panel.rs:800
+#: src/gui/downloads_panel.rs:806
 msgid "Speed"
 msgstr "Rychlost"
 
-#: src/gui/downloads_panel.rs:192 src/gui/downloads_panel.rs:882
-#: src/gui/downloads_panel.rs:887
+#: src/gui/downloads_panel.rs:204 src/gui/downloads_panel.rs:830
+#: src/gui/downloads_panel.rs:836
 msgid "Loaded"
 msgstr "Staženo"
 
-#: src/gui/downloads_panel.rs:198
+#: src/gui/downloads_panel.rs:210
 msgid "Remaining"
 msgstr "Zbývá"
 
-#: src/gui/downloads_panel.rs:204 src/gui/downloads_panel.rs:869
-#: src/gui/downloads_panel.rs:874
+#: src/gui/downloads_panel.rs:216 src/gui/downloads_panel.rs:815
+#: src/gui/downloads_panel.rs:821
 msgid "ETA"
 msgstr "Zbývající čas"
 
-#: src/gui/downloads_panel.rs:210
+#: src/gui/downloads_panel.rs:222
 msgid "Running downloads"
 msgstr "Probíhající stahování"
 
-#: src/gui/downloads_panel.rs:216
+#: src/gui/downloads_panel.rs:228
 msgid "Finished downloads"
 msgstr "Dokončená stahování"
 
-#: src/gui/downloads_panel.rs:222
+#: src/gui/downloads_panel.rs:234
 msgid "Skipped downloads"
 msgstr "Přeskočená stahování"
 
-#: src/gui/downloads_panel.rs:228
+#: src/gui/downloads_panel.rs:240
 msgid "Failed downloads"
 msgstr "Neúspěšná stahování"
 
-#: src/gui/downloads_panel.rs:677
+#: src/gui/downloads_panel.rs:552
 #: src/gui/components/settings/package_manager.rs:115
 #: src/gui/components/settings/scripts.rs:166
 #: src/gui/dialogs/script_edit_dialog.rs:41
 msgid "Name"
 msgstr "Název"
 
-#: src/gui/downloads_panel.rs:689 src/gui/downloads_panel.rs:716
+#: src/gui/downloads_panel.rs:569 src/gui/downloads_panel.rs:624
 msgid "Progress"
 msgstr "Průběh"
 
-#: src/gui/downloads_panel.rs:791 src/gui/downloads_panel.rs:794
+#: src/gui/downloads_panel.rs:702 src/gui/downloads_panel.rs:705
 msgid "Connection"
 msgstr "Připojení"
 
-#: src/gui/downloads_panel.rs:845 src/gui/downloads_panel.rs:848
+#: src/gui/downloads_panel.rs:788 src/gui/downloads_panel.rs:791
 #: src/gui/components/account_table.rs:183
 msgid "Status"
 msgstr "Stav"
 
-#: src/gui/downloads_panel.rs:908 src/gui/downloads_panel.rs:913
+#: src/gui/downloads_panel.rs:860 src/gui/downloads_panel.rs:866
 #: src/gui/dialogs/packagizer_rule_dialog.rs:243
 #: src/gui/dialogs/packagizer_rule_dialog.rs:385
 #: src/gui/properties_panel.rs:305
 msgid "Comment"
 msgstr "Komentář"
 
-#: src/gui/downloads_panel.rs:1134
+#: src/gui/downloads_panel.rs:1088
 msgid "Delete all"
 msgstr "Smazat vše"
 
-#: src/gui/downloads_panel.rs:1145
+#: src/gui/downloads_panel.rs:1099
 msgid "Delete failed"
 msgstr "Smazat neúspěšné"
 
-#: src/gui/downloads_panel.rs:1146
+#: src/gui/downloads_panel.rs:1100
 msgid "Delete finished"
 msgstr "Smazat dokončené"
 
-#: src/gui/downloads_panel.rs:1189
+#: src/gui/downloads_panel.rs:1143
 #: src/gui/dialogs/packagizer_rule_dialog.rs:391
 msgid "Chunks"
 msgstr "Segmenty"
 
-#: src/gui/downloads_panel.rs:1190
+#: src/gui/downloads_panel.rs:1144
 msgid "Parallel downloads"
 msgstr "Souběžná stahování"
 
-#: src/gui/downloads_panel.rs:1191
+#: src/gui/downloads_panel.rs:1145
 msgid "Parallel per host"
 msgstr "Souběžně na hostitele"
 
-#: src/gui/downloads_panel.rs:1192
+#: src/gui/downloads_panel.rs:1146
 msgid "Speed limit"
 msgstr "Omezení rychlosti"
 
-#: src/gui/downloads_panel.rs:1345
+#: src/gui/downloads_panel.rs:1309
 msgid "Downloads complete"
 msgstr "Stahování dokončena"
 
-#: src/gui/downloads_panel.rs:1346
+#: src/gui/downloads_panel.rs:1310
 msgid "One file downloaded successfully"
 msgid_plural "{n} files downloaded successfully"
 msgstr[0] "Jeden soubor byl úspěšně stažen"
 msgstr[1] "{n} soubory byly úspěšně staženy"
 msgstr[2] "{n} souborů bylo úspěšně staženo"
 
-#: src/gui/downloads_panel.rs:1687
+#: src/gui/downloads_panel.rs:1689
 msgid "Delete Selected Downloads?"
 msgstr "Smazat vybraná stahování?"
 
-#: src/gui/downloads_panel.rs:1710
+#: src/gui/downloads_panel.rs:1712
 msgid "{n} file ({}) on disk"
 msgid_plural "{n} files ({}) on disk"
 msgstr[0] "{n} soubor ({}) na disku"
 msgstr[1] "{n} soubory ({}) na disku"
 msgstr[2] "{n} souborů ({}) na disku"
 
-#: src/gui/downloads_panel.rs:1723
+#: src/gui/downloads_panel.rs:1725
 msgid "Keep all downloaded files - just remove links from JDownloader"
 msgstr "Ponechat všechny stažené soubory – pouze odebrat odkazy z JDownloaderu"
 
-#: src/gui/downloads_panel.rs:1724
+#: src/gui/downloads_panel.rs:1726
 msgid "Move downloaded files to Trash & remove links from JDownloader"
 msgstr "Přesunout stažené soubory do koše a odebrat odkazy z JDownloaderu"
 
-#: src/gui/downloads_panel.rs:1725
+#: src/gui/downloads_panel.rs:1727
 msgid ""
 "Delete downloaded files permanently from disk & remove links from JDownloader"
 msgstr "Trvale smazat stažené soubory z disku a odebrat odkazy z JDownloaderu"
@@ -461,7 +536,7 @@ msgstr "Záloha"
 msgid "Restart"
 msgstr "Restartovat"
 
-#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:203
+#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:204
 msgid "Exit"
 msgstr "Ukončit"
 
@@ -511,21 +586,81 @@ msgstr "Max. počet současných stahování na hostera"
 msgid "Speed Limit"
 msgstr "Omezení rychlosti"
 
-#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:185
+#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:187
 msgid "Download"
 msgstr "Stahování"
 
-#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:189
+#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:191
 msgid "Link Collector"
 msgstr "Sběrač odkazů"
 
-#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:194
+#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:196
 msgid "Donate"
 msgstr "Přispět darem"
 
 #: src/gui/menus/tools.rs:54 src/gui/menus/tools.rs:61
 msgid "Windows"
 msgstr "Okna"
+
+#. ── Extract Now ─────────────────────────────────────────────────
+#: src/gui/archive_menu.rs:138 src/gui/archive_menu.rs:178
+msgid "Extract Now"
+msgstr "Rozbalit nyní"
+
+#. ── Abort extraction ────────────────────────────────────────────
+#: src/gui/archive_menu.rs:143 src/gui/archive_menu.rs:196
+msgid "Abort extraction"
+msgstr "Přerušit rozbalování"
+
+#. ── Validate Archive(s) ─────────────────────────────────────────
+#. JDownloader opens a dedicated `DummyArchiveDialog` here, showing
+#. each part's checksum/presence check interactively — not exposed
+#. over the RemoteAPI at all. This instead summarizes
+#. `getArchiveInfo`'s own per-file `states` as a toast, which is the
+#. same completeness information (`COMPLETE`/`INCOMPLETE`/`MISSING`)
+#. without needing a from-scratch validation UI.
+#: src/gui/archive_menu.rs:148 src/gui/archive_menu.rs:220
+msgid "Validate Archive(s)"
+msgstr "Ověřit archivy"
+
+#. ── Auto Extract Enabled ────────────────────────────────────────
+#: src/gui/archive_menu.rs:154 src/gui/archive_menu.rs:270
+msgid "Auto Extract Enabled"
+msgstr "Automatické rozbalení povoleno"
+
+#: src/gui/archive_menu.rs:159 src/gui/archive_menu.rs:294
+#: src/gui/archive_menu.rs:304
+msgid "Set Extraction Path"
+msgstr "Nastavit cestu pro rozbalení"
+
+#: src/gui/archive_menu.rs:164 src/gui/archive_menu.rs:328
+#: src/gui/dialogs/archive_password_dialog.rs:15
+msgid "Set Archive Password"
+msgstr "Nastavit heslo archivu"
+
+#: src/gui/archive_menu.rs:169 src/gui/archive_menu.rs:428
+msgid "Cleanup after Extraction"
+msgstr "Vyčistit po rozbalení"
+
+#: src/gui/archive_menu.rs:251
+msgid "Archive validated: {} file(s) present"
+msgstr "Archiv ověřen: {} soubor(ů) přítomno"
+
+#: src/gui/archive_menu.rs:254
+msgid "Archive incomplete: {} present, {} incomplete, {} missing"
+msgstr "Archiv neúplný: {} přítomno, {} neúplných, {} chybí"
+
+#: src/gui/archive_menu.rs:357 src/gui/archive_menu.rs:370
+msgid "'Delete Archive Files' enabled"
+msgstr "'Odstranit soubory archivů' povoleno"
+
+#: src/gui/archive_menu.rs:362 src/gui/archive_menu.rs:399
+msgid "'Remove Links from Downloadlist' enabled"
+msgstr "'Odebrat odkazy ze seznamu stahování' povoleno"
+
+#: src/gui/archive_menu.rs:433 src/gui/mod.rs:357
+msgid "Archive(s)"
+msgstr "Archivy"
 
 #: src/gui/components/account_table.rs:31
 #: src/gui/dialogs/packagizer_rule_dialog.rs:107
@@ -577,6 +712,7 @@ msgid "Username"
 msgstr "Uživatelské jméno"
 
 #: src/gui/components/account_table.rs:185
+#: src/gui/dialogs/archive_password_dialog.rs:23
 msgid "Password"
 msgstr "Heslo"
 
@@ -666,14 +802,6 @@ msgstr "Nikdy"
 #: src/gui/components/settings/general.rs:200
 msgid "Remove finished downloads"
 msgstr "Odebrat dokončená stahování"
-
-#: src/gui/components/settings/general.rs:204
-msgid "Overwrite existing file"
-msgstr "Přepsat existující soubor"
-
-#: src/gui/components/settings/general.rs:205
-msgid "Skip file"
-msgstr "Přeskočit soubor"
 
 #: src/gui/components/settings/general.rs:206
 msgid "Auto-rename"
@@ -791,12 +919,12 @@ msgid "Duplicate"
 msgstr "Duplikovat"
 
 #: src/gui/components/settings/package_manager.rs:88
-#: src/gui/main_tool_bar.rs:146
+#: src/gui/main_tool_bar.rs:150
 msgid "Move up"
 msgstr "Posunout nahoru"
 
 #: src/gui/components/settings/package_manager.rs:90
-#: src/gui/main_tool_bar.rs:148
+#: src/gui/main_tool_bar.rs:152
 msgid "Move down"
 msgstr "Posunout dolů"
 
@@ -846,7 +974,7 @@ msgstr "Příklady skriptů"
 msgid "Event trigger"
 msgstr "Spouštěč události"
 
-#: src/gui/components/settings/scripts.rs:289
+#: src/gui/components/settings/scripts.rs:327
 msgid "New script"
 msgstr "Nový skript"
 
@@ -1153,49 +1281,49 @@ msgstr ""
 "instalačních balíčků a mohli JDownloader dále vylepšovat. Dar je navíc "
 "dobrým způsobem, jak nám sdělit, na které moduly bychom se měli zaměřit."
 
-#: src/gui/main_tool_bar.rs:120 src/gui/tray.rs:143
+#: src/gui/main_tool_bar.rs:121 src/gui/tray.rs:143
 msgid "Start downloads"
 msgstr "Spustit stahování"
 
-#: src/gui/main_tool_bar.rs:127 src/gui/tray.rs:159
+#: src/gui/main_tool_bar.rs:131 src/gui/tray.rs:159
 msgid "Pause downloads"
 msgstr "Pozastavit stahování"
 
-#: src/gui/main_tool_bar.rs:136 src/gui/tray.rs:151
+#: src/gui/main_tool_bar.rs:140 src/gui/tray.rs:151
 msgid "Stop downloads"
 msgstr "Zastavit stahování"
 
 #. Move actions
-#: src/gui/main_tool_bar.rs:144
+#: src/gui/main_tool_bar.rs:148
 msgid "Move to top"
 msgstr "Přesunout úplně nahoru"
 
-#: src/gui/main_tool_bar.rs:150
+#: src/gui/main_tool_bar.rs:154
 msgid "Move bottom"
 msgstr "Přesunout úplně dolů"
 
-#: src/gui/main_tool_bar.rs:158 src/gui/tray.rs:177
+#: src/gui/main_tool_bar.rs:162 src/gui/tray.rs:178
 msgid "Clipboard monitoring"
 msgstr "Sledování schránky"
 
-#: src/gui/main_tool_bar.rs:163 src/gui/tray.rs:185
+#: src/gui/main_tool_bar.rs:167 src/gui/tray.rs:186
 msgid "Auto reconnect"
 msgstr "Automatické opětovné připojení"
 
-#: src/gui/main_tool_bar.rs:171 src/gui/tray.rs:194
+#: src/gui/main_tool_bar.rs:175 src/gui/tray.rs:195
 msgid "Use premium accounts"
 msgstr "Používat prémiové účty"
 
-#: src/gui/main_tool_bar.rs:176
+#: src/gui/main_tool_bar.rs:180
 msgid "Silent mode"
 msgstr "Tichý režim"
 
 #. Misc
-#: src/gui/main_tool_bar.rs:183
+#: src/gui/main_tool_bar.rs:187
 msgid "Reconnect"
 msgstr "Znovu připojit"
 
-#: src/gui/main_tool_bar.rs:191
+#: src/gui/main_tool_bar.rs:195
 msgid "Check for updates"
 msgstr "Zkontrolovat aktualizace"
 
@@ -1269,7 +1397,7 @@ msgstr "Vlastnosti souboru: {}"
 
 #. Mirrors JDownloader's own tray menu entry
 #. (`TrayOpenDefaultDownloadDirectory` / `IconKey.ICON_SAVE`).
-#: src/gui/tray.rs:170
+#: src/gui/tray.rs:171
 msgid "Open download folder"
 msgstr "Otevřít složku pro stahování"
 
@@ -1277,28 +1405,28 @@ msgstr "Otevřít složku pro stahování"
 msgid "Waiting for JDownloader to exit..."
 msgstr "Čekání na ukončení JDownloaderu..."
 
-#: src/gui/mod.rs:176
+#: src/gui/mod.rs:178
 msgid "The power of JDownloader, the elegance of GNOME"
 msgstr "Síla JDownloaderu, elegance GNOME"
 
-#: src/gui/mod.rs:259 src/gui/mod.rs:281
+#: src/gui/mod.rs:261 src/gui/mod.rs:283
 msgid "Start Downloads"
 msgstr "Spustit stahování"
 
-#: src/gui/mod.rs:264 src/gui/mod.rs:288
+#: src/gui/mod.rs:266 src/gui/mod.rs:290
 msgid "Start All Downloads"
 msgstr "Spustit všechna stahování"
 
 #. Status bar.
-#: src/gui/mod.rs:525
+#: src/gui/mod.rs:550
 msgid "Ready"
 msgstr "Připraveno"
 
-#: src/gui/mod.rs:581 src/jd/settings/event_scripter_settings.rs:138
+#: src/gui/mod.rs:606 src/jd/settings/event_scripter_settings.rs:138
 msgid "JDownloader started"
 msgstr "JDownloader spuštěn"
 
-#: src/gui/mod.rs:616
+#: src/gui/mod.rs:641
 msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
 msgstr "JDownloader.jar nebyl nalezen. Nastavte proměnnou JDOWNLOADER_JAR."
 

@@ -9,7 +9,10 @@ use gtk4::gio;
 use gtk4::glib;
 use serde_json::Value;
 
-use crate::jd::{GraphicalUserInterfaceSettings, JdApi};
+use crate::gui::package_tree::{
+    build_name_column, sync_store, sync_store_keep_expanded, tree_item, PackageTree,
+};
+use crate::jd::{GeneralSettings, GraphicalUserInterfaceSettings, JdApi};
 
 #[derive(Clone, Debug)]
 pub struct DownloadRow {
@@ -47,6 +50,14 @@ pub struct DownloadRow {
     pub finished: bool,
     pub enabled: bool,
     pub show_progress: bool,
+    /// `(current, total)` bytes from `advancedStatus.PluginProgress` when
+    /// its `id` is `"EXTRACTION"` — JDownloader reuses `DownloadLink`'s
+    /// progress bar for the archive-extraction phase too
+    /// (`ProgressColumn`/`ExtractionProgress`, verified against the SVN),
+    /// with `current`/`total` counting decompressed bytes rather than
+    /// downloaded ones. `None` outside that phase, in which case the
+    /// Progress column falls back to `bytes_loaded`/`bytes_total` as usual.
+    pub extraction_progress: Option<(i64, i64)>,
 }
 
 impl PartialEq for DownloadRow {
@@ -74,6 +85,7 @@ impl PartialEq for DownloadRow {
             && self.finished == other.finished
             && self.enabled == other.enabled
             && self.show_progress == other.show_progress
+            && self.extraction_progress == other.extraction_progress
     }
 }
 
@@ -100,6 +112,13 @@ pub struct PackageRow {
     pub finished: bool,
     pub running: bool,
     pub comment: String,
+    /// Sum of `(current, total)` across the package's children currently
+    /// mid-extraction (see [`DownloadRow::extraction_progress`]) — JD has no
+    /// package-level equivalent over the API, so this is our own
+    /// aggregation, computed in `JdApi::query_downloads`. `None` when no
+    /// child is extracting, in which case the Progress column falls back to
+    /// `bytes_loaded`/`bytes_total` as usual.
+    pub extraction_progress: Option<(i64, i64)>,
 }
 
 impl PartialEq for PackageRow {
@@ -120,6 +139,7 @@ impl PartialEq for PackageRow {
             && self.finished == other.finished
             && self.running == other.running
             && self.comment == other.comment
+            && self.extraction_progress == other.extraction_progress
     }
 }
 
@@ -138,6 +158,15 @@ pub struct DownloadsPanel {
     /// would discard its `TreeListRow`'s expanded state — see
     /// `sync_store_keep_expanded`).
     expanded_state: Rc<RefCell<HashMap<i64, bool>>>,
+    /// One [`PackageLiveRefresh`] registry per column that shows package
+    /// data, collected while building `view`'s columns. `start_refresh`
+    /// fans a mutated-in-place package out through all of them so an
+    /// expanded package's row keeps repainting on every tick.
+    package_live: Vec<PackageLiveRefresh>,
+    /// Whether JDownloader's global download speed cap is on — read by the
+    /// Speed column to color its text red, mirroring `SpeedColumn`. Updated
+    /// by `start_refresh`'s poll.
+    speed_limited: Rc<Cell<bool>>,
 }
 
 /// Keys identifying each Overview stat, passed to
@@ -334,100 +363,24 @@ fn properties_actions(
     }
 }
 
-/// Diffs `new_items` against `last_items` (by `PartialEq`), patching `store`
-/// in place item-by-item when `key(item)` is in the same order as before
-/// (the common case: just field changes), or fully replacing the store's
-/// contents when items were added, removed, or reordered. Never touches rows
-/// that didn't change, so their selection state is left alone.
-pub(crate) fn sync_store<T, K: PartialEq>(
-    store: &gio::ListStore,
-    last_items: &mut Vec<T>,
-    new_items: Vec<T>,
-    key: impl Fn(&T) -> K,
-) where
-    T: PartialEq + Clone + 'static,
-{
-    let same_order = last_items.len() == new_items.len()
-        && last_items.iter().zip(&new_items).all(|(o, n)| key(o) == key(n));
-    if same_order {
-        for (pos, (old_item, new_item)) in last_items.iter().zip(&new_items).enumerate() {
-            if old_item != new_item {
-                store.splice(pos as u32, 1, &[glib::BoxedAnyObject::new(new_item.clone())]);
-            }
-        }
-    } else {
-        store.remove_all();
-        for item in &new_items {
-            store.append(&glib::BoxedAnyObject::new(item.clone()));
+/// This panel's package row type, bound to [`crate::gui::package_tree::PackageLiveRefresh`].
+type PackageLiveRefresh = crate::gui::package_tree::PackageLiveRefresh<PackageRow>;
+
+/// 0.0-1.0 download fraction for a package row, shared between the Progress
+/// column's initial bind and its `PackageLiveRefresh` repaint closure.
+fn package_progress_fraction(pkg: &PackageRow) -> f64 {
+    if let Some((current, total)) = pkg.extraction_progress {
+        if total > 0 {
+            return current as f64 / total as f64;
         }
     }
-    *last_items = new_items;
-}
-
-/// Like [`sync_store`], but for a *package*-level top store: when a changed
-/// item's `is_expanded` returns true, its `BoxedAnyObject` is mutated in
-/// place (`glib::BoxedAnyObject::replace`) instead of being spliced in as a
-/// new one.
-///
-/// GTK's `GtkTreeListModel` has no lighter-weight "this item's value
-/// changed but it's still the same node" signal — any splice at a position
-/// (even replacing an item with an equal-`key` one) makes it discard that
-/// row's expanded state and cached child model outright. For a package
-/// that's currently expanded, that meant every refresh which changed so
-/// much as its size/speed/status text (i.e. constantly, while downloading)
-/// silently collapsed it again. Mutating in place instead means the
-/// package's own row stops repainting on every tick while expanded (its
-/// children, which live in their own store, keep updating live regardless)
-/// until something else causes a real rebind — a fair trade for never
-/// losing the expanded state.
-pub(crate) fn sync_store_keep_expanded<T, K: PartialEq>(
-    store: &gio::ListStore,
-    last_items: &mut Vec<T>,
-    new_items: Vec<T>,
-    key: impl Fn(&T) -> K,
-    is_expanded: impl Fn(&T) -> bool,
-) where
-    T: PartialEq + Clone + 'static,
-{
-    let same_order = last_items.len() == new_items.len()
-        && last_items.iter().zip(&new_items).all(|(o, n)| key(o) == key(n));
-    if same_order {
-        for (pos, (old_item, new_item)) in last_items.iter().zip(&new_items).enumerate() {
-            if old_item != new_item {
-                if is_expanded(new_item) {
-                    if let Some(obj) = store.item(pos as u32).and_downcast::<glib::BoxedAnyObject>() {
-                        obj.replace(new_item.clone());
-                        continue;
-                    }
-                }
-                store.splice(pos as u32, 1, &[glib::BoxedAnyObject::new(new_item.clone())]);
-            }
-        }
+    if pkg.bytes_total > 0 {
+        pkg.bytes_loaded as f64 / pkg.bytes_total as f64
+    } else if pkg.finished {
+        1.0
     } else {
-        store.remove_all();
-        for item in &new_items {
-            store.append(&glib::BoxedAnyObject::new(item.clone()));
-        }
+        0.0
     }
-    *last_items = new_items;
-}
-
-/// Resolves the open/closed package icon for a given expand state, mirroring
-/// JDownloader's own package row icon. Shared with `link_grabber_panel.rs`.
-pub(crate) fn package_icon(expanded: bool) -> gio::Icon {
-    crate::gui::jd_icon::resolve(if expanded {
-        crate::gui::icon_key::ICON_PACKAGE_OPEN
-    } else {
-        crate::gui::icon_key::ICON_PACKAGE_CLOSED
-    })
-}
-
-/// Returns the item at `list_item`'s position unwrapped from its
-/// `TreeListRow`, along with the row itself (for depth/expander access).
-fn tree_item(list_item: &gtk4::ListItem) -> Option<(gtk4::TreeListRow, glib::BoxedAnyObject)> {
-    let tree_row = list_item.item().and_downcast::<gtk4::TreeListRow>()?;
-    let obj = tree_row.item()?.downcast::<glib::BoxedAnyObject>().ok()?;
-    Some((tree_row, obj))
 }
 
 impl DownloadsPanel {
@@ -436,37 +389,14 @@ impl DownloadsPanel {
         page.set_vexpand(true);
         page.set_hexpand(true);
 
-        let store = gio::ListStore::builder()
-            .item_type(glib::BoxedAnyObject::static_type())
-            .build();
+        let PackageTree {
+            store,
+            child_stores,
+            expanded_state,
+            selection,
+            ..
+        } = PackageTree::build::<PackageRow>("downloads", |p| p.uuid);
 
-        let child_stores: Rc<RefCell<HashMap<i64, gio::ListStore>>> =
-            Rc::new(RefCell::new(HashMap::new()));
-
-        // Remembers each package's expand/collapse state across refreshes
-        // (packages start collapsed, like JDownloader).
-        let expanded_state: Rc<RefCell<HashMap<i64, bool>>> =
-            Rc::new(RefCell::new(crate::config::get_expanded_map("downloads")));
-
-        let tree_model = {
-            let child_stores = child_stores.clone();
-            gtk4::TreeListModel::new(store.clone(), false, false, move |item| {
-                let obj = item.downcast_ref::<glib::BoxedAnyObject>()?;
-                let uuid = obj.try_borrow::<PackageRow>().ok()?.uuid;
-                let child = child_stores
-                    .borrow_mut()
-                    .entry(uuid)
-                    .or_insert_with(|| {
-                        gio::ListStore::builder()
-                            .item_type(glib::BoxedAnyObject::static_type())
-                            .build()
-                    })
-                    .clone();
-                Some(child.upcast::<gio::ListModel>())
-            })
-        };
-
-        let selection = gtk4::MultiSelection::new(Some(tree_model));
         let view = gtk4::ColumnView::new(Some(selection.clone()));
         view.set_vexpand(true);
         view.set_hexpand(true);
@@ -482,8 +412,24 @@ impl DownloadsPanel {
                              title: &str,
                              resizable: bool,
                              expand: bool,
-                             ellipsize: bool|
-         -> gtk4::ColumnViewColumn {
+                             ellipsize: bool,
+                             red_when_limited: Option<Rc<Cell<bool>>>|
+         -> (gtk4::ColumnViewColumn, PackageLiveRefresh) {
+            let live: PackageLiveRefresh = Rc::new(RefCell::new(HashMap::new()));
+            // Only the Speed column passes `Some` here — mirrors
+            // `SpeedColumn.configureRendererComponent`, which colors the
+            // whole column red whenever a global download speed cap is on,
+            // regardless of any row's actual speed value.
+            let set_text = move |label: &gtk4::Label, text: &str| {
+                if red_when_limited.as_ref().is_some_and(|f| f.get()) {
+                    label.set_markup(&format!(
+                        "<span foreground=\"red\">{}</span>",
+                        glib::markup_escape_text(text)
+                    ));
+                } else {
+                    label.set_text(text);
+                }
+            };
             let factory = gtk4::SignalListItemFactory::new();
             factory.connect_setup(move |_, list_item| {
                 let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
@@ -500,30 +446,71 @@ impl DownloadsPanel {
                 }
                 list_item.set_child(Some(&label));
             });
-            factory.connect_bind(move |_, list_item| {
-                let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
-                let Some((tree_row, obj)) = tree_item(list_item) else {
-                    return;
-                };
-                let Some(label) = list_item.child().and_downcast::<gtk4::Label>() else {
-                    return;
-                };
-                let text = if tree_row.depth() == 0 {
-                    pkg_accessor(&obj.borrow::<PackageRow>()).to_string()
-                } else {
-                    link_accessor(&obj.borrow::<DownloadRow>()).to_string()
-                };
-                label.set_text(&text);
-                if ellipsize {
-                    label.set_tooltip_text(Some(&text));
+            factory.connect_bind({
+                let live = live.clone();
+                let set_text = set_text.clone();
+                move |_, list_item| {
+                    let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
+                    let Some((tree_row, obj)) = tree_item(list_item) else {
+                        return;
+                    };
+                    let Some(label) = list_item.child().and_downcast::<gtk4::Label>() else {
+                        return;
+                    };
+                    if tree_row.depth() == 0 {
+                        let pkg = obj.borrow::<PackageRow>();
+                        set_text(&label, pkg_accessor(&pkg));
+                        if ellipsize {
+                            label.set_tooltip_text(Some(pkg_accessor(&pkg)));
+                        }
+                        let uuid = pkg.uuid;
+                        let label = label.clone();
+                        let set_text = set_text.clone();
+                        live.borrow_mut().insert(
+                            uuid,
+                            Box::new(move |pkg: &PackageRow| {
+                                let text = pkg_accessor(pkg);
+                                set_text(&label, text);
+                                if ellipsize {
+                                    label.set_tooltip_text(Some(text));
+                                }
+                            }),
+                        );
+                    } else {
+                        let row = obj.borrow::<DownloadRow>();
+                        let text = link_accessor(&row);
+                        set_text(&label, text);
+                        if ellipsize {
+                            label.set_tooltip_text(Some(text));
+                        }
+                    }
+                }
+            });
+            factory.connect_unbind({
+                let live = live.clone();
+                move |_, list_item| {
+                    let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
+                    if let Some((_, obj)) = tree_item(list_item) {
+                        // Not `tree_row.depth() == 0`: a row's depth can no
+                        // longer be trusted once it's being torn down (e.g.
+                        // as part of removing rows), so the underlying
+                        // `BoxedAnyObject`'s actual type is checked directly
+                        // instead — `borrow` would panic on a mismatch.
+                        if let Ok(pkg) = obj.try_borrow::<PackageRow>() {
+                            live.borrow_mut().remove(&pkg.uuid);
+                        }
+                    }
                 }
             });
             let col = gtk4::ColumnViewColumn::new(Some(title), Some(factory));
             col.set_fixed_width(min_width);
             col.set_resizable(resizable);
             col.set_expand(expand);
-            col
+            (col, live)
         };
+        let mut package_live: Vec<PackageLiveRefresh> = Vec::new();
+        // Set by `start_refresh`'s poll; only the Speed column reads it.
+        let speed_limited: Rc<Cell<bool>> = Rc::new(Cell::new(false));
 
         // Icon column: only meaningful for link rows (e.g. the hoster favicon);
         // package rows show nothing, matching JDownloader.
@@ -583,101 +570,15 @@ impl DownloadsPanel {
         // Name: TreeExpander (package/link indentation + expand triangle) +
         // file/package icon + label.
         {
-            let factory = gtk4::SignalListItemFactory::new();
-            factory.connect_setup(move |_, list_item| {
-                let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
-                let hbox = gtk4::Box::new(gtk4::Orientation::Horizontal, 6);
-                hbox.set_halign(gtk4::Align::Fill);
-                hbox.set_hexpand(true);
-                let icon = gtk4::Image::new();
-                icon.set_pixel_size(16);
-                icon.set_valign(gtk4::Align::Center);
-                let label = gtk4::Label::new(None);
-                label.set_halign(gtk4::Align::Fill);
-                label.set_xalign(0.0);
-                label.set_hexpand(true);
-                label.set_ellipsize(gtk4::pango::EllipsizeMode::End);
-                label.set_has_tooltip(true);
-                hbox.append(&icon);
-                hbox.append(&label);
-
-                let expander = gtk4::TreeExpander::new();
-                expander.set_hexpand(true);
-                expander.set_child(Some(&hbox));
-
-                list_item.set_child(Some(&expander));
-            });
-            factory.connect_bind({
-                let expanded_state = expanded_state.clone();
-                move |_, list_item| {
-                let expanded_state = expanded_state.clone();
-                let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
-                let Some(tree_row) = list_item.item().and_downcast::<gtk4::TreeListRow>() else {
-                    return;
-                };
-                let Some(obj) = tree_row
-                    .item()
-                    .and_then(|i| i.downcast::<glib::BoxedAnyObject>().ok())
-                else {
-                    return;
-                };
-                let Some(expander) = list_item.child().and_downcast::<gtk4::TreeExpander>()
-                else {
-                    return;
-                };
-                expander.set_list_row(Some(&tree_row));
-                let Some(hbox) = expander.child().and_downcast::<gtk4::Box>() else {
-                    return;
-                };
-                let Some(icon) = hbox.first_child().and_downcast::<gtk4::Image>() else {
-                    return;
-                };
-                let Some(label) = icon.next_sibling().and_downcast::<gtk4::Label>() else {
-                    return;
-                };
-                if tree_row.depth() == 0 {
-                    let uuid = obj.borrow::<PackageRow>().uuid;
-                    let desired = expanded_state.borrow().get(&uuid).copied().unwrap_or(false);
-                    if tree_row.is_expanded() != desired {
-                        // Deferred to idle: this bind is itself running as
-                        // GTK processes the items-changed that just
-                        // recreated this row (e.g. a package's fields
-                        // changed, so `sync_store` replaced its list item).
-                        // Expanding synchronously here re-enters the tree
-                        // model mid-update and the row can end up visually
-                        // collapsed anyway.
-                        let deferred_row = tree_row.clone();
-                        glib::source::idle_add_local_once(move || {
-                            if deferred_row.is_expanded() != desired {
-                                deferred_row.set_expanded(desired);
-                            }
-                        });
-                    }
-                    icon.set_from_gicon(&package_icon(tree_row.is_expanded()));
-                    tree_row.connect_expanded_notify({
-                        let expanded_state = expanded_state.clone();
-                        let icon = icon.clone();
-                        move |row| {
-                            expanded_state.borrow_mut().insert(uuid, row.is_expanded());
-                            crate::config::set_expanded("downloads", uuid, row.is_expanded());
-                            icon.set_from_gicon(&package_icon(row.is_expanded()));
-                        }
-                    });
-                    let pkg = obj.borrow::<PackageRow>();
-                    label.set_text(&pkg.name);
-                    label.set_tooltip_text(Some(&pkg.name));
-                } else {
-                    let row = obj.borrow::<DownloadRow>();
-                    icon.set_from_gicon(&row.file_type_icon);
-                    label.set_text(&row.name);
-                    label.set_tooltip_text(Some(&row.name));
-                }
-                }
-            });
-            let col = gtk4::ColumnViewColumn::new(Some(tr!("Name").as_ref()), Some(factory));
-            col.set_fixed_width(220);
-            col.set_resizable(false);
-            col.set_expand(true);
+            let col = build_name_column::<PackageRow, DownloadRow>(
+                tr!("Name").as_ref(),
+                220,
+                "downloads",
+                expanded_state.clone(),
+                |p| p.uuid,
+                |p| &p.name,
+                (|r| &r.file_type_icon, |r| &r.name),
+            );
             view.append_column(&col);
         }
 
@@ -685,6 +586,7 @@ impl DownloadsPanel {
         // overlay is built; only the fraction computation is specific to
         // download rows here.
         {
+            let progress_live: PackageLiveRefresh = Rc::new(RefCell::new(HashMap::new()));
             let col = crate::gui::cells::progress_cell::build_column(
                 tr!("Progress").as_ref(),
                 165,
@@ -692,17 +594,16 @@ impl DownloadsPanel {
                 |list_item| {
                     let (tree_row, obj) = tree_item(list_item)?;
                     let fraction = if tree_row.depth() == 0 {
-                        let pkg = obj.borrow::<PackageRow>();
-                        if pkg.bytes_total > 0 {
-                            pkg.bytes_loaded as f64 / pkg.bytes_total as f64
-                        } else if pkg.finished {
-                            1.0
-                        } else {
-                            0.0
-                        }
+                        package_progress_fraction(&obj.borrow::<PackageRow>())
                     } else {
                         let row = obj.borrow::<DownloadRow>();
-                        if row.bytes_total > 0 {
+                        if let Some((current, total)) = row.extraction_progress {
+                            if total > 0 {
+                                current as f64 / total as f64
+                            } else {
+                                0.0
+                            }
+                        } else if row.bytes_total > 0 {
                             row.bytes_loaded as f64 / row.bytes_total as f64
                         } else if row.finished {
                             1.0
@@ -712,23 +613,129 @@ impl DownloadsPanel {
                     };
                     Some(fraction)
                 },
+                {
+                    let progress_live = progress_live.clone();
+                    move |list_item, bar, label| {
+                        let Some((tree_row, obj)) = tree_item(list_item) else {
+                            return;
+                        };
+                        if tree_row.depth() != 0 {
+                            return;
+                        }
+                        let uuid = obj.borrow::<PackageRow>().uuid;
+                        let bar = bar.clone();
+                        let label = label.clone();
+                        progress_live.borrow_mut().insert(
+                            uuid,
+                            Box::new(move |pkg: &PackageRow| {
+                                let fraction = package_progress_fraction(pkg);
+                                bar.set_fraction(fraction);
+                                label.set_text(&format!("{:.1}%", fraction * 100.0));
+                            }),
+                        );
+                    }
+                },
+                {
+                    let progress_live = progress_live.clone();
+                    move |list_item| {
+                        if let Some((_, obj)) = tree_item(list_item) {
+                            // See `dual_text_col`'s `connect_unbind` for why
+                            // this checks the object's actual type instead
+                            // of `tree_row.depth()`.
+                            if let Ok(pkg) = obj.try_borrow::<PackageRow>() {
+                                progress_live.borrow_mut().remove(&pkg.uuid);
+                            }
+                        }
+                    }
+                },
             );
             togglable_columns.push(("progress", tr!("Progress").to_string(), col.clone()));
             view.append_column(&col);
+            package_live.push(progress_live);
         }
 
-        let size_col = dual_text_col(
-            |p| &p.size_text,
-            |r| &r.size_text,
-            1.0,
-            90,
-            tr!("Size").as_ref(),
-            false,
-            false,
-            false,
-        );
-        togglable_columns.push(("size", tr!("Size").to_string(), size_col.clone()));
-        view.append_column(&size_col);
+        // Size: a package row shows the child count in brackets next to the
+        // total size, mirroring `SizeColumn`'s two-`RenderLabel` layout
+        // (`countRenderer` left-aligned, `sizeRenderer` right-aligned in the
+        // same cell) — `isFileCountInSizeColumnVisible` gates this in JD,
+        // defaulting (and always, here) to on. A link row has no count of
+        // its own, matching JD leaving `countRenderer` blank there.
+        {
+            let size_live: PackageLiveRefresh = Rc::new(RefCell::new(HashMap::new()));
+            let factory = gtk4::SignalListItemFactory::new();
+            factory.connect_setup(move |_, list_item| {
+                let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
+                let hbox = gtk4::Box::new(gtk4::Orientation::Horizontal, 6);
+                hbox.set_hexpand(true);
+                let count_label = gtk4::Label::new(None);
+                count_label.set_halign(gtk4::Align::Start);
+                let size_label = gtk4::Label::new(None);
+                size_label.set_halign(gtk4::Align::End);
+                size_label.set_hexpand(true);
+                hbox.append(&count_label);
+                hbox.append(&size_label);
+                list_item.set_child(Some(&hbox));
+            });
+            factory.connect_bind({
+                let size_live = size_live.clone();
+                move |_, list_item| {
+                    let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
+                    let Some((tree_row, obj)) = tree_item(list_item) else {
+                        return;
+                    };
+                    let Some(hbox) = list_item.child().and_downcast::<gtk4::Box>() else {
+                        return;
+                    };
+                    let Some(count_label) = hbox.first_child().and_downcast::<gtk4::Label>()
+                    else {
+                        return;
+                    };
+                    let Some(size_label) = count_label.next_sibling().and_downcast::<gtk4::Label>()
+                    else {
+                        return;
+                    };
+                    if tree_row.depth() == 0 {
+                        let pkg = obj.borrow::<PackageRow>();
+                        count_label.set_text(&format!("[{}]", pkg.child_count));
+                        size_label.set_text(&pkg.size_text);
+                        let uuid = pkg.uuid;
+                        let count_label = count_label.clone();
+                        let size_label = size_label.clone();
+                        size_live.borrow_mut().insert(
+                            uuid,
+                            Box::new(move |pkg: &PackageRow| {
+                                count_label.set_text(&format!("[{}]", pkg.child_count));
+                                size_label.set_text(&pkg.size_text);
+                            }),
+                        );
+                    } else {
+                        let row = obj.borrow::<DownloadRow>();
+                        count_label.set_text("");
+                        size_label.set_text(&row.size_text);
+                    }
+                }
+            });
+            factory.connect_unbind({
+                let size_live = size_live.clone();
+                move |_, list_item| {
+                    let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
+                    if let Some((_, obj)) = tree_item(list_item) {
+                        // See `dual_text_col`'s `connect_unbind` for why
+                        // this checks the object's actual type instead of
+                        // `tree_row.depth()`.
+                        if let Ok(pkg) = obj.try_borrow::<PackageRow>() {
+                            size_live.borrow_mut().remove(&pkg.uuid);
+                        }
+                    }
+                }
+            });
+            let size_col = gtk4::ColumnViewColumn::new(Some(tr!("Size").as_ref()), Some(factory));
+            size_col.set_fixed_width(110);
+            size_col.set_resizable(false);
+            togglable_columns.push(("size", tr!("Size").to_string(), size_col.clone()));
+            view.append_column(&size_col);
+            package_live.push(size_live);
+        }
 
         let hoster_col = icon_col(
             |r| &r.host_icon,
@@ -738,18 +745,22 @@ impl DownloadsPanel {
         );
         togglable_columns.push(("hoster", tr!("Hoster").to_string(), hoster_col.clone()));
         view.append_column(&hoster_col);
-        // Connection: link-only (JDownloader also keeps this blank on package rows).
+        // Connection: link-only (JDownloader also keeps this blank on package
+        // rows). Mirrors `ConnectionColumn.configureRendererComponent`: the
+        // cell is blank by default (`resetRenderer`), and each icon is a
+        // narrow, specific condition rather than a general link-state
+        // summary — notably there's *no* icon for finished or disabled;
+        // those show nothing here (a finished link's checkmark lives in the
+        // Status column instead, via `FinalLinkState`'s own icon).
         {
             let factory = gtk4::SignalListItemFactory::new();
             factory.connect_setup(move |_, list_item| {
                 let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
                 let row_box = gtk4::Box::new(gtk4::Orientation::Horizontal, 2);
                 row_box.set_halign(gtk4::Align::Start);
-                let icons: [&'static str; 4] = [
+                let icons: [&'static str; 2] = [
                     crate::gui::icon_key::ICON_SKIPPED,
                     crate::gui::icon_key::ICON_MEDIA_PLAYBACK_START,
-                    crate::gui::icon_key::ICON_OK,
-                    crate::gui::icon_key::ICON_STOP,
                 ];
                 for icon in icons {
                     let img = gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(icon));
@@ -768,15 +779,10 @@ impl DownloadsPanel {
                     return;
                 };
                 let visibilities = if tree_row.depth() == 0 {
-                    [false, false, false, false]
+                    [false, false]
                 } else {
                     let row = obj.borrow::<DownloadRow>();
-                    [
-                        row.skipped,
-                        row.running && !row.finished,
-                        row.finished,
-                        !row.enabled && !row.finished,
-                    ]
+                    [row.skipped, row.running && !row.finished]
                 };
                 let mut child = row_box.first_child();
                 for visible in visibilities {
@@ -800,6 +806,7 @@ impl DownloadsPanel {
         // the exact rich label/icon JD's own column would show, for both
         // links and packages).
         {
+            let status_live: PackageLiveRefresh = Rc::new(RefCell::new(HashMap::new()));
             let factory = gtk4::SignalListItemFactory::new();
             factory.connect_setup(move |_, list_item| {
                 let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
@@ -816,39 +823,71 @@ impl DownloadsPanel {
                 hbox.append(&label);
                 list_item.set_child(Some(&hbox));
             });
-            factory.connect_bind(move |_, list_item| {
-                let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
-                let Some((tree_row, obj)) = tree_item(list_item) else {
-                    return;
-                };
-                let Some(hbox) = list_item.child().and_downcast::<gtk4::Box>() else {
-                    return;
-                };
-                let Some(icon) = hbox.first_child().and_downcast::<gtk4::Image>() else {
-                    return;
-                };
-                let Some(label) = icon.next_sibling().and_downcast::<gtk4::Label>() else {
-                    return;
-                };
-                let (status, status_icon) = if tree_row.depth() == 0 {
-                    let pkg = obj.borrow::<PackageRow>();
-                    (pkg.status.clone(), pkg.status_icon.clone())
-                } else {
-                    let row = obj.borrow::<DownloadRow>();
-                    (row.status.clone(), row.status_icon.clone())
-                };
-                icon.set_from_gicon(&status_icon);
-                icon.set_visible(!status.is_empty());
-                label.set_text(&status);
-                label.set_tooltip_text(Some(&status));
+            factory.connect_bind({
+                let status_live = status_live.clone();
+                move |_, list_item| {
+                    let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
+                    let Some((tree_row, obj)) = tree_item(list_item) else {
+                        return;
+                    };
+                    let Some(hbox) = list_item.child().and_downcast::<gtk4::Box>() else {
+                        return;
+                    };
+                    let Some(icon) = hbox.first_child().and_downcast::<gtk4::Image>() else {
+                        return;
+                    };
+                    let Some(label) = icon.next_sibling().and_downcast::<gtk4::Label>() else {
+                        return;
+                    };
+                    let (status, status_icon) = if tree_row.depth() == 0 {
+                        let pkg = obj.borrow::<PackageRow>();
+                        (pkg.status.clone(), pkg.status_icon.clone())
+                    } else {
+                        let row = obj.borrow::<DownloadRow>();
+                        (row.status.clone(), row.status_icon.clone())
+                    };
+                    icon.set_from_gicon(&status_icon);
+                    icon.set_visible(!status.is_empty());
+                    label.set_text(&status);
+                    label.set_tooltip_text(Some(&status));
+                    if tree_row.depth() == 0 {
+                        let uuid = obj.borrow::<PackageRow>().uuid;
+                        let icon = icon.clone();
+                        let label = label.clone();
+                        status_live.borrow_mut().insert(
+                            uuid,
+                            Box::new(move |pkg: &PackageRow| {
+                                icon.set_from_gicon(&pkg.status_icon);
+                                icon.set_visible(!pkg.status.is_empty());
+                                label.set_text(&pkg.status);
+                                label.set_tooltip_text(Some(&pkg.status));
+                            }),
+                        );
+                    }
+                }
+            });
+            factory.connect_unbind({
+                let status_live = status_live.clone();
+                move |_, list_item| {
+                    let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
+                    if let Some((_, obj)) = tree_item(list_item) {
+                        // See `dual_text_col`'s `connect_unbind` for why this
+                        // checks the object's actual type instead of
+                        // `tree_row.depth()`.
+                        if let Ok(pkg) = obj.try_borrow::<PackageRow>() {
+                            status_live.borrow_mut().remove(&pkg.uuid);
+                        }
+                    }
+                }
             });
             let col = gtk4::ColumnViewColumn::new(Some(tr!("Status").as_ref()), Some(factory));
             col.set_fixed_width(110);
             col.set_resizable(false);
             togglable_columns.push(("status", tr!("Status").to_string(), col.clone()));
             view.append_column(&col);
+            package_live.push(status_live);
         }
-        let speed_col = dual_text_col(
+        let (speed_col, speed_live) = dual_text_col(
             |p| &p.speed_text,
             |r| &r.speed_text,
             1.0,
@@ -857,11 +896,13 @@ impl DownloadsPanel {
             false,
             false,
             false,
+            Some(speed_limited.clone()),
         );
         togglable_columns.push(("speed", tr!("Speed").to_string(), speed_col.clone()));
         view.append_column(&speed_col);
+        package_live.push(speed_live);
 
-        let eta_col = dual_text_col(
+        let (eta_col, eta_live) = dual_text_col(
             |p| &p.eta_text,
             |r| &r.eta_text,
             1.0,
@@ -870,11 +911,13 @@ impl DownloadsPanel {
             false,
             false,
             false,
+            None,
         );
         togglable_columns.push(("eta", tr!("ETA").to_string(), eta_col.clone()));
         view.append_column(&eta_col);
+        package_live.push(eta_live);
 
-        let loaded_col = dual_text_col(
+        let (loaded_col, loaded_live) = dual_text_col(
             |p| &p.loaded_text,
             |r| &r.loaded_text,
             1.0,
@@ -883,11 +926,13 @@ impl DownloadsPanel {
             false,
             false,
             false,
+            None,
         );
         togglable_columns.push(("loaded", tr!("Loaded").to_string(), loaded_col.clone()));
         view.append_column(&loaded_col);
+        package_live.push(loaded_live);
 
-        let save_to_col = dual_text_col(
+        let (save_to_col, save_to_live) = dual_text_col(
             |p| &p.save_to,
             |r| &r.save_to,
             0.0,
@@ -896,11 +941,13 @@ impl DownloadsPanel {
             false,
             true,
             true,
+            None,
         );
         togglable_columns.push(("save_to", tr!("Save To").to_string(), save_to_col.clone()));
         view.append_column(&save_to_col);
+        package_live.push(save_to_live);
 
-        let comment_col = dual_text_col(
+        let (comment_col, comment_live) = dual_text_col(
             |p| &p.comment,
             |r| &r.comment,
             0.0,
@@ -909,9 +956,11 @@ impl DownloadsPanel {
             false,
             false,
             true,
+            None,
         );
         togglable_columns.push(("comment", tr!("Comment").to_string(), comment_col.clone()));
         view.append_column(&comment_col);
+        package_live.push(comment_live);
 
         let table_scroll = gtk4::ScrolledWindow::builder()
             .child(&view)
@@ -1221,6 +1270,8 @@ impl DownloadsPanel {
             view,
             overview,
             expanded_state,
+            package_live,
+            speed_limited,
         }
     }
 
@@ -1241,6 +1292,8 @@ impl DownloadsPanel {
         let selection = self.selection.clone();
         let overview = self.overview.clone();
         let expanded_state = self.expanded_state.clone();
+        let package_live = self.package_live.clone();
+        let speed_limited = self.speed_limited.clone();
         let last_packages: Rc<RefCell<Vec<PackageRow>>> = Rc::new(RefCell::new(Vec::new()));
         let last_links_by_package: Rc<RefCell<HashMap<i64, Vec<DownloadRow>>>> =
             Rc::new(RefCell::new(HashMap::new()));
@@ -1258,6 +1311,8 @@ impl DownloadsPanel {
             let selection = selection.clone();
             let overview = overview.clone();
             let expanded_state = expanded_state.clone();
+            let package_live = package_live.clone();
+            let speed_limited = speed_limited.clone();
             let last_packages = last_packages.clone();
             let last_links_by_package = last_links_by_package.clone();
             let had_running = had_running.clone();
@@ -1267,16 +1322,20 @@ impl DownloadsPanel {
             let app = app.clone();
             let toast_overlay = toast_overlay.clone();
 
-            let (tx, rx) = async_channel::bounded::<(Vec<Value>, Vec<Value>)>(1);
+            let (tx, rx) = async_channel::bounded::<(Vec<Value>, Vec<Value>, bool)>(1);
             let api_fetch = api.clone();
             std::thread::spawn(move || {
-                if let Ok(data) = api_fetch.query_downloads() {
-                    let _ = tx.try_send(data);
+                if let Ok((packages, links)) = api_fetch.query_downloads() {
+                    let limit_enabled = GeneralSettings::new(api_fetch.clone())
+                        .get_download_speed_limit_enabled()
+                        .unwrap_or(false);
+                    let _ = tx.try_send((packages, links, limit_enabled));
                 }
             });
 
             glib::MainContext::default().spawn_local(async move {
-                if let Ok((packages_json, links_json)) = rx.recv().await {
+                if let Ok((packages_json, links_json, limit_enabled)) = rx.recv().await {
+                    speed_limited.set(limit_enabled);
                     update_overview_values(&overview, packages_json.len(), &links_json);
                     let new_packages: Vec<PackageRow> =
                         packages_json.iter().map(package_row_from_json).collect();
@@ -1405,7 +1464,21 @@ impl DownloadsPanel {
                         &mut last_packages.borrow_mut(),
                         new_packages,
                         |p| p.uuid,
-                        |p| expanded_state.borrow().get(&p.uuid).copied().unwrap_or(false),
+                        |old, new| {
+                            expanded_state.borrow().get(&new.uuid).copied().unwrap_or(false)
+                                // A package finishing/restarting is worth a
+                                // real rebind even while expanded — see
+                                // `sync_store_keep_expanded`'s doc comment.
+                                && old.running == new.running
+                                && old.finished == new.finished
+                        },
+                        |p| {
+                            for live in &package_live {
+                                if let Some(update) = live.borrow().get(&p.uuid) {
+                                    update(p);
+                                }
+                            }
+                        },
                     );
 
                     // Drop child stores/history for packages that no longer exist.
@@ -1546,6 +1619,37 @@ fn selected_rows(
         }
     }
     rows
+}
+
+/// Selected link/package ids for archive-related actions
+/// (`extraction/startExtractionNow`, `extraction/getArchiveInfo`, etc.),
+/// which take `linkIds`/`packageIds` separately rather than always
+/// resolving a package down to its children: a selected package row
+/// contributes its own uuid to `package_ids` (letting JDownloader resolve
+/// its archives itself), while a selected link row contributes its uuid,
+/// parsed back to the `i64` it always was (see `row_from_json`), to
+/// `link_ids`.
+pub(crate) fn selected_archive_ids(
+    selection: &gtk4::MultiSelection,
+) -> (Vec<i64>, Vec<i64>) {
+    let bitset = selection.selection();
+    let mut link_ids = Vec::new();
+    let mut package_ids = Vec::new();
+    for i in 0..bitset.size() {
+        let pos = bitset.nth(i as u32);
+        let Some(tree_row) = selection.item(pos).and_downcast::<gtk4::TreeListRow>() else {
+            continue;
+        };
+        let Some(obj) = tree_row.item().and_downcast::<glib::BoxedAnyObject>() else {
+            continue;
+        };
+        if tree_row.depth() == 0 {
+            package_ids.push(obj.borrow::<PackageRow>().uuid);
+        } else if let Ok(id) = obj.borrow::<DownloadRow>().uuid.parse::<i64>() {
+            link_ids.push(id);
+        }
+    }
+    (link_ids, package_ids)
 }
 
 /// Removes link rows matching `uuids` from whichever per-package child store
@@ -2023,6 +2127,8 @@ fn package_row_from_json(pkg: &Value) -> PackageRow {
         finished: get_bool_at(pkg, "finished"),
         running,
         comment: get_str_at(pkg, "comment"),
+        extraction_progress: get_num_at(pkg, "extractionCurrent")
+            .zip(get_num_at(pkg, "extractionTotal")),
     }
 }
 
@@ -2090,6 +2196,17 @@ fn row_from_json(link: &Value) -> DownloadRow {
         })
         .unwrap_or(false);
 
+    // JDownloader reuses the link's own `PluginProgress` for the
+    // extraction phase too (`ExtractionProgress`, tagged `id: "EXTRACTION"`
+    // — verified against the SVN's `ProgressColumn`/`DownloadLinkArchiveFile`),
+    // with `current`/`total` counting decompressed bytes rather than
+    // downloaded ones; `id: "DOWNLOAD"` is the ordinary download-progress
+    // case, already covered by `bytes_loaded`/`bytes_total`.
+    let extraction_progress = link
+        .pointer("/advancedStatus/PluginProgress")
+        .filter(|p| p.get("id").and_then(Value::as_str) == Some("EXTRACTION"))
+        .and_then(|p| p.get("current").and_then(Value::as_i64).zip(p.get("total").and_then(Value::as_i64)));
+
     let has_host_icon = !host.is_empty() && crate::gui::jd_icon::resolve_path(&host).is_some();
 
     DownloadRow {
@@ -2120,6 +2237,7 @@ fn row_from_json(link: &Value) -> DownloadRow {
         finished,
         enabled,
         show_progress,
+        extraction_progress,
     }
 }
 

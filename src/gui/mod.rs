@@ -1,3 +1,4 @@
+pub mod archive_menu;
 pub mod cells;
 pub mod clipboard;
 pub mod components;
@@ -15,6 +16,7 @@ pub mod main_tool_bar;
 pub mod menus;
 pub mod notifications;
 pub mod overview_panel;
+pub mod package_tree;
 pub mod pending_jd_dialogs;
 pub mod properties_panel;
 pub mod settings_panel;
@@ -325,6 +327,14 @@ pub fn build_ui(app: &adw::Application) {
     });
     collector.view.add_controller(collector_key_controller);
 
+    // Created here (rather than down by its actual `set_content` use) so
+    // the downloads context menu's "Archive(s)" submenu can show toast
+    // feedback (e.g. "Validate Archive(s)") — everything below still shares
+    // this same outer scope, `toast_overlay` included.
+    let toast_overlay = adw::ToastOverlay::new();
+    toast_overlay.set_hexpand(true);
+    toast_overlay.set_vexpand(true);
+
     // Downloads context menu.
     let downloads_actions = gio::SimpleActionGroup::new();
     let remove_downloads_action = gio::SimpleAction::new("remove", None);
@@ -344,13 +354,26 @@ pub fn build_ui(app: &adw::Application) {
 
     let downloads_context_menu = gio::Menu::new();
     downloads_context_menu.append_item(&menus::custom_item(
+        tr!("Archive(s)").as_ref(),
+        None,
+        "downloads-archive",
+    ));
+    let downloads_delete_section = gio::Menu::new();
+    downloads_delete_section.append_item(&menus::custom_item(
         tr!("Delete").as_ref(),
         Some("downloads.remove"),
         "downloads-remove",
     ));
+    downloads_context_menu.append_section(None, &downloads_delete_section);
 
     let downloads_context_popover = gtk4::PopoverMenu::from_model(Some(&downloads_context_menu));
     downloads_context_popover.set_parent(&downloads.view);
+    let downloads_archive_menu = archive_menu::ArchiveMenu::build(
+        Arc::clone(&api),
+        window.clone().upcast::<gtk4::Window>(),
+        toast_overlay.clone(),
+    );
+    downloads_context_popover.add_child(&downloads_archive_menu.button, "downloads-archive");
     downloads_context_popover.add_child(
         &menus::action_button(
             icon_key::ICON_DELETE, tr!("Delete").as_ref(), "downloads.remove",
@@ -362,7 +385,11 @@ pub fn build_ui(app: &adw::Application) {
     downloads_gesture.set_button(gtk4::gdk::BUTTON_SECONDARY);
     downloads_gesture.connect_pressed({
         let popover = downloads_context_popover.clone();
+        let api = Arc::clone(&api);
+        let selection = downloads.selection.clone();
         move |_, _, x, y| {
+            let (link_ids, package_ids) = downloads_panel::selected_archive_ids(&selection);
+            downloads_archive_menu.refresh(&api, link_ids, package_ids);
             popover.set_pointing_to(Some(&gtk4::gdk::Rectangle::new(x as i32, y as i32, 1, 1)));
             popover.popup();
         }
@@ -438,10 +465,8 @@ pub fn build_ui(app: &adw::Application) {
             }
         });
 
-        // Toast overlay + clipboard setup.
-        let toast_overlay = adw::ToastOverlay::new();
-        toast_overlay.set_hexpand(true);
-        toast_overlay.set_vexpand(true);
+        // Clipboard setup. (`toast_overlay` itself is created earlier, next
+        // to the downloads context menu — see its own comment.)
 
         clipboard::setup(
             &api,

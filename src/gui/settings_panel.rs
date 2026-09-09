@@ -13,13 +13,14 @@ use crate::gui::components::settings::{
     ScriptsPage,
 };
 use crate::gui::jd_icon;
-use crate::jd::{GraphicalUserInterfaceSettings, JdApi, JdExtensions, JdProcess, INTERNAL_JD_PORT};
+use crate::jd::{
+    ExtensionQuery, GraphicalUserInterfaceSettings, JdApi, JdExtensions, JdProcess,
+    INTERNAL_JD_PORT,
+};
 
-/// JDownloader identifiers for the EventScripter extension (`ScriptsPage`).
-/// `extensions/isInstalled` takes the short optional-extension id, while
-/// `extensions/isEnabled`/`setEnabled` take the extension's Java classname
-/// — JDownloader itself has no single id that works for both.
-const EVENTSCRIPTER_SHORT_ID: &str = "eventscripter";
+/// JDownloader identifier for the EventScripter extension (`ScriptsPage`).
+/// `extensions/list` reports an installed extension under its Java
+/// classname; `extensions/setEnabled` takes that same classname.
 const EVENTSCRIPTER_CLASSNAME: &str =
     "org.jdownloader.extensions.eventscripter.EventScripterExtension";
 
@@ -141,13 +142,38 @@ impl SettingsPanel {
                     }
                     thread::sleep(Duration::from_millis(500));
                 }
-                let installed = extensions_for_load
-                    .is_installed(EVENTSCRIPTER_SHORT_ID)
-                    .unwrap_or(false);
-                let enabled = installed
-                    && extensions_for_load
-                        .is_enabled(EVENTSCRIPTER_CLASSNAME)
-                        .unwrap_or(false);
+                // extensions/isInstalled + extensions/isEnabled race
+                // ExtensionController's own async init: called too early they
+                // silently report "not installed"/"disabled" (JDownloader's
+                // ExtensionsAPIImpl treats "not yet loaded" and "genuinely
+                // disabled" identically). extensions/list is backed by the
+                // same controller state but empties out the same way while
+                // it's still loading, so retrying until it's non-empty is a
+                // reliable readiness signal, and reading installed/enabled
+                // off that list result (rather than two separate calls)
+                // shares that one settled read for both fields.
+                let deadline = Instant::now() + Duration::from_secs(10);
+                let mut installed = false;
+                let mut enabled = false;
+                loop {
+                    match extensions_for_load.list(&ExtensionQuery::all()) {
+                        Ok(list) if !list.is_empty() => {
+                            if let Some(ext) =
+                                list.iter().find(|e| e.id == EVENTSCRIPTER_CLASSNAME)
+                            {
+                                installed = ext.installed;
+                                enabled = ext.enabled;
+                            }
+                            break;
+                        }
+                        Ok(_) => {}
+                        Err(e) => log::warn!("extensions/list failed: {}", e),
+                    }
+                    if Instant::now() >= deadline {
+                        break;
+                    }
+                    thread::sleep(Duration::from_millis(800));
+                }
                 let _ = tx.try_send((installed, enabled));
             });
 

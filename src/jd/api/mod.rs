@@ -16,6 +16,7 @@
 
 mod config;
 mod downloads;
+mod extraction;
 mod linkgrabber;
 mod system;
 

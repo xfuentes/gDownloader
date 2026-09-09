@@ -155,10 +155,11 @@ impl ksni::Tray for GDownloaderTray {
                 ..Default::default()
             }
             .into(),
-            StandardItem {
+            CheckmarkItem {
                 label: tr!("Pause downloads").to_string(),
                 icon_data: Self::jd_icon_data(crate::gui::icon_key::ICON_MEDIA_PLAYBACK_PAUSE),
                 visible: self.running || self.paused,
+                checked: self.paused,
                 activate: Box::new(|tray: &mut Self| tray.send(TrayMessage::TogglePause)),
                 ..Default::default()
             }

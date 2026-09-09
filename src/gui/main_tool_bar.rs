@@ -22,6 +22,7 @@ pub struct MainToolBar {
 
     start_btn: gtk4::Button,
     pause_btn: gtk4::ToggleButton,
+    pause_badge: gtk4::Image,
     stop_btn: gtk4::Button,
 
     move_top_btn: gtk4::Button,
@@ -121,11 +122,14 @@ impl MainToolBar {
         );
         toolbar.append(&start_btn);
 
-        let pause_btn = gtk4::ToggleButton::new();
-        pause_btn.set_child(Some(&make_icon(crate::gui::icon_key::ICON_MEDIA_PLAYBACK_PAUSE)));
-        pause_btn.set_has_frame(false);
-        pause_btn.set_tooltip_text(Some(tr!("Pause downloads").as_ref()));
-        pause_btn.set_size_request(TOOLBAR_ICON_SIZE, TOOLBAR_ICON_SIZE);
+        // Also a badged toggle: JDownloader's own `PauseDownloadsAction`
+        // extends the same `AbstractToolBarAction` base as the other
+        // toolbar toggles and drives it with `setSelected(true/false)`
+        // exactly like they do, so it renders with the same checkbox badge.
+        let (pause_btn, pause_badge) = add_toggle_with_badge(
+            crate::gui::icon_key::ICON_MEDIA_PLAYBACK_PAUSE,
+            tr!("Pause downloads").as_ref(),
+        );
         // Corrected by the first status poll in `wire()`; starting disabled
         // avoids a flash of "enabled" before that first poll lands.
         pause_btn.set_sensitive(false);
@@ -196,6 +200,7 @@ impl MainToolBar {
             widget: toolbar,
             start_btn,
             pause_btn,
+            pause_badge,
             stop_btn,
             move_top_btn,
             move_up_btn,
@@ -257,7 +262,9 @@ impl MainToolBar {
         // below — so no reentrancy guard is needed here.
         self.pause_btn.connect_clicked({
             let api = api.clone();
-            move |_| {
+            let badge = self.pause_badge.clone();
+            move |btn| {
+                set_badge(&badge, btn.is_active());
                 let api = api.clone();
                 spawn::api_fire(move || {
                     let _ = api.toggle_pause_downloads();
@@ -437,6 +444,7 @@ impl MainToolBar {
             let silent_mode_settings = silent_mode_settings.clone();
             let start_btn = self.start_btn.clone();
             let pause_btn = self.pause_btn.clone();
+            let pause_badge = self.pause_badge.clone();
             let stop_btn = self.stop_btn.clone();
             let clipboard_toggle = self.clipboard_toggle.clone();
             let clipboard_badge = self.clipboard_badge.clone();
@@ -456,6 +464,7 @@ impl MainToolBar {
                 let silent_mode_settings = silent_mode_settings.clone();
                 let start_btn = start_btn.clone();
                 let pause_btn = pause_btn.clone();
+                let pause_badge = pause_badge.clone();
                 let stop_btn = stop_btn.clone();
                 let clipboard_toggle = clipboard_toggle.clone();
                 let clipboard_badge = clipboard_badge.clone();
@@ -484,6 +493,7 @@ impl MainToolBar {
                         start_btn.set_sensitive(!status.running);
                         pause_btn.set_sensitive(status.running || status.pause);
                         pause_btn.set_active(status.pause);
+                        set_badge(&pause_badge, status.pause);
                         stop_btn.set_sensitive(status.running);
 
                         if let Some(handle) = tray_handle.lock().unwrap().clone() {

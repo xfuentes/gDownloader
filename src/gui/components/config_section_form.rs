@@ -53,6 +53,12 @@ impl ConfigSectionForm {
 
         if let Some(text) = label {
             let label = gtk4::Label::new(Some(text));
+            // width_chars must match max_width_chars: leaving width_chars at
+            // its default (-1) lets GTK compute a much narrower minimum width
+            // than the natural one for a wrapping label, which flips into a
+            // min-height > natural-height GtkBox measure() warning further
+            // up the tree.
+            label.set_width_chars(40);
             label.set_max_width_chars(40);
             label.set_xalign(0.0);
             label.set_valign(gtk4::Align::Center);

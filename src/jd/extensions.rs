@@ -74,19 +74,9 @@ impl JdExtensions {
         Ok(serde_json::from_value(value)?)
     }
 
-    pub fn is_enabled(&self, classname: &str) -> Result<bool> {
-        let value = self.api.call("extensions/isEnabled", &[classname])?;
-        Ok(value.as_bool().unwrap_or(false))
-    }
-
     pub fn set_enabled(&self, classname: &str, enabled: bool) -> Result<bool> {
         let flag = if enabled { "true" } else { "false" };
         let value = self.api.call("extensions/setEnabled", &[classname, flag])?;
-        Ok(value.as_bool().unwrap_or(false))
-    }
-
-    pub fn is_installed(&self, id: &str) -> Result<bool> {
-        let value = self.api.call("extensions/isInstalled", &[id])?;
         Ok(value.as_bool().unwrap_or(false))
     }
 

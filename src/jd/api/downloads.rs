@@ -86,7 +86,7 @@ impl JdApi {
     /// package's `saveTo`/`name` to populate `downloadPath`/`packageName`.
     pub fn query_downloads(&self) -> Result<(Vec<Value>, Vec<Value>)> {
         let links = self.query_downloads_links()?;
-        let packages = self.query_downloads_packages()?;
+        let mut packages = self.query_downloads_packages()?;
 
         let mut save_to_by_package: HashMap<u64, String> = HashMap::new();
         let mut name_by_package: HashMap<u64, String> = HashMap::new();
@@ -97,6 +97,38 @@ impl JdApi {
             }
             if let Some(name) = pkg.get("name").and_then(Value::as_str) {
                 name_by_package.insert(uuid, name.to_string());
+            }
+        }
+
+        // JDownloader has no package-level equivalent of a link's own
+        // `advancedStatus.PluginProgress` (verified against the SVN: the
+        // real client's package-row extraction progress is a GUI-only trick
+        // over the same children's `DownloadLink`s, not something the API
+        // exposes) — so it's aggregated here instead, by summing the
+        // `current`/`total` of whichever children are mid-extraction
+        // (`id: "EXTRACTION"`) into each package.
+        let mut extraction_progress_by_package: HashMap<u64, (i64, i64)> = HashMap::new();
+        for link in &links {
+            let Some(package_uuid) = link.get("packageUUID").and_then(Value::as_u64) else {
+                continue;
+            };
+            let Some(progress) = link.pointer("/advancedStatus/PluginProgress") else {
+                continue;
+            };
+            if progress.get("id").and_then(Value::as_str) != Some("EXTRACTION") {
+                continue;
+            }
+            let current = progress.get("current").and_then(Value::as_i64).unwrap_or(0);
+            let total = progress.get("total").and_then(Value::as_i64).unwrap_or(0);
+            let entry = extraction_progress_by_package.entry(package_uuid).or_insert((0, 0));
+            entry.0 += current;
+            entry.1 += total;
+        }
+        for pkg in &mut packages {
+            let uuid = pkg.get("uuid").and_then(Value::as_u64).unwrap_or(0);
+            if let Some((current, total)) = extraction_progress_by_package.get(&uuid) {
+                pkg["extractionCurrent"] = Value::from(*current);
+                pkg["extractionTotal"] = Value::from(*total);
             }
         }
 

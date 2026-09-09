@@ -49,11 +49,18 @@ pub fn install_css() {
 /// `fraction_of` computes the 0.0-1.0 fill fraction for a bound list item,
 /// returning `None` to leave a row unbound (e.g. a row kind the column
 /// doesn't apply to).
+///
+/// `on_bind`/`on_unbind` are extra hooks run at the end of each bind/unbind,
+/// handed the bar and label directly — callers use them to register (and
+/// deregister) their own way of repainting this row's bar/label later on,
+/// outside of a real GTK rebind (see `downloads_panel::PackageLiveRefresh`).
 pub fn build_column(
     title: &str,
     width: i32,
     resizable: bool,
     fraction_of: impl Fn(&gtk4::ListItem) -> Option<f64> + 'static,
+    on_bind: impl Fn(&gtk4::ListItem, &gtk4::ProgressBar, &gtk4::Label) + 'static,
+    on_unbind: impl Fn(&gtk4::ListItem) + 'static,
 ) -> gtk4::ColumnViewColumn {
     let factory = gtk4::SignalListItemFactory::new();
     factory.connect_setup(move |_, list_item| {
@@ -109,6 +116,11 @@ pub fn build_column(
         };
         bar.set_fraction(fraction);
         label.set_text(&format!("{:.1}%", fraction * 100.0));
+        on_bind(list_item, &bar, &label);
+    });
+    factory.connect_unbind(move |_, list_item| {
+        let list_item = list_item.downcast_ref::<gtk4::ListItem>().unwrap();
+        on_unbind(list_item);
     });
     let col = gtk4::ColumnViewColumn::new(Some(title), Some(factory));
     col.set_fixed_width(width);

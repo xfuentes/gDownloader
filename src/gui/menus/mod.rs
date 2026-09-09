@@ -74,7 +74,7 @@ pub fn merged_icon_label(
 /// added to a `PopoverMenu`/`PopoverMenuBar` via `add_child` are plain
 /// buttons and don't auto-close their popover on activation like native
 /// menu-model items do, so callers close it by hand after the action runs.
-fn popdown_ancestor(widget: &impl IsA<gtk4::Widget>) {
+pub(crate) fn popdown_ancestor(widget: &impl IsA<gtk4::Widget>) {
     if let Some(popover) = widget
         .as_ref()
         .ancestor(gtk4::Popover::static_type())
