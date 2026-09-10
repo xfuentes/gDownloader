@@ -45,6 +45,12 @@ All notable changes to gDownloader are documented in this file.
   checkbox indicator as the other toolbar toggles.
 
 ### Fixed
+- Link Collector context menu: "Start Downloads" on a selected package did
+  nothing (it silently skipped package rows instead of expanding them to
+  their child links, so it only ever worked on individually selected
+  files). "Start All Downloads" also did nothing when the download list was
+  still empty, because it resumed the existing download queue instead of
+  pushing the Link Collector's own links to it.
 - An expanded package row in the Downloads/Link Grabber tree could still go
   visually stale in some cases (e.g. its only download finishing) even
   though it no longer collapsed on refresh — now always repaints.

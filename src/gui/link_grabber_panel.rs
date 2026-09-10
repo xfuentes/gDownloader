@@ -1380,10 +1380,10 @@ impl LinkGrabberPanel {
 }
 
 /// Walks the flattened tree and collects the uuid of every link that should
-/// be removed for the current selection: individually selected link rows,
-/// plus (mirroring JDownloader) every link belonging to a selected package
-/// row, since deleting a package deletes all files inside it.
-fn selected_uuids(
+/// be affected by an action on the current selection: individually selected
+/// link rows, plus (mirroring JDownloader) every link belonging to a
+/// selected package row, since acting on a package acts on all files inside it.
+pub(crate) fn selected_uuids(
     selection: &gtk4::MultiSelection,
     child_stores: &Rc<RefCell<HashMap<i64, gio::ListStore>>>,
 ) -> std::collections::HashSet<String> {
@@ -1412,6 +1412,24 @@ fn selected_uuids(
         }
     }
     uuids
+}
+
+/// Collects the uuid of every link currently held in the link grabber,
+/// regardless of selection — used by "Start All Downloads".
+pub(crate) fn all_uuids(
+    child_stores: &Rc<RefCell<HashMap<i64, gio::ListStore>>>,
+) -> std::collections::HashSet<String> {
+    child_stores
+        .borrow()
+        .values()
+        .flat_map(|store| {
+            (0..store.n_items()).filter_map(|pos| {
+                let obj = store.item(pos).and_downcast::<glib::BoxedAnyObject>()?;
+                let uuid = obj.borrow::<LinkGrabberRow>().uuid.clone();
+                Some(uuid)
+            })
+        })
+        .collect()
 }
 
 /// Removes link rows matching `uuids` from whichever per-package child store

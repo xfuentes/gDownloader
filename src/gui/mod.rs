@@ -205,24 +205,12 @@ pub fn build_ui(app: &adw::Application) {
     start_selected_action.connect_activate({
         let api = Arc::clone(&api);
         let selection = collector.selection.clone();
+        let child_stores = collector.child_stores.clone();
         move |_, _| {
-            let bitset = selection.selection();
-            let ids: Vec<u64> = (0..bitset.size())
-                .filter_map(|i| {
-                    let pos = bitset.nth(i as u32);
-                    // `selection` wraps a `TreeListModel` (package/link
-                    // tree), so each item is a `TreeListRow`, not the row
-                    // data directly — package rows (depth 0) have no
-                    // `LinkGrabberRow`/uuid to start.
-                    let tree_row = selection.item(pos).and_downcast::<gtk4::TreeListRow>()?;
-                    if tree_row.depth() == 0 {
-                        return None;
-                    }
-                    let obj = tree_row.item()?.downcast::<glib::BoxedAnyObject>().ok()?;
-                    let uuid = obj.borrow::<link_grabber_panel::LinkGrabberRow>().uuid.clone();
-                    uuid.parse().ok()
-                })
-                .collect();
+            // Mirrors `remove_selected`: a selected package row expands to
+            // every link it contains, not just individually selected links.
+            let uuids = link_grabber_panel::selected_uuids(&selection, &child_stores);
+            let ids: Vec<u64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
             if !ids.is_empty() {
                 let api = api.clone();
                 std::thread::spawn(move || { let _ = api.start_linkgrabber_downloads(&ids); });
@@ -234,9 +222,18 @@ pub fn build_ui(app: &adw::Application) {
     let start_all_action = gio::SimpleAction::new("start-all", None);
     start_all_action.connect_activate({
         let api = Arc::clone(&api);
+        let child_stores = collector.child_stores.clone();
         move |_, _| {
-            let api = api.clone();
-            std::thread::spawn(move || { let _ = api.start_all_downloads(); });
+            // `api.start_all_downloads()` resumes the *existing* download
+            // list (`/toolbar/startDownloads`); it has no effect on links
+            // still sitting in the link grabber. Push every link grabber
+            // link through `linkcollector/startDownloads` instead.
+            let uuids = link_grabber_panel::all_uuids(&child_stores);
+            let ids: Vec<u64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
+            if !ids.is_empty() {
+                let api = api.clone();
+                std::thread::spawn(move || { let _ = api.start_linkgrabber_downloads(&ids); });
+            }
         }
     });
     linkgrabber_actions.add_action(&start_all_action);
