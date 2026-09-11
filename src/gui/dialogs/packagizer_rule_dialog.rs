@@ -3,7 +3,7 @@ use gtk4::glib;
 use std::rc::Rc;
 
 use crate::gui::components::{ConfigSection, ConfigSectionForm};
-use crate::gui::fields::ellipsize_dropdown;
+use crate::gui::fields::{ellipsize_dropdown, icon_dropdown};
 use crate::jd::{
     BooleanFilter, FilesizeFilter, FiletypeFilter, PackagizerRule, Priority, RegexFilter,
     RegexMatchType, SizeMatchType, TypeMatchType,
@@ -371,7 +371,8 @@ impl PackagizerRuleDialog {
         priority_model.append(tr!("Low").as_ref());
         priority_model.append(tr!("Lower").as_ref());
         priority_model.append(tr!("Lowest").as_ref());
-        let priority_dropdown = ellipsize_dropdown(priority_model);
+        let priority_dropdown =
+            icon_dropdown(priority_model, crate::gui::properties_panel::priority_icons());
         priority_dropdown.set_sensitive(false);
         then_form.add_row(tr!("Priority").as_ref(), Some(&priority_enable), &priority_dropdown);
         {

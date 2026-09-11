@@ -19,6 +19,8 @@ const HASH_RETRY_ENABLED_KEY: &str = "HashRetryEnabled";
 const AUTO_OPEN_CONTAINER_AFTER_DOWNLOAD_KEY: &str = "AutoOpenContainerAfterDownload";
 const USE_AVAILABLE_ACCOUNTS_KEY: &str = "UseAvailableAccounts";
 const DOWNLOAD_SPEED_LIMIT_ENABLED_KEY: &str = "DownloadSpeedLimitEnabled";
+const DOWNLOAD_SPEED_LIMIT_KEY: &str = "DownloadSpeedLimit";
+const DELAY_WRITE_MODE_KEY: &str = "DelayWriteMode";
 
 #[derive(Clone)]
 /// Accessor for JDownloader's GeneralSettings.
@@ -194,5 +196,37 @@ impl GeneralSettings {
             .get(DOWNLOAD_SPEED_LIMIT_ENABLED_KEY)?
             .as_bool()
             .unwrap_or(false))
+    }
+
+    pub fn set_download_speed_limit_enabled(&self, value: bool) -> anyhow::Result<bool> {
+        self.set(DOWNLOAD_SPEED_LIMIT_ENABLED_KEY, value)
+    }
+
+    /// Speed limit in bytes/s (JD's own unit — `GeneralSettings
+    /// .getDownloadSpeedLimit()`), default 50 KB/s.
+    pub fn get_download_speed_limit(&self) -> anyhow::Result<i32> {
+        Ok(self
+            .get(DOWNLOAD_SPEED_LIMIT_KEY)?
+            .as_i64()
+            .unwrap_or(50 * 1024) as i32)
+    }
+
+    pub fn set_download_speed_limit(&self, value: i32) -> anyhow::Result<bool> {
+        self.set(DOWNLOAD_SPEED_LIMIT_KEY, value)
+    }
+
+    /// `org.jdownloader.settings.DelayWriteMode` — `"OFF"`/`"ON"`/`"AUTO"`.
+    /// `jd.controlling.DelayWriteController` auto-enables buffered
+    /// (delayed) config writes whenever this is `AUTO` and JDownloader runs
+    /// headless (which it always does under gDownloader) — but the only
+    /// thing that reschedules its flush timer is download/link-collector
+    /// activity, *not* a plain settings change, and that timer also has a
+    /// 10s minimum delay. A `/config/set` for something like "Max.
+    /// simultaneous downloads" can easily never get flushed to disk before
+    /// JDownloader actually exits. gDownloader forces this to `"OFF"` on
+    /// startup so every config write lands on disk immediately, matching
+    /// JDownloader's own (non-headless) desktop behavior.
+    pub fn set_delay_write_mode(&self, value: &str) -> anyhow::Result<bool> {
+        self.set(DELAY_WRITE_MODE_KEY, value)
     }
 }

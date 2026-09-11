@@ -1,7 +1,7 @@
 use adw::prelude::*;
 use gtk4::gio;
 
-use super::{action_button, custom_item, disabled_button, submenu_button, MenuChildren};
+use super::{action_button, action_button_with_accel, custom_item, disabled_button, submenu_button, MenuChildren};
 
 pub fn build() -> (gio::Menu, MenuChildren) {
     // Backup submenu
@@ -33,7 +33,7 @@ pub fn build() -> (gio::Menu, MenuChildren) {
     let file_top_section = gio::Menu::new();
     file_top_section.append_item(&custom_item(
         tr!("Analyse Text with Links").as_ref(),
-        None,
+        Some("win.add-links"),
         "file-analyse",
     ));
     file_top_section.append_item(&custom_item(
@@ -66,7 +66,14 @@ pub fn build() -> (gio::Menu, MenuChildren) {
 
     let children: MenuChildren = vec![
         (
-            disabled_button("add", tr!("Analyse Text with Links").as_ref()).upcast(),
+            action_button_with_accel(
+                "add",
+                tr!("Analyse Text with Links").as_ref(),
+                "win.add-links",
+                "<Primary>L",
+                None,
+            )
+            .upcast(),
             "file-analyse".to_string(),
         ),
         (

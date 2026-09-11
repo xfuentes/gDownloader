@@ -5,6 +5,7 @@ pub mod components;
 pub mod spawn;
 pub mod dialogs;
 pub mod donate;
+pub mod download_limits;
 pub mod favicon;
 pub mod downloads_panel;
 pub mod fields;
@@ -166,10 +167,16 @@ pub fn build_ui(app: &adw::Application) {
 
     // ── Panels ───────────────────────────────────────────────────────────────
     let gui_settings = GraphicalUserInterfaceSettings::new(Arc::clone(&api));
+    let download_limits = download_limits::DownloadLimitsCache::new(Arc::clone(&api));
     let tool_bar = MainToolBar::build();
-    let downloads = Rc::new(DownloadsPanel::build(Arc::clone(&api), gui_settings.clone()));
+    let downloads = Rc::new(DownloadsPanel::build(
+        Arc::clone(&api),
+        gui_settings.clone(),
+        download_limits.clone(),
+    ));
     let collector = Rc::new(LinkGrabberPanel::build(Arc::clone(&api), gui_settings.clone()));
-    let settings = SettingsPanel::build(Arc::clone(&process), jar_path.clone());
+    let settings =
+        SettingsPanel::build(Arc::clone(&process), jar_path.clone(), download_limits.clone());
 
     // ── Tab view ─────────────────────────────────────────────────────────────
     let header = adw::HeaderBar::new();
@@ -201,6 +208,16 @@ pub fn build_ui(app: &adw::Application) {
 
     // Link grabber context menu.
     let linkgrabber_actions = gio::SimpleActionGroup::new();
+    let add_links_context_action = gio::SimpleAction::new("add-links", None);
+    add_links_context_action.connect_activate({
+        let api = Arc::clone(&api);
+        let window = window.clone();
+        move |_, _| {
+            dialogs::AddLinksDialog::show(window.upcast_ref::<gtk4::Window>(), &api);
+        }
+    });
+    linkgrabber_actions.add_action(&add_links_context_action);
+
     let start_selected_action = gio::SimpleAction::new("start", None);
     start_selected_action.connect_activate({
         let api = Arc::clone(&api);
@@ -254,6 +271,13 @@ pub fn build_ui(app: &adw::Application) {
     collector.view.insert_action_group("linkgrabber", Some(&linkgrabber_actions));
 
     let context_menu = gio::Menu::new();
+    let linkgrabber_add_section = gio::Menu::new();
+    linkgrabber_add_section.append_item(&menus::custom_item(
+        tr!("Add New Links").as_ref(),
+        Some("linkgrabber.add-links"),
+        "linkgrabber-add-links",
+    ));
+    context_menu.append_section(None, &linkgrabber_add_section);
     context_menu.append_item(&menus::custom_item(
         tr!("Start Downloads").as_ref(),
         Some("linkgrabber.start"),
@@ -274,6 +298,16 @@ pub fn build_ui(app: &adw::Application) {
 
     let context_popover = gtk4::PopoverMenu::from_model(Some(&context_menu));
     context_popover.set_parent(&collector.view);
+    context_popover.add_child(
+        &menus::action_button_with_accel(
+            icon_key::ICON_ADD,
+            tr!("Add New Links").as_ref(),
+            "linkgrabber.add-links",
+            "<Primary>L",
+            None,
+        ),
+        "linkgrabber-add-links",
+    );
     context_popover.add_child(
         &menus::merged_action_button(
             icon_key::ICON_MEDIA_PLAYBACK_START, 16, icon_key::ICON_ADD, 14,
@@ -437,16 +471,28 @@ pub fn build_ui(app: &adw::Application) {
         let gui_settings = gui_settings.clone();
         let download_tab = download_tab.clone();
         let ignore_donate = ignore_donate.clone();
-        header.pack_start(&MainMenuBar::build(&window, {
-            let settings = Rc::clone(&settings);
-            let tab_view = tab_view.clone();
-            let donate_tab = donate_tab.clone();
-            let last_tab = last_tab.clone();
-            let gui_settings = gui_settings.clone();
-            Rc::new(move || {
-                settings.toggle(&tab_view, &donate_tab, &last_tab, &gui_settings);
-            })
-        }));
+        header.pack_start(&MainMenuBar::build(
+            &window,
+            {
+                let settings = Rc::clone(&settings);
+                let tab_view = tab_view.clone();
+                let donate_tab = donate_tab.clone();
+                let last_tab = last_tab.clone();
+                let gui_settings = gui_settings.clone();
+                Rc::new(move || {
+                    settings.toggle(&tab_view, &donate_tab, &last_tab, &gui_settings);
+                })
+            },
+            {
+                let window = window.clone();
+                let api = Arc::clone(&api);
+                Rc::new(move || {
+                    dialogs::AddLinksDialog::show(window.upcast_ref::<gtk4::Window>(), &api);
+                })
+            },
+        ));
+        // Matches JDownloader's own `AddLinksAction` accelerator.
+        app.set_accels_for_action("win.add-links", &["<Primary>L"]);
 
         // ── Clipboard toggle init ─────────────────────────────────────────────
         let clipboard_toggle = tool_bar.clipboard_toggle.clone();
@@ -517,6 +563,27 @@ pub fn build_ui(app: &adw::Application) {
             glib::MainContext::default().spawn_local(async move {
                 if let Ok(true) = rx.recv().await {
                     settings_for_restore.restore(&tab_view_r, &donate_tab_r);
+                }
+            });
+        }
+
+        // Force disabling JDownloader's own delayed (buffered) config
+        // writes: running headless auto-enables them, but the only thing
+        // that reschedules their flush timer is download/link-collector
+        // activity — a plain settings change (e.g. "Max. simultaneous
+        // downloads") can sit unflushed until JDownloader exits, and often
+        // loses the race against that exit entirely. See
+        // `GeneralSettings::set_delay_write_mode`.
+        {
+            let general_settings = GeneralSettings::new(Arc::clone(&api));
+            std::thread::spawn(move || {
+                let start = std::time::Instant::now();
+                while start.elapsed() < Duration::from_secs(30) {
+                    if general_settings.is_ready() {
+                        let _ = general_settings.set_delay_write_mode("OFF");
+                        return;
+                    }
+                    std::thread::sleep(Duration::from_millis(500));
                 }
             });
         }

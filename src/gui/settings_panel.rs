@@ -12,6 +12,7 @@ use crate::gui::components::settings::{
     AccountManagerPage, ExtensionManagerPage, GeneralSettingsPage, PackageManagerPage,
     ScriptsPage,
 };
+use crate::gui::download_limits::DownloadLimitsCache;
 use crate::gui::jd_icon;
 use crate::jd::{
     ExtensionQuery, GraphicalUserInterfaceSettings, JdApi, JdExtensions, JdProcess,
@@ -66,7 +67,11 @@ pub struct SettingsPanel {
 }
 
 impl SettingsPanel {
-    pub fn build(process: Arc<Mutex<JdProcess>>, jar_path: Option<PathBuf>) -> Self {
+    pub fn build(
+        process: Arc<Mutex<JdProcess>>,
+        jar_path: Option<PathBuf>,
+        download_limits: DownloadLimitsCache,
+    ) -> Self {
         install_extension_toggle_css();
 
         let listbox = gtk4::ListBox::new();
@@ -77,8 +82,9 @@ impl SettingsPanel {
         listbox.set_margin_start(12);
         listbox.set_margin_end(12);
 
+        let general_page = GeneralSettingsPage::build(download_limits);
         let pages: Vec<adw::NavigationPage> = vec![
-            adw::NavigationPage::new(&GeneralSettingsPage::build(), tr!("General").as_ref()),
+            adw::NavigationPage::new(&general_page.widget, tr!("General").as_ref()),
             adw::NavigationPage::new(
                 &AccountManagerPage::build(),
                 tr!("Account Manager").as_ref(),

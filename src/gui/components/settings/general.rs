@@ -1,5 +1,7 @@
 use adw::prelude::*;
 use gtk4::glib;
+use std::cell::Cell;
+use std::rc::Rc;
 use std::sync::Arc;
 use std::thread;
 use std::time::Duration;
@@ -7,16 +9,16 @@ use std::time::Duration;
 use crate::gui::spawn::api_fire;
 
 use crate::gui::components::{ConfigSection, ConfigSectionForm};
+use crate::gui::download_limits::{DownloadLimits, DownloadLimitsCache};
 use crate::gui::fields::{ellipsize_dropdown, select_from_api};
 use crate::jd::{GeneralSettings, JdApi, LinkgrabberSettings, INTERNAL_JD_PORT};
 
+/// Every General setting *except* chunks/parallel downloads/parallel per
+/// host, which live in the shared [`DownloadLimitsCache`] instead (also
+/// shown in the Downloads list's own Quick Settings menu).
 #[derive(Clone, Debug)]
 struct GeneralSettingsData {
     download_folder: String,
-    max_sim: i32,
-    max_sim_per_host: i32,
-    max_per_host_enabled: bool,
-    max_chunks: i32,
     cleanup_after_download: String,
     if_file_exists: String,
     auto_start: String,
@@ -32,10 +34,6 @@ impl Default for GeneralSettingsData {
     fn default() -> Self {
         Self {
             download_folder: String::from("~/Downloads"),
-            max_sim: 3,
-            max_sim_per_host: 1,
-            max_per_host_enabled: false,
-            max_chunks: 1,
             cleanup_after_download: String::from("NEVER"),
             if_file_exists: String::from("ASK_FOR_EACH_FILE"),
             auto_start: String::from("ONLY_IF_EXIT_WITH_RUNNING_DOWNLOADS"),
@@ -69,18 +67,6 @@ fn load_settings_from_api(
     if let Ok(v) = general.get_default_download_folder() {
         d.download_folder = v;
     }
-    if let Ok(v) = general.get_max_simultane_downloads() {
-        d.max_sim = v;
-    }
-    if let Ok(v) = general.get_max_downloads_per_host_enabled() {
-        d.max_per_host_enabled = v;
-    }
-    if let Ok(v) = general.get_max_simultane_downloads_per_host() {
-        d.max_sim_per_host = v;
-    }
-    if let Ok(v) = general.get_max_chunks_per_file() {
-        d.max_chunks = v;
-    }
     if let Ok(v) = general.get_cleanup_after_download_action() {
         d.cleanup_after_download = v;
     }
@@ -112,10 +98,12 @@ fn load_settings_from_api(
     Some(d)
 }
 
-pub struct GeneralSettingsPage;
+pub struct GeneralSettingsPage {
+    pub widget: gtk4::ScrolledWindow,
+}
 
 impl GeneralSettingsPage {
-    pub fn build() -> gtk4::ScrolledWindow {
+    pub fn build(download_limits: DownloadLimitsCache) -> Self {
         let api = Arc::new(JdApi::new(format!("http://localhost:{}", INTERNAL_JD_PORT)));
         let general = GeneralSettings::new(Arc::clone(&api));
         let linkgrabber = LinkgrabberSettings::new(Arc::clone(&api));
@@ -165,13 +153,14 @@ impl GeneralSettingsPage {
         let mgmt_form =
             ConfigSectionForm::new(&label_size_group, &checkbox_size_group, &input_size_group);
 
-        let max_sim_adj = gtk4::Adjustment::new(data.max_sim as f64, 1.0, 20.0, 1.0, 10.0, 0.0);
+        // Chunks/parallel downloads/parallel per host are populated from
+        // the shared `DownloadLimitsCache` further down, not from `data`.
+        let max_sim_adj = gtk4::Adjustment::new(3.0, 1.0, 20.0, 1.0, 10.0, 0.0);
         let max_sim = gtk4::SpinButton::new(Some(&max_sim_adj), 1.0, 0);
         mgmt_form.add_row(tr!("Max. simultaneous Downloads").as_ref(), None, &max_sim);
 
         let per_host_switch = gtk4::Switch::new();
-        let per_host_adj =
-            gtk4::Adjustment::new(data.max_sim_per_host as f64, 1.0, 20.0, 1.0, 10.0, 0.0);
+        let per_host_adj = gtk4::Adjustment::new(1.0, 1.0, 20.0, 1.0, 10.0, 0.0);
         let per_host_spin = gtk4::SpinButton::new(Some(&per_host_adj), 1.0, 0);
         per_host_spin.set_sensitive(false);
         mgmt_form.add_row(
@@ -180,8 +169,7 @@ impl GeneralSettingsPage {
             &per_host_spin,
         );
 
-        let max_chunks_adj =
-            gtk4::Adjustment::new(data.max_chunks as f64, 1.0, 20.0, 1.0, 10.0, 0.0);
+        let max_chunks_adj = gtk4::Adjustment::new(1.0, 1.0, 20.0, 1.0, 10.0, 0.0);
         let max_chunks = gtk4::SpinButton::new(Some(&max_chunks_adj), 1.0, 0);
         mgmt_form.add_row(tr!("Max. Chunks per Download").as_ref(), None, &max_chunks);
 
@@ -353,34 +341,100 @@ impl GeneralSettingsPage {
             });
         });
 
-        let general_save = general.clone();
-        max_sim.connect_value_changed(move |s| {
-            let val = s.value() as i32;
-            let g = general_save.clone();
-            api_fire(move || { let _ = g.set_max_simultane_downloads(val); });
+        // Chunks/parallel downloads/parallel per host: read from and
+        // written through the shared `DownloadLimitsCache` (also shown in
+        // the Downloads list's own Quick Settings menu), rather than
+        // polling JDownloader independently — see `DownloadLimitsCache`.
+        // `refresh_limits` re-reads the cache (free once loaded) each time
+        // this page's tab is reopened, so it can't go stale relative to a
+        // change made in the Downloads list's Quick Settings menu while
+        // this tab stayed closed.
+        let loading_limits = Rc::new(Cell::new(true));
+        let refresh_limits: Rc<dyn Fn()> = {
+            let download_limits = download_limits.clone();
+            let loading_limits = loading_limits.clone();
+            let max_sim_c = max_sim.clone();
+            let per_host_switch_c = per_host_switch.clone();
+            let per_host_spin_c = per_host_spin.clone();
+            let max_chunks_c = max_chunks.clone();
+            Rc::new(move || {
+                loading_limits.set(true);
+                download_limits.read({
+                    let loading_limits = loading_limits.clone();
+                    let max_sim_c = max_sim_c.clone();
+                    let per_host_switch_c = per_host_switch_c.clone();
+                    let per_host_spin_c = per_host_spin_c.clone();
+                    let max_chunks_c = max_chunks_c.clone();
+                    move |limits: DownloadLimits| {
+                        max_sim_c.set_value(limits.max_simultaneous as f64);
+                        per_host_switch_c.set_active(limits.max_simultaneous_per_host_enabled);
+                        per_host_spin_c.set_value(limits.max_simultaneous_per_host as f64);
+                        per_host_spin_c.set_sensitive(limits.max_simultaneous_per_host_enabled);
+                        max_chunks_c.set_value(limits.max_chunks as f64);
+                        loading_limits.set(false);
+                    }
+                });
+            })
+        };
+        refresh_limits();
+        // `map` fires every time this page's widget actually becomes
+        // visible again — unlike hooking `SettingsPanel::toggle()`, which
+        // only ran on the closed→open transition and missed the case
+        // where the tab was already open and the user just switched back
+        // to it via the tab strip directly.
+        scrolled.connect_map({
+            let refresh_limits = refresh_limits.clone();
+            move |_| refresh_limits()
         });
 
-        let per_host_spin_c = per_host_spin.clone();
-        let general_save = general.clone();
-        per_host_switch.connect_state_notify(move |s| {
-            let active = s.is_active();
-            per_host_spin_c.set_sensitive(active);
-            let g = general_save.clone();
-            api_fire(move || { let _ = g.set_max_downloads_per_host_enabled(active); });
+        max_sim.connect_value_changed({
+            let download_limits = download_limits.clone();
+            let loading_limits = loading_limits.clone();
+            move |s| {
+                if loading_limits.get() {
+                    return;
+                }
+                let val = s.value() as i32;
+                download_limits.update(|limits| limits.max_simultaneous = val);
+            }
         });
 
-        let general_save = general.clone();
-        per_host_spin.connect_value_changed(move |s| {
-            let val = s.value() as i32;
-            let g = general_save.clone();
-            api_fire(move || { let _ = g.set_max_simultane_downloads_per_host(val); });
+        per_host_switch.connect_state_notify({
+            let download_limits = download_limits.clone();
+            let loading_limits = loading_limits.clone();
+            let per_host_spin_c = per_host_spin.clone();
+            move |s| {
+                let active = s.is_active();
+                per_host_spin_c.set_sensitive(active);
+                if loading_limits.get() {
+                    return;
+                }
+                download_limits.update(|limits| limits.max_simultaneous_per_host_enabled = active);
+            }
         });
 
-        let general_save = general.clone();
-        max_chunks.connect_value_changed(move |s| {
-            let val = s.value() as i32;
-            let g = general_save.clone();
-            api_fire(move || { let _ = g.set_max_chunks_per_file(val); });
+        per_host_spin.connect_value_changed({
+            let download_limits = download_limits.clone();
+            let loading_limits = loading_limits.clone();
+            move |s| {
+                if loading_limits.get() {
+                    return;
+                }
+                let val = s.value() as i32;
+                download_limits.update(|limits| limits.max_simultaneous_per_host = val);
+            }
+        });
+
+        max_chunks.connect_value_changed({
+            let download_limits = download_limits.clone();
+            let loading_limits = loading_limits.clone();
+            move |s| {
+                if loading_limits.get() {
+                    return;
+                }
+                let val = s.value() as i32;
+                download_limits.update(|limits| limits.max_chunks = val);
+            }
         });
 
         let general_save = general.clone();
@@ -460,23 +514,22 @@ impl GeneralSettingsPage {
             api_fire(move || { let _ = g.set_auto_open_container_after_download(active); });
         });
 
-        // Load actual values from the internal JDownloader API
+        // Loads the remaining settings from the internal JDownloader API
+        // once (JDownloader never changes these on its own, and nothing
+        // else in gDownloader edits them, so a single one-time load is
+        // enough — unlike chunks/parallel downloads/parallel per host
+        // above, which the Downloads list's Quick Settings menu can also
+        // change and so need the shared, always-current cache instead).
         let (tx, rx) = async_channel::bounded::<GeneralSettingsData>(1);
         let general_for_load = general.clone();
         let linkgrabber_for_load = linkgrabber.clone();
         thread::spawn(move || {
-            if let Some(settings) =
-                load_settings_from_api(&general_for_load, &linkgrabber_for_load)
-            {
+            if let Some(settings) = load_settings_from_api(&general_for_load, &linkgrabber_for_load) {
                 let _ = tx.try_send(settings);
             }
         });
 
         let download_folder_c = download_folder.clone();
-        let max_sim_c = max_sim.clone();
-        let per_host_switch_c = per_host_switch.clone();
-        let per_host_spin_c = per_host_spin.clone();
-        let max_chunks_c = max_chunks.clone();
         let remove_combo_c = remove_combo.clone();
         let exists_combo_c = exists_combo.clone();
         let auto_combo_c = auto_combo.clone();
@@ -490,11 +543,6 @@ impl GeneralSettingsPage {
         glib::MainContext::default().spawn_local(async move {
             if let Ok(settings) = rx.recv().await {
                 download_folder_c.set_text(&settings.download_folder);
-                max_sim_c.set_value(settings.max_sim as f64);
-                per_host_switch_c.set_active(settings.max_per_host_enabled);
-                per_host_spin_c.set_value(settings.max_sim_per_host as f64);
-                per_host_spin_c.set_sensitive(settings.max_per_host_enabled);
-                max_chunks_c.set_value(settings.max_chunks as f64);
                 select_from_api(&remove_combo_c, &cleanup_api, &settings.cleanup_after_download);
                 select_from_api(&exists_combo_c, &exists_api, &settings.if_file_exists);
                 select_from_api(&auto_combo_c, &auto_api, &settings.auto_start);
@@ -508,6 +556,6 @@ impl GeneralSettingsPage {
             }
         });
 
-        scrolled
+        Self { widget: scrolled }
     }
 }

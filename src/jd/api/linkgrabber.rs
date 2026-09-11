@@ -21,6 +21,41 @@ use serde_json::Value;
 
 use super::JdApi;
 
+/// Every option JDownloader's own "Add Links" dialog lets the user set,
+/// passed to [`JdApi::add_links_with_options`]. Defaults match what
+/// [`JdApi::add_links`] used to hardcode.
+pub struct AddLinksOptions {
+    pub links: String,
+    pub autostart: bool,
+    pub package_name: String,
+    pub extract_password: String,
+    pub download_password: String,
+    pub destination_folder: String,
+    pub comment: String,
+    pub auto_extract: bool,
+    pub deep_decrypt: bool,
+    pub overwrite_packagizer_rules: bool,
+    pub priority: String,
+}
+
+impl Default for AddLinksOptions {
+    fn default() -> Self {
+        Self {
+            links: String::new(),
+            autostart: false,
+            package_name: String::new(),
+            extract_password: String::new(),
+            download_password: String::new(),
+            destination_folder: String::new(),
+            comment: String::new(),
+            auto_extract: true,
+            deep_decrypt: false,
+            overwrite_packagizer_rules: false,
+            priority: "DEFAULT".to_string(),
+        }
+    }
+}
+
 impl JdApi {
     /// Queries collected packages via `/linkgrabberv2/queryPackages`, including
     /// aggregate fields (size/etc.) for the package-level rows of the link
@@ -147,21 +182,30 @@ impl JdApi {
     /// with [`query_linkcollector_links_for_job`] to find out how many (and
     /// which) links this call actually added once crawling settles.
     pub fn add_links(&self, links: &str) -> Result<i64> {
+        self.add_links_with_options(&AddLinksOptions {
+            links: links.to_string(),
+            ..Default::default()
+        })
+    }
+
+    /// Same as [`add_links`], but exposes every option JDownloader's own
+    /// "Add Links" dialog lets the user set.
+    pub fn add_links_with_options(&self, opts: &AddLinksOptions) -> Result<i64> {
         let params = serde_json::json!({
-            "autostart": false,
-            "links": links,
-            "packageName": "",
-            "extractPassword": "",
-            "downloadPassword": "",
-            "destinationFolder": "",
+            "autostart": opts.autostart,
+            "links": opts.links,
+            "packageName": opts.package_name,
+            "extractPassword": opts.extract_password,
+            "downloadPassword": opts.download_password,
+            "destinationFolder": opts.destination_folder,
             "sourceUrl": "",
             "dataURLs": [],
-            "comment": "",
-            "autoExtract": true,
-            "deepDecrypt": false,
-            "overwritePackagizerRules": false,
+            "comment": opts.comment,
+            "autoExtract": opts.auto_extract,
+            "deepDecrypt": opts.deep_decrypt,
+            "overwritePackagizerRules": opts.overwrite_packagizer_rules,
             "assignJobID": true,
-            "priority": "DEFAULT"
+            "priority": opts.priority
         });
         let value = self.get_v2("linkgrabberv2/addLinks", "query", params)?;
         Ok(value.get("id").and_then(Value::as_i64).unwrap_or(0))
@@ -293,5 +337,14 @@ impl JdApi {
         let ids_json = serde_json::to_string(link_ids)?;
         self.call("linkcollector/startDownloads", &[&ids_json, "[]"])
             .map(|v| v.as_bool().unwrap_or(false))
+    }
+
+    /// Moves links to the download list via `/linkgrabberv2/moveToDownloadlist`,
+    /// without starting them — unlike [`Self::start_linkgrabber_downloads`],
+    /// which moves *and* starts.
+    pub fn move_linkgrabber_to_downloadlist(&self, link_ids: &[i64]) -> Result<()> {
+        let link_ids_json = serde_json::to_string(link_ids)?;
+        self.call("linkgrabberv2/moveToDownloadlist", &[&link_ids_json, "[]"])?;
+        Ok(())
     }
 }

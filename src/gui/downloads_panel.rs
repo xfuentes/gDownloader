@@ -9,6 +9,7 @@ use gtk4::gio;
 use gtk4::glib;
 use serde_json::Value;
 
+use crate::gui::download_limits::{DownloadLimits, DownloadLimitsCache};
 use crate::gui::package_tree::{
     build_name_column, sync_store, sync_store_keep_expanded, tree_item, PackageTree,
 };
@@ -384,7 +385,11 @@ fn package_progress_fraction(pkg: &PackageRow) -> f64 {
 }
 
 impl DownloadsPanel {
-    pub fn build(api: Arc<JdApi>, gui_settings: GraphicalUserInterfaceSettings) -> Self {
+    pub fn build(
+        api: Arc<JdApi>,
+        gui_settings: GraphicalUserInterfaceSettings,
+        download_limits: DownloadLimitsCache,
+    ) -> Self {
         let page = gtk4::Box::new(gtk4::Orientation::Vertical, 0);
         page.set_vexpand(true);
         page.set_hexpand(true);
@@ -1024,7 +1029,7 @@ impl DownloadsPanel {
 
         // Properties panel: shown for the selected download, hidden otherwise.
         let properties = Rc::new(crate::gui::properties_panel::PropertiesPanel::build(
-            properties_actions(api, gui_settings.clone()),
+            properties_actions(api.clone(), gui_settings.clone()),
         ));
         page.append(&properties.widget);
         crate::gui::properties_panel::restore_field_visibility(properties.clone(), {
@@ -1137,66 +1142,176 @@ impl DownloadsPanel {
         bottom_bar.set_valign(gtk4::Align::Center);
         bottom_bar.set_size_request(-1, 24);
 
-        // Add links
-        let add_btn = gtk4::Button::builder()
-            .child(&gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(
-                crate::gui::icon_key::ICON_ADD,
-            )))
-            .build();
-        add_btn.set_has_frame(false);
+        // Add Links — icon + text like JDownloader's own button (shared
+        // with the Link Collector's identical bottom-bar button: adding
+        // links always goes through the Link Collector regardless of which
+        // tab is active), with the arrow menu button visually joined to it.
+        let add_btn_content = gtk4::Box::new(gtk4::Orientation::Horizontal, 6);
+        add_btn_content.append(&gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(
+            crate::gui::icon_key::ICON_ADD,
+        )));
+        add_btn_content.append(&gtk4::Label::new(Some(tr!("Add Links").as_ref())));
+        let add_btn = gtk4::Button::builder().child(&add_btn_content).build();
         add_btn.set_tooltip_text(Some(tr!("Add links to linkgrabber").as_ref()));
-        add_btn.set_size_request(24, 24);
-        bottom_bar.append(&add_btn);
 
         let add_popover_box = gtk4::Box::new(gtk4::Orientation::Vertical, 4);
         add_popover_box.set_margin_start(8);
         add_popover_box.set_margin_end(8);
         add_popover_box.set_margin_top(8);
         add_popover_box.set_margin_bottom(8);
-        for label in [tr!("Add links"), tr!("Add container"), tr!("Paste links")] {
-            let row = gtk4::Button::builder()
-                .label(label.as_str())
-                .has_frame(false)
-                .halign(gtk4::Align::Start)
-                .build();
-            add_popover_box.append(&row);
-        }
+        // Shared across this popover's rows so their icon+label portion is
+        // equally wide, lining up the trailing shortcut hints in a column.
+        let add_popover_size_group = gtk4::SizeGroup::new(gtk4::SizeGroupMode::Horizontal);
+        let add_links_row = gtk4::Button::builder()
+            .child(&crate::gui::menus::icon_label_with_accel(
+                crate::gui::icon_key::ICON_ADD,
+                tr!("Analyse Text with Links").as_ref(),
+                Some("<Primary>L"),
+                Some(&add_popover_size_group),
+            ))
+            .has_frame(false)
+            .halign(gtk4::Align::Start)
+            .build();
+        add_popover_box.append(&add_links_row);
+
+        // Loading `.crawljob`/`.dlc` container files isn't implemented yet
+        // (a different RemoteAPI endpoint, `linkgrabberv2/addContainer`).
+        let add_container_row = gtk4::Button::builder()
+            .child(&crate::gui::menus::icon_label_with_accel(
+                crate::gui::icon_key::ICON_LOAD,
+                tr!("Add Container").as_ref(),
+                None,
+                Some(&add_popover_size_group),
+            ))
+            .has_frame(false)
+            .halign(gtk4::Align::Start)
+            .sensitive(false)
+            .build();
+        add_container_row.set_tooltip_text(Some(
+            tr!("Loading link container files isn't supported yet.").as_ref(),
+        ));
+        add_popover_box.append(&add_container_row);
+
+        let paste_links_row = gtk4::Button::builder()
+            .child(&crate::gui::menus::icon_label_with_accel(
+                crate::gui::icon_key::ICON_CLIPBOARD,
+                tr!("Paste Links").as_ref(),
+                Some("<Primary>V"),
+                Some(&add_popover_size_group),
+            ))
+            .has_frame(false)
+            .halign(gtk4::Align::Start)
+            .build();
+        add_popover_box.append(&paste_links_row);
+
+        let paste_links_deep_row = gtk4::Button::builder()
+            .child(&crate::gui::menus::icon_label_with_accel(
+                crate::gui::icon_key::ICON_CLIPBOARD,
+                tr!("Paste Links (Deep Analyse)").as_ref(),
+                Some("<Primary><Shift>V"),
+                Some(&add_popover_size_group),
+            ))
+            .has_frame(false)
+            .halign(gtk4::Align::Start)
+            .build();
+        add_popover_box.append(&paste_links_deep_row);
+
         let add_popover = gtk4::Popover::new();
         add_popover.set_child(Some(&add_popover_box));
         let add_arrow = gtk4::MenuButton::new();
-        add_arrow.set_child(Some(&gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(
-            crate::gui::icon_key::ICON_GO_DOWN,
-        ))));
+        add_arrow.set_direction(gtk4::ArrowType::Down);
         add_arrow.set_popover(Some(&add_popover));
-        add_arrow.set_size_request(12, 24);
-        bottom_bar.append(&add_arrow);
+
+        let add_box = gtk4::Box::new(gtk4::Orientation::Horizontal, 0);
+        add_box.add_css_class("linked");
+        add_box.append(&add_btn);
+        add_box.append(&add_arrow);
+        bottom_bar.append(&add_box);
+
+        add_btn.connect_clicked({
+            let api = api.clone();
+            move |btn| {
+                if let Some(root) = btn.root() {
+                    if let Ok(window) = root.downcast::<gtk4::Window>() {
+                        crate::gui::dialogs::AddLinksDialog::show(&window, &api);
+                    }
+                }
+            }
+        });
+        add_links_row.connect_clicked({
+            let api = api.clone();
+            let add_popover = add_popover.clone();
+            move |btn| {
+                add_popover.popdown();
+                if let Some(root) = btn.root() {
+                    if let Ok(window) = root.downcast::<gtk4::Window>() {
+                        crate::gui::dialogs::AddLinksDialog::show(&window, &api);
+                    }
+                }
+            }
+        });
+        paste_links_row.connect_clicked({
+            let api = api.clone();
+            let add_popover = add_popover.clone();
+            move |_| {
+                add_popover.popdown();
+                crate::gui::link_grabber_panel::paste_links(api.clone(), false);
+            }
+        });
+        paste_links_deep_row.connect_clicked({
+            let api = api.clone();
+            let add_popover = add_popover.clone();
+            move |_| {
+                add_popover.popdown();
+                crate::gui::link_grabber_panel::paste_links(api.clone(), true);
+            }
+        });
+
+        // Ctrl+V / Ctrl+Shift+V "Paste Links" shortcuts (JDownloader's own
+        // `PasteLinksAction` accelerators), active while the download table
+        // itself has focus — attached to `view` rather than the whole
+        // panel so it doesn't steal normal Ctrl+V paste from the search
+        // entry or any other text field.
+        let paste_shortcut_controller = gtk4::EventControllerKey::new();
+        paste_shortcut_controller.connect_key_pressed({
+            let api = api.clone();
+            move |_, key, _, modifier| {
+                if key == gtk4::gdk::Key::v && modifier.contains(gtk4::gdk::ModifierType::CONTROL_MASK) {
+                    let deep = modifier.contains(gtk4::gdk::ModifierType::SHIFT_MASK);
+                    crate::gui::link_grabber_panel::paste_links(api.clone(), deep);
+                    glib::Propagation::Stop
+                } else {
+                    glib::Propagation::Proceed
+                }
+            }
+        });
+        view.add_controller(paste_shortcut_controller);
 
         bottom_bar.append(&gtk4::Separator::new(gtk4::Orientation::Vertical));
 
-        // Delete
+        // Delete — icon/tooltip match JDownloader's own "Clear Downloadlist"
+        // button (`GenericDeleteFromDownloadlistAction`, `IconKey.ICON_DELETE`),
+        // joined to its variants menu via GTK's "linked" segmented style.
         let delete_btn = gtk4::Button::builder()
             .child(&gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(
-                crate::gui::icon_key::ICON_TRASH,
+                crate::gui::icon_key::ICON_DELETE,
             )))
             .build();
-        delete_btn.set_has_frame(false);
-        delete_btn.set_tooltip_text(Some(tr!("Delete all").as_ref()));
-        delete_btn.set_size_request(24, 24);
-        bottom_bar.append(&delete_btn);
+        delete_btn.set_tooltip_text(Some(tr!("Clear Downloadlist").as_ref()));
 
         let delete_popover_box = gtk4::Box::new(gtk4::Orientation::Vertical, 4);
         delete_popover_box.set_margin_start(8);
         delete_popover_box.set_margin_end(8);
         delete_popover_box.set_margin_top(8);
         delete_popover_box.set_margin_bottom(8);
-        for label in [
-            tr!("Delete disabled"),
-            tr!("Delete failed"),
-            tr!("Delete finished"),
-            tr!("Delete offline"),
+        for (icon, label) in [
+            (crate::gui::icon_key::ICON_REMOVE_DISABLED, tr!("Delete disabled")),
+            (crate::gui::icon_key::ICON_REMOVE_FAILED, tr!("Delete failed")),
+            (crate::gui::icon_key::ICON_REMOVE_OK, tr!("Delete finished")),
+            (crate::gui::icon_key::ICON_REMOVE_OFFLINE, tr!("Delete offline")),
         ] {
             let row = gtk4::Button::builder()
-                .label(label.as_str())
+                .child(&crate::gui::menus::icon_label(icon, label.as_ref()))
                 .has_frame(false)
                 .halign(gtk4::Align::Start)
                 .build();
@@ -1205,60 +1320,449 @@ impl DownloadsPanel {
         let delete_popover = gtk4::Popover::new();
         delete_popover.set_child(Some(&delete_popover_box));
         let delete_arrow = gtk4::MenuButton::new();
-        delete_arrow.set_child(Some(&gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(
-            crate::gui::icon_key::ICON_GO_DOWN,
-        ))));
+        delete_arrow.set_direction(gtk4::ArrowType::Down);
         delete_arrow.set_popover(Some(&delete_popover));
-        delete_arrow.set_size_request(12, 24);
-        bottom_bar.append(&delete_arrow);
+
+        let delete_box = gtk4::Box::new(gtk4::Orientation::Horizontal, 0);
+        delete_box.add_css_class("linked");
+        delete_box.append(&delete_btn);
+        delete_box.append(&delete_arrow);
+        bottom_bar.append(&delete_box);
 
         bottom_bar.append(&gtk4::Separator::new(gtk4::Orientation::Vertical));
 
-        // Search
-        let search = gtk4::SearchEntry::new();
-        search.set_hexpand(true);
-        search.set_placeholder_text(Some(tr!("Filter").as_ref()));
-        search.set_size_request(80, 24);
-        bottom_bar.append(&search);
+        // Search — a category combobox (icon per entry) linked to a text
+        // field whose placeholder changes with the selected category,
+        // matching JDownloader's own `DownloadsTableSearchField`/
+        // `LinktablesSearchCategory` (label/icon/help text per category).
+        let search_categories: [(&str, String, String); 7] = [
+            (
+                crate::gui::icon_key::ICON_TEXT,
+                tr!("File Name").to_string(),
+                tr!("Please enter the file name you are looking for...").to_string(),
+            ),
+            (
+                crate::gui::icon_key::ICON_TEXT,
+                tr!("File Path").to_string(),
+                tr!("Please enter the file path you are looking for...").to_string(),
+            ),
+            (
+                crate::gui::icon_key::ICON_BROWSE,
+                tr!("Hoster").to_string(),
+                tr!("Please enter the domain you are looking for...").to_string(),
+            ),
+            (
+                crate::gui::icon_key::ICON_PACKAGE_OPEN,
+                tr!("Package Name").to_string(),
+                tr!("Please enter the package name you are looking for...").to_string(),
+            ),
+            (
+                crate::gui::icon_key::ICON_LIST,
+                tr!("Comment").to_string(),
+                tr!("Please enter the comment you are looking for...").to_string(),
+            ),
+            (
+                crate::gui::icon_key::ICON_LIST,
+                tr!("Comment(Package)").to_string(),
+                tr!("Please enter the comment you are looking for...").to_string(),
+            ),
+            (
+                crate::gui::icon_key::ICON_INFO,
+                tr!("Status").to_string(),
+                tr!("Please enter the Status you are looking for...").to_string(),
+            ),
+        ];
+        let search_category_model = gtk4::StringList::new(&[]);
+        for (_, label, _) in &search_categories {
+            search_category_model.append(label);
+        }
+        let search_category_icons: Vec<&'static str> =
+            search_categories.iter().map(|(icon, _, _)| *icon).collect();
+        let search_category_dropdown =
+            crate::gui::fields::icon_dropdown(search_category_model, search_category_icons);
 
-        // Quick filter
-        let filter = gtk4::DropDown::from_strings(&[
-            "All", "Running", "Failed", "Exists", "Offline", "Skipped", "Successful", "Todo",
-        ]);
-        filter.set_size_request(80, 24);
+        let search_entry = gtk4::Entry::new();
+        search_entry.set_hexpand(true);
+        search_entry.set_placeholder_text(Some(&search_categories[0].2));
+
+        let search_box = gtk4::Box::new(gtk4::Orientation::Horizontal, 0);
+        search_box.add_css_class("linked");
+        search_box.set_hexpand(true);
+        search_box.append(&search_category_dropdown);
+        search_box.append(&search_entry);
+        bottom_bar.append(&search_box);
+
+        search_category_dropdown.connect_selected_notify({
+            let search_entry = search_entry.clone();
+            let placeholders: Vec<String> =
+                search_categories.iter().map(|(_, _, help)| help.clone()).collect();
+            move |dropdown| {
+                if let Some(placeholder) = placeholders.get(dropdown.selected() as usize) {
+                    search_entry.set_placeholder_text(Some(placeholder));
+                }
+            }
+        });
+
+        // Quick filter — JDownloader's own `View` enum (icon + label per
+        // entry), in `FilterCombo`'s own display order.
+        let view_icons = vec![
+            crate::gui::icon_key::ICON_DOWNLOAD,
+            crate::gui::icon_key::ICON_MEDIA_PLAYBACK_START,
+            crate::gui::icon_key::ICON_ERROR,
+            crate::gui::icon_key::ICON_FALSE,
+            crate::gui::icon_key::ICON_FALSE,
+            crate::gui::icon_key::ICON_SKIPPED,
+            crate::gui::icon_key::ICON_OK,
+            crate::gui::icon_key::ICON_WAIT,
+        ];
+        let view_model = gtk4::StringList::new(&[]);
+        for label in [
+            tr!("All Downloads"),
+            tr!("Running Downloads"),
+            tr!("Failed Downloads"),
+            tr!("File exists"),
+            tr!("Offline Downloads"),
+            tr!("Skipped Downloads"),
+            tr!("Successful Downloads"),
+            tr!("Pending Downloads"),
+        ] {
+            view_model.append(&label);
+        }
+        let filter = crate::gui::fields::icon_dropdown(view_model, view_icons);
         bottom_bar.append(&filter);
 
-        // Quick settings
-        let settings_popover_box = gtk4::Box::new(gtk4::Orientation::Vertical, 4);
+        // Quick settings — download-behavior spinners matching JDownloader's
+        // own ChunksEditor/ParalellDownloadsEditor/
+        // ParallelDownloadsPerHostEditor/SpeedlimitEditor, plus Properties/
+        // Overview panel visibility. "Bottom bar manager" (JD's own
+        // menu-customization system) has no gDownloader equivalent.
+        let settings_popover_box = gtk4::Box::new(gtk4::Orientation::Vertical, 6);
         settings_popover_box.set_margin_start(8);
         settings_popover_box.set_margin_end(8);
         settings_popover_box.set_margin_top(8);
         settings_popover_box.set_margin_bottom(8);
-        for label in [
-            tr!("Chunks"),
-            tr!("Parallel downloads"),
-            tr!("Parallel per host"),
-            tr!("Speed limit"),
-            tr!("Properties"),
-            tr!("Overview"),
-            tr!("Bottom bar manager"),
-        ] {
-            let row = gtk4::Button::builder()
-                .label(label.as_str())
-                .has_frame(false)
-                .halign(gtk4::Align::Start)
-                .build();
-            settings_popover_box.append(&row);
-        }
+
+        // Three `SizeGroup`s keep this little form's columns aligned: the
+        // icon+label portion, the checkbox-or-empty-spacer slot (so rows
+        // without a checkbox still start their spinner at the same x as
+        // rows that have one), and the spinners themselves (same width
+        // *and* height — `Both`, since a plain label vs. a checkbox next
+        // to it can otherwise naturally request different heights).
+        let quick_settings_size_group = gtk4::SizeGroup::new(gtk4::SizeGroupMode::Horizontal);
+        let checkbox_size_group = gtk4::SizeGroup::new(gtk4::SizeGroupMode::Both);
+        let spin_size_group = gtk4::SizeGroup::new(gtk4::SizeGroupMode::Both);
+        // Returns the row's icon too: plain (non-symbolic) JDownloader
+        // icons don't reliably re-dim on their own when only an ancestor's
+        // `sensitive` flips back on, so the enabled state is also applied
+        // to the icon directly (see `set_row_enabled`).
+        let icon_label_content = |icon: &str, label: &str| -> (gtk4::Box, gtk4::Image) {
+            let content = gtk4::Box::new(gtk4::Orientation::Horizontal, 8);
+            let icon_widget = gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(icon));
+            icon_widget.set_pixel_size(18);
+            let label_widget = gtk4::Label::new(Some(label));
+            label_widget.set_xalign(0.0);
+            content.append(&icon_widget);
+            content.append(&label_widget);
+            quick_settings_size_group.add_widget(&content);
+            (content, icon_widget)
+        };
+        let set_row_enabled = |content: &gtk4::Box, icon: &gtk4::Image, enabled: bool| {
+            content.set_sensitive(enabled);
+            icon.set_opacity(if enabled { 1.0 } else { 0.5 });
+        };
+
+        let chunks_row = gtk4::Box::new(gtk4::Orientation::Horizontal, 8);
+        chunks_row.append(
+            &icon_label_content(crate::gui::icon_key::ICON_CHUNKS, tr!("Max. chunks per download").as_ref()).0,
+        );
+        let chunks_spacer = gtk4::Box::new(gtk4::Orientation::Horizontal, 0);
+        checkbox_size_group.add_widget(&chunks_spacer);
+        chunks_row.append(&chunks_spacer);
+        let chunks_adj = gtk4::Adjustment::new(1.0, 1.0, 20.0, 1.0, 1.0, 0.0);
+        let chunks_spin = gtk4::SpinButton::new(Some(&chunks_adj), 1.0, 0);
+        spin_size_group.add_widget(&chunks_spin);
+        chunks_row.append(&chunks_spin);
+        settings_popover_box.append(&chunks_row);
+
+        let parallel_row = gtk4::Box::new(gtk4::Orientation::Horizontal, 8);
+        parallel_row.append(
+            &icon_label_content(
+                crate::gui::icon_key::ICON_PARALELL,
+                tr!("Max. simultaneous downloads").as_ref(),
+            )
+            .0,
+        );
+        let parallel_spacer = gtk4::Box::new(gtk4::Orientation::Horizontal, 0);
+        checkbox_size_group.add_widget(&parallel_spacer);
+        parallel_row.append(&parallel_spacer);
+        let parallel_adj = gtk4::Adjustment::new(3.0, 1.0, 20.0, 1.0, 1.0, 0.0);
+        let parallel_spin = gtk4::SpinButton::new(Some(&parallel_adj), 1.0, 0);
+        spin_size_group.add_widget(&parallel_spin);
+        parallel_row.append(&parallel_spin);
+        settings_popover_box.append(&parallel_row);
+
+        // Checkbox sits between the label and its spinner (matching
+        // JDownloader's own `ParallelDownloadsPerHostEditor`/
+        // `SpeedlimitEditor`: `add(lbl); add(checkbox); add(spinner);`).
+        let per_host_row = gtk4::Box::new(gtk4::Orientation::Horizontal, 8);
+        let (per_host_content, per_host_icon) = icon_label_content(
+            crate::gui::icon_key::ICON_BATCH,
+            tr!("Max. sim. Downloads per Hoster").as_ref(),
+        );
+        set_row_enabled(&per_host_content, &per_host_icon, false);
+        per_host_row.append(&per_host_content);
+        let per_host_check = gtk4::CheckButton::new();
+        checkbox_size_group.add_widget(&per_host_check);
+        let per_host_adj = gtk4::Adjustment::new(1.0, 1.0, 40.0, 1.0, 1.0, 0.0);
+        let per_host_spin = gtk4::SpinButton::new(Some(&per_host_adj), 1.0, 0);
+        per_host_spin.set_sensitive(false);
+        spin_size_group.add_widget(&per_host_spin);
+        per_host_row.append(&per_host_check);
+        per_host_row.append(&per_host_spin);
+        settings_popover_box.append(&per_host_row);
+
+        let speed_row = gtk4::Box::new(gtk4::Orientation::Horizontal, 8);
+        let (speed_content, speed_icon) = icon_label_content(
+            crate::gui::icon_key::ICON_SPEED,
+            tr!("Speed limit (KiB/s)").as_ref(),
+        );
+        set_row_enabled(&speed_content, &speed_icon, false);
+        speed_row.append(&speed_content);
+        let speed_check = gtk4::CheckButton::new();
+        checkbox_size_group.add_widget(&speed_check);
+        let speed_adj = gtk4::Adjustment::new(50.0, 1.0, 1_000_000.0, 1.0, 10.0, 0.0);
+        let speed_spin = gtk4::SpinButton::new(Some(&speed_adj), 1.0, 0);
+        speed_spin.set_sensitive(false);
+        spin_size_group.add_widget(&speed_spin);
+        speed_row.append(&speed_check);
+        speed_row.append(&speed_spin);
+        settings_popover_box.append(&speed_row);
+
+        settings_popover_box.append(&gtk4::Separator::new(gtk4::Orientation::Horizontal));
+
+        let (properties_row, properties_check) =
+            crate::gui::menus::check_row(tr!("Package or Link Properties").as_ref());
+        settings_popover_box.append(&properties_row);
+        let (overview_row, overview_check) =
+            crate::gui::menus::check_row(tr!("Overview Panel visible").as_ref());
+        settings_popover_box.append(&overview_row);
+
         let settings_popover = gtk4::Popover::new();
         settings_popover.set_child(Some(&settings_popover_box));
         let settings_btn = gtk4::MenuButton::new();
         settings_btn.set_child(Some(&gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(
             crate::gui::icon_key::ICON_SETTINGS,
         ))));
+        settings_btn.set_always_show_arrow(true);
+        settings_btn.set_direction(gtk4::ArrowType::Down);
         settings_btn.set_popover(Some(&settings_popover));
-        settings_btn.set_size_request(24, 24);
         bottom_bar.append(&settings_btn);
+
+        // Chunks/parallel downloads/parallel per host: the shared
+        // `DownloadLimitsCache`, since Settings > General shows and edits
+        // these same values — a single cached source of truth instead of
+        // each page independently polling JDownloader (which never
+        // changes these on its own). `refresh_limits` re-reads the cache
+        // (free once loaded — no network) on every popover open, so this
+        // menu can't go stale relative to a change made in Settings >
+        // General while this popover stays closed.
+        let loading_limits = Rc::new(Cell::new(true));
+        let refresh_limits: Rc<dyn Fn()> = {
+            let download_limits = download_limits.clone();
+            let loading_limits = loading_limits.clone();
+            let chunks_spin = chunks_spin.clone();
+            let parallel_spin = parallel_spin.clone();
+            let per_host_check = per_host_check.clone();
+            let per_host_spin = per_host_spin.clone();
+            let per_host_content = per_host_content.clone();
+            let per_host_icon = per_host_icon.clone();
+            Rc::new(move || {
+                loading_limits.set(true);
+                download_limits.read({
+                    let loading_limits = loading_limits.clone();
+                    let chunks_spin = chunks_spin.clone();
+                    let parallel_spin = parallel_spin.clone();
+                    let per_host_check = per_host_check.clone();
+                    let per_host_spin = per_host_spin.clone();
+                    let per_host_content = per_host_content.clone();
+                    let per_host_icon = per_host_icon.clone();
+                    move |limits: DownloadLimits| {
+                        chunks_spin.set_value(limits.max_chunks as f64);
+                        parallel_spin.set_value(limits.max_simultaneous as f64);
+                        per_host_check.set_active(limits.max_simultaneous_per_host_enabled);
+                        per_host_spin.set_value(limits.max_simultaneous_per_host as f64);
+                        per_host_spin.set_sensitive(limits.max_simultaneous_per_host_enabled);
+                        set_row_enabled(
+                            &per_host_content,
+                            &per_host_icon,
+                            limits.max_simultaneous_per_host_enabled,
+                        );
+                        loading_limits.set(false);
+                    }
+                });
+            })
+        };
+        refresh_limits();
+        settings_popover.connect_show({
+            let refresh_limits = refresh_limits.clone();
+            move |_| refresh_limits()
+        });
+
+        chunks_spin.connect_value_changed({
+            let download_limits = download_limits.clone();
+            let loading_limits = loading_limits.clone();
+            move |spin| {
+                if loading_limits.get() {
+                    return;
+                }
+                let value = spin.value() as i32;
+                download_limits.update(|limits| limits.max_chunks = value);
+            }
+        });
+        parallel_spin.connect_value_changed({
+            let download_limits = download_limits.clone();
+            let loading_limits = loading_limits.clone();
+            move |spin| {
+                if loading_limits.get() {
+                    return;
+                }
+                let value = spin.value() as i32;
+                download_limits.update(|limits| limits.max_simultaneous = value);
+            }
+        });
+        per_host_check.connect_toggled({
+            let download_limits = download_limits.clone();
+            let loading_limits = loading_limits.clone();
+            let per_host_spin = per_host_spin.clone();
+            let per_host_content = per_host_content.clone();
+            let per_host_icon = per_host_icon.clone();
+            move |btn| {
+                let value = btn.is_active();
+                per_host_spin.set_sensitive(value);
+                set_row_enabled(&per_host_content, &per_host_icon, value);
+                if loading_limits.get() {
+                    return;
+                }
+                download_limits.update(|limits| limits.max_simultaneous_per_host_enabled = value);
+            }
+        });
+        per_host_spin.connect_value_changed({
+            let download_limits = download_limits.clone();
+            let loading_limits = loading_limits.clone();
+            move |spin| {
+                if loading_limits.get() {
+                    return;
+                }
+                let value = spin.value() as i32;
+                download_limits.update(|limits| limits.max_simultaneous_per_host = value);
+            }
+        });
+
+        // Speed limit and Properties/Overview panel visibility: not shown
+        // anywhere else, so a plain one-time load is enough.
+        let loading_settings = Rc::new(Cell::new(true));
+        let general_settings = GeneralSettings::new(api.clone());
+        crate::gui::spawn::api_call(
+            {
+                let general_settings = general_settings.clone();
+                let gui_settings = gui_settings.clone();
+                move || {
+                    (
+                        general_settings.get_download_speed_limit_enabled().unwrap_or(false),
+                        general_settings.get_download_speed_limit().unwrap_or(50 * 1024),
+                        gui_settings.get_flag("DownloadsTabPropertiesPanelVisible", true).unwrap_or(true),
+                        gui_settings.get_flag("DownloadTabOverviewVisible", true).unwrap_or(true),
+                    )
+                }
+            },
+            {
+                let loading_settings = loading_settings.clone();
+                let speed_check = speed_check.clone();
+                let speed_spin = speed_spin.clone();
+                let speed_content = speed_content.clone();
+                let speed_icon = speed_icon.clone();
+                let properties_check = properties_check.clone();
+                let overview_check = overview_check.clone();
+                let properties = properties.clone();
+                let overview = overview.clone();
+                move |(speed_enabled, speed_bytes, props_visible, overview_visible)| {
+                    speed_check.set_active(speed_enabled);
+                    speed_spin.set_value((speed_bytes / 1024) as f64);
+                    speed_spin.set_sensitive(speed_enabled);
+                    set_row_enabled(&speed_content, &speed_icon, speed_enabled);
+                    properties_check.set_active(props_visible);
+                    overview_check.set_active(overview_visible);
+                    properties.widget.set_visible(props_visible);
+                    overview.widget.set_visible(overview_visible);
+                    loading_settings.set(false);
+                }
+            },
+        );
+        speed_check.connect_toggled({
+            let general_settings = general_settings.clone();
+            let loading_settings = loading_settings.clone();
+            let speed_spin = speed_spin.clone();
+            let speed_content = speed_content.clone();
+            let speed_icon = speed_icon.clone();
+            move |btn| {
+                let value = btn.is_active();
+                speed_spin.set_sensitive(value);
+                set_row_enabled(&speed_content, &speed_icon, value);
+                if loading_settings.get() {
+                    return;
+                }
+                let general_settings = general_settings.clone();
+                crate::gui::spawn::api_fire(move || {
+                    let _ = general_settings.set_download_speed_limit_enabled(value);
+                });
+            }
+        });
+        speed_spin.connect_value_changed({
+            let general_settings = general_settings.clone();
+            let loading_settings = loading_settings.clone();
+            move |spin| {
+                if loading_settings.get() {
+                    return;
+                }
+                let value_bytes = (spin.value() as i32).saturating_mul(1024);
+                let general_settings = general_settings.clone();
+                crate::gui::spawn::api_fire(move || {
+                    let _ = general_settings.set_download_speed_limit(value_bytes);
+                });
+            }
+        });
+        properties_check.connect_toggled({
+            let gui_settings = gui_settings.clone();
+            let loading_settings = loading_settings.clone();
+            let properties = properties.clone();
+            move |btn| {
+                let value = btn.is_active();
+                properties.widget.set_visible(value);
+                if loading_settings.get() {
+                    return;
+                }
+                let gui_settings = gui_settings.clone();
+                crate::gui::spawn::api_fire(move || {
+                    let _ = gui_settings.set_flag("DownloadsTabPropertiesPanelVisible", value);
+                });
+            }
+        });
+        overview_check.connect_toggled({
+            let gui_settings = gui_settings.clone();
+            let loading_settings = loading_settings.clone();
+            let overview = overview.clone();
+            move |btn| {
+                let value = btn.is_active();
+                overview.widget.set_visible(value);
+                if loading_settings.get() {
+                    return;
+                }
+                let gui_settings = gui_settings.clone();
+                crate::gui::spawn::api_fire(move || {
+                    let _ = gui_settings.set_flag("DownloadTabOverviewVisible", value);
+                });
+            }
+        });
 
         page.append(&bottom_bar);
 

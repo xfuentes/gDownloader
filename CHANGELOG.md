@@ -5,6 +5,48 @@ All notable changes to gDownloader are documented in this file.
 ## [Unreleased]
 
 ### Added
+- A new "Add Links" dialog, matching JDownloader's own "Analyse and Add
+  Links" window — opened from the File menu's "Analyse Text with Links"
+  entry and the Link Collector's "+" button / right-click "Add New Links"
+  entry. Lets you paste links/URLs/text, set a download destination (with a
+  folder browser), package name, comment, extraction password, download
+  password, priority, and Auto Extract, with a "Start Deep Link Analyse"
+  option via a small arrow menu next to Continue. Pre-fills from
+  JDownloader's own LinkgrabberSettings (last-used or default download
+  folder, Auto Extract default, clipboard auto-fill on open) and
+  auto-toggles "Information overwrites packagizer rules" when a custom
+  field is set, mirroring JDownloader's own dialog behavior.
+- Link Collector bottom bar: every button is now wired up, matching
+  JDownloader's own (Clear, Delete disabled/offline/incomplete-archives,
+  Confirm's Start/Add all/selected, and a Quick Settings menu for Add at
+  top/Auto confirm/Auto start/Link filter plus Properties/Overview/Sidebar
+  panel visibility toggles) — previously these were inert placeholders.
+  "Add" also gained "Paste Links"/"Paste Links (Deep Analyse)", which submit
+  the clipboard directly without opening the Add Links dialog, and the same
+  "Add Links"/"Clear Downloadlist" buttons and menus (with JDownloader's own
+  icons throughout) are now also in the Downloads list's bottom bar. Ctrl+L
+  opens Add Links from anywhere, and Ctrl+V/Ctrl+Shift+V trigger Paste
+  Links/Paste Links (Deep Analyse) while a links or downloads table has
+  focus — the same shortcuts JDownloader uses, now also shown next to their
+  menu entries (File menu, Link Collector right-click, both "Add" popovers)
+  the way GTK shows native menu shortcuts. A few JDownloader actions
+  ("Clear filtered links", "Add filtered stuff", "Add Container") stay
+  disabled as they have no RemoteAPI equivalent reachable from a remote
+  client, or aren't implemented yet.
+- Downloads list bottom bar: the "Filter" field is now a category combobox
+  (File Name/File Path/Hoster/Package Name/Comment/Comment(Package)/Status,
+  each with JDownloader's own icon) linked to a text field whose
+  placeholder changes with the selected category, and the "All Downloads"
+  quick filter dropdown now shows JDownloader's own labels and icons for
+  each view (Running/Failed/File exists/Offline/Skipped/Successful/
+  Pending), matching `DownloadsTableSearchField`/`View`. Its Quick Settings
+  menu now has working spinners for Max. chunks per download/Max.
+  simultaneous downloads/Max. sim. downloads per hoster/Speed limit
+  (matching JDownloader's own editors) plus Properties/Overview panel
+  visibility toggles, in place of the previous inert placeholder rows.
+- All bottom-bar arrow menu buttons (Add/Delete/Confirm/Quick Settings, in
+  both the Link Collector and Downloads list) now point down, matching the
+  usual GTK dropdown/combobox convention.
 - Scripts page: JavaScript syntax highlighting in the script editor, and an
   "Example Scripts" menu offering JDownloader's own bundled example scripts
   (info file writer, play a sound, play a sound when inactive, reset a slow
@@ -45,6 +87,34 @@ All notable changes to gDownloader are documented in this file.
   checkbox indicator as the other toolbar toggles.
 
 ### Fixed
+- Settings changed via the Downloads list's Quick Settings menu or
+  Settings > General (Max. chunks/simultaneous downloads/per hoster, speed
+  limit) could silently fail to survive an app restart: JDownloader running
+  headless buffers its own config writes to disk and only flushes them when
+  download or Link Collector activity happens to reschedule that flush,
+  which a plain settings change never does. gDownloader now disables that
+  buffering on startup, so every setting change is written to disk
+  immediately, matching JDownloader's own desktop (non-headless) behavior.
+- Those same settings could show a wrong, generic default value (e.g. "3"
+  simultaneous downloads) right after startup instead of the real saved
+  one, because they were read before JDownloader's RemoteAPI had actually
+  finished starting up.
+- A setting changed right before closing gDownloader (via the window's
+  close button, which waits for JDownloader to shut down gracefully so it
+  can flush its own delayed config writes) could still be lost: the change
+  itself is saved on a detached background thread that isn't guaranteed to
+  have even sent its request yet by the time JDownloader is asked to exit.
+  Closing the window now waits (briefly) for every such pending write to
+  actually complete first.
+- "Max. chunks per download"/"Max. simultaneous downloads"/"Max. sim.
+  Downloads per Hoster" were shown in two places (Settings > General, and
+  the Downloads list's own Quick Settings menu), each independently
+  polling JDownloader — changing one saved correctly, but the other kept
+  showing whatever value it had loaded at startup, even after being
+  reopened. Both now read and write a single shared, cached state, and
+  each re-syncs itself with it whenever shown (opening the Quick Settings
+  popover, or the Settings tab) — free once loaded, since JDownloader
+  never changes these on its own, so no repeated network polling either.
 - Link Collector context menu: "Start Downloads" on a selected package did
   nothing (it silently skipped package rows instead of expanding them to
   their child links, so it only ever worked on individually selected

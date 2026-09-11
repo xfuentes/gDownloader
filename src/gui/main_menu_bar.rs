@@ -8,7 +8,11 @@ use crate::gui::menus;
 pub struct MainMenuBar;
 
 impl MainMenuBar {
-    pub fn build(window: &adw::ApplicationWindow, on_settings: Rc<dyn Fn()>) -> gtk4::PopoverMenuBar {
+    pub fn build(
+        window: &adw::ApplicationWindow,
+        on_settings: Rc<dyn Fn()>,
+        on_add_links: Rc<dyn Fn()>,
+    ) -> gtk4::PopoverMenuBar {
         let action_group = gio::SimpleActionGroup::new();
 
         let settings_action = gio::SimpleAction::new("settings", None);
@@ -17,6 +21,13 @@ impl MainMenuBar {
             move |_, _| on_settings()
         });
         action_group.add_action(&settings_action);
+
+        let add_links_action = gio::SimpleAction::new("add-links", None);
+        add_links_action.connect_activate({
+            let on_add_links = on_add_links.clone();
+            move |_, _| on_add_links()
+        });
+        action_group.add_action(&add_links_action);
 
         let exit_action = gio::SimpleAction::new("exit", None);
         exit_action.connect_activate({

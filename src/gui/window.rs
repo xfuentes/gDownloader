@@ -18,6 +18,7 @@ use std::cell::Cell;
 use std::path::PathBuf;
 use std::rc::Rc;
 use std::sync::{Arc, Mutex};
+use std::time::Duration;
 
 use adw::prelude::*;
 use gtk4::glib;
@@ -183,6 +184,7 @@ pub fn setup_close_handler(
             let api_thread = api.clone();
             let process_thread = process.clone();
             std::thread::spawn(move || {
+                crate::gui::spawn::wait_for_pending(Duration::from_secs(3));
                 let _ = api_thread.system_exit();
                 if let Ok(mut p) = process_thread.lock() {
                     let _ = p.stop(true);

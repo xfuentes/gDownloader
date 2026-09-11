@@ -75,13 +75,30 @@ pub const FIELD_SOURCE: &str = "source";
 pub const FIELD_COMMENT: &str = "comment";
 
 /// `Priority` enum names, in JDownloader's own declaration order.
-const PRIORITIES: [&str; 7] = [
+pub(crate) const PRIORITIES: [&str; 7] = [
     "HIGHEST", "HIGHER", "HIGH", "DEFAULT", "LOW", "LOWER", "LOWEST",
 ];
 
+/// Icon shown for each [`PRIORITIES`] entry, matching JDownloader's own
+/// `Priority#getIcon()`.
+pub(crate) fn priority_icons() -> Vec<&'static str> {
+    PRIORITIES
+        .iter()
+        .map(|key| match *key {
+            "HIGHEST" => crate::gui::icon_key::ICON_PRIO_3,
+            "HIGHER" => crate::gui::icon_key::ICON_PRIO_2,
+            "HIGH" => crate::gui::icon_key::ICON_PRIO_1,
+            "LOW" => crate::gui::icon_key::ICON_PRIO_MINUS_1,
+            "LOWER" => crate::gui::icon_key::ICON_PRIO_MINUS_2,
+            "LOWEST" => crate::gui::icon_key::ICON_PRIO_MINUS_3,
+            _ => crate::gui::icon_key::ICON_PRIO_0,
+        })
+        .collect()
+}
+
 /// JDownloader folds the field name into the dropdown entry itself (e.g.
 /// "Default priority") instead of a separate "Priority:" label.
-fn priority_label(key: &str) -> String {
+pub(crate) fn priority_label(key: &str) -> String {
     match key {
         "HIGHEST" => tr!("Highest priority").to_string(),
         "HIGHER" => tr!("Higher priority").to_string(),
@@ -292,9 +309,11 @@ impl PropertiesPanel {
 
         // JDownloader shows/hides the priority dropdown together with the
         // comment field, as one "Comment" toggle, since they share a row.
-        let priority_labels: Vec<String> = PRIORITIES.iter().map(|k| priority_label(k)).collect();
-        let priority_refs: Vec<&str> = priority_labels.iter().map(String::as_str).collect();
-        let priority = gtk4::DropDown::from_strings(&priority_refs);
+        let priority_model = gtk4::StringList::new(&[]);
+        for key in PRIORITIES {
+            priority_model.append(&priority_label(key));
+        }
+        let priority = crate::gui::fields::icon_dropdown(priority_model, priority_icons());
         priority.set_valign(gtk4::Align::Center);
         priority.set_margin_top(0);
         priority.set_margin_bottom(0);

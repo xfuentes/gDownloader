@@ -75,6 +75,7 @@ impl ExtCtx {
         let process = self.process.clone();
         let (tx, rx) = async_channel::bounded::<bool>(1);
         thread::spawn(move || {
+            crate::gui::spawn::wait_for_pending(Duration::from_secs(3));
             let _ = api.system_exit();
             if let Ok(mut p) = process.lock() {
                 let _ = p.stop(true);

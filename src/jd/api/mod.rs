@@ -20,6 +20,8 @@ mod extraction;
 mod linkgrabber;
 mod system;
 
+pub use linkgrabber::AddLinksOptions;
+
 use std::time::Duration;
 
 use anyhow::Result;

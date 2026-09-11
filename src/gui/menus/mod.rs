@@ -20,12 +20,44 @@ pub fn custom_item(label: &str, detailed_action: Option<&str>, id: &str) -> gio:
 }
 
 pub fn icon_label(icon: &str, label: &str) -> gtk4::Box {
+    icon_label_with_accel(icon, label, None, None)
+}
+
+/// Same as [`icon_label`], but with a trailing, dimmed shortcut hint —
+/// e.g. "Ctrl+L" — rendered the way GTK's own native menu items show their
+/// accelerator, via `gtk4::accelerator_get_label`. `accel` is a
+/// `gtk4::accelerator_parse`-style string (e.g. `"<Primary>L"`).
+///
+/// `size_group` (shared across every row of the same popover) equalizes
+/// the icon+label portion's width, so shortcut hints of differently-sized
+/// rows all start at the same x position — the same column alignment
+/// GTK's native menus give their accelerators for free.
+pub fn icon_label_with_accel(
+    icon: &str,
+    label: &str,
+    accel: Option<&str>,
+    size_group: Option<&gtk4::SizeGroup>,
+) -> gtk4::Box {
     let bx = gtk4::Box::new(gtk4::Orientation::Horizontal, 6);
     bx.set_halign(gtk4::Align::Fill);
+
+    let content = gtk4::Box::new(gtk4::Orientation::Horizontal, 6);
     let img = gtk4::Image::from_gicon(&jd_icon::resolve(icon));
     img.set_pixel_size(16);
-    bx.append(&img);
-    bx.append(&gtk4::Label::new(Some(label)));
+    content.append(&img);
+    let label_widget = gtk4::Label::new(Some(label));
+    label_widget.set_xalign(0.0);
+    content.append(&label_widget);
+    bx.append(&content);
+    if let Some(group) = size_group {
+        group.add_widget(&content);
+    }
+
+    if let Some((key, mods)) = accel.and_then(gtk4::accelerator_parse) {
+        let accel_label = gtk4::Label::new(Some(&gtk4::accelerator_get_label(key, mods)));
+        accel_label.add_css_class("dim-label");
+        bx.append(&accel_label);
+    }
     bx
 }
 
@@ -93,6 +125,64 @@ pub fn action_button(icon: &str, label: &str, action: &str) -> gtk4::Button {
         .build();
     btn.connect_clicked(popdown_ancestor);
     btn
+}
+
+/// Same as [`action_button`], but with a trailing shortcut hint (see
+/// [`icon_label_with_accel`]) — for a menu row whose action has a matching
+/// `gtk4::Application::set_accels_for_action` binding elsewhere.
+pub fn action_button_with_accel(
+    icon: &str,
+    label: &str,
+    action: &str,
+    accel: &str,
+    size_group: Option<&gtk4::SizeGroup>,
+) -> gtk4::Button {
+    let btn = gtk4::Button::builder()
+        .child(&icon_label_with_accel(icon, label, Some(accel), size_group))
+        .has_frame(false)
+        .halign(gtk4::Align::Fill)
+        .action_name(action)
+        .build();
+    btn.connect_clicked(popdown_ancestor);
+    btn
+}
+
+/// A toggleable popover row matching GNOME/GTK's own convention for a
+/// boolean menu item: a trailing checkmark that appears only when active
+/// (not a persistent checkbox square, which GTK reserves for radio-style
+/// choices) on a flat, full-width, hoverable row. The `gtk4::CheckButton`
+/// returned is never shown — it's just the state holder, so callers can
+/// keep using `is_active`/`set_active`/`connect_toggled` exactly as if a
+/// real checkbox were on screen.
+pub fn check_row(label: &str) -> (gtk4::Button, gtk4::CheckButton) {
+    let check = gtk4::CheckButton::new();
+
+    let checkmark = gtk4::Image::from_icon_name("object-select-symbolic");
+    checkmark.set_visible(false);
+
+    let label_widget = gtk4::Label::new(Some(label));
+    label_widget.set_xalign(0.0);
+    label_widget.set_hexpand(true);
+
+    let content = gtk4::Box::new(gtk4::Orientation::Horizontal, 6);
+    content.append(&label_widget);
+    content.append(&checkmark);
+
+    let row = gtk4::Button::builder()
+        .child(&content)
+        .has_frame(false)
+        .halign(gtk4::Align::Fill)
+        .build();
+
+    check.connect_toggled({
+        let checkmark = checkmark.clone();
+        move |c| checkmark.set_visible(c.is_active())
+    });
+    row.connect_clicked({
+        let check = check.clone();
+        move |_| check.set_active(!check.is_active())
+    });
+    (row, check)
 }
 
 pub fn merged_action_button(
