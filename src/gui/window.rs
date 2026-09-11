@@ -89,7 +89,19 @@ pub fn setup_css() {
          switch slider { min-width: 16px; min-height: 16px; }\n\
          spinbutton { min-height: 0; padding: 0; }\n\
          spinbutton text { min-height: 18px; padding: 2px 4px; }\n\
-         spinbutton button { min-width: 18px; min-height: 18px; padding: 0; }",
+         spinbutton button { min-width: 18px; min-height: 18px; padding: 0; }\n\
+         .menu-editor-row { padding: 4px 6px; border-radius: 6px; }\n\
+         popovermenu .menu-editor-row checkbutton check,\n\
+         popover.menu .menu-editor-row checkbutton check {\n\
+             min-width: 14px; min-height: 14px; margin: 0;\n\
+             border: 1px solid alpha(currentColor, 0.5);\n\
+             border-radius: 4px; background-color: transparent;\n\
+         }\n\
+         popovermenu .menu-editor-row checkbutton check:checked,\n\
+         popover.menu .menu-editor-row checkbutton check:checked {\n\
+             background-color: @accent_bg_color; border-color: @accent_bg_color;\n\
+             color: @accent_fg_color;\n\
+         }",
     );
     if let Some(display) = gtk4::gdk::Display::default() {
         gtk4::style_context_add_provider_for_display(

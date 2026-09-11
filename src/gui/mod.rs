@@ -473,6 +473,7 @@ pub fn build_ui(app: &adw::Application) {
         let ignore_donate = ignore_donate.clone();
         header.pack_start(&MainMenuBar::build(
             &window,
+            download_limits.clone(),
             {
                 let settings = Rc::clone(&settings);
                 let tab_view = tab_view.clone();

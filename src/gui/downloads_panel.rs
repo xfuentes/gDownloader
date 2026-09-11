@@ -1558,17 +1558,16 @@ impl DownloadsPanel {
         settings_btn.set_popover(Some(&settings_popover));
         bottom_bar.append(&settings_btn);
 
-        // Chunks/parallel downloads/parallel per host: the shared
-        // `DownloadLimitsCache`, since Settings > General shows and edits
-        // these same values — a single cached source of truth instead of
-        // each page independently polling JDownloader (which never
-        // changes these on its own). `refresh_limits` re-reads the cache
-        // (free once loaded — no network) on every popover open, so this
-        // menu can't go stale relative to a change made in Settings >
-        // General while this popover stays closed.
+        // Chunks/parallel downloads/parallel per host/speed limit: the
+        // shared `DownloadLimitsCache`, since Settings > General and the
+        // main menu bar's Settings menu show and edit these same values —
+        // a single cached source of truth instead of each surface
+        // independently polling JDownloader. `subscribe` both applies the
+        // current values now (or as soon as they're first loaded) *and*
+        // keeps re-applying them live on every future change made from any
+        // other surface, even while this popover stays open.
         let loading_limits = Rc::new(Cell::new(true));
-        let refresh_limits: Rc<dyn Fn()> = {
-            let download_limits = download_limits.clone();
+        download_limits.subscribe({
             let loading_limits = loading_limits.clone();
             let chunks_spin = chunks_spin.clone();
             let parallel_spin = parallel_spin.clone();
@@ -1576,36 +1575,28 @@ impl DownloadsPanel {
             let per_host_spin = per_host_spin.clone();
             let per_host_content = per_host_content.clone();
             let per_host_icon = per_host_icon.clone();
-            Rc::new(move || {
+            let speed_check = speed_check.clone();
+            let speed_spin = speed_spin.clone();
+            let speed_content = speed_content.clone();
+            let speed_icon = speed_icon.clone();
+            move |limits: DownloadLimits| {
                 loading_limits.set(true);
-                download_limits.read({
-                    let loading_limits = loading_limits.clone();
-                    let chunks_spin = chunks_spin.clone();
-                    let parallel_spin = parallel_spin.clone();
-                    let per_host_check = per_host_check.clone();
-                    let per_host_spin = per_host_spin.clone();
-                    let per_host_content = per_host_content.clone();
-                    let per_host_icon = per_host_icon.clone();
-                    move |limits: DownloadLimits| {
-                        chunks_spin.set_value(limits.max_chunks as f64);
-                        parallel_spin.set_value(limits.max_simultaneous as f64);
-                        per_host_check.set_active(limits.max_simultaneous_per_host_enabled);
-                        per_host_spin.set_value(limits.max_simultaneous_per_host as f64);
-                        per_host_spin.set_sensitive(limits.max_simultaneous_per_host_enabled);
-                        set_row_enabled(
-                            &per_host_content,
-                            &per_host_icon,
-                            limits.max_simultaneous_per_host_enabled,
-                        );
-                        loading_limits.set(false);
-                    }
-                });
-            })
-        };
-        refresh_limits();
-        settings_popover.connect_show({
-            let refresh_limits = refresh_limits.clone();
-            move |_| refresh_limits()
+                chunks_spin.set_value(limits.max_chunks as f64);
+                parallel_spin.set_value(limits.max_simultaneous as f64);
+                per_host_check.set_active(limits.max_simultaneous_per_host_enabled);
+                per_host_spin.set_value(limits.max_simultaneous_per_host as f64);
+                per_host_spin.set_sensitive(limits.max_simultaneous_per_host_enabled);
+                set_row_enabled(
+                    &per_host_content,
+                    &per_host_icon,
+                    limits.max_simultaneous_per_host_enabled,
+                );
+                speed_check.set_active(limits.speed_limit_enabled);
+                speed_spin.set_value((limits.speed_limit / 1024) as f64);
+                speed_spin.set_sensitive(limits.speed_limit_enabled);
+                set_row_enabled(&speed_content, &speed_icon, limits.speed_limit_enabled);
+                loading_limits.set(false);
+            }
         });
 
         chunks_spin.connect_value_changed({
@@ -1658,18 +1649,42 @@ impl DownloadsPanel {
             }
         });
 
-        // Speed limit and Properties/Overview panel visibility: not shown
-        // anywhere else, so a plain one-time load is enough.
+        speed_check.connect_toggled({
+            let download_limits = download_limits.clone();
+            let loading_limits = loading_limits.clone();
+            let speed_spin = speed_spin.clone();
+            let speed_content = speed_content.clone();
+            let speed_icon = speed_icon.clone();
+            move |btn| {
+                let value = btn.is_active();
+                speed_spin.set_sensitive(value);
+                set_row_enabled(&speed_content, &speed_icon, value);
+                if loading_limits.get() {
+                    return;
+                }
+                download_limits.update(|limits| limits.speed_limit_enabled = value);
+            }
+        });
+        speed_spin.connect_value_changed({
+            let download_limits = download_limits.clone();
+            let loading_limits = loading_limits.clone();
+            move |spin| {
+                if loading_limits.get() {
+                    return;
+                }
+                let value_bytes = (spin.value() as i32).saturating_mul(1024);
+                download_limits.update(|limits| limits.speed_limit = value_bytes);
+            }
+        });
+
+        // Properties/Overview panel visibility: not shown anywhere else, so
+        // a plain one-time load is enough.
         let loading_settings = Rc::new(Cell::new(true));
-        let general_settings = GeneralSettings::new(api.clone());
         crate::gui::spawn::api_call(
             {
-                let general_settings = general_settings.clone();
                 let gui_settings = gui_settings.clone();
                 move || {
                     (
-                        general_settings.get_download_speed_limit_enabled().unwrap_or(false),
-                        general_settings.get_download_speed_limit().unwrap_or(50 * 1024),
                         gui_settings.get_flag("DownloadsTabPropertiesPanelVisible", true).unwrap_or(true),
                         gui_settings.get_flag("DownloadTabOverviewVisible", true).unwrap_or(true),
                     )
@@ -1677,19 +1692,11 @@ impl DownloadsPanel {
             },
             {
                 let loading_settings = loading_settings.clone();
-                let speed_check = speed_check.clone();
-                let speed_spin = speed_spin.clone();
-                let speed_content = speed_content.clone();
-                let speed_icon = speed_icon.clone();
                 let properties_check = properties_check.clone();
                 let overview_check = overview_check.clone();
                 let properties = properties.clone();
                 let overview = overview.clone();
-                move |(speed_enabled, speed_bytes, props_visible, overview_visible)| {
-                    speed_check.set_active(speed_enabled);
-                    speed_spin.set_value((speed_bytes / 1024) as f64);
-                    speed_spin.set_sensitive(speed_enabled);
-                    set_row_enabled(&speed_content, &speed_icon, speed_enabled);
+                move |(props_visible, overview_visible)| {
                     properties_check.set_active(props_visible);
                     overview_check.set_active(overview_visible);
                     properties.widget.set_visible(props_visible);
@@ -1698,39 +1705,6 @@ impl DownloadsPanel {
                 }
             },
         );
-        speed_check.connect_toggled({
-            let general_settings = general_settings.clone();
-            let loading_settings = loading_settings.clone();
-            let speed_spin = speed_spin.clone();
-            let speed_content = speed_content.clone();
-            let speed_icon = speed_icon.clone();
-            move |btn| {
-                let value = btn.is_active();
-                speed_spin.set_sensitive(value);
-                set_row_enabled(&speed_content, &speed_icon, value);
-                if loading_settings.get() {
-                    return;
-                }
-                let general_settings = general_settings.clone();
-                crate::gui::spawn::api_fire(move || {
-                    let _ = general_settings.set_download_speed_limit_enabled(value);
-                });
-            }
-        });
-        speed_spin.connect_value_changed({
-            let general_settings = general_settings.clone();
-            let loading_settings = loading_settings.clone();
-            move |spin| {
-                if loading_settings.get() {
-                    return;
-                }
-                let value_bytes = (spin.value() as i32).saturating_mul(1024);
-                let general_settings = general_settings.clone();
-                crate::gui::spawn::api_fire(move || {
-                    let _ = general_settings.set_download_speed_limit(value_bytes);
-                });
-            }
-        });
         properties_check.connect_toggled({
             let gui_settings = gui_settings.clone();
             let loading_settings = loading_settings.clone();

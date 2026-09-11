@@ -5,6 +5,15 @@ All notable changes to gDownloader are documented in this file.
 ## [Unreleased]
 
 ### Added
+- Main menu bar's Settings menu: "Max. chunks per download"/"Max.
+  simultaneous downloads"/"Max. sim. Downloads per Hoster"/"Speed limit"
+  are now working editors (previously inert placeholders), matching
+  JDownloader's own main toolbar Settings menu — the same editors already
+  used in the Downloads list's Quick Settings menu, sharing the same
+  cached state so a change in either place shows up in both. "My.
+  JDownloader" stays disabled — it's JDownloader's cloud pairing/remote
+  access feature (my.jdownloader.org), unrelated to the local RemoteAPI
+  gDownloader talks to, and out of scope here.
 - A new "Add Links" dialog, matching JDownloader's own "Analyse and Add
   Links" window — opened from the File menu's "Analyse Text with Links"
   entry and the Link Collector's "+" button / right-click "Add New Links"
@@ -107,14 +116,22 @@ All notable changes to gDownloader are documented in this file.
   Closing the window now waits (briefly) for every such pending write to
   actually complete first.
 - "Max. chunks per download"/"Max. simultaneous downloads"/"Max. sim.
-  Downloads per Hoster" were shown in two places (Settings > General, and
-  the Downloads list's own Quick Settings menu), each independently
-  polling JDownloader — changing one saved correctly, but the other kept
-  showing whatever value it had loaded at startup, even after being
-  reopened. Both now read and write a single shared, cached state, and
-  each re-syncs itself with it whenever shown (opening the Quick Settings
-  popover, or the Settings tab) — free once loaded, since JDownloader
-  never changes these on its own, so no repeated network polling either.
+  Downloads per Hoster"/"Speed limit" are shown in three places (Settings >
+  General, the Downloads list's own Quick Settings menu, and the main menu
+  bar's Settings menu), each independently polling JDownloader — changing
+  one saved correctly, but the others kept showing whatever value they'd
+  loaded at startup, even after being reopened. All three now read and
+  write a single shared, cached state and update live the moment any one
+  of them changes it, even while another stays open on screen — free once
+  loaded, since JDownloader never changes these on its own, so no repeated
+  network polling either.
+- Main menu bar's Settings menu: the new chunks/simultaneous/per-hoster/
+  speed-limit rows didn't highlight on hover and had no padding around
+  them, unlike every other row in the same menu; their per-hoster/speed
+  checkboxes also rendered as a bare checkmark instead of a proper boxed
+  checkbox, because GTK restyles checkboxes placed inside a menu bar's
+  popover context differently than a plain popover (like the Downloads
+  list's own Quick Settings menu, where they already looked right).
 - Link Collector context menu: "Start Downloads" on a selected package did
   nothing (it silently skipped package rows instead of expanding them to
   their child links, so it only ever worked on individually selected

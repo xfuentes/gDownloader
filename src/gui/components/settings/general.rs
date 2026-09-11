@@ -343,48 +343,29 @@ impl GeneralSettingsPage {
 
         // Chunks/parallel downloads/parallel per host: read from and
         // written through the shared `DownloadLimitsCache` (also shown in
-        // the Downloads list's own Quick Settings menu), rather than
-        // polling JDownloader independently — see `DownloadLimitsCache`.
-        // `refresh_limits` re-reads the cache (free once loaded) each time
-        // this page's tab is reopened, so it can't go stale relative to a
-        // change made in the Downloads list's Quick Settings menu while
-        // this tab stayed closed.
+        // the Downloads list's own Quick Settings menu and the main menu
+        // bar's Settings menu), rather than polling JDownloader
+        // independently — see `DownloadLimitsCache`. `subscribe` applies
+        // the current values now (or as soon as they're first loaded) and
+        // keeps re-applying them live on every future change made from any
+        // other surface, even while this page stays open/visible — no need
+        // to wait for the tab to be reopened.
         let loading_limits = Rc::new(Cell::new(true));
-        let refresh_limits: Rc<dyn Fn()> = {
-            let download_limits = download_limits.clone();
+        download_limits.subscribe({
             let loading_limits = loading_limits.clone();
             let max_sim_c = max_sim.clone();
             let per_host_switch_c = per_host_switch.clone();
             let per_host_spin_c = per_host_spin.clone();
             let max_chunks_c = max_chunks.clone();
-            Rc::new(move || {
+            move |limits: DownloadLimits| {
                 loading_limits.set(true);
-                download_limits.read({
-                    let loading_limits = loading_limits.clone();
-                    let max_sim_c = max_sim_c.clone();
-                    let per_host_switch_c = per_host_switch_c.clone();
-                    let per_host_spin_c = per_host_spin_c.clone();
-                    let max_chunks_c = max_chunks_c.clone();
-                    move |limits: DownloadLimits| {
-                        max_sim_c.set_value(limits.max_simultaneous as f64);
-                        per_host_switch_c.set_active(limits.max_simultaneous_per_host_enabled);
-                        per_host_spin_c.set_value(limits.max_simultaneous_per_host as f64);
-                        per_host_spin_c.set_sensitive(limits.max_simultaneous_per_host_enabled);
-                        max_chunks_c.set_value(limits.max_chunks as f64);
-                        loading_limits.set(false);
-                    }
-                });
-            })
-        };
-        refresh_limits();
-        // `map` fires every time this page's widget actually becomes
-        // visible again — unlike hooking `SettingsPanel::toggle()`, which
-        // only ran on the closed→open transition and missed the case
-        // where the tab was already open and the user just switched back
-        // to it via the tab strip directly.
-        scrolled.connect_map({
-            let refresh_limits = refresh_limits.clone();
-            move |_| refresh_limits()
+                max_sim_c.set_value(limits.max_simultaneous as f64);
+                per_host_switch_c.set_active(limits.max_simultaneous_per_host_enabled);
+                per_host_spin_c.set_value(limits.max_simultaneous_per_host as f64);
+                per_host_spin_c.set_sensitive(limits.max_simultaneous_per_host_enabled);
+                max_chunks_c.set_value(limits.max_chunks as f64);
+                loading_limits.set(false);
+            }
         });
 
         max_sim.connect_value_changed({

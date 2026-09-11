@@ -3,6 +3,7 @@ use std::rc::Rc;
 use adw::prelude::*;
 use gtk4::gio;
 
+use crate::gui::download_limits::DownloadLimitsCache;
 use crate::gui::menus;
 
 pub struct MainMenuBar;
@@ -10,6 +11,7 @@ pub struct MainMenuBar;
 impl MainMenuBar {
     pub fn build(
         window: &adw::ApplicationWindow,
+        download_limits: DownloadLimitsCache,
         on_settings: Rc<dyn Fn()>,
         on_add_links: Rc<dyn Fn()>,
     ) -> gtk4::PopoverMenuBar {
@@ -39,7 +41,7 @@ impl MainMenuBar {
         window.insert_action_group("win", Some(&action_group));
 
         let (file_menu, file_children) = menus::file::build();
-        let (settings_menu, settings_children) = menus::settings::build();
+        let (settings_menu, settings_children) = menus::settings::build(download_limits);
         let (tools_menu, tools_children) = menus::tools::build();
         let (help_menu, help_children) = menus::help::build();
 
