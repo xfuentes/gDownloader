@@ -2,7 +2,7 @@
 
 All notable changes to gDownloader are documented in this file.
 
-## [Unreleased]
+## [0.3.0] - 2026-09-14
 
 ### Added
 - Main menu bar's Settings menu: "Max. chunks per download"/"Max.

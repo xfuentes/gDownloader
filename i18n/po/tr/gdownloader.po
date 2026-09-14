@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-09 13:26+0000\n"
+"POT-Creation-Date: 2026-09-11 17:41+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -25,7 +25,7 @@ msgstr "Hata: {}"
 msgid "JDownloader did not respond in time"
 msgstr "JDownloader zamanında yanıt vermedi"
 
-#: src/gui/overview_panel.rs:114 src/gui/properties_panel.rs:201
+#: src/gui/overview_panel.rs:114 src/gui/properties_panel.rs:218
 msgid "Choose visible fields"
 msgstr "Görünür alanları seçin"
 
@@ -91,11 +91,11 @@ msgstr "Barındırıcı:"
 msgid "Archive:"
 msgstr "Arşiv:"
 
-#: src/gui/pending_jd_dialogs.rs:600 src/gui/components/settings/general.rs:205
+#: src/gui/pending_jd_dialogs.rs:600 src/gui/components/settings/general.rs:193
 msgid "Skip file"
 msgstr "Dosyayı atla"
 
-#: src/gui/pending_jd_dialogs.rs:601 src/gui/components/settings/general.rs:204
+#: src/gui/pending_jd_dialogs.rs:601 src/gui/components/settings/general.rs:192
 msgid "Overwrite existing file"
 msgstr "Mevcut dosyanın üzerine yaz"
 
@@ -120,12 +120,14 @@ msgstr "Bu arşiv için tekrar gösterme"
 msgid "OK"
 msgstr "Tamam"
 
-#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.2.0)  #-#-#-#-#
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.3.0)  #-#-#-#-#
 #. Buttons
-#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:1564
-#: src/gui/downloads_panel.rs:1755 src/gui/dialogs/account_add_dialog.rs:114
+#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2197
+#: src/gui/link_grabber_panel.rs:2390 src/gui/downloads_panel.rs:2335
+#: src/gui/dialogs/account_add_dialog.rs:114
+#: src/gui/dialogs/add_links_dialog.rs:264
 #: src/gui/dialogs/archive_password_dialog.rs:33
-#: src/gui/dialogs/packagizer_rule_dialog.rs:443
+#: src/gui/dialogs/packagizer_rule_dialog.rs:444
 #: src/gui/dialogs/script_edit_dialog.rs:119 src/gui/donate.rs:34
 msgid "Cancel"
 msgstr "İptal"
@@ -148,367 +150,521 @@ msgstr[1] "{n} bağlantı yakalandı"
 msgid "Show"
 msgstr "Göster"
 
-#: src/gui/settings_panel.rs:81 src/gui/settings_panel.rs:102
+#: src/gui/settings_panel.rs:87 src/gui/settings_panel.rs:108
 msgid "General"
 msgstr "Genel"
 
-#: src/gui/settings_panel.rs:84 src/gui/settings_panel.rs:105
+#: src/gui/settings_panel.rs:90 src/gui/settings_panel.rs:111
 #: src/gui/components/settings/account_manager.rs:43
 msgid "Account Manager"
 msgstr "Hesap Yöneticisi"
 
-#: src/gui/settings_panel.rs:88 src/gui/settings_panel.rs:109
+#: src/gui/settings_panel.rs:94 src/gui/settings_panel.rs:115
 #: src/gui/components/settings/package_manager.rs:54
 msgid "Package Manager"
 msgstr "Paket Yöneticisi"
 
-#: src/gui/settings_panel.rs:92 src/gui/settings_panel.rs:113
-#: src/gui/components/settings/extension_manager.rs:171
+#: src/gui/settings_panel.rs:98 src/gui/settings_panel.rs:119
+#: src/gui/components/settings/extension_manager.rs:172
 msgid "Extension Manager"
 msgstr "Uzantı Yöneticisi"
 
-#: src/gui/settings_panel.rs:94 src/gui/settings_panel.rs:99
+#: src/gui/settings_panel.rs:100 src/gui/settings_panel.rs:105
 #: src/gui/components/settings/scripts.rs:84
 msgid "Scripts"
 msgstr "Betikler"
 
-#: src/gui/settings_panel.rs:206 src/gui/settings_panel.rs:257
-#: src/gui/settings_panel.rs:272 src/gui/main_menu_bar.rs:37
-#: src/gui/menus/settings.rs:10 src/gui/menus/settings.rs:46
+#: src/gui/settings_panel.rs:212 src/gui/settings_panel.rs:263
+#: src/gui/settings_panel.rs:278 src/gui/main_menu_bar.rs:50
+#: src/gui/menus/settings.rs:15 src/gui/menus/settings.rs:242
 #: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: src/gui/link_grabber_panel.rs:135 src/gui/downloads_panel.rs:180
+#: src/gui/link_grabber_panel.rs:145 src/gui/downloads_panel.rs:198
 msgid "Packages"
 msgstr "Paketler"
 
-#: src/gui/link_grabber_panel.rs:141 src/gui/downloads_panel.rs:186
+#: src/gui/link_grabber_panel.rs:151 src/gui/downloads_panel.rs:204
 msgid "Links"
 msgstr "Bağlantılar"
 
-#: src/gui/link_grabber_panel.rs:147 src/gui/link_grabber_panel.rs:598
-#: src/gui/link_grabber_panel.rs:603 src/gui/downloads_panel.rs:192
-#: src/gui/downloads_panel.rs:634 src/gui/downloads_panel.rs:640
+#: src/gui/link_grabber_panel.rs:157 src/gui/link_grabber_panel.rs:608
+#: src/gui/link_grabber_panel.rs:613 src/gui/downloads_panel.rs:210
+#: src/gui/downloads_panel.rs:737 src/gui/downloads_panel.rs:740
 msgid "Size"
 msgstr "Boyut"
 
-#: src/gui/link_grabber_panel.rs:153 src/gui/link_grabber_panel.rs:1772
+#: src/gui/link_grabber_panel.rs:163 src/gui/link_grabber_panel.rs:2607
 msgid "Online"
 msgstr "Çevrimiçi"
 
-#: src/gui/link_grabber_panel.rs:159 src/gui/link_grabber_panel.rs:669
-#: src/gui/link_grabber_panel.rs:671 src/gui/downloads_panel.rs:648
-#: src/gui/downloads_panel.rs:650 src/gui/components/account_table.rs:182
+#: src/gui/link_grabber_panel.rs:169 src/gui/link_grabber_panel.rs:679
+#: src/gui/link_grabber_panel.rs:681 src/gui/downloads_panel.rs:749
+#: src/gui/downloads_panel.rs:751 src/gui/downloads_panel.rs:1351
+#: src/gui/components/account_table.rs:182
 msgid "Hoster"
 msgstr "Sunucu"
 
-#: src/gui/link_grabber_panel.rs:165 src/gui/link_grabber_panel.rs:1776
+#: src/gui/link_grabber_panel.rs:175 src/gui/link_grabber_panel.rs:2611
 msgid "Offline"
 msgstr "Çevrimdışı"
 
-#: src/gui/link_grabber_panel.rs:171 src/gui/link_grabber_panel.rs:1784
+#: src/gui/link_grabber_panel.rs:181 src/gui/link_grabber_panel.rs:2619
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
-#: src/gui/link_grabber_panel.rs:362 src/gui/main_menu_bar.rs:36
+#: src/gui/link_grabber_panel.rs:372 src/gui/main_menu_bar.rs:49
 msgid "File"
 msgstr "Dosya"
 
-#: src/gui/link_grabber_panel.rs:575 src/gui/link_grabber_panel.rs:577
+#: src/gui/link_grabber_panel.rs:585 src/gui/link_grabber_panel.rs:587
 msgid "Variant"
 msgstr "Varyant"
 
-#: src/gui/link_grabber_panel.rs:585 src/gui/link_grabber_panel.rs:590
-#: src/gui/downloads_panel.rs:845 src/gui/downloads_panel.rs:851
+#: src/gui/link_grabber_panel.rs:595 src/gui/link_grabber_panel.rs:600
+#: src/gui/downloads_panel.rs:945 src/gui/downloads_panel.rs:951
 msgid "Save To"
 msgstr "Kaydetme Konumu"
 
-#: src/gui/link_grabber_panel.rs:678 src/gui/link_grabber_panel.rs:682
+#: src/gui/link_grabber_panel.rs:688 src/gui/link_grabber_panel.rs:692
 msgid "Availability"
 msgstr "Kullanılabilirlik"
 
-#: src/gui/link_grabber_panel.rs:707 src/gui/downloads_panel.rs:890
+#: src/gui/link_grabber_panel.rs:717 src/gui/downloads_panel.rs:990
 msgid "Choose visible columns"
 msgstr "Görünür sütunları seçin"
 
-#: src/gui/link_grabber_panel.rs:902 src/gui/link_grabber_panel.rs:1077
-#: src/gui/downloads_panel.rs:1010 src/gui/downloads_panel.rs:1148
-#: src/gui/components/account_table.rs:248
+#: src/gui/link_grabber_panel.rs:912 src/gui/link_grabber_panel.rs:1536
+#: src/gui/downloads_panel.rs:1110 src/gui/components/account_table.rs:248
 msgid "Overview"
 msgstr "Genel Bakış"
 
-#: src/gui/link_grabber_panel.rs:937 src/gui/downloads_panel.rs:1052
+#: src/gui/link_grabber_panel.rs:948 src/gui/downloads_panel.rs:1153
+#, fuzzy
+msgid "Add Links"
+msgstr "Bağlantı ekle"
+
+#: src/gui/link_grabber_panel.rs:950 src/gui/downloads_panel.rs:1155
 msgid "Add links to linkgrabber"
 msgstr "Bağlantıları bağlantı toplayıcıya ekle"
 
-#: src/gui/link_grabber_panel.rs:946 src/gui/downloads_panel.rs:1061
-msgid "Add links"
-msgstr "Bağlantı ekle"
+#: src/gui/link_grabber_panel.rs:963 src/gui/downloads_panel.rs:1168
+#: src/gui/menus/file.rs:35 src/gui/menus/file.rs:71
+msgid "Analyse Text with Links"
+msgstr "Bağlantılı Metni Analiz Et"
 
-#: src/gui/link_grabber_panel.rs:946 src/gui/downloads_panel.rs:1061
-msgid "Add container"
-msgstr "Konteyner ekle"
+#: src/gui/link_grabber_panel.rs:977 src/gui/downloads_panel.rs:1182
+#: src/gui/menus/file.rs:40 src/gui/menus/file.rs:80
+msgid "Add Container"
+msgstr "Konteyner Ekle"
 
-#: src/gui/link_grabber_panel.rs:946 src/gui/downloads_panel.rs:1061
-msgid "Paste links"
+#: src/gui/link_grabber_panel.rs:986 src/gui/downloads_panel.rs:1191
+msgid "Loading link container files isn't supported yet."
+msgstr "Bağlantı kapsayıcı dosyalarının yüklenmesi henüz desteklenmiyor."
+
+#: src/gui/link_grabber_panel.rs:993 src/gui/downloads_panel.rs:1198
+#, fuzzy
+msgid "Paste Links"
 msgstr "Bağlantıları yapıştır"
 
-#: src/gui/link_grabber_panel.rs:969
+#: src/gui/link_grabber_panel.rs:1005 src/gui/downloads_panel.rs:1210
+msgid "Paste Links (Deep Analyse)"
+msgstr "Bağlantıları yapıştır (derin analiz)"
+
+#: src/gui/link_grabber_panel.rs:1091
 msgid "Clear linkgrabber"
 msgstr "Bağlantı toplayıcıyı temizle"
 
-#: src/gui/link_grabber_panel.rs:978 src/gui/mod.rs:272 src/gui/mod.rs:296
-#: src/gui/mod.rs:363 src/gui/mod.rs:379
+#: src/gui/link_grabber_panel.rs:1108
+msgid "Clear {n} link from the Link Collector"
+msgid_plural "Clear {n} links from the Link Collector"
+msgstr[0] "Bağlantı toplayıcıdan {n} bağlantıyı kaldır"
+msgstr[1] "Bağlantı toplayıcıdan {n} bağlantıyı kaldır"
+
+#: src/gui/link_grabber_panel.rs:1133 src/gui/mod.rs:293 src/gui/mod.rs:327
+#: src/gui/mod.rs:394 src/gui/mod.rs:410
 msgid "Delete"
 msgstr "Sil"
 
-#: src/gui/link_grabber_panel.rs:988 src/gui/downloads_panel.rs:1098
+#: src/gui/link_grabber_panel.rs:1145 src/gui/downloads_panel.rs:1308
 msgid "Delete disabled"
 msgstr "Devre dışıları sil"
 
-#: src/gui/link_grabber_panel.rs:989 src/gui/downloads_panel.rs:1101
+#: src/gui/link_grabber_panel.rs:1154 src/gui/downloads_panel.rs:1311
 msgid "Delete offline"
 msgstr "Çevrimdışıları sil"
 
-#: src/gui/link_grabber_panel.rs:990
+#: src/gui/link_grabber_panel.rs:1163
 msgid "Remove incomplete archives"
 msgstr "Eksik arşivleri kaldır"
 
-#: src/gui/link_grabber_panel.rs:991
+#: src/gui/link_grabber_panel.rs:1176
 msgid "Clear filtered links"
 msgstr "Filtrelenmiş bağlantıları temizle"
 
-#: src/gui/link_grabber_panel.rs:1012 src/gui/downloads_panel.rs:1125
+#: src/gui/link_grabber_panel.rs:1183 src/gui/link_grabber_panel.rs:1370
+msgid ""
+"Not available: JDownloader doesn't expose its filtered-links list over the "
+"RemoteAPI."
+msgstr ""
+
+#: src/gui/link_grabber_panel.rs:1216
+#, fuzzy
+msgid "Delete {n} disabled link"
+msgid_plural "Delete {n} disabled links"
+msgstr[0] "Devre dışıları sil"
+msgstr[1] "Devre dışıları sil"
+
+#: src/gui/link_grabber_panel.rs:1249
+#, fuzzy
+msgid "Delete {n} offline link"
+msgid_plural "Delete {n} offline links"
+msgstr[0] "Çevrimdışıları sil"
+msgstr[1] "Çevrimdışıları sil"
+
+#: src/gui/link_grabber_panel.rs:1331
+#, fuzzy
+msgid "Remove {n} link belonging to an incomplete archive"
+msgid_plural "Remove {n} links belonging to incomplete archives"
+msgstr[0] "Eksik arşivleri kaldır"
+msgstr[1] "Eksik arşivleri kaldır"
+
+#: src/gui/link_grabber_panel.rs:1357
 msgid "Filter"
 msgstr "Filtre"
 
-#: src/gui/link_grabber_panel.rs:1021
-msgid "Add filtered stuff"
-msgstr "Filtrelenmiş öğeleri ekle"
+#: src/gui/link_grabber_panel.rs:1382 src/gui/link_grabber_panel.rs:1396
+#, fuzzy
+msgid "Start all Downloads"
+msgstr "Tüm İndirmeleri Başlat"
 
-#: src/gui/link_grabber_panel.rs:1031
-msgid "Add to download list"
+#: src/gui/link_grabber_panel.rs:1405
+#, fuzzy
+msgid "Start selected Downloads"
+msgstr "Tüm İndirmeleri Başlat"
+
+#: src/gui/link_grabber_panel.rs:1414
+#, fuzzy
+msgid "Add all to Download List"
 msgstr "İndirme listesine ekle"
 
-#: src/gui/link_grabber_panel.rs:1043
-msgid "Add and start all"
-msgstr "Tümünü ekle ve başlat"
+#: src/gui/link_grabber_panel.rs:1423
+#, fuzzy
+msgid "Add selected to Download List"
+msgstr "İndirme listesine ekle"
 
-#: src/gui/link_grabber_panel.rs:1044
-msgid "Add and start selected"
-msgstr "Seçilenleri ekle ve başlat"
-
-#: src/gui/link_grabber_panel.rs:1045
-msgid "Add all"
-msgstr "Tümünü ekle"
-
-#: src/gui/link_grabber_panel.rs:1046
-msgid "Add selected"
-msgstr "Seçilenleri ekle"
-
-#: src/gui/link_grabber_panel.rs:1072
+#: src/gui/link_grabber_panel.rs:1525
 msgid "Add at top"
 msgstr "Başa ekle"
 
-#: src/gui/link_grabber_panel.rs:1073
+#: src/gui/link_grabber_panel.rs:1527
 msgid "Auto confirm"
 msgstr "Otomatik onayla"
 
-#: src/gui/link_grabber_panel.rs:1074
+#: src/gui/link_grabber_panel.rs:1529
 msgid "Auto start"
 msgstr "Otomatik başlat"
 
-#: src/gui/link_grabber_panel.rs:1075
+#: src/gui/link_grabber_panel.rs:1531
 msgid "Link filter"
 msgstr "Bağlantı filtresi"
 
-#: src/gui/link_grabber_panel.rs:1076 src/gui/downloads_panel.rs:1147
+#: src/gui/link_grabber_panel.rs:1534
 msgid "Properties"
 msgstr "Özellikler"
 
-#: src/gui/link_grabber_panel.rs:1078
+#: src/gui/link_grabber_panel.rs:1538
 msgid "Sidebar"
 msgstr "Kenar çubuğu"
 
-#: src/gui/link_grabber_panel.rs:1079 src/gui/downloads_panel.rs:1149
-msgid "Bottom bar manager"
-msgstr "Alt çubuk yöneticisi"
-
-#: src/gui/link_grabber_panel.rs:1499 src/gui/downloads_panel.rs:1666
+#: src/gui/link_grabber_panel.rs:2132 src/gui/link_grabber_panel.rs:2330
+#: src/gui/downloads_panel.rs:2246
 msgid "Are you sure?"
 msgstr "Emin misiniz?"
 
-#: src/gui/link_grabber_panel.rs:1521 src/gui/downloads_panel.rs:1688
+#: src/gui/link_grabber_panel.rs:2154 src/gui/link_grabber_panel.rs:2352
+#: src/gui/downloads_panel.rs:2268
 msgid "Do you really want to perform this clean up action:"
 msgstr "Bu temizleme işlemini gerçekleştirmek istediğinizden emin misiniz:"
 
-#: src/gui/link_grabber_panel.rs:1522
+#: src/gui/link_grabber_panel.rs:2155 src/gui/link_grabber_panel.rs:2353
 msgid "Delete Selected Links?"
 msgstr "Seçilen bağlantılar silinsin mi?"
 
-#: src/gui/link_grabber_panel.rs:1530 src/gui/downloads_panel.rs:1697
+#: src/gui/link_grabber_panel.rs:2163 src/gui/link_grabber_panel.rs:2361
+#: src/gui/downloads_panel.rs:2277
 msgid "Tasks to do:"
 msgstr "Yapılacak işlemler:"
 
-#: src/gui/link_grabber_panel.rs:1539 src/gui/downloads_panel.rs:1706
+#: src/gui/link_grabber_panel.rs:2172 src/gui/downloads_panel.rs:2286
 msgid "Delete selected link"
 msgid_plural "Delete selected links"
 msgstr[0] "Seçilen bağlantıyı sil"
 msgstr[1] "Seçilen bağlantıları sil"
 
-#: src/gui/link_grabber_panel.rs:1540 src/gui/downloads_panel.rs:1707
+#: src/gui/link_grabber_panel.rs:2173 src/gui/downloads_panel.rs:2287
 msgid "{n} link remaining"
 msgid_plural "{n} links remaining"
 msgstr[0] "{n} bağlantı kaldı"
 msgstr[1] "{n} bağlantı kaldı"
 
-#: src/gui/link_grabber_panel.rs:1558 src/gui/downloads_panel.rs:1749
+#: src/gui/link_grabber_panel.rs:2191 src/gui/link_grabber_panel.rs:2384
+#: src/gui/downloads_panel.rs:2329
 msgid "Don't show this again"
 msgstr "Bunu bir daha gösterme"
 
-#: src/gui/link_grabber_panel.rs:1565 src/gui/downloads_panel.rs:1756
+#. #-#-#-#-#  mod.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. Bottom row: the "overwrites packagizer rules" checkbox on the
+#. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
+#. visually joined via GTK's "linked" segmented style) on the right.
+#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. Bottom row: the "overwrites packagizer rules" checkbox on the
+#. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
+#. visually joined via GTK's "linked" segmented style) on the right.
+#: src/gui/link_grabber_panel.rs:2198 src/gui/link_grabber_panel.rs:2391
+#: src/gui/downloads_panel.rs:2336 src/gui/dialogs/add_links_dialog.rs:232
 #: src/gui/donate.rs:38
 msgid "Continue"
 msgstr "Devam"
 
-#: src/gui/link_grabber_panel.rs:1780
+#: src/gui/link_grabber_panel.rs:2615
 msgid "Temporarily Unknown"
 msgstr "Geçici olarak bilinmiyor"
 
-#: src/gui/downloads_panel.rs:198 src/gui/downloads_panel.rs:800
-#: src/gui/downloads_panel.rs:806
+#: src/gui/downloads_panel.rs:216 src/gui/downloads_panel.rs:900
+#: src/gui/downloads_panel.rs:906
 msgid "Speed"
 msgstr "Hız"
 
-#: src/gui/downloads_panel.rs:204 src/gui/downloads_panel.rs:830
-#: src/gui/downloads_panel.rs:836
+#: src/gui/downloads_panel.rs:222 src/gui/downloads_panel.rs:930
+#: src/gui/downloads_panel.rs:936
 msgid "Loaded"
 msgstr "Yüklenen"
 
-#: src/gui/downloads_panel.rs:210
+#: src/gui/downloads_panel.rs:228
 msgid "Remaining"
 msgstr "Kalan"
 
-#: src/gui/downloads_panel.rs:216 src/gui/downloads_panel.rs:815
-#: src/gui/downloads_panel.rs:821
+#: src/gui/downloads_panel.rs:234 src/gui/downloads_panel.rs:915
+#: src/gui/downloads_panel.rs:921
 msgid "ETA"
 msgstr "Tahmini süre"
 
-#: src/gui/downloads_panel.rs:222
+#: src/gui/downloads_panel.rs:240
 msgid "Running downloads"
 msgstr "Devam eden indirmeler"
 
-#: src/gui/downloads_panel.rs:228
+#: src/gui/downloads_panel.rs:246
 msgid "Finished downloads"
 msgstr "Tamamlanan indirmeler"
 
-#: src/gui/downloads_panel.rs:234
+#: src/gui/downloads_panel.rs:252
 msgid "Skipped downloads"
 msgstr "Atlanan indirmeler"
 
-#: src/gui/downloads_panel.rs:240
+#: src/gui/downloads_panel.rs:258
 msgid "Failed downloads"
 msgstr "Başarısız indirmeler"
 
-#: src/gui/downloads_panel.rs:552
+#: src/gui/downloads_panel.rs:579
 #: src/gui/components/settings/package_manager.rs:115
 #: src/gui/components/settings/scripts.rs:166
 #: src/gui/dialogs/script_edit_dialog.rs:41
 msgid "Name"
 msgstr "Ad"
 
-#: src/gui/downloads_panel.rs:569 src/gui/downloads_panel.rs:624
+#: src/gui/downloads_panel.rs:596 src/gui/downloads_panel.rs:657
 msgid "Progress"
 msgstr "İlerleme"
 
-#: src/gui/downloads_panel.rs:702 src/gui/downloads_panel.rs:705
+#: src/gui/downloads_panel.rs:802 src/gui/downloads_panel.rs:805
 msgid "Connection"
 msgstr "Bağlantı"
 
-#: src/gui/downloads_panel.rs:788 src/gui/downloads_panel.rs:791
-#: src/gui/components/account_table.rs:183
+#: src/gui/downloads_panel.rs:888 src/gui/downloads_panel.rs:891
+#: src/gui/downloads_panel.rs:1371 src/gui/components/account_table.rs:183
 msgid "Status"
 msgstr "Durum"
 
-#: src/gui/downloads_panel.rs:860 src/gui/downloads_panel.rs:866
+#: src/gui/downloads_panel.rs:960 src/gui/downloads_panel.rs:966
+#: src/gui/downloads_panel.rs:1361
 #: src/gui/dialogs/packagizer_rule_dialog.rs:243
-#: src/gui/dialogs/packagizer_rule_dialog.rs:385
-#: src/gui/properties_panel.rs:305
+#: src/gui/dialogs/packagizer_rule_dialog.rs:386
+#: src/gui/properties_panel.rs:324
 msgid "Comment"
 msgstr "Yorum"
 
-#: src/gui/downloads_panel.rs:1088
-msgid "Delete all"
-msgstr "Tümünü sil"
+#: src/gui/downloads_panel.rs:1300
+#, fuzzy
+msgid "Clear Downloadlist"
+msgstr "İndirmeleri Başlat"
 
-#: src/gui/downloads_panel.rs:1099
+#: src/gui/downloads_panel.rs:1309
 msgid "Delete failed"
 msgstr "Başarısızları sil"
 
-#: src/gui/downloads_panel.rs:1100
+#: src/gui/downloads_panel.rs:1310
 msgid "Delete finished"
 msgstr "Tamamlananları sil"
 
-#: src/gui/downloads_panel.rs:1143
-#: src/gui/dialogs/packagizer_rule_dialog.rs:391
-msgid "Chunks"
-msgstr "Parça"
+#: src/gui/downloads_panel.rs:1341
+#, fuzzy
+msgid "File Name"
+msgstr "Dosya adı"
 
-#: src/gui/downloads_panel.rs:1144
-msgid "Parallel downloads"
-msgstr "Paralel indirme"
+#: src/gui/downloads_panel.rs:1342
+msgid "Please enter the file name you are looking for..."
+msgstr "Aradığınız dosya adını girin..."
 
-#: src/gui/downloads_panel.rs:1145
-msgid "Parallel per host"
-msgstr "Sunucu başına paralel"
+#: src/gui/downloads_panel.rs:1346
+#, fuzzy
+msgid "File Path"
+msgstr "Dosya türü"
 
-#: src/gui/downloads_panel.rs:1146
-msgid "Speed limit"
+#: src/gui/downloads_panel.rs:1347
+msgid "Please enter the file path you are looking for..."
+msgstr "Aradığınız dosya yolunu girin..."
+
+#: src/gui/downloads_panel.rs:1352
+msgid "Please enter the domain you are looking for..."
+msgstr "Aradığınız alan adını girin..."
+
+#: src/gui/downloads_panel.rs:1356
+#, fuzzy
+msgid "Package Name"
+msgstr "Paket adı"
+
+#: src/gui/downloads_panel.rs:1357
+msgid "Please enter the package name you are looking for..."
+msgstr "Aradığınız paket adını girin..."
+
+#: src/gui/downloads_panel.rs:1362 src/gui/downloads_panel.rs:1367
+msgid "Please enter the comment you are looking for..."
+msgstr "Aradığınız yorumu girin..."
+
+#: src/gui/downloads_panel.rs:1366
+#, fuzzy
+msgid "Comment(Package)"
+msgstr "Yorum"
+
+#: src/gui/downloads_panel.rs:1372
+msgid "Please enter the Status you are looking for..."
+msgstr "Aradığınız durumu girin..."
+
+#: src/gui/downloads_panel.rs:1420
+#, fuzzy
+msgid "All Downloads"
+msgstr "Tüm İndirmeleri Başlat"
+
+#: src/gui/downloads_panel.rs:1421
+#, fuzzy
+msgid "Running Downloads"
+msgstr "Devam eden indirmeler"
+
+#: src/gui/downloads_panel.rs:1422
+#, fuzzy
+msgid "Failed Downloads"
+msgstr "Başarısız indirmeler"
+
+#: src/gui/downloads_panel.rs:1423
+#, fuzzy
+msgid "File exists"
+msgstr "Dosya zaten mevcut"
+
+#: src/gui/downloads_panel.rs:1424
+#, fuzzy
+msgid "Offline Downloads"
+msgstr "Tamamlanan indirmeler"
+
+#: src/gui/downloads_panel.rs:1425
+#, fuzzy
+msgid "Skipped Downloads"
+msgstr "Atlanan indirmeler"
+
+#: src/gui/downloads_panel.rs:1426
+#, fuzzy
+msgid "Successful Downloads"
+msgstr "İndirmeleri Başlat"
+
+#: src/gui/downloads_panel.rs:1427
+#, fuzzy
+msgid "Pending Downloads"
+msgstr "Devam eden indirmeler"
+
+#: src/gui/downloads_panel.rs:1476 src/gui/menus/settings.rs:28
+#: src/gui/menus/settings.rs:78
+#, fuzzy
+msgid "Max. chunks per download"
+msgstr "İndirme Başına Maks. Parça"
+
+#: src/gui/downloads_panel.rs:1491 src/gui/menus/settings.rs:33
+#: src/gui/menus/settings.rs:90
+#, fuzzy
+msgid "Max. simultaneous downloads"
+msgstr "Maks. Eşzamanlı İndirme"
+
+#: src/gui/downloads_panel.rs:1510 src/gui/menus/settings.rs:38
+#: src/gui/menus/settings.rs:103
+msgid "Max. sim. Downloads per Hoster"
+msgstr "Sunucu Başına Maks. Eşzamanlı İndirme"
+
+#: src/gui/downloads_panel.rs:1527 src/gui/menus/settings.rs:43
+#: src/gui/menus/settings.rs:118
+#, fuzzy
+msgid "Speed limit (KiB/s)"
 msgstr "Hız sınırı"
 
-#: src/gui/downloads_panel.rs:1309
+#: src/gui/downloads_panel.rs:1544
+msgid "Package or Link Properties"
+msgstr "Paket veya Bağlantı Özellikleri"
+
+#: src/gui/downloads_panel.rs:1547
+msgid "Overview Panel visible"
+msgstr "Genel Bakış Paneli görünür"
+
+#: src/gui/downloads_panel.rs:1882
 msgid "Downloads complete"
 msgstr "İndirmeler tamamlandı"
 
-#: src/gui/downloads_panel.rs:1310
+#: src/gui/downloads_panel.rs:1883
 msgid "One file downloaded successfully"
 msgid_plural "{n} files downloaded successfully"
 msgstr[0] "1 dosya başarıyla indirildi"
 msgstr[1] "{n} dosya başarıyla indirildi"
 
-#: src/gui/downloads_panel.rs:1689
+#: src/gui/downloads_panel.rs:2269
 msgid "Delete Selected Downloads?"
 msgstr "Seçilen indirmeler silinsin mi?"
 
-#: src/gui/downloads_panel.rs:1712
+#: src/gui/downloads_panel.rs:2292
 msgid "{n} file ({}) on disk"
 msgid_plural "{n} files ({}) on disk"
 msgstr[0] "{n} dosya ({}) diskte"
 msgstr[1] "{n} dosya ({}) diskte"
 
-#: src/gui/downloads_panel.rs:1725
+#: src/gui/downloads_panel.rs:2305
 msgid "Keep all downloaded files - just remove links from JDownloader"
-msgstr ""
+msgstr "Tüm indirilen dosyaları koru - yalnızca bağlantıları JDownloader'dan kaldır"
 "İndirilen tüm dosyaları koru - yalnızca bağlantıları JDownloader'dan kaldır"
 
-#: src/gui/downloads_panel.rs:1726
+#: src/gui/downloads_panel.rs:2306
 msgid "Move downloaded files to Trash & remove links from JDownloader"
-msgstr ""
+msgstr "İndirilen dosyaları Çöp Kutusuna taşı ve bağlantıları JDownloader'dan kaldır"
 "İndirilen dosyaları Çöp Kutusuna taşı ve bağlantıları JDownloader'dan kaldır"
 
-#: src/gui/downloads_panel.rs:1727
+#: src/gui/downloads_panel.rs:2307
 msgid ""
 "Delete downloaded files permanently from disk & remove links from JDownloader"
 msgstr ""
 "İndirilen dosyaları diskten kalıcı olarak sil ve bağlantıları "
 "JDownloader'dan kaldır"
 
-#: src/gui/main_menu_bar.rs:38
+#: src/gui/main_menu_bar.rs:51
 msgid "Tools"
 msgstr "Araçlar"
 
-#: src/gui/main_menu_bar.rs:39
+#: src/gui/main_menu_bar.rs:52
 msgid "Help"
 msgstr "Yardım"
 
@@ -520,23 +676,15 @@ msgstr "Tüm ayarları yedekle"
 msgid "Restore settings"
 msgstr "Ayarları geri yükle"
 
-#: src/gui/menus/file.rs:35 src/gui/menus/file.rs:69
-msgid "Analyse Text with Links"
-msgstr "Bağlantılı Metni Analiz Et"
-
-#: src/gui/menus/file.rs:40 src/gui/menus/file.rs:73
-msgid "Add Container"
-msgstr "Konteyner Ekle"
-
-#: src/gui/menus/file.rs:48 src/gui/menus/file.rs:77
+#: src/gui/menus/file.rs:48 src/gui/menus/file.rs:84
 msgid "Backup"
 msgstr "Yedekle"
 
-#: src/gui/menus/file.rs:56 src/gui/menus/file.rs:81
+#: src/gui/menus/file.rs:56 src/gui/menus/file.rs:88
 msgid "Restart"
 msgstr "Yeniden başlat"
 
-#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:204
+#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:92 src/gui/tray.rs:204
 msgid "Exit"
 msgstr "Çıkış"
 
@@ -564,37 +712,19 @@ msgstr "Katkıda Bulun"
 msgid "About JDownloader"
 msgstr "JDownloader Hakkında"
 
-#: src/gui/menus/settings.rs:15 src/gui/menus/settings.rs:50
+#: src/gui/menus/settings.rs:20 src/gui/menus/settings.rs:246
 msgid "My.JDownloader"
 msgstr "My.JDownloader"
 
-#: src/gui/menus/settings.rs:23 src/gui/menus/settings.rs:54
-#: src/gui/components/settings/general.rs:186
-msgid "Max. Chunks per Download"
-msgstr "İndirme Başına Maks. Parça"
-
-#: src/gui/menus/settings.rs:28 src/gui/menus/settings.rs:58
-#: src/gui/components/settings/general.rs:170
-msgid "Max. simultaneous Downloads"
-msgstr "Maks. Eşzamanlı İndirme"
-
-#: src/gui/menus/settings.rs:33 src/gui/menus/settings.rs:62
-msgid "Max. sim. Downloads per Hoster"
-msgstr "Sunucu Başına Maks. Eşzamanlı İndirme"
-
-#: src/gui/menus/settings.rs:38 src/gui/menus/settings.rs:66
-msgid "Speed Limit"
-msgstr "Hız Sınırı"
-
-#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:187
+#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:194
 msgid "Download"
 msgstr "İndirme"
 
-#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:191
+#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:198
 msgid "Link Collector"
 msgstr "Bağlantı Toplayıcı"
 
-#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:196
+#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:203
 msgid "Donate"
 msgstr "Bağış Yap"
 
@@ -658,7 +788,7 @@ msgstr "'Arşiv Dosyalarını Sil' etkinleştirildi"
 msgid "'Remove Links from Downloadlist' enabled"
 msgstr "'İndirme Listesinden Bağlantıları Kaldır' etkinleştirildi"
 
-#: src/gui/archive_menu.rs:433 src/gui/mod.rs:357
+#: src/gui/archive_menu.rs:433 src/gui/mod.rs:388
 msgid "Archive(s)"
 msgstr "Arşiv(ler)"
 
@@ -679,7 +809,7 @@ msgstr "Hesap sorunsuz"
 msgid "Unlimited"
 msgstr "Sınırsız"
 
-#. #-#-#-#-#  account_table.pot (gdownloader 0.2.0)  #-#-#-#-#
+#. #-#-#-#-#  account_table.pot (gdownloader 0.3.0)  #-#-#-#-#
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
@@ -688,7 +818,7 @@ msgid "Add"
 msgstr "Ekle"
 
 #: src/gui/components/account_table.rs:147
-#: src/gui/components/settings/extension_manager.rs:324
+#: src/gui/components/settings/extension_manager.rs:325
 #: src/gui/components/settings/package_manager.rs:84
 #: src/gui/components/settings/scripts.rs:128
 msgid "Remove"
@@ -699,7 +829,7 @@ msgid "Buy"
 msgstr "Satın Al"
 
 #: src/gui/components/account_table.rs:149
-#: src/gui/components/settings/extension_manager.rs:177
+#: src/gui/components/settings/extension_manager.rs:178
 msgid "Refresh"
 msgstr "Yenile"
 
@@ -732,46 +862,47 @@ msgstr "İndirme için hesap(lar)ı kullan"
 msgid "Enter and manage all your Premium/Gold/Platinum accounts."
 msgstr "Tüm Premium/Gold/Platinum hesaplarınızı girin ve yönetin."
 
-#: src/gui/components/settings/extension_manager.rs:172
+#: src/gui/components/settings/extension_manager.rs:173
 msgid "Enable, disable or install JDownloader extensions."
 msgstr ""
 "JDownloader uzantılarını etkinleştirin, devre dışı bırakın veya yükleyin."
 
-#: src/gui/components/settings/extension_manager.rs:193
+#: src/gui/components/settings/extension_manager.rs:194
 msgid "Loading extensions…"
 msgstr "Uzantılar yükleniyor…"
 
-#: src/gui/components/settings/extension_manager.rs:234
+#: src/gui/components/settings/extension_manager.rs:235
 msgid "No extensions found."
 msgstr "Uzantı bulunamadı."
 
-#: src/gui/components/settings/extension_manager.rs:337
+#: src/gui/components/settings/extension_manager.rs:338
 msgid "Removing extension…"
 msgstr "Uzantı kaldırılıyor…"
 
-#: src/gui/components/settings/extension_manager.rs:361
+#: src/gui/components/settings/extension_manager.rs:362
 msgid "This extension is built into JDownloader and cannot be removed."
 msgstr "Bu uzantı JDownloader'a yerleşiktir ve kaldırılamaz."
 
-#: src/gui/components/settings/extension_manager.rs:368
+#: src/gui/components/settings/extension_manager.rs:369
 msgid "Install"
 msgstr "Yükle"
 
-#: src/gui/components/settings/extension_manager.rs:379
+#: src/gui/components/settings/extension_manager.rs:380
 msgid "Installing extension…"
 msgstr "Uzantı yükleniyor…"
 
-#: src/gui/components/settings/general.rs:143
+#: src/gui/components/settings/general.rs:131
+#: src/gui/dialogs/add_links_dialog.rs:82
 #: src/gui/dialogs/packagizer_rule_dialog.rs:154
 msgid "Browse"
 msgstr "Gözat"
 
-#: src/gui/components/settings/general.rs:152
-#: src/gui/components/settings/general.rs:156
+#: src/gui/components/settings/general.rs:140
+#: src/gui/components/settings/general.rs:144
 msgid "Download Folder"
 msgstr "İndirme Klasörü"
 
-#: src/gui/components/settings/general.rs:158
+#: src/gui/components/settings/general.rs:146
 msgid ""
 "Set the default download path here. Changing default path here, affects only "
 "new downloads."
@@ -779,48 +910,56 @@ msgstr ""
 "Varsayılan indirme yolunu burada ayarlayın. Buradaki değişiklik yalnızca "
 "yeni indirmeleri etkiler."
 
-#: src/gui/components/settings/general.rs:178
+#: src/gui/components/settings/general.rs:160
+msgid "Max. simultaneous Downloads"
+msgstr "Maks. Eşzamanlı İndirme"
+
+#: src/gui/components/settings/general.rs:167
 msgid "Maximum of simultaneous downloads per host"
 msgstr "Sunucu başına maksimum eşzamanlı indirme sayısı"
 
-#: src/gui/components/settings/general.rs:195
+#: src/gui/components/settings/general.rs:174
+msgid "Max. Chunks per Download"
+msgstr "İndirme Başına Maks. Parça"
+
+#: src/gui/components/settings/general.rs:183
 msgid "Immediate"
 msgstr "Anında"
 
-#: src/gui/components/settings/general.rs:196
+#: src/gui/components/settings/general.rs:184
 msgid "At start"
 msgstr "Başlangıçta"
 
-#: src/gui/components/settings/general.rs:197
+#: src/gui/components/settings/general.rs:185
 msgid "Package ready"
 msgstr "Paket hazır"
 
-#: src/gui/components/settings/general.rs:198
-#: src/gui/components/settings/general.rs:229
+#: src/gui/components/settings/general.rs:186
+#: src/gui/components/settings/general.rs:217
 msgid "Never"
 msgstr "Asla"
 
-#: src/gui/components/settings/general.rs:200
+#: src/gui/components/settings/general.rs:188
 msgid "Remove finished downloads"
 msgstr "Tamamlanan indirmeleri kaldır"
 
-#: src/gui/components/settings/general.rs:206
+#: src/gui/components/settings/general.rs:194
 msgid "Auto-rename"
 msgstr "Otomatik yeniden adlandır"
 
-#: src/gui/components/settings/general.rs:207
+#: src/gui/components/settings/general.rs:195
 msgid "Ask for each file"
 msgstr "Her dosya için sor"
 
-#: src/gui/components/settings/general.rs:209
+#: src/gui/components/settings/general.rs:197
 msgid "If the file already exists"
 msgstr "Dosya zaten mevcutsa"
 
-#: src/gui/components/settings/general.rs:213
+#: src/gui/components/settings/general.rs:201
 msgid "Download Management"
 msgstr "İndirme Yönetimi"
 
-#: src/gui/components/settings/general.rs:215
+#: src/gui/components/settings/general.rs:203
 msgid ""
 "Connection limits, Download order, Priorities, ... Set up the Download "
 "controller details."
@@ -828,27 +967,27 @@ msgstr ""
 "Bağlantı sınırları, indirme sırası, öncelikler... İndirme denetleyicisinin "
 "ayrıntılarını yapılandırın."
 
-#: src/gui/components/settings/general.rs:227
+#: src/gui/components/settings/general.rs:215
 msgid "Always"
 msgstr "Her zaman"
 
-#: src/gui/components/settings/general.rs:228
+#: src/gui/components/settings/general.rs:216
 msgid "Only if downloads were running at last Session's end"
 msgstr "Yalnızca önceki oturumun sonunda indirmeler çalışıyorsa"
 
-#: src/gui/components/settings/general.rs:232
+#: src/gui/components/settings/general.rs:220
 msgid "Autostart downloads at application start"
 msgstr "Uygulama başlangıcında indirmeleri otomatik başlat"
 
-#: src/gui/components/settings/general.rs:243
+#: src/gui/components/settings/general.rs:231
 msgid "Show Countdown (seconds)"
 msgstr "Geri sayımı göster (saniye)"
 
-#: src/gui/components/settings/general.rs:250
+#: src/gui/components/settings/general.rs:238
 msgid "Autostart Downloads"
 msgstr "İndirmeleri Otomatik Başlat"
 
-#: src/gui/components/settings/general.rs:252
+#: src/gui/components/settings/general.rs:240
 msgid ""
 "Choose if, and when JDownloader should start pending downloads without user "
 "interaction."
@@ -856,27 +995,27 @@ msgstr ""
 "JDownloader'ın bekleyen indirmeleri kullanıcı müdahalesi olmadan ne zaman "
 "başlatacağını seçin."
 
-#: src/gui/components/settings/general.rs:264
+#: src/gui/components/settings/general.rs:252
 msgid "Group single files in a Various package"
 msgstr "Tekil dosyaları \"Çeşitli\" paketinde grupla"
 
-#: src/gui/components/settings/general.rs:271
+#: src/gui/components/settings/general.rs:259
 msgid "LinkGrabber"
 msgstr "Bağlantı Toplayıcı"
 
-#: src/gui/components/settings/general.rs:282
+#: src/gui/components/settings/general.rs:270
 msgid "SFV / CRC check when possible"
 msgstr "Mümkün olduğunda SFV / CRC kontrolü"
 
-#: src/gui/components/settings/general.rs:286
+#: src/gui/components/settings/general.rs:274
 msgid "Restart Downloads when SFV/CRC check fails"
 msgstr "SFV/CRC kontrolü başarısız olduğunda indirmeleri yeniden başlat"
 
-#: src/gui/components/settings/general.rs:293
+#: src/gui/components/settings/general.rs:281
 msgid "File Writing"
 msgstr "Dosya Yazma"
 
-#: src/gui/components/settings/general.rs:295
+#: src/gui/components/settings/general.rs:283
 msgid ""
 "JDownloader will verify your downloads for correctness after download using "
 "the hash/check option"
@@ -884,17 +1023,18 @@ msgstr ""
 "JDownloader, hash/kontrol seçeneğini kullanarak indirmelerinizin doğruluğunu "
 "indirme sonrasında doğrulayacaktır"
 
-#: src/gui/components/settings/general.rs:307
+#: src/gui/components/settings/general.rs:295
 msgid "Auto open Link Containers (dlc,rsdf,...)"
 msgstr "Bağlantı konteynerlerini otomatik aç (dlc, rsdf,...)"
 
-#: src/gui/components/settings/general.rs:314
+#: src/gui/components/settings/general.rs:302
 msgid "Miscellaneous"
 msgstr "Çeşitli"
 
-#: src/gui/components/settings/general.rs:337
+#: src/gui/components/settings/general.rs:325
+#: src/gui/dialogs/add_links_dialog.rs:318
 #: src/gui/dialogs/packagizer_rule_dialog.rs:161
-#: src/gui/properties_panel.rs:400
+#: src/gui/properties_panel.rs:419
 msgid "Select Folder"
 msgstr "Klasör Seç"
 
@@ -1018,7 +1158,7 @@ msgid "Enter password..."
 msgstr "Parolayı girin..."
 
 #: src/gui/dialogs/account_add_dialog.rs:115
-#: src/gui/dialogs/packagizer_rule_dialog.rs:444
+#: src/gui/dialogs/packagizer_rule_dialog.rs:445
 #: src/gui/dialogs/script_edit_dialog.rs:120
 msgid "Save"
 msgstr "Kaydet"
@@ -1030,6 +1170,76 @@ msgstr "2. {} Giriş Bilgilerinizi Girin"
 #: src/gui/dialogs/account_add_dialog.rs:253
 msgid "Adding account..."
 msgstr "Hesap ekleniyor..."
+
+#: src/gui/dialogs/add_links_dialog.rs:39
+#, fuzzy
+msgid "Analyse and Add Links"
+msgstr "Bağlantılı Metni Analiz Et"
+
+#: src/gui/dialogs/add_links_dialog.rs:63
+msgid "Enter Links, URLs, Websites, or any other text here..."
+msgstr "Buraya bağlantıları, URL'leri, web sitelerini veya başka bir metni girin..."
+
+#: src/gui/dialogs/add_links_dialog.rs:91
+msgid "Please choose Download Destination here."
+msgstr "İndirme hedefini burada seçin."
+
+#: src/gui/dialogs/add_links_dialog.rs:98
+msgid "Enter a Package name, or leave empty for auto mode"
+msgstr "Bir paket adı girin veya otomatik mod için boş bırakın"
+
+#: src/gui/dialogs/add_links_dialog.rs:102
+msgid ""
+"Choose a Package Name for the Downloads above. If empty, JDownloader will "
+"create Packages based on the filenames"
+msgstr ""
+
+#: src/gui/dialogs/add_links_dialog.rs:108
+msgid "Enter a comment or leave empty..."
+msgstr "Bir yorum girin veya boş bırakın..."
+
+#: src/gui/dialogs/add_links_dialog.rs:112
+msgid ""
+"Enter a comment. This comment will be stored in every package and "
+"downloadlink."
+msgstr ""
+
+#: src/gui/dialogs/add_links_dialog.rs:120
+#: src/gui/dialogs/add_links_dialog.rs:131
+#, fuzzy
+msgid "Enter the archive's extraction password"
+msgstr "Arşiv çıkarma tamamlandı"
+
+#: src/gui/dialogs/add_links_dialog.rs:121
+#, fuzzy
+msgid "Auto Extract"
+msgstr "Otomatik çıkart"
+
+#: src/gui/dialogs/add_links_dialog.rs:123
+msgid "Enable this option to extract all found archives after download"
+msgstr "İndirme sonrasında bulunan tüm arşivleri çıkartmak için bu seçeneği etkinleştirin"
+
+#: src/gui/dialogs/add_links_dialog.rs:139
+#: src/gui/dialogs/add_links_dialog.rs:155
+msgid "Enter a Password for protected Links"
+msgstr "Korumalı bağlantılar için bir parola girin"
+
+#: src/gui/dialogs/add_links_dialog.rs:165
+msgid "Information overwrites packagizer rules"
+msgstr "Girilen bilgiler Packagizer kurallarının üzerine yazar"
+
+#: src/gui/dialogs/add_links_dialog.rs:242
+msgid "Start Deep Link Analyse"
+msgstr "Bağlantıların derin analizini başlat"
+
+#: src/gui/dialogs/add_links_dialog.rs:247
+msgid "Start Normal Link Analyse"
+msgstr "Bağlantıların normal analizini başlat"
+
+#: src/gui/dialogs/add_links_dialog.rs:425
+#, fuzzy
+msgid "Adding links..."
+msgstr "Bağlantı ekle"
 
 #: src/gui/dialogs/packagizer_rule_dialog.rs:21
 msgid "Contains"
@@ -1064,13 +1274,13 @@ msgid "Always matches"
 msgstr "Her zaman eşleşir"
 
 #: src/gui/dialogs/packagizer_rule_dialog.rs:241
-#: src/gui/dialogs/packagizer_rule_dialog.rs:384
+#: src/gui/dialogs/packagizer_rule_dialog.rs:385
 msgid "Filename"
 msgstr "Dosya adı"
 
 #: src/gui/dialogs/packagizer_rule_dialog.rs:242
-#: src/gui/dialogs/packagizer_rule_dialog.rs:382
-#: src/gui/properties_panel.rs:240
+#: src/gui/dialogs/packagizer_rule_dialog.rs:383
+#: src/gui/properties_panel.rs:257
 msgid "Package name"
 msgstr "Paket adı"
 
@@ -1187,55 +1397,59 @@ msgstr "Daha düşük"
 msgid "Lowest"
 msgstr "En düşük"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:376
+#: src/gui/dialogs/packagizer_rule_dialog.rs:377
 msgid "Priority"
 msgstr "Öncelik"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:383
+#: src/gui/dialogs/packagizer_rule_dialog.rs:384
 msgid "Package key"
 msgstr "Paket anahtarı"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:397
+#: src/gui/dialogs/packagizer_rule_dialog.rs:392
+msgid "Chunks"
+msgstr "Parça"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:398
 msgid "Auto extract"
 msgstr "Otomatik çıkart"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:398
+#: src/gui/dialogs/packagizer_rule_dialog.rs:399
 msgid "Auto add"
 msgstr "Otomatik ekle"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:399
+#: src/gui/dialogs/packagizer_rule_dialog.rs:400
 msgid "Autostart"
 msgstr "Otomatik başlat"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:400
+#: src/gui/dialogs/packagizer_rule_dialog.rs:401
 msgid "Forced start"
 msgstr "Zorla başlat"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:401
+#: src/gui/dialogs/packagizer_rule_dialog.rs:402
 msgid "Link enabled"
 msgstr "Bağlantı etkin"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:405
+#: src/gui/dialogs/packagizer_rule_dialog.rs:406
 msgid "Then"
 msgstr "O zaman"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:414
+#: src/gui/dialogs/packagizer_rule_dialog.rs:415
 msgid "Move to"
 msgstr "Taşı"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:415
+#: src/gui/dialogs/packagizer_rule_dialog.rs:416
 msgid "Rename to"
 msgstr "Yeniden adlandır"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:419
+#: src/gui/dialogs/packagizer_rule_dialog.rs:420
 msgid "...and do"
 msgstr "...ve şunu yap"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:430
+#: src/gui/dialogs/packagizer_rule_dialog.rs:431
 msgid "Stop processing further rules if this rule matches"
 msgstr "Bu kural eşleşirse diğer kuralları işlemeyi durdur"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:449
+#: src/gui/dialogs/packagizer_rule_dialog.rs:450
 msgid "This is a predefined rule and cannot be modified."
 msgstr "Bu, önceden tanımlanmış bir kuraldır ve değiştirilemez."
 
@@ -1329,71 +1543,71 @@ msgstr "Yeniden bağlan"
 msgid "Check for updates"
 msgstr "Güncellemeleri kontrol et"
 
-#: src/gui/properties_panel.rs:86
+#: src/gui/properties_panel.rs:103
 msgid "Highest priority"
 msgstr "En yüksek öncelik"
 
-#: src/gui/properties_panel.rs:87
+#: src/gui/properties_panel.rs:104
 msgid "Higher priority"
 msgstr "Daha yüksek öncelik"
 
-#: src/gui/properties_panel.rs:88
+#: src/gui/properties_panel.rs:105
 msgid "High priority"
 msgstr "Yüksek öncelik"
 
-#: src/gui/properties_panel.rs:89
+#: src/gui/properties_panel.rs:106
 msgid "Low priority"
 msgstr "Düşük öncelik"
 
-#: src/gui/properties_panel.rs:90
+#: src/gui/properties_panel.rs:107
 msgid "Lower priority"
 msgstr "Daha düşük öncelik"
 
-#: src/gui/properties_panel.rs:91
+#: src/gui/properties_panel.rs:108
 msgid "Lowest priority"
 msgstr "En düşük öncelik"
 
-#: src/gui/properties_panel.rs:92
+#: src/gui/properties_panel.rs:109
 msgid "Default priority"
 msgstr "Varsayılan öncelik"
 
-#: src/gui/properties_panel.rs:235
+#: src/gui/properties_panel.rs:252
 msgid "Package name:"
 msgstr "Paket adı:"
 
-#: src/gui/properties_panel.rs:249
+#: src/gui/properties_panel.rs:266
 msgid "File name:"
 msgstr "Dosya adı:"
 
-#: src/gui/properties_panel.rs:254
+#: src/gui/properties_panel.rs:271
 msgid "File name"
 msgstr "Dosya adı"
 
-#: src/gui/properties_panel.rs:260
+#: src/gui/properties_panel.rs:277
 msgid "Browse…"
 msgstr "Gözat…"
 
-#: src/gui/properties_panel.rs:266
+#: src/gui/properties_panel.rs:283
 msgid "Save to:"
 msgstr "Kaydetme konumu:"
 
-#: src/gui/properties_panel.rs:271
+#: src/gui/properties_panel.rs:288
 msgid "Save to"
 msgstr "Kaydetme konumu"
 
-#: src/gui/properties_panel.rs:278
+#: src/gui/properties_panel.rs:295
 msgid "Source:"
 msgstr "Kaynak:"
 
-#: src/gui/properties_panel.rs:283
+#: src/gui/properties_panel.rs:300
 msgid "Source"
 msgstr "Kaynak"
 
-#: src/gui/properties_panel.rs:289
+#: src/gui/properties_panel.rs:306
 msgid "Comment:"
 msgstr "Yorum:"
 
-#: src/gui/properties_panel.rs:490
+#: src/gui/properties_panel.rs:509
 msgid "File Properties: {}"
 msgstr "Dosya Özellikleri: {}"
 
@@ -1403,32 +1617,37 @@ msgstr "Dosya Özellikleri: {}"
 msgid "Open download folder"
 msgstr "İndirme klasörünü aç"
 
-#: src/gui/window.rs:179
+#: src/gui/window.rs:192
 msgid "Waiting for JDownloader to exit..."
 msgstr "JDownloader'ın kapanması bekleniyor..."
 
-#: src/gui/mod.rs:178
+#: src/gui/mod.rs:185
 msgid "The power of JDownloader, the elegance of GNOME"
 msgstr "JDownloader'ın gücü, GNOME'un zarafeti"
 
-#: src/gui/mod.rs:261 src/gui/mod.rs:283
+#: src/gui/mod.rs:276 src/gui/mod.rs:304
+#, fuzzy
+msgid "Add New Links"
+msgstr "Bağlantı ekle"
+
+#: src/gui/mod.rs:282 src/gui/mod.rs:314
 msgid "Start Downloads"
 msgstr "İndirmeleri Başlat"
 
-#: src/gui/mod.rs:266 src/gui/mod.rs:290
+#: src/gui/mod.rs:287 src/gui/mod.rs:321
 msgid "Start All Downloads"
 msgstr "Tüm İndirmeleri Başlat"
 
 #. Status bar.
-#: src/gui/mod.rs:550
+#: src/gui/mod.rs:615
 msgid "Ready"
 msgstr "Hazır"
 
-#: src/gui/mod.rs:606 src/jd/settings/event_scripter_settings.rs:138
+#: src/gui/mod.rs:671 src/jd/settings/event_scripter_settings.rs:138
 msgid "JDownloader started"
 msgstr "JDownloader başlatıldı"
 
-#: src/gui/mod.rs:641
+#: src/gui/mod.rs:706
 msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
 msgstr "JDownloader.jar bulunamadı. JDOWNLOADER_JAR değişkenini ayarlayın."
 
@@ -1623,6 +1842,39 @@ msgstr "Bağlantı toplayıcı alt çubuğu düğmesine basıldı"
 #: src/jd/settings/event_scripter_settings.rs:168
 msgid "Traymenu Button Pressed"
 msgstr "Sistem tepsisi menü düğmesine basıldı"
+
+#~ msgid "Add container"
+#~ msgstr "Konteyner ekle"
+
+#~ msgid "Add filtered stuff"
+#~ msgstr "Filtrelenmiş öğeleri ekle"
+
+#~ msgid "Add and start all"
+#~ msgstr "Tümünü ekle ve başlat"
+
+#~ msgid "Add and start selected"
+#~ msgstr "Seçilenleri ekle ve başlat"
+
+#~ msgid "Add all"
+#~ msgstr "Tümünü ekle"
+
+#~ msgid "Add selected"
+#~ msgstr "Seçilenleri ekle"
+
+#~ msgid "Bottom bar manager"
+#~ msgstr "Alt çubuk yöneticisi"
+
+#~ msgid "Delete all"
+#~ msgstr "Tümünü sil"
+
+#~ msgid "Parallel downloads"
+#~ msgstr "Paralel indirme"
+
+#~ msgid "Parallel per host"
+#~ msgstr "Sunucu başına paralel"
+
+#~ msgid "Speed Limit"
+#~ msgstr "Hız Sınırı"
 
 #~ msgid "Installing…"
 #~ msgstr "Yükleniyor…"

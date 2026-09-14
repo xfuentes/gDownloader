@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-09 13:26+0000\n"
+"POT-Creation-Date: 2026-09-11 17:41+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Greek <team@lists.gnome.gr>\n"
@@ -25,7 +25,7 @@ msgstr "Σφάλμα: {}"
 msgid "JDownloader did not respond in time"
 msgstr "Το JDownloader δεν αποκρίθηκε εγκαίρως"
 
-#: src/gui/overview_panel.rs:114 src/gui/properties_panel.rs:201
+#: src/gui/overview_panel.rs:114 src/gui/properties_panel.rs:218
 msgid "Choose visible fields"
 msgstr "Επιλογή ορατών πεδίων"
 
@@ -91,11 +91,11 @@ msgstr "Πάροχος:"
 msgid "Archive:"
 msgstr "Αρχείο συμπίεσης:"
 
-#: src/gui/pending_jd_dialogs.rs:600 src/gui/components/settings/general.rs:205
+#: src/gui/pending_jd_dialogs.rs:600 src/gui/components/settings/general.rs:193
 msgid "Skip file"
 msgstr "Παράλειψη αρχείου"
 
-#: src/gui/pending_jd_dialogs.rs:601 src/gui/components/settings/general.rs:204
+#: src/gui/pending_jd_dialogs.rs:601 src/gui/components/settings/general.rs:192
 msgid "Overwrite existing file"
 msgstr "Αντικατάσταση υπάρχοντος αρχείου"
 
@@ -120,12 +120,14 @@ msgstr "Να μην εμφανιστεί ξανά για αυτό το αρχε�
 msgid "OK"
 msgstr "OK"
 
-#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.2.0)  #-#-#-#-#
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.3.0)  #-#-#-#-#
 #. Buttons
-#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:1564
-#: src/gui/downloads_panel.rs:1755 src/gui/dialogs/account_add_dialog.rs:114
+#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2197
+#: src/gui/link_grabber_panel.rs:2390 src/gui/downloads_panel.rs:2335
+#: src/gui/dialogs/account_add_dialog.rs:114
+#: src/gui/dialogs/add_links_dialog.rs:264
 #: src/gui/dialogs/archive_password_dialog.rs:33
-#: src/gui/dialogs/packagizer_rule_dialog.rs:443
+#: src/gui/dialogs/packagizer_rule_dialog.rs:444
 #: src/gui/dialogs/script_edit_dialog.rs:119 src/gui/donate.rs:34
 msgid "Cancel"
 msgstr "Ακύρωση"
@@ -148,369 +150,523 @@ msgstr[1] "Καταγράφηκαν {n} σύνδεσμοι"
 msgid "Show"
 msgstr "Εμφάνιση"
 
-#: src/gui/settings_panel.rs:81 src/gui/settings_panel.rs:102
+#: src/gui/settings_panel.rs:87 src/gui/settings_panel.rs:108
 msgid "General"
 msgstr "Γενικά"
 
-#: src/gui/settings_panel.rs:84 src/gui/settings_panel.rs:105
+#: src/gui/settings_panel.rs:90 src/gui/settings_panel.rs:111
 #: src/gui/components/settings/account_manager.rs:43
 msgid "Account Manager"
 msgstr "Διαχείριση λογαριασμών"
 
-#: src/gui/settings_panel.rs:88 src/gui/settings_panel.rs:109
+#: src/gui/settings_panel.rs:94 src/gui/settings_panel.rs:115
 #: src/gui/components/settings/package_manager.rs:54
 msgid "Package Manager"
 msgstr "Διαχείριση πακέτων"
 
-#: src/gui/settings_panel.rs:92 src/gui/settings_panel.rs:113
-#: src/gui/components/settings/extension_manager.rs:171
+#: src/gui/settings_panel.rs:98 src/gui/settings_panel.rs:119
+#: src/gui/components/settings/extension_manager.rs:172
 msgid "Extension Manager"
 msgstr "Διαχείριση επεκτάσεων"
 
-#: src/gui/settings_panel.rs:94 src/gui/settings_panel.rs:99
+#: src/gui/settings_panel.rs:100 src/gui/settings_panel.rs:105
 #: src/gui/components/settings/scripts.rs:84
 msgid "Scripts"
 msgstr "Σενάρια"
 
-#: src/gui/settings_panel.rs:206 src/gui/settings_panel.rs:257
-#: src/gui/settings_panel.rs:272 src/gui/main_menu_bar.rs:37
-#: src/gui/menus/settings.rs:10 src/gui/menus/settings.rs:46
+#: src/gui/settings_panel.rs:212 src/gui/settings_panel.rs:263
+#: src/gui/settings_panel.rs:278 src/gui/main_menu_bar.rs:50
+#: src/gui/menus/settings.rs:15 src/gui/menus/settings.rs:242
 #: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: src/gui/link_grabber_panel.rs:135 src/gui/downloads_panel.rs:180
+#: src/gui/link_grabber_panel.rs:145 src/gui/downloads_panel.rs:198
 msgid "Packages"
 msgstr "Πακέτα"
 
-#: src/gui/link_grabber_panel.rs:141 src/gui/downloads_panel.rs:186
+#: src/gui/link_grabber_panel.rs:151 src/gui/downloads_panel.rs:204
 msgid "Links"
 msgstr "Σύνδεσμοι"
 
-#: src/gui/link_grabber_panel.rs:147 src/gui/link_grabber_panel.rs:598
-#: src/gui/link_grabber_panel.rs:603 src/gui/downloads_panel.rs:192
-#: src/gui/downloads_panel.rs:634 src/gui/downloads_panel.rs:640
+#: src/gui/link_grabber_panel.rs:157 src/gui/link_grabber_panel.rs:608
+#: src/gui/link_grabber_panel.rs:613 src/gui/downloads_panel.rs:210
+#: src/gui/downloads_panel.rs:737 src/gui/downloads_panel.rs:740
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: src/gui/link_grabber_panel.rs:153 src/gui/link_grabber_panel.rs:1772
+#: src/gui/link_grabber_panel.rs:163 src/gui/link_grabber_panel.rs:2607
 msgid "Online"
 msgstr "Συνδεδεμένο"
 
-#: src/gui/link_grabber_panel.rs:159 src/gui/link_grabber_panel.rs:669
-#: src/gui/link_grabber_panel.rs:671 src/gui/downloads_panel.rs:648
-#: src/gui/downloads_panel.rs:650 src/gui/components/account_table.rs:182
+#: src/gui/link_grabber_panel.rs:169 src/gui/link_grabber_panel.rs:679
+#: src/gui/link_grabber_panel.rs:681 src/gui/downloads_panel.rs:749
+#: src/gui/downloads_panel.rs:751 src/gui/downloads_panel.rs:1351
+#: src/gui/components/account_table.rs:182
 msgid "Hoster"
 msgstr "Πάροχος"
 
-#: src/gui/link_grabber_panel.rs:165 src/gui/link_grabber_panel.rs:1776
+#: src/gui/link_grabber_panel.rs:175 src/gui/link_grabber_panel.rs:2611
 msgid "Offline"
 msgstr "Αποσυνδεδεμένο"
 
-#: src/gui/link_grabber_panel.rs:171 src/gui/link_grabber_panel.rs:1784
+#: src/gui/link_grabber_panel.rs:181 src/gui/link_grabber_panel.rs:2619
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: src/gui/link_grabber_panel.rs:362 src/gui/main_menu_bar.rs:36
+#: src/gui/link_grabber_panel.rs:372 src/gui/main_menu_bar.rs:49
 msgid "File"
 msgstr "Αρχείο"
 
-#: src/gui/link_grabber_panel.rs:575 src/gui/link_grabber_panel.rs:577
+#: src/gui/link_grabber_panel.rs:585 src/gui/link_grabber_panel.rs:587
 msgid "Variant"
 msgstr "Παραλλαγή"
 
-#: src/gui/link_grabber_panel.rs:585 src/gui/link_grabber_panel.rs:590
-#: src/gui/downloads_panel.rs:845 src/gui/downloads_panel.rs:851
+#: src/gui/link_grabber_panel.rs:595 src/gui/link_grabber_panel.rs:600
+#: src/gui/downloads_panel.rs:945 src/gui/downloads_panel.rs:951
 msgid "Save To"
 msgstr "Αποθήκευση σε"
 
-#: src/gui/link_grabber_panel.rs:678 src/gui/link_grabber_panel.rs:682
+#: src/gui/link_grabber_panel.rs:688 src/gui/link_grabber_panel.rs:692
 msgid "Availability"
 msgstr "Διαθεσιμότητα"
 
-#: src/gui/link_grabber_panel.rs:707 src/gui/downloads_panel.rs:890
+#: src/gui/link_grabber_panel.rs:717 src/gui/downloads_panel.rs:990
 msgid "Choose visible columns"
 msgstr "Επιλογή ορατών στηλών"
 
-#: src/gui/link_grabber_panel.rs:902 src/gui/link_grabber_panel.rs:1077
-#: src/gui/downloads_panel.rs:1010 src/gui/downloads_panel.rs:1148
-#: src/gui/components/account_table.rs:248
+#: src/gui/link_grabber_panel.rs:912 src/gui/link_grabber_panel.rs:1536
+#: src/gui/downloads_panel.rs:1110 src/gui/components/account_table.rs:248
 msgid "Overview"
 msgstr "Επισκόπηση"
 
-#: src/gui/link_grabber_panel.rs:937 src/gui/downloads_panel.rs:1052
+#: src/gui/link_grabber_panel.rs:948 src/gui/downloads_panel.rs:1153
+#, fuzzy
+msgid "Add Links"
+msgstr "Προσθήκη συνδέσμων"
+
+#: src/gui/link_grabber_panel.rs:950 src/gui/downloads_panel.rs:1155
 msgid "Add links to linkgrabber"
 msgstr "Προσθήκη συνδέσμων στη συλλογή συνδέσμων"
 
-#: src/gui/link_grabber_panel.rs:946 src/gui/downloads_panel.rs:1061
-msgid "Add links"
-msgstr "Προσθήκη συνδέσμων"
+#: src/gui/link_grabber_panel.rs:963 src/gui/downloads_panel.rs:1168
+#: src/gui/menus/file.rs:35 src/gui/menus/file.rs:71
+msgid "Analyse Text with Links"
+msgstr "Ανάλυση κειμένου με συνδέσμους"
 
-#: src/gui/link_grabber_panel.rs:946 src/gui/downloads_panel.rs:1061
-msgid "Add container"
+#: src/gui/link_grabber_panel.rs:977 src/gui/downloads_panel.rs:1182
+#: src/gui/menus/file.rs:40 src/gui/menus/file.rs:80
+msgid "Add Container"
 msgstr "Προσθήκη περιέκτη"
 
-#: src/gui/link_grabber_panel.rs:946 src/gui/downloads_panel.rs:1061
-msgid "Paste links"
+#: src/gui/link_grabber_panel.rs:986 src/gui/downloads_panel.rs:1191
+msgid "Loading link container files isn't supported yet."
+msgstr "Η φόρτωση αρχείων περιέκτη συνδέσμων δεν υποστηρίζεται ακόμη."
+
+#: src/gui/link_grabber_panel.rs:993 src/gui/downloads_panel.rs:1198
+#, fuzzy
+msgid "Paste Links"
 msgstr "Επικόλληση συνδέσμων"
 
-#: src/gui/link_grabber_panel.rs:969
+#: src/gui/link_grabber_panel.rs:1005 src/gui/downloads_panel.rs:1210
+msgid "Paste Links (Deep Analyse)"
+msgstr "Επικόλληση συνδέσμων (βαθιά ανάλυση)"
+
+#: src/gui/link_grabber_panel.rs:1091
 msgid "Clear linkgrabber"
 msgstr "Εκκαθάριση συλλογής συνδέσμων"
 
-#: src/gui/link_grabber_panel.rs:978 src/gui/mod.rs:272 src/gui/mod.rs:296
-#: src/gui/mod.rs:363 src/gui/mod.rs:379
+#: src/gui/link_grabber_panel.rs:1108
+msgid "Clear {n} link from the Link Collector"
+msgid_plural "Clear {n} links from the Link Collector"
+msgstr[0] "Αφαίρεση {n} συνδέσμου από τον συλλέκτη συνδέσμων"
+msgstr[1] "Αφαίρεση {n} συνδέσμων από τον συλλέκτη συνδέσμων"
+
+#: src/gui/link_grabber_panel.rs:1133 src/gui/mod.rs:293 src/gui/mod.rs:327
+#: src/gui/mod.rs:394 src/gui/mod.rs:410
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: src/gui/link_grabber_panel.rs:988 src/gui/downloads_panel.rs:1098
+#: src/gui/link_grabber_panel.rs:1145 src/gui/downloads_panel.rs:1308
 msgid "Delete disabled"
 msgstr "Διαγραφή απενεργοποιημένων"
 
-#: src/gui/link_grabber_panel.rs:989 src/gui/downloads_panel.rs:1101
+#: src/gui/link_grabber_panel.rs:1154 src/gui/downloads_panel.rs:1311
 msgid "Delete offline"
 msgstr "Διαγραφή αποσυνδεδεμένων"
 
-#: src/gui/link_grabber_panel.rs:990
+#: src/gui/link_grabber_panel.rs:1163
 msgid "Remove incomplete archives"
 msgstr "Αφαίρεση ημιτελών αρχείων συμπίεσης"
 
-#: src/gui/link_grabber_panel.rs:991
+#: src/gui/link_grabber_panel.rs:1176
 msgid "Clear filtered links"
 msgstr "Εκκαθάριση φιλτραρισμένων συνδέσμων"
 
-#: src/gui/link_grabber_panel.rs:1012 src/gui/downloads_panel.rs:1125
+#: src/gui/link_grabber_panel.rs:1183 src/gui/link_grabber_panel.rs:1370
+msgid ""
+"Not available: JDownloader doesn't expose its filtered-links list over the "
+"RemoteAPI."
+msgstr ""
+
+#: src/gui/link_grabber_panel.rs:1216
+#, fuzzy
+msgid "Delete {n} disabled link"
+msgid_plural "Delete {n} disabled links"
+msgstr[0] "Διαγραφή απενεργοποιημένων"
+msgstr[1] "Διαγραφή απενεργοποιημένων"
+
+#: src/gui/link_grabber_panel.rs:1249
+#, fuzzy
+msgid "Delete {n} offline link"
+msgid_plural "Delete {n} offline links"
+msgstr[0] "Διαγραφή αποσυνδεδεμένων"
+msgstr[1] "Διαγραφή αποσυνδεδεμένων"
+
+#: src/gui/link_grabber_panel.rs:1331
+#, fuzzy
+msgid "Remove {n} link belonging to an incomplete archive"
+msgid_plural "Remove {n} links belonging to incomplete archives"
+msgstr[0] "Αφαίρεση ημιτελών αρχείων συμπίεσης"
+msgstr[1] "Αφαίρεση ημιτελών αρχείων συμπίεσης"
+
+#: src/gui/link_grabber_panel.rs:1357
 msgid "Filter"
 msgstr "Φίλτρο"
 
-#: src/gui/link_grabber_panel.rs:1021
-msgid "Add filtered stuff"
-msgstr "Προσθήκη φιλτραρισμένων στοιχείων"
+#: src/gui/link_grabber_panel.rs:1382 src/gui/link_grabber_panel.rs:1396
+#, fuzzy
+msgid "Start all Downloads"
+msgstr "Έναρξη όλων των λήψεων"
 
-#: src/gui/link_grabber_panel.rs:1031
-msgid "Add to download list"
+#: src/gui/link_grabber_panel.rs:1405
+#, fuzzy
+msgid "Start selected Downloads"
+msgstr "Έναρξη όλων των λήψεων"
+
+#: src/gui/link_grabber_panel.rs:1414
+#, fuzzy
+msgid "Add all to Download List"
 msgstr "Προσθήκη στη λίστα λήψεων"
 
-#: src/gui/link_grabber_panel.rs:1043
-msgid "Add and start all"
-msgstr "Προσθήκη και έναρξη όλων"
+#: src/gui/link_grabber_panel.rs:1423
+#, fuzzy
+msgid "Add selected to Download List"
+msgstr "Προσθήκη στη λίστα λήψεων"
 
-#: src/gui/link_grabber_panel.rs:1044
-msgid "Add and start selected"
-msgstr "Προσθήκη και έναρξη επιλεγμένων"
-
-#: src/gui/link_grabber_panel.rs:1045
-msgid "Add all"
-msgstr "Προσθήκη όλων"
-
-#: src/gui/link_grabber_panel.rs:1046
-msgid "Add selected"
-msgstr "Προσθήκη επιλεγμένων"
-
-#: src/gui/link_grabber_panel.rs:1072
+#: src/gui/link_grabber_panel.rs:1525
 msgid "Add at top"
 msgstr "Προσθήκη στην κορυφή"
 
-#: src/gui/link_grabber_panel.rs:1073
+#: src/gui/link_grabber_panel.rs:1527
 msgid "Auto confirm"
 msgstr "Αυτόματη επιβεβαίωση"
 
-#: src/gui/link_grabber_panel.rs:1074
+#: src/gui/link_grabber_panel.rs:1529
 msgid "Auto start"
 msgstr "Αυτόματη έναρξη"
 
-#: src/gui/link_grabber_panel.rs:1075
+#: src/gui/link_grabber_panel.rs:1531
 msgid "Link filter"
 msgstr "Φίλτρο συνδέσμων"
 
-#: src/gui/link_grabber_panel.rs:1076 src/gui/downloads_panel.rs:1147
+#: src/gui/link_grabber_panel.rs:1534
 msgid "Properties"
 msgstr "Ιδιότητες"
 
-#: src/gui/link_grabber_panel.rs:1078
+#: src/gui/link_grabber_panel.rs:1538
 msgid "Sidebar"
 msgstr "Πλαϊνή στήλη"
 
-#: src/gui/link_grabber_panel.rs:1079 src/gui/downloads_panel.rs:1149
-msgid "Bottom bar manager"
-msgstr "Διαχείριση κάτω γραμμής"
-
-#: src/gui/link_grabber_panel.rs:1499 src/gui/downloads_panel.rs:1666
+#: src/gui/link_grabber_panel.rs:2132 src/gui/link_grabber_panel.rs:2330
+#: src/gui/downloads_panel.rs:2246
 msgid "Are you sure?"
 msgstr "Είστε σίγουροι;"
 
-#: src/gui/link_grabber_panel.rs:1521 src/gui/downloads_panel.rs:1688
+#: src/gui/link_grabber_panel.rs:2154 src/gui/link_grabber_panel.rs:2352
+#: src/gui/downloads_panel.rs:2268
 msgid "Do you really want to perform this clean up action:"
 msgstr "Θέλετε πραγματικά να εκτελέσετε αυτήν την ενέργεια εκκαθάρισης:"
 
-#: src/gui/link_grabber_panel.rs:1522
+#: src/gui/link_grabber_panel.rs:2155 src/gui/link_grabber_panel.rs:2353
 msgid "Delete Selected Links?"
 msgstr "Διαγραφή επιλεγμένων συνδέσμων;"
 
-#: src/gui/link_grabber_panel.rs:1530 src/gui/downloads_panel.rs:1697
+#: src/gui/link_grabber_panel.rs:2163 src/gui/link_grabber_panel.rs:2361
+#: src/gui/downloads_panel.rs:2277
 msgid "Tasks to do:"
 msgstr "Εργασίες προς εκτέλεση:"
 
-#: src/gui/link_grabber_panel.rs:1539 src/gui/downloads_panel.rs:1706
+#: src/gui/link_grabber_panel.rs:2172 src/gui/downloads_panel.rs:2286
 msgid "Delete selected link"
 msgid_plural "Delete selected links"
 msgstr[0] "Διαγραφή επιλεγμένου συνδέσμου"
 msgstr[1] "Διαγραφή επιλεγμένων συνδέσμων"
 
-#: src/gui/link_grabber_panel.rs:1540 src/gui/downloads_panel.rs:1707
+#: src/gui/link_grabber_panel.rs:2173 src/gui/downloads_panel.rs:2287
 msgid "{n} link remaining"
 msgid_plural "{n} links remaining"
 msgstr[0] "Απομένει {n} σύνδεσμος"
 msgstr[1] "Απομένουν {n} σύνδεσμοι"
 
-#: src/gui/link_grabber_panel.rs:1558 src/gui/downloads_panel.rs:1749
+#: src/gui/link_grabber_panel.rs:2191 src/gui/link_grabber_panel.rs:2384
+#: src/gui/downloads_panel.rs:2329
 msgid "Don't show this again"
 msgstr "Να μην εμφανιστεί ξανά"
 
-#: src/gui/link_grabber_panel.rs:1565 src/gui/downloads_panel.rs:1756
+#. #-#-#-#-#  mod.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. Bottom row: the "overwrites packagizer rules" checkbox on the
+#. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
+#. visually joined via GTK's "linked" segmented style) on the right.
+#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. Bottom row: the "overwrites packagizer rules" checkbox on the
+#. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
+#. visually joined via GTK's "linked" segmented style) on the right.
+#: src/gui/link_grabber_panel.rs:2198 src/gui/link_grabber_panel.rs:2391
+#: src/gui/downloads_panel.rs:2336 src/gui/dialogs/add_links_dialog.rs:232
 #: src/gui/donate.rs:38
 msgid "Continue"
 msgstr "Συνέχεια"
 
-#: src/gui/link_grabber_panel.rs:1780
+#: src/gui/link_grabber_panel.rs:2615
 msgid "Temporarily Unknown"
 msgstr "Προσωρινά άγνωστο"
 
-#: src/gui/downloads_panel.rs:198 src/gui/downloads_panel.rs:800
-#: src/gui/downloads_panel.rs:806
+#: src/gui/downloads_panel.rs:216 src/gui/downloads_panel.rs:900
+#: src/gui/downloads_panel.rs:906
 msgid "Speed"
 msgstr "Ταχύτητα"
 
-#: src/gui/downloads_panel.rs:204 src/gui/downloads_panel.rs:830
-#: src/gui/downloads_panel.rs:836
+#: src/gui/downloads_panel.rs:222 src/gui/downloads_panel.rs:930
+#: src/gui/downloads_panel.rs:936
 msgid "Loaded"
 msgstr "Φορτώθηκε"
 
-#: src/gui/downloads_panel.rs:210
+#: src/gui/downloads_panel.rs:228
 msgid "Remaining"
 msgstr "Απομένει"
 
-#: src/gui/downloads_panel.rs:216 src/gui/downloads_panel.rs:815
-#: src/gui/downloads_panel.rs:821
+#: src/gui/downloads_panel.rs:234 src/gui/downloads_panel.rs:915
+#: src/gui/downloads_panel.rs:921
 msgid "ETA"
 msgstr "Εκτιμώμενος χρόνος"
 
-#: src/gui/downloads_panel.rs:222
+#: src/gui/downloads_panel.rs:240
 msgid "Running downloads"
 msgstr "Ενεργές λήψεις"
 
-#: src/gui/downloads_panel.rs:228
+#: src/gui/downloads_panel.rs:246
 msgid "Finished downloads"
 msgstr "Ολοκληρωμένες λήψεις"
 
-#: src/gui/downloads_panel.rs:234
+#: src/gui/downloads_panel.rs:252
 msgid "Skipped downloads"
 msgstr "Παραλειφθείσες λήψεις"
 
-#: src/gui/downloads_panel.rs:240
+#: src/gui/downloads_panel.rs:258
 msgid "Failed downloads"
 msgstr "Αποτυχημένες λήψεις"
 
-#: src/gui/downloads_panel.rs:552
+#: src/gui/downloads_panel.rs:579
 #: src/gui/components/settings/package_manager.rs:115
 #: src/gui/components/settings/scripts.rs:166
 #: src/gui/dialogs/script_edit_dialog.rs:41
 msgid "Name"
 msgstr "Όνομα"
 
-#: src/gui/downloads_panel.rs:569 src/gui/downloads_panel.rs:624
+#: src/gui/downloads_panel.rs:596 src/gui/downloads_panel.rs:657
 msgid "Progress"
 msgstr "Πρόοδος"
 
-#: src/gui/downloads_panel.rs:702 src/gui/downloads_panel.rs:705
+#: src/gui/downloads_panel.rs:802 src/gui/downloads_panel.rs:805
 msgid "Connection"
 msgstr "Σύνδεση"
 
-#: src/gui/downloads_panel.rs:788 src/gui/downloads_panel.rs:791
-#: src/gui/components/account_table.rs:183
+#: src/gui/downloads_panel.rs:888 src/gui/downloads_panel.rs:891
+#: src/gui/downloads_panel.rs:1371 src/gui/components/account_table.rs:183
 msgid "Status"
 msgstr "Κατάσταση"
 
-#: src/gui/downloads_panel.rs:860 src/gui/downloads_panel.rs:866
+#: src/gui/downloads_panel.rs:960 src/gui/downloads_panel.rs:966
+#: src/gui/downloads_panel.rs:1361
 #: src/gui/dialogs/packagizer_rule_dialog.rs:243
-#: src/gui/dialogs/packagizer_rule_dialog.rs:385
-#: src/gui/properties_panel.rs:305
+#: src/gui/dialogs/packagizer_rule_dialog.rs:386
+#: src/gui/properties_panel.rs:324
 msgid "Comment"
 msgstr "Σχόλιο"
 
-#: src/gui/downloads_panel.rs:1088
-msgid "Delete all"
-msgstr "Διαγραφή όλων"
+#: src/gui/downloads_panel.rs:1300
+#, fuzzy
+msgid "Clear Downloadlist"
+msgstr "Έναρξη λήψεων"
 
-#: src/gui/downloads_panel.rs:1099
+#: src/gui/downloads_panel.rs:1309
 msgid "Delete failed"
 msgstr "Διαγραφή αποτυχημένων"
 
-#: src/gui/downloads_panel.rs:1100
+#: src/gui/downloads_panel.rs:1310
 msgid "Delete finished"
 msgstr "Διαγραφή ολοκληρωμένων"
 
-#: src/gui/downloads_panel.rs:1143
-#: src/gui/dialogs/packagizer_rule_dialog.rs:391
-msgid "Chunks"
-msgstr "Τμήματα"
+#: src/gui/downloads_panel.rs:1341
+#, fuzzy
+msgid "File Name"
+msgstr "Όνομα αρχείου"
 
-#: src/gui/downloads_panel.rs:1144
-msgid "Parallel downloads"
-msgstr "Παράλληλες λήψεις"
+#: src/gui/downloads_panel.rs:1342
+msgid "Please enter the file name you are looking for..."
+msgstr "Εισαγάγετε το όνομα αρχείου που αναζητάτε..."
 
-#: src/gui/downloads_panel.rs:1145
-msgid "Parallel per host"
-msgstr "Παράλληλες ανά πάροχο"
+#: src/gui/downloads_panel.rs:1346
+#, fuzzy
+msgid "File Path"
+msgstr "Τύπος αρχείου"
 
-#: src/gui/downloads_panel.rs:1146
-msgid "Speed limit"
+#: src/gui/downloads_panel.rs:1347
+msgid "Please enter the file path you are looking for..."
+msgstr "Εισαγάγετε τη διαδρομή αρχείου που αναζητάτε..."
+
+#: src/gui/downloads_panel.rs:1352
+msgid "Please enter the domain you are looking for..."
+msgstr "Εισαγάγετε τον τομέα που αναζητάτε..."
+
+#: src/gui/downloads_panel.rs:1356
+#, fuzzy
+msgid "Package Name"
+msgstr "Όνομα πακέτου"
+
+#: src/gui/downloads_panel.rs:1357
+msgid "Please enter the package name you are looking for..."
+msgstr "Εισαγάγετε το όνομα πακέτου που αναζητάτε..."
+
+#: src/gui/downloads_panel.rs:1362 src/gui/downloads_panel.rs:1367
+msgid "Please enter the comment you are looking for..."
+msgstr "Εισαγάγετε το σχόλιο που αναζητάτε..."
+
+#: src/gui/downloads_panel.rs:1366
+#, fuzzy
+msgid "Comment(Package)"
+msgstr "Σχόλιο"
+
+#: src/gui/downloads_panel.rs:1372
+msgid "Please enter the Status you are looking for..."
+msgstr "Εισαγάγετε την κατάσταση που αναζητάτε..."
+
+#: src/gui/downloads_panel.rs:1420
+#, fuzzy
+msgid "All Downloads"
+msgstr "Έναρξη όλων των λήψεων"
+
+#: src/gui/downloads_panel.rs:1421
+#, fuzzy
+msgid "Running Downloads"
+msgstr "Ενεργές λήψεις"
+
+#: src/gui/downloads_panel.rs:1422
+#, fuzzy
+msgid "Failed Downloads"
+msgstr "Αποτυχημένες λήψεις"
+
+#: src/gui/downloads_panel.rs:1423
+#, fuzzy
+msgid "File exists"
+msgstr "Το αρχείο υπάρχει ήδη"
+
+#: src/gui/downloads_panel.rs:1424
+#, fuzzy
+msgid "Offline Downloads"
+msgstr "Ολοκληρωμένες λήψεις"
+
+#: src/gui/downloads_panel.rs:1425
+#, fuzzy
+msgid "Skipped Downloads"
+msgstr "Παραλειφθείσες λήψεις"
+
+#: src/gui/downloads_panel.rs:1426
+#, fuzzy
+msgid "Successful Downloads"
+msgstr "Έναρξη λήψεων"
+
+#: src/gui/downloads_panel.rs:1427
+#, fuzzy
+msgid "Pending Downloads"
+msgstr "Ενεργές λήψεις"
+
+#: src/gui/downloads_panel.rs:1476 src/gui/menus/settings.rs:28
+#: src/gui/menus/settings.rs:78
+#, fuzzy
+msgid "Max. chunks per download"
+msgstr "Μέγ. τμήματα ανά λήψη"
+
+#: src/gui/downloads_panel.rs:1491 src/gui/menus/settings.rs:33
+#: src/gui/menus/settings.rs:90
+#, fuzzy
+msgid "Max. simultaneous downloads"
+msgstr "Μέγ. ταυτόχρονες λήψεις"
+
+#: src/gui/downloads_panel.rs:1510 src/gui/menus/settings.rs:38
+#: src/gui/menus/settings.rs:103
+msgid "Max. sim. Downloads per Hoster"
+msgstr "Μέγ. ταυτόχρονες λήψεις ανά πάροχο"
+
+#: src/gui/downloads_panel.rs:1527 src/gui/menus/settings.rs:43
+#: src/gui/menus/settings.rs:118
+#, fuzzy
+msgid "Speed limit (KiB/s)"
 msgstr "Όριο ταχύτητας"
 
-#: src/gui/downloads_panel.rs:1309
+#: src/gui/downloads_panel.rs:1544
+msgid "Package or Link Properties"
+msgstr "Ιδιότητες πακέτου ή συνδέσμου"
+
+#: src/gui/downloads_panel.rs:1547
+msgid "Overview Panel visible"
+msgstr "Ορατός πίνακας επισκόπησης"
+
+#: src/gui/downloads_panel.rs:1882
 msgid "Downloads complete"
 msgstr "Οι λήψεις ολοκληρώθηκαν"
 
-#: src/gui/downloads_panel.rs:1310
+#: src/gui/downloads_panel.rs:1883
 msgid "One file downloaded successfully"
 msgid_plural "{n} files downloaded successfully"
 msgstr[0] "Ένα αρχείο λήφθηκε με επιτυχία"
 msgstr[1] "{n} αρχεία λήφθηκαν με επιτυχία"
 
-#: src/gui/downloads_panel.rs:1689
+#: src/gui/downloads_panel.rs:2269
 msgid "Delete Selected Downloads?"
 msgstr "Διαγραφή επιλεγμένων λήψεων;"
 
-#: src/gui/downloads_panel.rs:1712
+#: src/gui/downloads_panel.rs:2292
 msgid "{n} file ({}) on disk"
 msgid_plural "{n} files ({}) on disk"
 msgstr[0] "{n} αρχείο ({}) στον δίσκο"
 msgstr[1] "{n} αρχεία ({}) στον δίσκο"
 
-#: src/gui/downloads_panel.rs:1725
+#: src/gui/downloads_panel.rs:2305
 msgid "Keep all downloaded files - just remove links from JDownloader"
-msgstr ""
+msgstr "Διατήρηση όλων των ληφθέντων αρχείων - αφαίρεση μόνο των συνδέσμων από το JDownloader"
 "Διατήρηση όλων των ληφθέντων αρχείων — αφαίρεση μόνο των συνδέσμων από το "
 "JDownloader"
 
-#: src/gui/downloads_panel.rs:1726
+#: src/gui/downloads_panel.rs:2306
 msgid "Move downloaded files to Trash & remove links from JDownloader"
-msgstr ""
+msgstr "Μετακίνηση των ληφθέντων αρχείων στον Κάδο Απορριμμάτων και αφαίρεση των συνδέσμων από το JDownloader"
 "Μετακίνηση ληφθέντων αρχείων στα απορρίμματα και αφαίρεση συνδέσμων από το "
 "JDownloader"
 
-#: src/gui/downloads_panel.rs:1727
+#: src/gui/downloads_panel.rs:2307
 msgid ""
 "Delete downloaded files permanently from disk & remove links from JDownloader"
 msgstr ""
 "Οριστική διαγραφή ληφθέντων αρχείων από τον δίσκο και αφαίρεση συνδέσμων από "
 "το JDownloader"
 
-#: src/gui/main_menu_bar.rs:38
+#: src/gui/main_menu_bar.rs:51
 msgid "Tools"
 msgstr "Εργαλεία"
 
-#: src/gui/main_menu_bar.rs:39
+#: src/gui/main_menu_bar.rs:52
 msgid "Help"
 msgstr "Βοήθεια"
 
@@ -522,23 +678,15 @@ msgstr "Δημιουργία αντιγράφου ασφαλείας όλων τ
 msgid "Restore settings"
 msgstr "Επαναφορά ρυθμίσεων"
 
-#: src/gui/menus/file.rs:35 src/gui/menus/file.rs:69
-msgid "Analyse Text with Links"
-msgstr "Ανάλυση κειμένου με συνδέσμους"
-
-#: src/gui/menus/file.rs:40 src/gui/menus/file.rs:73
-msgid "Add Container"
-msgstr "Προσθήκη περιέκτη"
-
-#: src/gui/menus/file.rs:48 src/gui/menus/file.rs:77
+#: src/gui/menus/file.rs:48 src/gui/menus/file.rs:84
 msgid "Backup"
 msgstr "Αντίγραφο ασφαλείας"
 
-#: src/gui/menus/file.rs:56 src/gui/menus/file.rs:81
+#: src/gui/menus/file.rs:56 src/gui/menus/file.rs:88
 msgid "Restart"
 msgstr "Επανεκκίνηση"
 
-#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:85 src/gui/tray.rs:204
+#: src/gui/menus/file.rs:61 src/gui/menus/file.rs:92 src/gui/tray.rs:204
 msgid "Exit"
 msgstr "Έξοδος"
 
@@ -566,37 +714,19 @@ msgstr "Συνεισφορά"
 msgid "About JDownloader"
 msgstr "Σχετικά με το JDownloader"
 
-#: src/gui/menus/settings.rs:15 src/gui/menus/settings.rs:50
+#: src/gui/menus/settings.rs:20 src/gui/menus/settings.rs:246
 msgid "My.JDownloader"
 msgstr "My.JDownloader"
 
-#: src/gui/menus/settings.rs:23 src/gui/menus/settings.rs:54
-#: src/gui/components/settings/general.rs:186
-msgid "Max. Chunks per Download"
-msgstr "Μέγ. τμήματα ανά λήψη"
-
-#: src/gui/menus/settings.rs:28 src/gui/menus/settings.rs:58
-#: src/gui/components/settings/general.rs:170
-msgid "Max. simultaneous Downloads"
-msgstr "Μέγ. ταυτόχρονες λήψεις"
-
-#: src/gui/menus/settings.rs:33 src/gui/menus/settings.rs:62
-msgid "Max. sim. Downloads per Hoster"
-msgstr "Μέγ. ταυτόχρονες λήψεις ανά πάροχο"
-
-#: src/gui/menus/settings.rs:38 src/gui/menus/settings.rs:66
-msgid "Speed Limit"
-msgstr "Όριο ταχύτητας"
-
-#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:187
+#: src/gui/menus/tools.rs:11 src/gui/menus/tools.rs:34 src/gui/mod.rs:194
 msgid "Download"
 msgstr "Λήψεις"
 
-#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:191
+#: src/gui/menus/tools.rs:16 src/gui/menus/tools.rs:38 src/gui/mod.rs:198
 msgid "Link Collector"
 msgstr "Συλλέκτης συνδέσμων"
 
-#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:196
+#: src/gui/menus/tools.rs:26 src/gui/menus/tools.rs:46 src/gui/mod.rs:203
 msgid "Donate"
 msgstr "Δωρεά"
 
@@ -660,7 +790,7 @@ msgstr "Διαγραφή Αρχείων Συμπίεσης"
 msgid "'Remove Links from Downloadlist' enabled"
 msgstr "Αφαίρεση Συνδέσμων από τον Κατάλογο Λήψεων"
 
-#: src/gui/archive_menu.rs:433 src/gui/mod.rs:357
+#: src/gui/archive_menu.rs:433 src/gui/mod.rs:388
 msgid "Archive(s)"
 msgstr "Συμπιεσμένα αρχεία"
 
@@ -681,7 +811,7 @@ msgstr "Ο λογαριασμός είναι εντάξει"
 msgid "Unlimited"
 msgstr "Απεριόριστο"
 
-#. #-#-#-#-#  account_table.pot (gdownloader 0.2.0)  #-#-#-#-#
+#. #-#-#-#-#  account_table.pot (gdownloader 0.3.0)  #-#-#-#-#
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
@@ -690,7 +820,7 @@ msgid "Add"
 msgstr "Προσθήκη"
 
 #: src/gui/components/account_table.rs:147
-#: src/gui/components/settings/extension_manager.rs:324
+#: src/gui/components/settings/extension_manager.rs:325
 #: src/gui/components/settings/package_manager.rs:84
 #: src/gui/components/settings/scripts.rs:128
 msgid "Remove"
@@ -701,7 +831,7 @@ msgid "Buy"
 msgstr "Αγορά"
 
 #: src/gui/components/account_table.rs:149
-#: src/gui/components/settings/extension_manager.rs:177
+#: src/gui/components/settings/extension_manager.rs:178
 msgid "Refresh"
 msgstr "Ανανέωση"
 
@@ -736,47 +866,48 @@ msgstr ""
 "Εισαγάγετε και διαχειριστείτε όλους τους λογαριασμούς σας Premium/Gold/"
 "Platinum."
 
-#: src/gui/components/settings/extension_manager.rs:172
+#: src/gui/components/settings/extension_manager.rs:173
 msgid "Enable, disable or install JDownloader extensions."
 msgstr "Ενεργοποίηση, απενεργοποίηση ή εγκατάσταση επεκτάσεων του JDownloader."
 
-#: src/gui/components/settings/extension_manager.rs:193
+#: src/gui/components/settings/extension_manager.rs:194
 msgid "Loading extensions…"
 msgstr "Φόρτωση επεκτάσεων…"
 
-#: src/gui/components/settings/extension_manager.rs:234
+#: src/gui/components/settings/extension_manager.rs:235
 msgid "No extensions found."
 msgstr "Δεν βρέθηκαν επεκτάσεις."
 
-#: src/gui/components/settings/extension_manager.rs:337
+#: src/gui/components/settings/extension_manager.rs:338
 msgid "Removing extension…"
 msgstr "Αφαίρεση επέκτασης…"
 
-#: src/gui/components/settings/extension_manager.rs:361
+#: src/gui/components/settings/extension_manager.rs:362
 msgid "This extension is built into JDownloader and cannot be removed."
-msgstr ""
+msgstr "Αυτή η επέκταση είναι ενσωματωμένη στο JDownloader και δεν μπορεί να αφαιρεθεί."
 "Αυτή η επέκταση είναι ενσωματωμένη στο JDownloader και δεν μπορεί να "
 "αφαιρεθεί."
 
-#: src/gui/components/settings/extension_manager.rs:368
+#: src/gui/components/settings/extension_manager.rs:369
 msgid "Install"
 msgstr "Εγκατάσταση"
 
-#: src/gui/components/settings/extension_manager.rs:379
+#: src/gui/components/settings/extension_manager.rs:380
 msgid "Installing extension…"
 msgstr "Εγκατάσταση επέκτασης…"
 
-#: src/gui/components/settings/general.rs:143
+#: src/gui/components/settings/general.rs:131
+#: src/gui/dialogs/add_links_dialog.rs:82
 #: src/gui/dialogs/packagizer_rule_dialog.rs:154
 msgid "Browse"
 msgstr "Περιήγηση"
 
-#: src/gui/components/settings/general.rs:152
-#: src/gui/components/settings/general.rs:156
+#: src/gui/components/settings/general.rs:140
+#: src/gui/components/settings/general.rs:144
 msgid "Download Folder"
 msgstr "Φάκελος λήψεων"
 
-#: src/gui/components/settings/general.rs:158
+#: src/gui/components/settings/general.rs:146
 msgid ""
 "Set the default download path here. Changing default path here, affects only "
 "new downloads."
@@ -784,48 +915,56 @@ msgstr ""
 "Ορίστε εδώ την προεπιλεγμένη διαδρομή λήψης. Η αλλαγή της προεπιλεγμένης "
 "διαδρομής εδώ επηρεάζει μόνο τις νέες λήψεις."
 
-#: src/gui/components/settings/general.rs:178
+#: src/gui/components/settings/general.rs:160
+msgid "Max. simultaneous Downloads"
+msgstr "Μέγ. ταυτόχρονες λήψεις"
+
+#: src/gui/components/settings/general.rs:167
 msgid "Maximum of simultaneous downloads per host"
 msgstr "Μέγιστες ταυτόχρονες λήψεις ανά πάροχο"
 
-#: src/gui/components/settings/general.rs:195
+#: src/gui/components/settings/general.rs:174
+msgid "Max. Chunks per Download"
+msgstr "Μέγ. τμήματα ανά λήψη"
+
+#: src/gui/components/settings/general.rs:183
 msgid "Immediate"
 msgstr "Άμεσα"
 
-#: src/gui/components/settings/general.rs:196
+#: src/gui/components/settings/general.rs:184
 msgid "At start"
 msgstr "Κατά την εκκίνηση"
 
-#: src/gui/components/settings/general.rs:197
+#: src/gui/components/settings/general.rs:185
 msgid "Package ready"
 msgstr "Το πακέτο είναι έτοιμο"
 
-#: src/gui/components/settings/general.rs:198
-#: src/gui/components/settings/general.rs:229
+#: src/gui/components/settings/general.rs:186
+#: src/gui/components/settings/general.rs:217
 msgid "Never"
 msgstr "Ποτέ"
 
-#: src/gui/components/settings/general.rs:200
+#: src/gui/components/settings/general.rs:188
 msgid "Remove finished downloads"
 msgstr "Αφαίρεση ολοκληρωμένων λήψεων"
 
-#: src/gui/components/settings/general.rs:206
+#: src/gui/components/settings/general.rs:194
 msgid "Auto-rename"
 msgstr "Αυτόματη μετονομασία"
 
-#: src/gui/components/settings/general.rs:207
+#: src/gui/components/settings/general.rs:195
 msgid "Ask for each file"
 msgstr "Ερώτηση για κάθε αρχείο"
 
-#: src/gui/components/settings/general.rs:209
+#: src/gui/components/settings/general.rs:197
 msgid "If the file already exists"
 msgstr "Αν το αρχείο υπάρχει ήδη"
 
-#: src/gui/components/settings/general.rs:213
+#: src/gui/components/settings/general.rs:201
 msgid "Download Management"
 msgstr "Διαχείριση λήψεων"
 
-#: src/gui/components/settings/general.rs:215
+#: src/gui/components/settings/general.rs:203
 msgid ""
 "Connection limits, Download order, Priorities, ... Set up the Download "
 "controller details."
@@ -833,27 +972,27 @@ msgstr ""
 "Όρια σύνδεσης, σειρά λήψεων, προτεραιότητες... Ρυθμίστε τις λεπτομέρειες του "
 "ελεγκτή λήψεων."
 
-#: src/gui/components/settings/general.rs:227
+#: src/gui/components/settings/general.rs:215
 msgid "Always"
 msgstr "Πάντα"
 
-#: src/gui/components/settings/general.rs:228
+#: src/gui/components/settings/general.rs:216
 msgid "Only if downloads were running at last Session's end"
 msgstr "Μόνο αν υπήρχαν ενεργές λήψεις στο τέλος της τελευταίας συνεδρίας"
 
-#: src/gui/components/settings/general.rs:232
+#: src/gui/components/settings/general.rs:220
 msgid "Autostart downloads at application start"
 msgstr "Αυτόματη έναρξη λήψεων κατά την εκκίνηση της εφαρμογής"
 
-#: src/gui/components/settings/general.rs:243
+#: src/gui/components/settings/general.rs:231
 msgid "Show Countdown (seconds)"
 msgstr "Εμφάνιση αντίστροφης μέτρησης (δευτερόλεπτα)"
 
-#: src/gui/components/settings/general.rs:250
+#: src/gui/components/settings/general.rs:238
 msgid "Autostart Downloads"
 msgstr "Αυτόματη έναρξη λήψεων"
 
-#: src/gui/components/settings/general.rs:252
+#: src/gui/components/settings/general.rs:240
 msgid ""
 "Choose if, and when JDownloader should start pending downloads without user "
 "interaction."
@@ -861,27 +1000,27 @@ msgstr ""
 "Επιλέξτε αν και πότε το JDownloader θα πρέπει να ξεκινά τις εκκρεμείς λήψεις "
 "χωρίς αλληλεπίδραση χρήστη."
 
-#: src/gui/components/settings/general.rs:264
+#: src/gui/components/settings/general.rs:252
 msgid "Group single files in a Various package"
 msgstr "Ομαδοποίηση μεμονωμένων αρχείων σε πακέτο Various"
 
-#: src/gui/components/settings/general.rs:271
+#: src/gui/components/settings/general.rs:259
 msgid "LinkGrabber"
 msgstr "Συλλέκτης συνδέσμων"
 
-#: src/gui/components/settings/general.rs:282
+#: src/gui/components/settings/general.rs:270
 msgid "SFV / CRC check when possible"
 msgstr "Έλεγχος SFV / CRC όταν είναι δυνατόν"
 
-#: src/gui/components/settings/general.rs:286
+#: src/gui/components/settings/general.rs:274
 msgid "Restart Downloads when SFV/CRC check fails"
 msgstr "Επανεκκίνηση λήψεων όταν αποτυγχάνει ο έλεγχος SFV/CRC"
 
-#: src/gui/components/settings/general.rs:293
+#: src/gui/components/settings/general.rs:281
 msgid "File Writing"
 msgstr "Εγγραφή αρχείων"
 
-#: src/gui/components/settings/general.rs:295
+#: src/gui/components/settings/general.rs:283
 msgid ""
 "JDownloader will verify your downloads for correctness after download using "
 "the hash/check option"
@@ -889,17 +1028,18 @@ msgstr ""
 "Το JDownloader θα επαληθεύσει την ορθότητα των λήψεών σας μετά τη λήψη "
 "χρησιμοποιώντας την επιλογή ελέγχου με hash"
 
-#: src/gui/components/settings/general.rs:307
+#: src/gui/components/settings/general.rs:295
 msgid "Auto open Link Containers (dlc,rsdf,...)"
 msgstr "Αυτόματο άνοιγμα περιεκτών συνδέσμων (dlc, rsdf...)"
 
-#: src/gui/components/settings/general.rs:314
+#: src/gui/components/settings/general.rs:302
 msgid "Miscellaneous"
 msgstr "Διάφορα"
 
-#: src/gui/components/settings/general.rs:337
+#: src/gui/components/settings/general.rs:325
+#: src/gui/dialogs/add_links_dialog.rs:318
 #: src/gui/dialogs/packagizer_rule_dialog.rs:161
-#: src/gui/properties_panel.rs:400
+#: src/gui/properties_panel.rs:419
 msgid "Select Folder"
 msgstr "Επιλογή φακέλου"
 
@@ -950,7 +1090,7 @@ msgstr "αντίγραφο"
 
 #: src/gui/components/settings/scripts.rs:26
 msgid "Create an Info-File in the Download-Folder with detailed information"
-msgstr ""
+msgstr "Δημιουργία αρχείου πληροφοριών στον φάκελο λήψεων με λεπτομερείς πληροφορίες"
 "Δημιουργία αρχείου πληροφοριών στον φάκελο λήψης με λεπτομερείς πληροφορίες"
 
 #: src/gui/components/settings/scripts.rs:32
@@ -1024,7 +1164,7 @@ msgid "Enter password..."
 msgstr "Εισαγάγετε κωδικό πρόσβασης..."
 
 #: src/gui/dialogs/account_add_dialog.rs:115
-#: src/gui/dialogs/packagizer_rule_dialog.rs:444
+#: src/gui/dialogs/packagizer_rule_dialog.rs:445
 #: src/gui/dialogs/script_edit_dialog.rs:120
 msgid "Save"
 msgstr "Αποθήκευση"
@@ -1036,6 +1176,76 @@ msgstr "2. Εισαγάγετε τα στοιχεία σύνδεσής σας σ
 #: src/gui/dialogs/account_add_dialog.rs:253
 msgid "Adding account..."
 msgstr "Προσθήκη λογαριασμού..."
+
+#: src/gui/dialogs/add_links_dialog.rs:39
+#, fuzzy
+msgid "Analyse and Add Links"
+msgstr "Ανάλυση κειμένου με συνδέσμους"
+
+#: src/gui/dialogs/add_links_dialog.rs:63
+msgid "Enter Links, URLs, Websites, or any other text here..."
+msgstr "Εισαγάγετε εδώ συνδέσμους, διευθύνσεις URL, ιστότοπους ή οποιοδήποτε άλλο κείμενο..."
+
+#: src/gui/dialogs/add_links_dialog.rs:91
+msgid "Please choose Download Destination here."
+msgstr "Επιλέξτε εδώ τον προορισμό λήψης."
+
+#: src/gui/dialogs/add_links_dialog.rs:98
+msgid "Enter a Package name, or leave empty for auto mode"
+msgstr "Εισαγάγετε ένα όνομα πακέτου, ή αφήστε το κενό για αυτόματη λειτουργία"
+
+#: src/gui/dialogs/add_links_dialog.rs:102
+msgid ""
+"Choose a Package Name for the Downloads above. If empty, JDownloader will "
+"create Packages based on the filenames"
+msgstr ""
+
+#: src/gui/dialogs/add_links_dialog.rs:108
+msgid "Enter a comment or leave empty..."
+msgstr "Εισαγάγετε ένα σχόλιο ή αφήστε το κενό..."
+
+#: src/gui/dialogs/add_links_dialog.rs:112
+msgid ""
+"Enter a comment. This comment will be stored in every package and "
+"downloadlink."
+msgstr ""
+
+#: src/gui/dialogs/add_links_dialog.rs:120
+#: src/gui/dialogs/add_links_dialog.rs:131
+#, fuzzy
+msgid "Enter the archive's extraction password"
+msgstr "Η εξαγωγή αρχείου ολοκληρώθηκε"
+
+#: src/gui/dialogs/add_links_dialog.rs:121
+#, fuzzy
+msgid "Auto Extract"
+msgstr "Αυτόματη εξαγωγή"
+
+#: src/gui/dialogs/add_links_dialog.rs:123
+msgid "Enable this option to extract all found archives after download"
+msgstr "Ενεργοποιήστε αυτήν την επιλογή για εξαγωγή όλων των αρχείων συμπίεσης που βρέθηκαν μετά τη λήψη"
+
+#: src/gui/dialogs/add_links_dialog.rs:139
+#: src/gui/dialogs/add_links_dialog.rs:155
+msgid "Enter a Password for protected Links"
+msgstr "Εισαγάγετε έναν κωδικό πρόσβασης για προστατευμένους συνδέσμους"
+
+#: src/gui/dialogs/add_links_dialog.rs:165
+msgid "Information overwrites packagizer rules"
+msgstr "Οι πληροφορίες αντικαθιστούν τους κανόνες του Packagizer"
+
+#: src/gui/dialogs/add_links_dialog.rs:242
+msgid "Start Deep Link Analyse"
+msgstr "Έναρξη βαθιάς ανάλυσης συνδέσμων"
+
+#: src/gui/dialogs/add_links_dialog.rs:247
+msgid "Start Normal Link Analyse"
+msgstr "Έναρξη κανονικής ανάλυσης συνδέσμων"
+
+#: src/gui/dialogs/add_links_dialog.rs:425
+#, fuzzy
+msgid "Adding links..."
+msgstr "Προσθήκη συνδέσμων"
 
 #: src/gui/dialogs/packagizer_rule_dialog.rs:21
 msgid "Contains"
@@ -1070,13 +1280,13 @@ msgid "Always matches"
 msgstr "Ταιριάζει πάντα"
 
 #: src/gui/dialogs/packagizer_rule_dialog.rs:241
-#: src/gui/dialogs/packagizer_rule_dialog.rs:384
+#: src/gui/dialogs/packagizer_rule_dialog.rs:385
 msgid "Filename"
 msgstr "Όνομα αρχείου"
 
 #: src/gui/dialogs/packagizer_rule_dialog.rs:242
-#: src/gui/dialogs/packagizer_rule_dialog.rs:382
-#: src/gui/properties_panel.rs:240
+#: src/gui/dialogs/packagizer_rule_dialog.rs:383
+#: src/gui/properties_panel.rs:257
 msgid "Package name"
 msgstr "Όνομα πακέτου"
 
@@ -1193,55 +1403,59 @@ msgstr "Πολύ χαμηλή"
 msgid "Lowest"
 msgstr "Ελάχιστη"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:376
+#: src/gui/dialogs/packagizer_rule_dialog.rs:377
 msgid "Priority"
 msgstr "Προτεραιότητα"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:383
+#: src/gui/dialogs/packagizer_rule_dialog.rs:384
 msgid "Package key"
 msgstr "Κλειδί πακέτου"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:397
+#: src/gui/dialogs/packagizer_rule_dialog.rs:392
+msgid "Chunks"
+msgstr "Τμήματα"
+
+#: src/gui/dialogs/packagizer_rule_dialog.rs:398
 msgid "Auto extract"
 msgstr "Αυτόματη εξαγωγή"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:398
+#: src/gui/dialogs/packagizer_rule_dialog.rs:399
 msgid "Auto add"
 msgstr "Αυτόματη προσθήκη"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:399
+#: src/gui/dialogs/packagizer_rule_dialog.rs:400
 msgid "Autostart"
 msgstr "Αυτόματη εκκίνηση"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:400
+#: src/gui/dialogs/packagizer_rule_dialog.rs:401
 msgid "Forced start"
 msgstr "Αναγκαστική εκκίνηση"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:401
+#: src/gui/dialogs/packagizer_rule_dialog.rs:402
 msgid "Link enabled"
 msgstr "Ενεργοποιημένος σύνδεσμος"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:405
+#: src/gui/dialogs/packagizer_rule_dialog.rs:406
 msgid "Then"
 msgstr "Τότε"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:414
+#: src/gui/dialogs/packagizer_rule_dialog.rs:415
 msgid "Move to"
 msgstr "Μετακίνηση σε"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:415
+#: src/gui/dialogs/packagizer_rule_dialog.rs:416
 msgid "Rename to"
 msgstr "Μετονομασία σε"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:419
+#: src/gui/dialogs/packagizer_rule_dialog.rs:420
 msgid "...and do"
 msgstr "...και εκτέλεση"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:430
+#: src/gui/dialogs/packagizer_rule_dialog.rs:431
 msgid "Stop processing further rules if this rule matches"
 msgstr "Διακοπή επεξεργασίας περαιτέρω κανόνων αν ταιριάζει αυτός ο κανόνας"
 
-#: src/gui/dialogs/packagizer_rule_dialog.rs:449
+#: src/gui/dialogs/packagizer_rule_dialog.rs:450
 msgid "This is a predefined rule and cannot be modified."
 msgstr "Αυτός είναι προκαθορισμένος κανόνας και δεν μπορεί να τροποποιηθεί."
 
@@ -1336,71 +1550,71 @@ msgstr "Επανασύνδεση"
 msgid "Check for updates"
 msgstr "Έλεγχος για ενημερώσεις"
 
-#: src/gui/properties_panel.rs:86
+#: src/gui/properties_panel.rs:103
 msgid "Highest priority"
 msgstr "Μέγιστη προτεραιότητα"
 
-#: src/gui/properties_panel.rs:87
+#: src/gui/properties_panel.rs:104
 msgid "Higher priority"
 msgstr "Πολύ υψηλή προτεραιότητα"
 
-#: src/gui/properties_panel.rs:88
+#: src/gui/properties_panel.rs:105
 msgid "High priority"
 msgstr "Υψηλή προτεραιότητα"
 
-#: src/gui/properties_panel.rs:89
+#: src/gui/properties_panel.rs:106
 msgid "Low priority"
 msgstr "Χαμηλή προτεραιότητα"
 
-#: src/gui/properties_panel.rs:90
+#: src/gui/properties_panel.rs:107
 msgid "Lower priority"
 msgstr "Πολύ χαμηλή προτεραιότητα"
 
-#: src/gui/properties_panel.rs:91
+#: src/gui/properties_panel.rs:108
 msgid "Lowest priority"
 msgstr "Ελάχιστη προτεραιότητα"
 
-#: src/gui/properties_panel.rs:92
+#: src/gui/properties_panel.rs:109
 msgid "Default priority"
 msgstr "Προεπιλεγμένη προτεραιότητα"
 
-#: src/gui/properties_panel.rs:235
+#: src/gui/properties_panel.rs:252
 msgid "Package name:"
 msgstr "Όνομα πακέτου:"
 
-#: src/gui/properties_panel.rs:249
+#: src/gui/properties_panel.rs:266
 msgid "File name:"
 msgstr "Όνομα αρχείου:"
 
-#: src/gui/properties_panel.rs:254
+#: src/gui/properties_panel.rs:271
 msgid "File name"
 msgstr "Όνομα αρχείου"
 
-#: src/gui/properties_panel.rs:260
+#: src/gui/properties_panel.rs:277
 msgid "Browse…"
 msgstr "Περιήγηση…"
 
-#: src/gui/properties_panel.rs:266
+#: src/gui/properties_panel.rs:283
 msgid "Save to:"
 msgstr "Αποθήκευση σε:"
 
-#: src/gui/properties_panel.rs:271
+#: src/gui/properties_panel.rs:288
 msgid "Save to"
 msgstr "Αποθήκευση σε"
 
-#: src/gui/properties_panel.rs:278
+#: src/gui/properties_panel.rs:295
 msgid "Source:"
 msgstr "Προέλευση:"
 
-#: src/gui/properties_panel.rs:283
+#: src/gui/properties_panel.rs:300
 msgid "Source"
 msgstr "Προέλευση"
 
-#: src/gui/properties_panel.rs:289
+#: src/gui/properties_panel.rs:306
 msgid "Comment:"
 msgstr "Σχόλιο:"
 
-#: src/gui/properties_panel.rs:490
+#: src/gui/properties_panel.rs:509
 msgid "File Properties: {}"
 msgstr "Ιδιότητες αρχείου: {}"
 
@@ -1410,32 +1624,37 @@ msgstr "Ιδιότητες αρχείου: {}"
 msgid "Open download folder"
 msgstr "Άνοιγμα φακέλου λήψεων"
 
-#: src/gui/window.rs:179
+#: src/gui/window.rs:192
 msgid "Waiting for JDownloader to exit..."
 msgstr "Αναμονή για τερματισμό του JDownloader..."
 
-#: src/gui/mod.rs:178
+#: src/gui/mod.rs:185
 msgid "The power of JDownloader, the elegance of GNOME"
 msgstr "Η δύναμη του JDownloader, η κομψότητα του GNOME"
 
-#: src/gui/mod.rs:261 src/gui/mod.rs:283
+#: src/gui/mod.rs:276 src/gui/mod.rs:304
+#, fuzzy
+msgid "Add New Links"
+msgstr "Προσθήκη συνδέσμων"
+
+#: src/gui/mod.rs:282 src/gui/mod.rs:314
 msgid "Start Downloads"
 msgstr "Έναρξη λήψεων"
 
-#: src/gui/mod.rs:266 src/gui/mod.rs:290
+#: src/gui/mod.rs:287 src/gui/mod.rs:321
 msgid "Start All Downloads"
 msgstr "Έναρξη όλων των λήψεων"
 
 #. Status bar.
-#: src/gui/mod.rs:550
+#: src/gui/mod.rs:615
 msgid "Ready"
 msgstr "Έτοιμο"
 
-#: src/gui/mod.rs:606 src/jd/settings/event_scripter_settings.rs:138
+#: src/gui/mod.rs:671 src/jd/settings/event_scripter_settings.rs:138
 msgid "JDownloader started"
 msgstr "Το JDownloader ξεκίνησε"
 
-#: src/gui/mod.rs:641
+#: src/gui/mod.rs:706
 msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
 msgstr "Δεν βρέθηκε το JDownloader.jar. Ορίστε τη μεταβλητή JDOWNLOADER_JAR."
 
@@ -1630,6 +1849,39 @@ msgstr "Πατήθηκε το κουμπί κάτω γραμμής του συλ
 #: src/jd/settings/event_scripter_settings.rs:168
 msgid "Traymenu Button Pressed"
 msgstr "Πατήθηκε το κουμπί μενού περιοχής ειδοποιήσεων"
+
+#~ msgid "Add container"
+#~ msgstr "Προσθήκη περιέκτη"
+
+#~ msgid "Add filtered stuff"
+#~ msgstr "Προσθήκη φιλτραρισμένων στοιχείων"
+
+#~ msgid "Add and start all"
+#~ msgstr "Προσθήκη και έναρξη όλων"
+
+#~ msgid "Add and start selected"
+#~ msgstr "Προσθήκη και έναρξη επιλεγμένων"
+
+#~ msgid "Add all"
+#~ msgstr "Προσθήκη όλων"
+
+#~ msgid "Add selected"
+#~ msgstr "Προσθήκη επιλεγμένων"
+
+#~ msgid "Bottom bar manager"
+#~ msgstr "Διαχείριση κάτω γραμμής"
+
+#~ msgid "Delete all"
+#~ msgstr "Διαγραφή όλων"
+
+#~ msgid "Parallel downloads"
+#~ msgstr "Παράλληλες λήψεις"
+
+#~ msgid "Parallel per host"
+#~ msgstr "Παράλληλες ανά πάροχο"
+
+#~ msgid "Speed Limit"
+#~ msgstr "Όριο ταχύτητας"
 
 #~ msgid "Installing…"
 #~ msgstr "Γίνεται εγκατάσταση…"
