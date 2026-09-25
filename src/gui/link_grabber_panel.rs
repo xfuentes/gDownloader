@@ -935,9 +935,13 @@ impl LinkGrabberPanel {
             },
         );
 
-        // Bottom bar split left/right
+        // Bottom bar split left/right — `left_bar` itself expands (rather
+        // than a dedicated spacer widget) so the search field it ends with
+        // stretches to fill the available width, matching the downloads
+        // panel's own bottom bar.
         let left_bar = gtk4::Box::new(gtk4::Orientation::Horizontal, 2);
         left_bar.set_valign(gtk4::Align::Center);
+        left_bar.set_hexpand(true);
 
         // Add — icon + text like JDownloader's own button, with the arrow
         // menu button visually joined to it (GTK's "linked" segmented style).
@@ -1022,6 +1026,89 @@ impl LinkGrabberPanel {
         add_box.append(&add_arrow);
         left_bar.append(&add_box);
 
+        // Clear — JDownloader's own `ClearLinkgrabberAction` sits right next
+        // to Add Links, using its "reset" (yellow arrow) icon rather than a
+        // plain trash can, and wipes the whole link collector regardless of
+        // selection/filtering.
+        let clear_filtered_btn = gtk4::Button::builder()
+            .child(&gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(crate::gui::icon_key::ICON_RESET)))
+            .build();
+        clear_filtered_btn.set_tooltip_text(Some(tr!("Clear linkgrabber").as_ref()));
+
+        let filtered_popover_box = gtk4::Box::new(gtk4::Orientation::Vertical, 4);
+        filtered_popover_box.set_margin_start(8);
+        filtered_popover_box.set_margin_end(8);
+        filtered_popover_box.set_margin_top(8);
+        filtered_popover_box.set_margin_bottom(8);
+        let clear_filtered_row = gtk4::Button::builder()
+            .child(&crate::gui::menus::icon_label(
+                crate::gui::icon_key::ICON_FILTER,
+                tr!("Clear filtered links").as_ref(),
+            ))
+            .has_frame(false)
+            .halign(gtk4::Align::Start)
+            .sensitive(false)
+            .build();
+        filtered_popover_box.append(&clear_filtered_row);
+        let restore_filtered_row = gtk4::Button::builder()
+            .child(&crate::gui::menus::icon_label(
+                crate::gui::icon_key::ICON_FILTER,
+                tr!("Restore filtered links").as_ref(),
+            ))
+            .has_frame(false)
+            .halign(gtk4::Align::Start)
+            .sensitive(false)
+            .build();
+        filtered_popover_box.append(&restore_filtered_row);
+        let filtered_popover = gtk4::Popover::new();
+        filtered_popover.set_child(Some(&filtered_popover_box));
+        let filtered_arrow = gtk4::MenuButton::new();
+        filtered_arrow.set_direction(gtk4::ArrowType::Down);
+        filtered_arrow.set_popover(Some(&filtered_popover));
+        filtered_arrow.set_sensitive(false);
+        filtered_arrow.set_tooltip_text(Some(
+            tr!("Not available: JDownloader doesn't expose its filtered-links list over the RemoteAPI.").as_ref(),
+        ));
+
+        let clear_filtered_box = gtk4::Box::new(gtk4::Orientation::Horizontal, 0);
+        clear_filtered_box.add_css_class("linked");
+        clear_filtered_box.append(&clear_filtered_btn);
+        clear_filtered_box.append(&filtered_arrow);
+        left_bar.append(&clear_filtered_box);
+
+        clear_filtered_btn.connect_clicked({
+            let api = api.clone();
+            let child_stores = child_stores.clone();
+            let store = store.clone();
+            let view = view.clone();
+            move |_| {
+                let uuids = all_uuids(&child_stores);
+                if uuids.is_empty() {
+                    return;
+                }
+                let count = uuids.len();
+                let ids: Vec<i64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
+                let task_text = tr!(
+                    "Clear {n} link from the Link Collector" | "Clear {n} links from the Link Collector" % count
+                )
+                .to_string();
+                let api = api.clone();
+                let child_stores = child_stores.clone();
+                let store = store.clone();
+                confirm_action(&view, "skip_confirm_linkgrabber_clear", task_text, move || {
+                    crate::gui::spawn::api_call(
+                        move || {
+                            let _ = api.remove_linkgrabber_links(&ids);
+                        },
+                        move |_| {
+                            remove_rows_by_uuid(&child_stores, &uuids);
+                            prune_empty_packages(&store, &child_stores);
+                        },
+                    );
+                });
+            }
+        });
+
         add_btn.connect_clicked({
             let api = api.clone();
             move |btn| {
@@ -1083,355 +1170,283 @@ impl LinkGrabberPanel {
 
         left_bar.append(&gtk4::Separator::new(gtk4::Orientation::Vertical));
 
-        // Clear
-        let clear_btn = gtk4::Button::builder()
-            .child(&gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(crate::gui::icon_key::ICON_CLEAR)))
-            .build();
-        clear_btn.set_has_frame(false);
-        clear_btn.set_tooltip_text(Some(tr!("Clear linkgrabber").as_ref()));
-        clear_btn.set_size_request(24, 24);
-        left_bar.append(&clear_btn);
+        // Search — a category combobox (icon per entry) linked to a text
+        // field whose placeholder changes with the selected category,
+        // matching JDownloader's own `LinkgrabberSearchField`/
+        // `LinktablesSearchCategory`. The link grabber offers one fewer
+        // category than the downloads panel: no "Status", since crawled
+        // links have no download status yet.
+        let search_categories: [(&str, String, String); 6] = [
+            (
+                crate::gui::icon_key::ICON_TEXT,
+                tr!("File Name").to_string(),
+                tr!("Please enter the file name you are looking for...").to_string(),
+            ),
+            (
+                crate::gui::icon_key::ICON_TEXT,
+                tr!("File Path").to_string(),
+                tr!("Please enter the file path you are looking for...").to_string(),
+            ),
+            (
+                crate::gui::icon_key::ICON_BROWSE,
+                tr!("Hoster").to_string(),
+                tr!("Please enter the domain you are looking for...").to_string(),
+            ),
+            (
+                crate::gui::icon_key::ICON_PACKAGE_OPEN,
+                tr!("Package Name").to_string(),
+                tr!("Please enter the package name you are looking for...").to_string(),
+            ),
+            (
+                crate::gui::icon_key::ICON_LIST,
+                tr!("Comment").to_string(),
+                tr!("Please enter the comment you are looking for...").to_string(),
+            ),
+            (
+                crate::gui::icon_key::ICON_LIST,
+                tr!("Comment(Package)").to_string(),
+                tr!("Please enter the comment you are looking for...").to_string(),
+            ),
+        ];
+        let search_category_model = gtk4::StringList::new(&[]);
+        for (_, label, _) in &search_categories {
+            search_category_model.append(label);
+        }
+        let search_category_icons: Vec<&'static str> =
+            search_categories.iter().map(|(icon, _, _)| *icon).collect();
+        let search_category_dropdown =
+            crate::gui::fields::icon_dropdown(search_category_model, search_category_icons);
 
-        clear_btn.connect_clicked({
-            let api = api.clone();
-            let child_stores = child_stores.clone();
-            let store = store.clone();
-            let view = view.clone();
-            move |_| {
-                let uuids = all_uuids(&child_stores);
-                if uuids.is_empty() {
-                    return;
+        let search_entry = gtk4::Entry::new();
+        search_entry.set_hexpand(true);
+        search_entry.set_placeholder_text(Some(&search_categories[0].2));
+
+        let search_box = gtk4::Box::new(gtk4::Orientation::Horizontal, 0);
+        search_box.add_css_class("linked");
+        search_box.set_hexpand(true);
+        search_box.append(&search_category_dropdown);
+        search_box.append(&search_entry);
+        left_bar.append(&search_box);
+
+        search_category_dropdown.connect_selected_notify({
+            let search_entry = search_entry.clone();
+            let placeholders: Vec<String> =
+                search_categories.iter().map(|(_, _, help)| help.clone()).collect();
+            move |dropdown| {
+                if let Some(placeholder) = placeholders.get(dropdown.selected() as usize) {
+                    search_entry.set_placeholder_text(Some(placeholder));
                 }
-                let count = uuids.len();
-                let ids: Vec<i64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
-                let task_text = tr!(
-                    "Clear {n} link from the Link Collector" | "Clear {n} links from the Link Collector" % count
-                )
-                .to_string();
-                let api = api.clone();
-                let child_stores = child_stores.clone();
-                let store = store.clone();
-                confirm_action(&view, "skip_confirm_linkgrabber_clear", task_text, move || {
-                    crate::gui::spawn::api_call(
-                        move || {
-                            let _ = api.remove_linkgrabber_links(&ids);
-                        },
-                        move |_| {
-                            remove_rows_by_uuid(&child_stores, &uuids);
-                            prune_empty_packages(&store, &child_stores);
-                        },
-                    );
-                });
             }
         });
-
-        // Delete
-        let delete_btn = gtk4::Button::builder()
-            .child(&gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(crate::gui::icon_key::ICON_TRASH)))
-            .build();
-        delete_btn.set_has_frame(false);
-        delete_btn.set_tooltip_text(Some(tr!("Delete").as_ref()));
-        delete_btn.set_size_request(24, 24);
-        left_bar.append(&delete_btn);
-
-        let delete_popover_box = gtk4::Box::new(gtk4::Orientation::Vertical, 4);
-        delete_popover_box.set_margin_start(8);
-        delete_popover_box.set_margin_end(8);
-        delete_popover_box.set_margin_top(8);
-        delete_popover_box.set_margin_bottom(8);
-        let delete_disabled_row = gtk4::Button::builder()
-            .child(&crate::gui::menus::icon_label(
-                crate::gui::icon_key::ICON_REMOVE_DISABLED,
-                tr!("Delete disabled").as_ref(),
-            ))
-            .has_frame(false)
-            .halign(gtk4::Align::Start)
-            .build();
-        delete_popover_box.append(&delete_disabled_row);
-        let delete_offline_row = gtk4::Button::builder()
-            .child(&crate::gui::menus::icon_label(
-                crate::gui::icon_key::ICON_REMOVE_OFFLINE,
-                tr!("Delete offline").as_ref(),
-            ))
-            .has_frame(false)
-            .halign(gtk4::Align::Start)
-            .build();
-        delete_popover_box.append(&delete_offline_row);
-        let delete_incomplete_archives_row = gtk4::Button::builder()
-            .child(&crate::gui::menus::icon_label(
-                crate::gui::icon_key::ICON_EXTRACT_ERROR,
-                tr!("Remove incomplete archives").as_ref(),
-            ))
-            .has_frame(false)
-            .halign(gtk4::Align::Start)
-            .build();
-        delete_popover_box.append(&delete_incomplete_archives_row);
-        // JDownloader's "filtered" links here are ones dropped by the global
-        // Link Filter during crawling (`LinkCollector.filteredStuff`) — an
-        // internal list with no RemoteAPI surface at all, so this can't be
-        // implemented from a remote client.
-        let clear_filtered_row = gtk4::Button::builder()
-            .child(&crate::gui::menus::icon_label(
-                crate::gui::icon_key::ICON_FILTER,
-                tr!("Clear filtered links").as_ref(),
-            ))
-            .has_frame(false)
-            .halign(gtk4::Align::Start)
-            .sensitive(false)
-            .build();
-        clear_filtered_row.set_tooltip_text(Some(
-            tr!("Not available: JDownloader doesn't expose its filtered-links list over the RemoteAPI.").as_ref(),
-        ));
-        delete_popover_box.append(&clear_filtered_row);
-        let delete_popover = gtk4::Popover::new();
-        delete_popover.set_child(Some(&delete_popover_box));
-        let delete_arrow = gtk4::MenuButton::new();
-        delete_arrow.set_direction(gtk4::ArrowType::Down);
-        delete_arrow.set_popover(Some(&delete_popover));
-        left_bar.append(&delete_arrow);
-
-        // JDownloader's delete split-button has no distinct default action
-        // of its own (unlike Add) — the bare icon just opens the same menu
-        // as the arrow.
-        delete_btn.connect_clicked({
-            let delete_arrow = delete_arrow.clone();
-            move |_| delete_arrow.popup()
-        });
-
-        delete_disabled_row.connect_clicked({
-            let api = api.clone();
-            let child_stores = child_stores.clone();
-            let store = store.clone();
-            let view = view.clone();
-            let delete_popover = delete_popover.clone();
-            move |_| {
-                delete_popover.popdown();
-                let uuids = uuids_where(&child_stores, |row| !row.enabled);
-                if uuids.is_empty() {
-                    return;
-                }
-                let count = uuids.len();
-                let ids: Vec<i64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
-                let task_text =
-                    tr!("Delete {n} disabled link" | "Delete {n} disabled links" % count).to_string();
-                let api = api.clone();
-                let child_stores = child_stores.clone();
-                let store = store.clone();
-                confirm_action(&view, "skip_confirm_linkgrabber_delete_disabled", task_text, move || {
-                    crate::gui::spawn::api_call(
-                        move || {
-                            let _ = api.remove_linkgrabber_links(&ids);
-                        },
-                        move |_| {
-                            remove_rows_by_uuid(&child_stores, &uuids);
-                            prune_empty_packages(&store, &child_stores);
-                        },
-                    );
-                });
-            }
-        });
-
-        delete_offline_row.connect_clicked({
-            let api = api.clone();
-            let child_stores = child_stores.clone();
-            let store = store.clone();
-            let view = view.clone();
-            let delete_popover = delete_popover.clone();
-            move |_| {
-                delete_popover.popdown();
-                let uuids = uuids_where(&child_stores, |row| row.offline);
-                if uuids.is_empty() {
-                    return;
-                }
-                let count = uuids.len();
-                let ids: Vec<i64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
-                let task_text =
-                    tr!("Delete {n} offline link" | "Delete {n} offline links" % count).to_string();
-                let api = api.clone();
-                let child_stores = child_stores.clone();
-                let store = store.clone();
-                confirm_action(&view, "skip_confirm_linkgrabber_delete_offline", task_text, move || {
-                    crate::gui::spawn::api_call(
-                        move || {
-                            let _ = api.remove_linkgrabber_links(&ids);
-                        },
-                        move |_| {
-                            remove_rows_by_uuid(&child_stores, &uuids);
-                            prune_empty_packages(&store, &child_stores);
-                        },
-                    );
-                });
-            }
-        });
-
-        delete_incomplete_archives_row.connect_clicked({
-            let api = api.clone();
-            let child_stores = child_stores.clone();
-            let store = store.clone();
-            let view = view.clone();
-            let delete_popover = delete_popover.clone();
-            move |_| {
-                delete_popover.popdown();
-                let packages: Vec<(i64, Vec<i64>)> = child_stores
-                    .borrow()
-                    .iter()
-                    .map(|(package_id, package_store)| {
-                        let link_ids: Vec<i64> = (0..package_store.n_items())
-                            .filter_map(|pos| {
-                                let obj = package_store.item(pos).and_downcast::<glib::BoxedAnyObject>()?;
-                                let id: i64 = obj.borrow::<LinkGrabberRow>().uuid.parse().ok()?;
-                                Some(id)
-                            })
-                            .collect();
-                        (*package_id, link_ids)
-                    })
-                    .collect();
-                let api = api.clone();
-                let child_stores = child_stores.clone();
-                let store = store.clone();
-                let view = view.clone();
-                crate::gui::spawn::api_call(
-                    {
-                        let api = api.clone();
-                        move || {
-                            // Grouped per-package: JDownloader's own dialog removes
-                            // all links of an incomplete archive at once, and
-                            // `getArchiveInfo`'s `states` map isn't keyed by link
-                            // id, so completeness is resolved package-by-package
-                            // rather than per individual archive.
-                            let mut incomplete: std::collections::HashSet<String> = Default::default();
-                            for (package_id, link_ids) in packages {
-                                if link_ids.is_empty() {
-                                    continue;
-                                }
-                                let archives =
-                                    api.get_archive_info(&link_ids, &[package_id]).unwrap_or_default();
-                                let has_incomplete = archives.iter().any(|archive| {
-                                    archive
-                                        .get("states")
-                                        .and_then(Value::as_object)
-                                        .is_some_and(|states| {
-                                            states.values().any(|s| s.as_str() != Some("COMPLETE"))
-                                        })
-                                });
-                                if has_incomplete {
-                                    incomplete.extend(link_ids.iter().map(|id| id.to_string()));
-                                }
-                            }
-                            incomplete
-                        }
-                    },
-                    move |uuids: std::collections::HashSet<String>| {
-                        if uuids.is_empty() {
-                            return;
-                        }
-                        let count = uuids.len();
-                        let ids: Vec<i64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
-                        let task_text = tr!(
-                            "Remove {n} link belonging to an incomplete archive" | "Remove {n} links belonging to incomplete archives" % count
-                        )
-                        .to_string();
-                        let api = api.clone();
-                        let child_stores = child_stores.clone();
-                        let store = store.clone();
-                        confirm_action(&view, "skip_confirm_linkgrabber_remove_incomplete", task_text, move || {
-                            crate::gui::spawn::api_call(
-                                move || {
-                                    let _ = api.remove_linkgrabber_links(&ids);
-                                },
-                                move |_| {
-                                    remove_rows_by_uuid(&child_stores, &uuids);
-                                    prune_empty_packages(&store, &child_stores);
-                                },
-                            );
-                        });
-                    },
-                );
-            }
-        });
-
-        left_bar.append(&gtk4::Separator::new(gtk4::Orientation::Vertical));
-
-        // Search
-        let search = gtk4::SearchEntry::new();
-        search.set_placeholder_text(Some(tr!("Filter").as_ref()));
-        search.set_size_request(120, 24);
-        left_bar.append(&search);
-
-        // Add filtered — restores links dropped by the global Link Filter
-        // during crawling (`LinkCollector.filteredStuff`); same RemoteAPI
-        // gap as "Clear filtered links" above, so this stays disabled.
-        let add_filtered = gtk4::Button::builder()
-            .child(&gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(crate::gui::icon_key::ICON_FILTER)))
-            .sensitive(false)
-            .build();
-        add_filtered.set_has_frame(false);
-        add_filtered.set_tooltip_text(Some(
-            tr!("Not available: JDownloader doesn't expose its filtered-links list over the RemoteAPI.").as_ref(),
-        ));
-        add_filtered.set_size_request(24, 24);
-        left_bar.append(&add_filtered);
 
         // Right bar
         let right_bar = gtk4::Box::new(gtk4::Orientation::Horizontal, 2);
         right_bar.set_valign(gtk4::Align::Center);
 
         // Confirm — default click mirrors JDownloader's own default
-        // (`ConfirmSelectionBarAction_main_button_add_and_start_all`).
+        // (`ConfirmSelectionBarAction_main_button_add_and_start_all`), icon
+        // included: `updateLabelAndIcon()` merges a small "add" badge onto
+        // "media-playback-start" for the (default) auto-start case. The
+        // arrow menu button is visually joined to it (GTK's "linked"
+        // segmented style) just like the Add Links split button, and its
+        // menu mirrors JD's own nested structure — "Download All"/
+        // "Download Selected" (`ConfirmOptionsAction`), each opening a
+        // submenu of the 3 `ConfirmSelectionBarActionSub` variants.
         let confirm_btn = gtk4::Button::builder()
-            .label(tr!("Start all Downloads").as_str())
-            .has_frame(false)
+            .child(&crate::gui::menus::merged_icon_label(
+                crate::gui::icon_key::ICON_MEDIA_PLAYBACK_START,
+                16,
+                crate::gui::icon_key::ICON_ADD,
+                8,
+                8.0,
+                8.0,
+                tr!("Start all Downloads").as_ref(),
+            ))
             .build();
         confirm_btn.set_size_request(120, 24);
-        right_bar.append(&confirm_btn);
+
+        // A submenu's 3 rows: "... add to Download List", "... start
+        // Downloads", "... Force Start" — same wording for both "All" and
+        // "Selected" (the parent row already says which). Force Start has
+        // no RemoteAPI surface at all (JD keeps it as an in-memory flag on
+        // the `DownloadLink`, never sent over the wire), so it stays
+        // disabled like the other RemoteAPI-gap stubs in this file.
+        let build_confirm_submenu = |on_add: Box<dyn Fn() + 'static>, on_start: Box<dyn Fn() + 'static>| -> gtk4::Popover {
+            let box_ = gtk4::Box::new(gtk4::Orientation::Vertical, 4);
+            box_.set_margin_start(8);
+            box_.set_margin_end(8);
+            box_.set_margin_top(8);
+            box_.set_margin_bottom(8);
+
+            let add_row = gtk4::Button::builder()
+                .child(&crate::gui::menus::icon_label(
+                    crate::gui::icon_key::ICON_GO_NEXT,
+                    tr!("... add to Download List").as_ref(),
+                ))
+                .has_frame(false)
+                .halign(gtk4::Align::Start)
+                .build();
+            box_.append(&add_row);
+
+            let start_row = gtk4::Button::builder()
+                .child(&crate::gui::menus::merged_icon_label(
+                    crate::gui::icon_key::ICON_MEDIA_PLAYBACK_START,
+                    16,
+                    crate::gui::icon_key::ICON_ADD,
+                    8,
+                    8.0,
+                    8.0,
+                    tr!("... start Downloads").as_ref(),
+                ))
+                .has_frame(false)
+                .halign(gtk4::Align::Start)
+                .build();
+            box_.append(&start_row);
+
+            let force_row = gtk4::Button::builder()
+                .child(&crate::gui::menus::merged_icon_label(
+                    crate::gui::icon_key::ICON_MEDIA_PLAYBACK_START,
+                    20,
+                    crate::gui::icon_key::ICON_PRIO_3,
+                    10,
+                    10.0,
+                    0.0,
+                    tr!("... Force Start").as_ref(),
+                ))
+                .has_frame(false)
+                .halign(gtk4::Align::Start)
+                .sensitive(false)
+                .build();
+            force_row.set_tooltip_text(Some(
+                tr!("Not available: JDownloader keeps \"forced\" as an in-memory flag that isn't exposed over the RemoteAPI.").as_ref(),
+            ));
+            box_.append(&force_row);
+
+            let popover = gtk4::Popover::new();
+            popover.set_child(Some(&box_));
+
+            add_row.connect_clicked({
+                let popover = popover.clone();
+                move |_| {
+                    popover.popdown();
+                    on_add();
+                }
+            });
+            start_row.connect_clicked({
+                let popover = popover.clone();
+                move |_| {
+                    popover.popdown();
+                    on_start();
+                }
+            });
+
+            popover
+        };
+
+        let confirm_all_popover = build_confirm_submenu(
+            {
+                let api = api.clone();
+                let child_stores = child_stores.clone();
+                Box::new(move || {
+                    let uuids = all_uuids(&child_stores);
+                    let ids: Vec<i64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
+                    if !ids.is_empty() {
+                        let api = api.clone();
+                        std::thread::spawn(move || {
+                            let _ = api.move_linkgrabber_to_downloadlist(&ids);
+                        });
+                    }
+                })
+            },
+            {
+                let api = api.clone();
+                let child_stores = child_stores.clone();
+                Box::new(move || {
+                    let uuids = all_uuids(&child_stores);
+                    let ids: Vec<u64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
+                    if !ids.is_empty() {
+                        let api = api.clone();
+                        std::thread::spawn(move || {
+                            let _ = api.start_linkgrabber_downloads(&ids);
+                        });
+                    }
+                })
+            },
+        );
+        let confirm_all_btn = gtk4::MenuButton::builder()
+            .child(&crate::gui::menus::icon_label(
+                crate::gui::icon_key::ICON_CONFIRMALL,
+                tr!("Download All").as_ref(),
+            ))
+            .has_frame(false)
+            .halign(gtk4::Align::Fill)
+            .direction(gtk4::ArrowType::Right)
+            .always_show_arrow(true)
+            .popover(&confirm_all_popover)
+            .build();
+
+        let confirm_selected_popover = build_confirm_submenu(
+            {
+                let api = api.clone();
+                let selection = selection.clone();
+                let child_stores = child_stores.clone();
+                Box::new(move || {
+                    let uuids = selected_uuids(&selection, &child_stores);
+                    let ids: Vec<i64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
+                    if !ids.is_empty() {
+                        let api = api.clone();
+                        std::thread::spawn(move || {
+                            let _ = api.move_linkgrabber_to_downloadlist(&ids);
+                        });
+                    }
+                })
+            },
+            {
+                let api = api.clone();
+                let selection = selection.clone();
+                let child_stores = child_stores.clone();
+                Box::new(move || {
+                    let uuids = selected_uuids(&selection, &child_stores);
+                    let ids: Vec<u64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
+                    if !ids.is_empty() {
+                        let api = api.clone();
+                        std::thread::spawn(move || {
+                            let _ = api.start_linkgrabber_downloads(&ids);
+                        });
+                    }
+                })
+            },
+        );
+        let confirm_selected_btn = gtk4::MenuButton::builder()
+            .child(&crate::gui::menus::icon_label(
+                crate::gui::icon_key::ICON_CONFIRMSELECTEDLINKS,
+                tr!("Download Selected").as_ref(),
+            ))
+            .has_frame(false)
+            .halign(gtk4::Align::Fill)
+            .direction(gtk4::ArrowType::Right)
+            .always_show_arrow(true)
+            .popover(&confirm_selected_popover)
+            .build();
 
         let confirm_popover_box = gtk4::Box::new(gtk4::Orientation::Vertical, 4);
         confirm_popover_box.set_margin_start(8);
         confirm_popover_box.set_margin_end(8);
         confirm_popover_box.set_margin_top(8);
         confirm_popover_box.set_margin_bottom(8);
-        let confirm_start_all_row = gtk4::Button::builder()
-            .child(&crate::gui::menus::icon_label(
-                crate::gui::icon_key::ICON_CONFIRMALL,
-                tr!("Start all Downloads").as_ref(),
-            ))
-            .has_frame(false)
-            .halign(gtk4::Align::Start)
-            .build();
-        confirm_popover_box.append(&confirm_start_all_row);
-        let confirm_start_selected_row = gtk4::Button::builder()
-            .child(&crate::gui::menus::icon_label(
-                crate::gui::icon_key::ICON_CONFIRMSELECTEDLINKS,
-                tr!("Start selected Downloads").as_ref(),
-            ))
-            .has_frame(false)
-            .halign(gtk4::Align::Start)
-            .build();
-        confirm_popover_box.append(&confirm_start_selected_row);
-        let confirm_add_all_row = gtk4::Button::builder()
-            .child(&crate::gui::menus::icon_label(
-                crate::gui::icon_key::ICON_CONFIRMALL,
-                tr!("Add all to Download List").as_ref(),
-            ))
-            .has_frame(false)
-            .halign(gtk4::Align::Start)
-            .build();
-        confirm_popover_box.append(&confirm_add_all_row);
-        let confirm_add_selected_row = gtk4::Button::builder()
-            .child(&crate::gui::menus::icon_label(
-                crate::gui::icon_key::ICON_CONFIRMSELECTEDLINKS,
-                tr!("Add selected to Download List").as_ref(),
-            ))
-            .has_frame(false)
-            .halign(gtk4::Align::Start)
-            .build();
-        confirm_popover_box.append(&confirm_add_selected_row);
+        confirm_popover_box.append(&confirm_all_btn);
+        confirm_popover_box.append(&confirm_selected_btn);
         let confirm_popover = gtk4::Popover::new();
         confirm_popover.set_child(Some(&confirm_popover_box));
         let confirm_arrow = gtk4::MenuButton::new();
         confirm_arrow.set_direction(gtk4::ArrowType::Down);
         confirm_arrow.set_popover(Some(&confirm_popover));
-        right_bar.append(&confirm_arrow);
+
+        let confirm_box = gtk4::Box::new(gtk4::Orientation::Horizontal, 0);
+        confirm_box.add_css_class("linked");
+        confirm_box.append(&confirm_btn);
+        confirm_box.append(&confirm_arrow);
+        right_bar.append(&confirm_box);
 
         confirm_btn.connect_clicked({
             let api = api.clone();
@@ -1447,72 +1462,6 @@ impl LinkGrabberPanel {
                 }
             }
         });
-        confirm_start_all_row.connect_clicked({
-            let api = api.clone();
-            let child_stores = child_stores.clone();
-            let confirm_popover = confirm_popover.clone();
-            move |_| {
-                confirm_popover.popdown();
-                let uuids = all_uuids(&child_stores);
-                let ids: Vec<u64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
-                if !ids.is_empty() {
-                    let api = api.clone();
-                    std::thread::spawn(move || {
-                        let _ = api.start_linkgrabber_downloads(&ids);
-                    });
-                }
-            }
-        });
-        confirm_start_selected_row.connect_clicked({
-            let api = api.clone();
-            let selection = selection.clone();
-            let child_stores = child_stores.clone();
-            let confirm_popover = confirm_popover.clone();
-            move |_| {
-                confirm_popover.popdown();
-                let uuids = selected_uuids(&selection, &child_stores);
-                let ids: Vec<u64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
-                if !ids.is_empty() {
-                    let api = api.clone();
-                    std::thread::spawn(move || {
-                        let _ = api.start_linkgrabber_downloads(&ids);
-                    });
-                }
-            }
-        });
-        confirm_add_all_row.connect_clicked({
-            let api = api.clone();
-            let child_stores = child_stores.clone();
-            let confirm_popover = confirm_popover.clone();
-            move |_| {
-                confirm_popover.popdown();
-                let uuids = all_uuids(&child_stores);
-                let ids: Vec<i64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
-                if !ids.is_empty() {
-                    let api = api.clone();
-                    std::thread::spawn(move || {
-                        let _ = api.move_linkgrabber_to_downloadlist(&ids);
-                    });
-                }
-            }
-        });
-        confirm_add_selected_row.connect_clicked({
-            let api = api.clone();
-            let selection = selection.clone();
-            let child_stores = child_stores.clone();
-            let confirm_popover = confirm_popover.clone();
-            move |_| {
-                confirm_popover.popdown();
-                let uuids = selected_uuids(&selection, &child_stores);
-                let ids: Vec<i64> = uuids.iter().filter_map(|u| u.parse().ok()).collect();
-                if !ids.is_empty() {
-                    let api = api.clone();
-                    std::thread::spawn(move || {
-                        let _ = api.move_linkgrabber_to_downloadlist(&ids);
-                    });
-                }
-            }
-        });
 
         right_bar.append(&gtk4::Separator::new(gtk4::Orientation::Vertical));
 
@@ -1522,20 +1471,45 @@ impl LinkGrabberPanel {
         settings_popover_box.set_margin_end(8);
         settings_popover_box.set_margin_top(8);
         settings_popover_box.set_margin_bottom(8);
-        let (add_at_top_row, add_at_top_check) = crate::gui::menus::check_row(tr!("Add at top").as_ref());
+        // Icons match each toggle's real JD action class (`AddAtTopToggleAction`,
+        // `AutoConfirmToggleAction`, `AutoStartToggleAction`, `LinkFilterToggleAction`,
+        // `LinkgrabberPropertiesToggleAction`/`LinkgrabberOverviewPanelToggleAction`
+        // — both `ICON_BOTTOMBAR` in JD itself — and `LinkgrabberSidebarToggleAction`).
+        let (add_at_top_row, add_at_top_check) = crate::gui::menus::check_row_with_icon(
+            crate::gui::icon_key::ICON_GO_TOP,
+            tr!("Add at top").as_ref(),
+        );
         settings_popover_box.append(&add_at_top_row);
-        let (auto_confirm_row, auto_confirm_check) = crate::gui::menus::check_row(tr!("Auto confirm").as_ref());
+        let (auto_confirm_row, auto_confirm_check) = crate::gui::menus::check_row_with_icon(
+            crate::gui::icon_key::ICON_GO_NEXT,
+            tr!("Auto confirm").as_ref(),
+        );
         settings_popover_box.append(&auto_confirm_row);
-        let (auto_start_row, auto_start_check) = crate::gui::menus::check_row(tr!("Auto start").as_ref());
+        let (auto_start_row, auto_start_check) = crate::gui::menus::check_row_with_icon(
+            crate::gui::icon_key::ICON_MEDIA_PLAYBACK_START,
+            tr!("Auto start").as_ref(),
+        );
         settings_popover_box.append(&auto_start_row);
-        let (link_filter_row, link_filter_check) = crate::gui::menus::check_row(tr!("Link filter").as_ref());
+        let (link_filter_row, link_filter_check) = crate::gui::menus::check_row_with_icon(
+            crate::gui::icon_key::ICON_FILTER,
+            tr!("Link filter").as_ref(),
+        );
         settings_popover_box.append(&link_filter_row);
         settings_popover_box.append(&gtk4::Separator::new(gtk4::Orientation::Horizontal));
-        let (properties_row, properties_check) = crate::gui::menus::check_row(tr!("Properties").as_ref());
+        let (properties_row, properties_check) = crate::gui::menus::check_row_with_icon(
+            crate::gui::icon_key::ICON_BOTTOMBAR,
+            tr!("Properties").as_ref(),
+        );
         settings_popover_box.append(&properties_row);
-        let (overview_row, overview_check) = crate::gui::menus::check_row(tr!("Overview").as_ref());
+        let (overview_row, overview_check) = crate::gui::menus::check_row_with_icon(
+            crate::gui::icon_key::ICON_BOTTOMBAR,
+            tr!("Overview").as_ref(),
+        );
         settings_popover_box.append(&overview_row);
-        let (sidebar_row, sidebar_check) = crate::gui::menus::check_row(tr!("Sidebar").as_ref());
+        let (sidebar_row, sidebar_check) = crate::gui::menus::check_row_with_icon(
+            crate::gui::icon_key::ICON_SIDEBAR,
+            tr!("Sidebar").as_ref(),
+        );
         settings_popover_box.append(&sidebar_row);
         // "Bottom bar manager" (JDownloader's own menu-customization system)
         // has no gDownloader equivalent, so it isn't offered here.
@@ -1543,8 +1517,9 @@ impl LinkGrabberPanel {
         settings_popover.set_child(Some(&settings_popover_box));
         let settings_btn = gtk4::MenuButton::new();
         settings_btn.set_child(Some(&gtk4::Image::from_gicon(&crate::gui::jd_icon::resolve(crate::gui::icon_key::ICON_SETTINGS))));
+        settings_btn.set_always_show_arrow(true);
+        settings_btn.set_direction(gtk4::ArrowType::Down);
         settings_btn.set_popover(Some(&settings_popover));
-        settings_btn.set_size_request(24, 24);
         right_bar.append(&settings_btn);
 
         // Loads the 7 toggles' current state once, then applies both the
@@ -1705,9 +1680,6 @@ impl LinkGrabberPanel {
             }
         });
 
-        let spacer = gtk4::Box::new(gtk4::Orientation::Horizontal, 0);
-        spacer.set_hexpand(true);
-
         let bottom_bar = gtk4::Box::new(gtk4::Orientation::Horizontal, 2);
         bottom_bar.set_margin_start(6);
         bottom_bar.set_margin_end(6);
@@ -1716,7 +1688,6 @@ impl LinkGrabberPanel {
         bottom_bar.set_valign(gtk4::Align::Center);
         bottom_bar.set_size_request(-1, 24);
         bottom_bar.append(&left_bar);
-        bottom_bar.append(&spacer);
         bottom_bar.append(&right_bar);
 
         page.append(&bottom_bar);
@@ -2276,32 +2247,11 @@ pub(crate) fn paste_links(api: Arc<JdApi>, deep_decrypt: bool) {
         });
 }
 
-/// Walks the flattened tree and collects the uuid of every link matching
-/// `predicate` — used by the bottom bar's "Delete disabled"/"Delete
-/// offline" actions, which (mirroring JDownloader) act on the whole link
-/// collector rather than just the current selection.
-fn uuids_where(
-    child_stores: &Rc<RefCell<HashMap<i64, gio::ListStore>>>,
-    predicate: impl Fn(&LinkGrabberRow) -> bool,
-) -> std::collections::HashSet<String> {
-    child_stores
-        .borrow()
-        .values()
-        .flat_map(|store| {
-            (0..store.n_items()).filter_map(|pos| {
-                let obj = store.item(pos).and_downcast::<glib::BoxedAnyObject>()?;
-                let row = obj.borrow::<LinkGrabberRow>();
-                predicate(&row).then(|| row.uuid.clone())
-            })
-        })
-        .collect()
-}
-
 /// Shows JDownloader's generic "Are you sure?" clean-up confirmation dialog
 /// (the same `GenericResetLinkgrabberRlyDialog` chrome as [`confirm_remove`],
-/// parametrized for the bottom bar's other clean-up actions — Clear, Delete
-/// disabled/offline, Remove incomplete archives — each with its own
-/// "don't show again" key so silencing one doesn't silence the others).
+/// parametrized for other bottom bar clean-up actions — e.g. "Clear
+/// linkgrabber" — each with its own "don't show again" key so silencing one
+/// doesn't silence the others).
 fn confirm_action<W: IsA<gtk4::Widget> + Clone + 'static>(
     parent: &W,
     skip_key: &'static str,

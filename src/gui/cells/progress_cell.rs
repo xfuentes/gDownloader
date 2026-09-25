@@ -4,31 +4,9 @@ use adw::prelude::*;
 /// Call once during app startup (from `window::setup_css`).
 pub fn install_css() {
     let css = gtk4::CssProvider::new();
-    css.load_from_string(
-        ".download-progress-cell { padding: 0; margin: 0; }\n\
-         .download-progress-bar trough { padding: 0;  }\n\
-         .download-progress-bar, .download-progress-bar trough, .download-progress-bar progress {\n\
-             border-radius: 2px;\n\
-             margin: 0;\n\
-         }\n\
-         .download-progress-bar, .download-progress-bar trough, .download-progress-bar progress { min-height: 20px; }\n\
-         .download-progress-bar trough {\n\
-             background-image: linear-gradient(to bottom,\n\
-                 mix(@theme_bg_color, white, 0.65) 0%,\n\
-                 @theme_bg_color 30%,\n\
-                 mix(@theme_bg_color, white, 0.65) 100%);\n\
-             background-color: @theme_bg_color;\n\
-             border: 1px solid @borders;\n\
-         }\n\
-         .download-progress-bar progress {\n\
-             background-image: linear-gradient(to bottom,\n\
-                 mix(@accent_bg_color, white, 0.65) 0%,\n\
-                 @accent_bg_color 30%,\n\
-                 mix(@accent_bg_color, white, 0.65) 100%);\n\
-             background-color: @accent_bg_color;\n\
-         }\n\
-         .download-progress-label { color: @theme_fg_color; font-weight: normal; }",
-    );
+    css.load_from_string(include_str!(
+        "../../../data/resources/css/progress_cell.css"
+    ));
     if let Some(display) = gtk4::gdk::Display::default() {
         gtk4::style_context_add_provider_for_display(
             &display,

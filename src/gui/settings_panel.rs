@@ -34,21 +34,7 @@ const SIDEBAR_ICON_SIZE: i32 = 32;
 /// background as soon as it's hovered, pressed, or toggled on.
 fn install_extension_toggle_css() {
     let css = gtk4::CssProvider::new();
-    css.load_from_string(
-        ".extension-toggle-btn, \
-         .extension-toggle-btn:hover, \
-         .extension-toggle-btn:active, \
-         .extension-toggle-btn:checked, \
-         .extension-toggle-btn:focus { \
-             background: none; \
-             box-shadow: none; \
-             border: none; \
-             outline: none; \
-             padding: 0; \
-             min-width: 0; \
-             min-height: 0; \
-         }",
-    );
+    css.load_from_string(include_str!("../../data/resources/css/settings_panel.css"));
     if let Some(display) = gtk4::gdk::Display::default() {
         gtk4::style_context_add_provider_for_display(
             &display,

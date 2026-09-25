@@ -155,6 +155,17 @@ pub fn action_button_with_accel(
 /// keep using `is_active`/`set_active`/`connect_toggled` exactly as if a
 /// real checkbox were on screen.
 pub fn check_row(label: &str) -> (gtk4::Button, gtk4::CheckButton) {
+    check_row_inner(None, label)
+}
+
+/// Same as [`check_row`], but with a leading icon — mirroring JDownloader's
+/// own quick-settings toggles (`AddAtTopToggleAction`/`AutoStartToggleAction`/
+/// etc.), which all carry an icon alongside their checkbox state.
+pub fn check_row_with_icon(icon: &str, label: &str) -> (gtk4::Button, gtk4::CheckButton) {
+    check_row_inner(Some(icon), label)
+}
+
+fn check_row_inner(icon: Option<&str>, label: &str) -> (gtk4::Button, gtk4::CheckButton) {
     let check = gtk4::CheckButton::new();
 
     let checkmark = gtk4::Image::from_icon_name("object-select-symbolic");
@@ -165,6 +176,11 @@ pub fn check_row(label: &str) -> (gtk4::Button, gtk4::CheckButton) {
     label_widget.set_hexpand(true);
 
     let content = gtk4::Box::new(gtk4::Orientation::Horizontal, 6);
+    if let Some(icon) = icon {
+        let img = gtk4::Image::from_gicon(&jd_icon::resolve(icon));
+        img.set_pixel_size(16);
+        content.append(&img);
+    }
     content.append(&label_widget);
     content.append(&checkmark);
 

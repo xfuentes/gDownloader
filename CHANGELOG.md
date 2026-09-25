@@ -2,6 +2,23 @@
 
 All notable changes to gDownloader are documented in this file.
 
+## [Unreleased]
+
+### Added
+- Link Collector bottom bar: a category search field (File Name/Path,
+  Hoster, Package Name, Comment, Comment (Package)), matching the
+  Downloads panel's own search box.
+- Quick Settings menus (Link Collector and Downloads panel) now show an
+  icon next to each toggle, matching JDownloader's own quick-settings
+  actions.
+
+### Changed
+- Link Collector bottom bar: "Clear" moved next to "Add Links", and
+  "Download All"/"Download Selected" reworked into a single split button
+  whose arrow opens per-scope submenus, matching JDownloader's own layout.
+- README: personal APT repository moved from apt.serviam.cc to
+  ppa.serviam.cc.
+
 ## [0.3.0] - 2026-09-14
 
 ### Added

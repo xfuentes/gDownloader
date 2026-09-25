@@ -1,0 +1,50 @@
+/*
+ * gDownloader
+ * Copyright (c) 2026. Xavier Fuentes <xfuentes-dev@serviam.cc>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.tabbar { padding-left: 0; padding-right: 0; }
+
+/* Compact UI: slightly smaller text and tighter widget padding across the
+ * whole app. Uses `em` (relative to the inherited font size) and GTK's
+ * own logical-pixel units, both of which are already scaled per-monitor
+ * by the desktop's HiDPI/scale-factor setting, so this stays legible on
+ * 4K displays without needing to read the DPI ourselves. */
+window { font-size: 0.92em; }
+button, entry, dropdown { min-height: 22px; padding: 2px 6px; }
+dropdown { margin: 0; padding: 0px; }
+dropdown button, dropdown box, dropdown arrow { min-height: 0; margin: 0; padding: 2px 6px; }
+dropdown button.toggle { padding: 0 0 1px 0; }
+columnview > listview > row { min-height: 24px; }
+columnview > listview > row > cell { padding: 1px; }
+columnview header button { min-height: 22px; padding: 2px 6px; }
+switch { min-width: 34px; min-height: 18px; padding: 1px; }
+switch slider { min-width: 16px; min-height: 16px; }
+spinbutton { min-height: 0; padding: 0; }
+spinbutton text { min-height: 18px; padding: 2px 4px; }
+spinbutton button { min-width: 18px; min-height: 18px; padding: 0; }
+.menu-editor-row { padding: 4px 6px; border-radius: 6px; }
+popovermenu .menu-editor-row checkbutton check,
+popover.menu .menu-editor-row checkbutton check {
+    min-width: 14px; min-height: 14px; margin: 0;
+    border: 1px solid alpha(currentColor, 0.5);
+    border-radius: 4px; background-color: transparent;
+}
+popovermenu .menu-editor-row checkbutton check:checked,
+popover.menu .menu-editor-row checkbutton check:checked {
+    background-color: @accent_bg_color; border-color: @accent_bg_color;
+    color: @accent_fg_color;
+}

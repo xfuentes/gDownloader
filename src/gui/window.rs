@@ -60,53 +60,12 @@ pub fn setup_icon_theme() {
 
 /// Injects application-level CSS rules.
 pub fn setup_css() {
-    let tab_bar_css = gtk4::CssProvider::new();
-    tab_bar_css.load_from_string(".tabbar { padding-left: 0; padding-right: 0; }");
+    let window_css = gtk4::CssProvider::new();
+    window_css.load_from_string(include_str!("../../data/resources/css/window.css"));
     if let Some(display) = gtk4::gdk::Display::default() {
         gtk4::style_context_add_provider_for_display(
             &display,
-            &tab_bar_css,
-            gtk4::STYLE_PROVIDER_PRIORITY_APPLICATION,
-        );
-    }
-
-    // Compact UI: slightly smaller text and tighter widget padding across the
-    // whole app. Uses `em` (relative to the inherited font size) and GTK's
-    // own logical-pixel units, both of which are already scaled per-monitor
-    // by the desktop's HiDPI/scale-factor setting, so this stays legible on
-    // 4K displays without needing to read the DPI ourselves.
-    let compact_css = gtk4::CssProvider::new();
-    compact_css.load_from_string(
-        "window { font-size: 0.92em; }\n\
-         button, entry, dropdown { min-height: 22px; padding: 2px 6px; }\n\
-         dropdown { margin: 0; padding: 0px; }\n\
-         dropdown button, dropdown box, dropdown arrow { min-height: 0; margin: 0; padding: 2px 6px; }\n\
-         dropdown button.toggle { padding: 0 0 1px 0; }\n\
-         columnview > listview > row { min-height: 24px; }\n\
-         columnview > listview > row > cell { padding: 1px; }\n\
-         columnview header button { min-height: 22px; padding: 2px 6px; }\n\
-         switch { min-width: 34px; min-height: 18px; padding: 1px; }\n\
-         switch slider { min-width: 16px; min-height: 16px; }\n\
-         spinbutton { min-height: 0; padding: 0; }\n\
-         spinbutton text { min-height: 18px; padding: 2px 4px; }\n\
-         spinbutton button { min-width: 18px; min-height: 18px; padding: 0; }\n\
-         .menu-editor-row { padding: 4px 6px; border-radius: 6px; }\n\
-         popovermenu .menu-editor-row checkbutton check,\n\
-         popover.menu .menu-editor-row checkbutton check {\n\
-             min-width: 14px; min-height: 14px; margin: 0;\n\
-             border: 1px solid alpha(currentColor, 0.5);\n\
-             border-radius: 4px; background-color: transparent;\n\
-         }\n\
-         popovermenu .menu-editor-row checkbutton check:checked,\n\
-         popover.menu .menu-editor-row checkbutton check:checked {\n\
-             background-color: @accent_bg_color; border-color: @accent_bg_color;\n\
-             color: @accent_fg_color;\n\
-         }",
-    );
-    if let Some(display) = gtk4::gdk::Display::default() {
-        gtk4::style_context_add_provider_for_display(
-            &display,
-            &compact_css,
+            &window_css,
             gtk4::STYLE_PROVIDER_PRIORITY_APPLICATION,
         );
     }
