@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 17:41+0000\n"
+"POT-Creation-Date: 2026-09-25 05:55+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Arabic <(nothing)>\n"
@@ -120,10 +120,10 @@ msgstr "عدم الإظهار مرة أخرى لهذا الأرشيف"
 msgid "OK"
 msgstr "موافق"
 
-#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Buttons
-#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2197
-#: src/gui/link_grabber_panel.rs:2390 src/gui/downloads_panel.rs:2335
+#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2168
+#: src/gui/link_grabber_panel.rs:2340 src/gui/downloads_panel.rs:2335
 #: src/gui/dialogs/account_add_dialog.rs:114
 #: src/gui/dialogs/add_links_dialog.rs:264
 #: src/gui/dialogs/archive_password_dialog.rs:33
@@ -154,32 +154,32 @@ msgstr[5] "تم التقاط {n} رابط"
 msgid "Show"
 msgstr "إظهار"
 
-#: src/gui/settings_panel.rs:87 src/gui/settings_panel.rs:108
+#: src/gui/settings_panel.rs:73 src/gui/settings_panel.rs:94
 msgid "General"
 msgstr "عام"
 
-#: src/gui/settings_panel.rs:90 src/gui/settings_panel.rs:111
+#: src/gui/settings_panel.rs:76 src/gui/settings_panel.rs:97
 #: src/gui/components/settings/account_manager.rs:43
 msgid "Account Manager"
 msgstr "إدارة الحسابات"
 
-#: src/gui/settings_panel.rs:94 src/gui/settings_panel.rs:115
+#: src/gui/settings_panel.rs:80 src/gui/settings_panel.rs:101
 #: src/gui/components/settings/package_manager.rs:54
 msgid "Package Manager"
 msgstr "إدارة الحزم"
 
-#: src/gui/settings_panel.rs:98 src/gui/settings_panel.rs:119
+#: src/gui/settings_panel.rs:84 src/gui/settings_panel.rs:105
 #: src/gui/components/settings/extension_manager.rs:172
 msgid "Extension Manager"
 msgstr "إدارة الإضافات"
 
-#: src/gui/settings_panel.rs:100 src/gui/settings_panel.rs:105
+#: src/gui/settings_panel.rs:86 src/gui/settings_panel.rs:91
 #: src/gui/components/settings/scripts.rs:84
 msgid "Scripts"
 msgstr "النصوص البرمجية"
 
-#: src/gui/settings_panel.rs:212 src/gui/settings_panel.rs:263
-#: src/gui/settings_panel.rs:278 src/gui/main_menu_bar.rs:50
+#: src/gui/settings_panel.rs:198 src/gui/settings_panel.rs:249
+#: src/gui/settings_panel.rs:264 src/gui/main_menu_bar.rs:50
 #: src/gui/menus/settings.rs:15 src/gui/menus/settings.rs:242
 #: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
 msgid "Settings"
@@ -199,22 +199,22 @@ msgstr "الروابط"
 msgid "Size"
 msgstr "الحجم"
 
-#: src/gui/link_grabber_panel.rs:163 src/gui/link_grabber_panel.rs:2607
+#: src/gui/link_grabber_panel.rs:163 src/gui/link_grabber_panel.rs:2557
 msgid "Online"
 msgstr "متصل"
 
 #: src/gui/link_grabber_panel.rs:169 src/gui/link_grabber_panel.rs:679
-#: src/gui/link_grabber_panel.rs:681 src/gui/downloads_panel.rs:749
-#: src/gui/downloads_panel.rs:751 src/gui/downloads_panel.rs:1351
-#: src/gui/components/account_table.rs:182
+#: src/gui/link_grabber_panel.rs:681 src/gui/link_grabber_panel.rs:1192
+#: src/gui/downloads_panel.rs:749 src/gui/downloads_panel.rs:751
+#: src/gui/downloads_panel.rs:1351 src/gui/components/account_table.rs:182
 msgid "Hoster"
 msgstr "المستضيف"
 
-#: src/gui/link_grabber_panel.rs:175 src/gui/link_grabber_panel.rs:2611
+#: src/gui/link_grabber_panel.rs:175 src/gui/link_grabber_panel.rs:2561
 msgid "Offline"
 msgstr "غير متصل"
 
-#: src/gui/link_grabber_panel.rs:181 src/gui/link_grabber_panel.rs:2619
+#: src/gui/link_grabber_panel.rs:181 src/gui/link_grabber_panel.rs:2569
 msgid "Unknown"
 msgstr "غير معروف"
 
@@ -239,48 +239,63 @@ msgstr "التوفر"
 msgid "Choose visible columns"
 msgstr "اختر الأعمدة المرئية"
 
-#: src/gui/link_grabber_panel.rs:912 src/gui/link_grabber_panel.rs:1536
+#: src/gui/link_grabber_panel.rs:912 src/gui/link_grabber_panel.rs:1506
 #: src/gui/downloads_panel.rs:1110 src/gui/components/account_table.rs:248
 msgid "Overview"
 msgstr "نظرة عامة"
 
-#: src/gui/link_grabber_panel.rs:948 src/gui/downloads_panel.rs:1153
+#: src/gui/link_grabber_panel.rs:952 src/gui/downloads_panel.rs:1153
 #, fuzzy
 msgid "Add Links"
 msgstr "إضافة روابط"
 
-#: src/gui/link_grabber_panel.rs:950 src/gui/downloads_panel.rs:1155
+#: src/gui/link_grabber_panel.rs:954 src/gui/downloads_panel.rs:1155
 msgid "Add links to linkgrabber"
 msgstr "إضافة روابط إلى ملتقط الروابط"
 
-#: src/gui/link_grabber_panel.rs:963 src/gui/downloads_panel.rs:1168
+#: src/gui/link_grabber_panel.rs:967 src/gui/downloads_panel.rs:1168
 #: src/gui/menus/file.rs:35 src/gui/menus/file.rs:71
 msgid "Analyse Text with Links"
 msgstr "تحليل نص يحتوي على روابط"
 
-#: src/gui/link_grabber_panel.rs:977 src/gui/downloads_panel.rs:1182
+#: src/gui/link_grabber_panel.rs:981 src/gui/downloads_panel.rs:1182
 #: src/gui/menus/file.rs:40 src/gui/menus/file.rs:80
 msgid "Add Container"
 msgstr "إضافة حزمة روابط"
 
-#: src/gui/link_grabber_panel.rs:986 src/gui/downloads_panel.rs:1191
+#: src/gui/link_grabber_panel.rs:990 src/gui/downloads_panel.rs:1191
 msgid "Loading link container files isn't supported yet."
 msgstr "تحميل ملفات حاوية الروابط غير مدعوم بعد."
 
-#: src/gui/link_grabber_panel.rs:993 src/gui/downloads_panel.rs:1198
+#: src/gui/link_grabber_panel.rs:997 src/gui/downloads_panel.rs:1198
 #, fuzzy
 msgid "Paste Links"
 msgstr "لصق الروابط"
 
-#: src/gui/link_grabber_panel.rs:1005 src/gui/downloads_panel.rs:1210
+#: src/gui/link_grabber_panel.rs:1009 src/gui/downloads_panel.rs:1210
 msgid "Paste Links (Deep Analyse)"
 msgstr "لصق الروابط (تحليل عميق)"
 
-#: src/gui/link_grabber_panel.rs:1091
+#: src/gui/link_grabber_panel.rs:1036
 msgid "Clear linkgrabber"
 msgstr "مسح ملتقط الروابط"
 
-#: src/gui/link_grabber_panel.rs:1108
+#: src/gui/link_grabber_panel.rs:1046
+msgid "Clear filtered links"
+msgstr "مسح الروابط المصفّاة"
+
+#: src/gui/link_grabber_panel.rs:1056
+#, fuzzy
+msgid "Restore filtered links"
+msgstr "مسح الروابط المصفّاة"
+
+#: src/gui/link_grabber_panel.rs:1070
+msgid ""
+"Not available: JDownloader doesn't expose its filtered-links list over the "
+"RemoteAPI."
+msgstr "غير متاح: لا يعرض JDownloader قائمة الروابط المُصفّاة عبر RemoteAPI."
+
+#: src/gui/link_grabber_panel.rs:1092
 msgid "Clear {n} link from the Link Collector"
 msgid_plural "Clear {n} links from the Link Collector"
 msgstr[0] "مسح {n} رابط من ملتقط الروابط"
@@ -290,134 +305,135 @@ msgstr[3] "مسح {n} روابط من ملتقط الروابط"
 msgstr[4] "مسح {n} رابطًا من ملتقط الروابط"
 msgstr[5] "مسح {n} رابط من ملتقط الروابط"
 
-#: src/gui/link_grabber_panel.rs:1133 src/gui/mod.rs:293 src/gui/mod.rs:327
-#: src/gui/mod.rs:394 src/gui/mod.rs:410
-msgid "Delete"
-msgstr "حذف"
-
-#: src/gui/link_grabber_panel.rs:1145 src/gui/downloads_panel.rs:1308
-msgid "Delete disabled"
-msgstr "حذف المعطّلة"
-
-#: src/gui/link_grabber_panel.rs:1154 src/gui/downloads_panel.rs:1311
-msgid "Delete offline"
-msgstr "حذف غير المتصلة"
-
-#: src/gui/link_grabber_panel.rs:1163
-msgid "Remove incomplete archives"
-msgstr "إزالة الأرشيفات غير المكتملة"
-
-#: src/gui/link_grabber_panel.rs:1176
-msgid "Clear filtered links"
-msgstr "مسح الروابط المصفّاة"
-
-#: src/gui/link_grabber_panel.rs:1183 src/gui/link_grabber_panel.rs:1370
-msgid ""
-"Not available: JDownloader doesn't expose its filtered-links list over the "
-"RemoteAPI."
-msgstr ""
-
-#: src/gui/link_grabber_panel.rs:1216
+#: src/gui/link_grabber_panel.rs:1182 src/gui/downloads_panel.rs:1341
 #, fuzzy
-msgid "Delete {n} disabled link"
-msgid_plural "Delete {n} disabled links"
-msgstr[0] "حذف المعطّلة"
-msgstr[1] "حذف المعطّلة"
-msgstr[2] "حذف المعطّلة"
-msgstr[3] "حذف المعطّلة"
-msgstr[4] "حذف المعطّلة"
-msgstr[5] "حذف المعطّلة"
+msgid "File Name"
+msgstr "اسم الملف"
 
-#: src/gui/link_grabber_panel.rs:1249
+#: src/gui/link_grabber_panel.rs:1183 src/gui/downloads_panel.rs:1342
+msgid "Please enter the file name you are looking for..."
+msgstr "يُرجى إدخال اسم الملف الذي تبحث عنه..."
+
+#: src/gui/link_grabber_panel.rs:1187 src/gui/downloads_panel.rs:1346
 #, fuzzy
-msgid "Delete {n} offline link"
-msgid_plural "Delete {n} offline links"
-msgstr[0] "حذف غير المتصلة"
-msgstr[1] "حذف غير المتصلة"
-msgstr[2] "حذف غير المتصلة"
-msgstr[3] "حذف غير المتصلة"
-msgstr[4] "حذف غير المتصلة"
-msgstr[5] "حذف غير المتصلة"
+msgid "File Path"
+msgstr "نوع الملف"
 
-#: src/gui/link_grabber_panel.rs:1331
+#: src/gui/link_grabber_panel.rs:1188 src/gui/downloads_panel.rs:1347
+msgid "Please enter the file path you are looking for..."
+msgstr "يُرجى إدخال مسار الملف الذي تبحث عنه..."
+
+#: src/gui/link_grabber_panel.rs:1193 src/gui/downloads_panel.rs:1352
+msgid "Please enter the domain you are looking for..."
+msgstr "يُرجى إدخال النطاق الذي تبحث عنه..."
+
+#: src/gui/link_grabber_panel.rs:1197 src/gui/downloads_panel.rs:1356
 #, fuzzy
-msgid "Remove {n} link belonging to an incomplete archive"
-msgid_plural "Remove {n} links belonging to incomplete archives"
-msgstr[0] "إزالة الأرشيفات غير المكتملة"
-msgstr[1] "إزالة الأرشيفات غير المكتملة"
-msgstr[2] "إزالة الأرشيفات غير المكتملة"
-msgstr[3] "إزالة الأرشيفات غير المكتملة"
-msgstr[4] "إزالة الأرشيفات غير المكتملة"
-msgstr[5] "إزالة الأرشيفات غير المكتملة"
+msgid "Package Name"
+msgstr "اسم الحزمة"
 
-#: src/gui/link_grabber_panel.rs:1357
-msgid "Filter"
-msgstr "تصفية"
+#: src/gui/link_grabber_panel.rs:1198 src/gui/downloads_panel.rs:1357
+msgid "Please enter the package name you are looking for..."
+msgstr "يُرجى إدخال اسم الحزمة الذي تبحث عنه..."
 
-#: src/gui/link_grabber_panel.rs:1382 src/gui/link_grabber_panel.rs:1396
+#: src/gui/link_grabber_panel.rs:1202 src/gui/downloads_panel.rs:960
+#: src/gui/downloads_panel.rs:966 src/gui/downloads_panel.rs:1361
+#: src/gui/dialogs/packagizer_rule_dialog.rs:243
+#: src/gui/dialogs/packagizer_rule_dialog.rs:386
+#: src/gui/properties_panel.rs:324
+msgid "Comment"
+msgstr "تعليق"
+
+#: src/gui/link_grabber_panel.rs:1203 src/gui/link_grabber_panel.rs:1208
+#: src/gui/downloads_panel.rs:1362 src/gui/downloads_panel.rs:1367
+msgid "Please enter the comment you are looking for..."
+msgstr "يُرجى إدخال التعليق الذي تبحث عنه..."
+
+#: src/gui/link_grabber_panel.rs:1207 src/gui/downloads_panel.rs:1366
+#, fuzzy
+msgid "Comment(Package)"
+msgstr "تعليق"
+
+#: src/gui/link_grabber_panel.rs:1263
 #, fuzzy
 msgid "Start all Downloads"
 msgstr "بدء جميع التنزيلات"
 
-#: src/gui/link_grabber_panel.rs:1405
+#: src/gui/link_grabber_panel.rs:1284
 #, fuzzy
-msgid "Start selected Downloads"
-msgstr "بدء جميع التنزيلات"
-
-#: src/gui/link_grabber_panel.rs:1414
-#, fuzzy
-msgid "Add all to Download List"
+msgid "... add to Download List"
 msgstr "إضافة إلى قائمة التنزيل"
+
+#: src/gui/link_grabber_panel.rs:1299
+#, fuzzy
+msgid "... start Downloads"
+msgstr "بدء التنزيلات"
+
+#: src/gui/link_grabber_panel.rs:1314
+#, fuzzy
+msgid "... Force Start"
+msgstr "بدء قسري"
+
+#: src/gui/link_grabber_panel.rs:1321
+msgid ""
+"Not available: JDownloader keeps \"forced\" as an in-memory flag that isn't "
+"exposed over the RemoteAPI."
+msgstr "غير متاح: يحتفظ JDownloader بحالة \"الإجبار\" كعلامة داخلية غير معروضة عبر RemoteAPI."
+
+#: src/gui/link_grabber_panel.rs:1379
+#, fuzzy
+msgid "Download All"
+msgstr "التنزيل"
 
 #: src/gui/link_grabber_panel.rs:1423
 #, fuzzy
-msgid "Add selected to Download List"
-msgstr "إضافة إلى قائمة التنزيل"
+msgid "Download Selected"
+msgstr "اكتملت التنزيلات"
 
-#: src/gui/link_grabber_panel.rs:1525
+#: src/gui/link_grabber_panel.rs:1480
 msgid "Add at top"
 msgstr "إضافة في الأعلى"
 
-#: src/gui/link_grabber_panel.rs:1527
+#: src/gui/link_grabber_panel.rs:1485
 msgid "Auto confirm"
 msgstr "تأكيد تلقائي"
 
-#: src/gui/link_grabber_panel.rs:1529
+#: src/gui/link_grabber_panel.rs:1490
 msgid "Auto start"
 msgstr "بدء تلقائي"
 
-#: src/gui/link_grabber_panel.rs:1531
+#: src/gui/link_grabber_panel.rs:1495
 msgid "Link filter"
 msgstr "مرشح الروابط"
 
-#: src/gui/link_grabber_panel.rs:1534
+#: src/gui/link_grabber_panel.rs:1501
 msgid "Properties"
 msgstr "الخصائص"
 
-#: src/gui/link_grabber_panel.rs:1538
+#: src/gui/link_grabber_panel.rs:1511
 msgid "Sidebar"
 msgstr "الشريط الجانبي"
 
-#: src/gui/link_grabber_panel.rs:2132 src/gui/link_grabber_panel.rs:2330
+#: src/gui/link_grabber_panel.rs:2103 src/gui/link_grabber_panel.rs:2280
 #: src/gui/downloads_panel.rs:2246
 msgid "Are you sure?"
 msgstr "هل أنت متأكد؟"
 
-#: src/gui/link_grabber_panel.rs:2154 src/gui/link_grabber_panel.rs:2352
+#: src/gui/link_grabber_panel.rs:2125 src/gui/link_grabber_panel.rs:2302
 #: src/gui/downloads_panel.rs:2268
 msgid "Do you really want to perform this clean up action:"
 msgstr "هل تريد بالفعل تنفيذ إجراء التنظيف هذا:"
 
-#: src/gui/link_grabber_panel.rs:2155 src/gui/link_grabber_panel.rs:2353
+#: src/gui/link_grabber_panel.rs:2126 src/gui/link_grabber_panel.rs:2303
 msgid "Delete Selected Links?"
 msgstr "حذف الروابط المحددة؟"
 
-#: src/gui/link_grabber_panel.rs:2163 src/gui/link_grabber_panel.rs:2361
+#: src/gui/link_grabber_panel.rs:2134 src/gui/link_grabber_panel.rs:2311
 #: src/gui/downloads_panel.rs:2277
 msgid "Tasks to do:"
 msgstr "المهام المطلوب تنفيذها:"
 
-#: src/gui/link_grabber_panel.rs:2172 src/gui/downloads_panel.rs:2286
+#: src/gui/link_grabber_panel.rs:2143 src/gui/downloads_panel.rs:2286
 msgid "Delete selected link"
 msgid_plural "Delete selected links"
 msgstr[0] "حذف الروابط المحددة"
@@ -427,7 +443,7 @@ msgstr[3] "حذف الروابط المحددة"
 msgstr[4] "حذف الروابط المحددة"
 msgstr[5] "حذف الروابط المحددة"
 
-#: src/gui/link_grabber_panel.rs:2173 src/gui/downloads_panel.rs:2287
+#: src/gui/link_grabber_panel.rs:2144 src/gui/downloads_panel.rs:2287
 msgid "{n} link remaining"
 msgid_plural "{n} links remaining"
 msgstr[0] "لا روابط متبقية"
@@ -437,26 +453,26 @@ msgstr[3] "يتبقى {n} روابط"
 msgstr[4] "يتبقى {n} رابطًا"
 msgstr[5] "يتبقى {n} رابط"
 
-#: src/gui/link_grabber_panel.rs:2191 src/gui/link_grabber_panel.rs:2384
+#: src/gui/link_grabber_panel.rs:2162 src/gui/link_grabber_panel.rs:2334
 #: src/gui/downloads_panel.rs:2329
 msgid "Don't show this again"
 msgstr "عدم إظهار هذا مرة أخرى"
 
-#. #-#-#-#-#  mod.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  mod.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#: src/gui/link_grabber_panel.rs:2198 src/gui/link_grabber_panel.rs:2391
+#: src/gui/link_grabber_panel.rs:2169 src/gui/link_grabber_panel.rs:2341
 #: src/gui/downloads_panel.rs:2336 src/gui/dialogs/add_links_dialog.rs:232
 #: src/gui/donate.rs:38
 msgid "Continue"
 msgstr "استمرار"
 
-#: src/gui/link_grabber_panel.rs:2615
+#: src/gui/link_grabber_panel.rs:2565
 msgid "Temporarily Unknown"
 msgstr "غير معروف مؤقتًا"
 
@@ -515,18 +531,14 @@ msgstr "الاتصال"
 msgid "Status"
 msgstr "الحالة"
 
-#: src/gui/downloads_panel.rs:960 src/gui/downloads_panel.rs:966
-#: src/gui/downloads_panel.rs:1361
-#: src/gui/dialogs/packagizer_rule_dialog.rs:243
-#: src/gui/dialogs/packagizer_rule_dialog.rs:386
-#: src/gui/properties_panel.rs:324
-msgid "Comment"
-msgstr "تعليق"
-
 #: src/gui/downloads_panel.rs:1300
 #, fuzzy
 msgid "Clear Downloadlist"
 msgstr "بدء التنزيلات"
+
+#: src/gui/downloads_panel.rs:1308
+msgid "Delete disabled"
+msgstr "حذف المعطّلة"
 
 #: src/gui/downloads_panel.rs:1309
 msgid "Delete failed"
@@ -536,45 +548,9 @@ msgstr "حذف الفاشلة"
 msgid "Delete finished"
 msgstr "حذف المكتملة"
 
-#: src/gui/downloads_panel.rs:1341
-#, fuzzy
-msgid "File Name"
-msgstr "اسم الملف"
-
-#: src/gui/downloads_panel.rs:1342
-msgid "Please enter the file name you are looking for..."
-msgstr "يُرجى إدخال اسم الملف الذي تبحث عنه..."
-
-#: src/gui/downloads_panel.rs:1346
-#, fuzzy
-msgid "File Path"
-msgstr "نوع الملف"
-
-#: src/gui/downloads_panel.rs:1347
-msgid "Please enter the file path you are looking for..."
-msgstr "يُرجى إدخال مسار الملف الذي تبحث عنه..."
-
-#: src/gui/downloads_panel.rs:1352
-msgid "Please enter the domain you are looking for..."
-msgstr "يُرجى إدخال النطاق الذي تبحث عنه..."
-
-#: src/gui/downloads_panel.rs:1356
-#, fuzzy
-msgid "Package Name"
-msgstr "اسم الحزمة"
-
-#: src/gui/downloads_panel.rs:1357
-msgid "Please enter the package name you are looking for..."
-msgstr "يُرجى إدخال اسم الحزمة الذي تبحث عنه..."
-
-#: src/gui/downloads_panel.rs:1362 src/gui/downloads_panel.rs:1367
-msgid "Please enter the comment you are looking for..."
-msgstr "يُرجى إدخال التعليق الذي تبحث عنه..."
-
-#: src/gui/downloads_panel.rs:1366
-#, fuzzy
-msgid "Comment(Package)"
-msgstr "تعليق"
+#: src/gui/downloads_panel.rs:1311
+msgid "Delete offline"
+msgstr "حذف غير المتصلة"
 
 #: src/gui/downloads_panel.rs:1372
 msgid "Please enter the Status you are looking for..."
@@ -841,7 +817,7 @@ msgstr "الحساب سليم"
 msgid "Unlimited"
 msgstr "غير محدود"
 
-#. #-#-#-#-#  account_table.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  account_table.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
@@ -1217,7 +1193,7 @@ msgstr "أدخل اسم الحزمة، أو اتركه فارغًا للوضع �
 msgid ""
 "Choose a Package Name for the Downloads above. If empty, JDownloader will "
 "create Packages based on the filenames"
-msgstr ""
+msgstr "اختر اسم حزمة للتنزيلات أعلاه. إذا تُرك فارغًا، سينشئ JDownloader حزمًا بناءً على أسماء الملفات"
 
 #: src/gui/dialogs/add_links_dialog.rs:108
 msgid "Enter a comment or leave empty..."
@@ -1227,7 +1203,7 @@ msgstr "أدخل تعليقًا أو اتركه فارغًا..."
 msgid ""
 "Enter a comment. This comment will be stored in every package and "
 "downloadlink."
-msgstr ""
+msgstr "أدخل تعليقًا. سيتم تخزين هذا التعليق في كل حزمة ورابط تنزيل."
 
 #: src/gui/dialogs/add_links_dialog.rs:120
 #: src/gui/dialogs/add_links_dialog.rs:131
@@ -1641,7 +1617,7 @@ msgstr "خصائص الملف: {}"
 msgid "Open download folder"
 msgstr "افتح مجلد التنزيل"
 
-#: src/gui/window.rs:192
+#: src/gui/window.rs:151
 msgid "Waiting for JDownloader to exit..."
 msgstr "في انتظار إغلاق JDownloader..."
 
@@ -1661,6 +1637,10 @@ msgstr "بدء التنزيلات"
 #: src/gui/mod.rs:287 src/gui/mod.rs:321
 msgid "Start All Downloads"
 msgstr "بدء جميع التنزيلات"
+
+#: src/gui/mod.rs:293 src/gui/mod.rs:327 src/gui/mod.rs:394 src/gui/mod.rs:410
+msgid "Delete"
+msgstr "حذف"
 
 #. Status bar.
 #: src/gui/mod.rs:615
@@ -1866,6 +1846,50 @@ msgstr "تم الضغط على زر الشريط السفلي لملتقط ال�
 #: src/jd/settings/event_scripter_settings.rs:168
 msgid "Traymenu Button Pressed"
 msgstr "تم الضغط على زر قائمة علبة النظام"
+
+#~ msgid "Remove incomplete archives"
+#~ msgstr "إزالة الأرشيفات غير المكتملة"
+
+#, fuzzy
+#~ msgid "Delete {n} disabled link"
+#~ msgid_plural "Delete {n} disabled links"
+#~ msgstr[0] "حذف المعطّلة"
+#~ msgstr[1] "حذف المعطّلة"
+#~ msgstr[2] "حذف المعطّلة"
+#~ msgstr[3] "حذف المعطّلة"
+#~ msgstr[4] "حذف المعطّلة"
+#~ msgstr[5] "حذف المعطّلة"
+
+#, fuzzy
+#~ msgid "Delete {n} offline link"
+#~ msgid_plural "Delete {n} offline links"
+#~ msgstr[0] "حذف غير المتصلة"
+#~ msgstr[1] "حذف غير المتصلة"
+#~ msgstr[2] "حذف غير المتصلة"
+#~ msgstr[3] "حذف غير المتصلة"
+#~ msgstr[4] "حذف غير المتصلة"
+#~ msgstr[5] "حذف غير المتصلة"
+
+#, fuzzy
+#~ msgid "Remove {n} link belonging to an incomplete archive"
+#~ msgid_plural "Remove {n} links belonging to incomplete archives"
+#~ msgstr[0] "إزالة الأرشيفات غير المكتملة"
+#~ msgstr[1] "إزالة الأرشيفات غير المكتملة"
+#~ msgstr[2] "إزالة الأرشيفات غير المكتملة"
+#~ msgstr[3] "إزالة الأرشيفات غير المكتملة"
+#~ msgstr[4] "إزالة الأرشيفات غير المكتملة"
+#~ msgstr[5] "إزالة الأرشيفات غير المكتملة"
+
+#~ msgid "Filter"
+#~ msgstr "تصفية"
+
+#, fuzzy
+#~ msgid "Start selected Downloads"
+#~ msgstr "بدء جميع التنزيلات"
+
+#, fuzzy
+#~ msgid "Add selected to Download List"
+#~ msgstr "إضافة إلى قائمة التنزيل"
 
 #~ msgid "Add container"
 #~ msgstr "إضافة حزمة روابط"

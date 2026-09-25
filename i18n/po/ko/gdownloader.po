@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 17:41+0000\n"
+"POT-Creation-Date: 2026-09-25 05:55+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Korean <translation-team-ko@googlegroups.com>\n"
@@ -119,10 +119,10 @@ msgstr "이 압축 파일에 대해 다시 표시 안 함"
 msgid "OK"
 msgstr "확인"
 
-#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Buttons
-#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2197
-#: src/gui/link_grabber_panel.rs:2390 src/gui/downloads_panel.rs:2335
+#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2168
+#: src/gui/link_grabber_panel.rs:2340 src/gui/downloads_panel.rs:2335
 #: src/gui/dialogs/account_add_dialog.rs:114
 #: src/gui/dialogs/add_links_dialog.rs:264
 #: src/gui/dialogs/archive_password_dialog.rs:33
@@ -148,32 +148,32 @@ msgstr[0] "{n}개의 링크를 수집했습니다"
 msgid "Show"
 msgstr "표시"
 
-#: src/gui/settings_panel.rs:87 src/gui/settings_panel.rs:108
+#: src/gui/settings_panel.rs:73 src/gui/settings_panel.rs:94
 msgid "General"
 msgstr "일반"
 
-#: src/gui/settings_panel.rs:90 src/gui/settings_panel.rs:111
+#: src/gui/settings_panel.rs:76 src/gui/settings_panel.rs:97
 #: src/gui/components/settings/account_manager.rs:43
 msgid "Account Manager"
 msgstr "계정 관리자"
 
-#: src/gui/settings_panel.rs:94 src/gui/settings_panel.rs:115
+#: src/gui/settings_panel.rs:80 src/gui/settings_panel.rs:101
 #: src/gui/components/settings/package_manager.rs:54
 msgid "Package Manager"
 msgstr "패키지 관리자"
 
-#: src/gui/settings_panel.rs:98 src/gui/settings_panel.rs:119
+#: src/gui/settings_panel.rs:84 src/gui/settings_panel.rs:105
 #: src/gui/components/settings/extension_manager.rs:172
 msgid "Extension Manager"
 msgstr "확장 관리자"
 
-#: src/gui/settings_panel.rs:100 src/gui/settings_panel.rs:105
+#: src/gui/settings_panel.rs:86 src/gui/settings_panel.rs:91
 #: src/gui/components/settings/scripts.rs:84
 msgid "Scripts"
 msgstr "스크립트"
 
-#: src/gui/settings_panel.rs:212 src/gui/settings_panel.rs:263
-#: src/gui/settings_panel.rs:278 src/gui/main_menu_bar.rs:50
+#: src/gui/settings_panel.rs:198 src/gui/settings_panel.rs:249
+#: src/gui/settings_panel.rs:264 src/gui/main_menu_bar.rs:50
 #: src/gui/menus/settings.rs:15 src/gui/menus/settings.rs:242
 #: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
 msgid "Settings"
@@ -193,22 +193,22 @@ msgstr "링크"
 msgid "Size"
 msgstr "크기"
 
-#: src/gui/link_grabber_panel.rs:163 src/gui/link_grabber_panel.rs:2607
+#: src/gui/link_grabber_panel.rs:163 src/gui/link_grabber_panel.rs:2557
 msgid "Online"
 msgstr "온라인"
 
 #: src/gui/link_grabber_panel.rs:169 src/gui/link_grabber_panel.rs:679
-#: src/gui/link_grabber_panel.rs:681 src/gui/downloads_panel.rs:749
-#: src/gui/downloads_panel.rs:751 src/gui/downloads_panel.rs:1351
-#: src/gui/components/account_table.rs:182
+#: src/gui/link_grabber_panel.rs:681 src/gui/link_grabber_panel.rs:1192
+#: src/gui/downloads_panel.rs:749 src/gui/downloads_panel.rs:751
+#: src/gui/downloads_panel.rs:1351 src/gui/components/account_table.rs:182
 msgid "Hoster"
 msgstr "호스터"
 
-#: src/gui/link_grabber_panel.rs:175 src/gui/link_grabber_panel.rs:2611
+#: src/gui/link_grabber_panel.rs:175 src/gui/link_grabber_panel.rs:2561
 msgid "Offline"
 msgstr "오프라인"
 
-#: src/gui/link_grabber_panel.rs:181 src/gui/link_grabber_panel.rs:2619
+#: src/gui/link_grabber_panel.rs:181 src/gui/link_grabber_panel.rs:2569
 msgid "Unknown"
 msgstr "알 수 없음"
 
@@ -233,194 +233,225 @@ msgstr "가용성"
 msgid "Choose visible columns"
 msgstr "표시할 열 선택"
 
-#: src/gui/link_grabber_panel.rs:912 src/gui/link_grabber_panel.rs:1536
+#: src/gui/link_grabber_panel.rs:912 src/gui/link_grabber_panel.rs:1506
 #: src/gui/downloads_panel.rs:1110 src/gui/components/account_table.rs:248
 msgid "Overview"
 msgstr "개요"
 
-#: src/gui/link_grabber_panel.rs:948 src/gui/downloads_panel.rs:1153
+#: src/gui/link_grabber_panel.rs:952 src/gui/downloads_panel.rs:1153
 #, fuzzy
 msgid "Add Links"
 msgstr "링크 추가"
 
-#: src/gui/link_grabber_panel.rs:950 src/gui/downloads_panel.rs:1155
+#: src/gui/link_grabber_panel.rs:954 src/gui/downloads_panel.rs:1155
 msgid "Add links to linkgrabber"
 msgstr "링크그래버에 링크 추가"
 
-#: src/gui/link_grabber_panel.rs:963 src/gui/downloads_panel.rs:1168
+#: src/gui/link_grabber_panel.rs:967 src/gui/downloads_panel.rs:1168
 #: src/gui/menus/file.rs:35 src/gui/menus/file.rs:71
 msgid "Analyse Text with Links"
 msgstr "링크가 포함된 텍스트 분석"
 
-#: src/gui/link_grabber_panel.rs:977 src/gui/downloads_panel.rs:1182
+#: src/gui/link_grabber_panel.rs:981 src/gui/downloads_panel.rs:1182
 #: src/gui/menus/file.rs:40 src/gui/menus/file.rs:80
 msgid "Add Container"
 msgstr "컨테이너 추가"
 
-#: src/gui/link_grabber_panel.rs:986 src/gui/downloads_panel.rs:1191
+#: src/gui/link_grabber_panel.rs:990 src/gui/downloads_panel.rs:1191
 msgid "Loading link container files isn't supported yet."
 msgstr "링크 컨테이너 파일 불러오기는 아직 지원되지 않습니다."
 
-#: src/gui/link_grabber_panel.rs:993 src/gui/downloads_panel.rs:1198
+#: src/gui/link_grabber_panel.rs:997 src/gui/downloads_panel.rs:1198
 #, fuzzy
 msgid "Paste Links"
 msgstr "링크 붙여넣기"
 
-#: src/gui/link_grabber_panel.rs:1005 src/gui/downloads_panel.rs:1210
+#: src/gui/link_grabber_panel.rs:1009 src/gui/downloads_panel.rs:1210
 msgid "Paste Links (Deep Analyse)"
 msgstr "링크 붙여넣기(심층 분석)"
 
-#: src/gui/link_grabber_panel.rs:1091
+#: src/gui/link_grabber_panel.rs:1036
 msgid "Clear linkgrabber"
 msgstr "링크그래버 비우기"
 
-#: src/gui/link_grabber_panel.rs:1108
+#: src/gui/link_grabber_panel.rs:1046
+msgid "Clear filtered links"
+msgstr "필터링된 링크 지우기"
+
+#: src/gui/link_grabber_panel.rs:1056
+#, fuzzy
+msgid "Restore filtered links"
+msgstr "필터링된 링크 지우기"
+
+#: src/gui/link_grabber_panel.rs:1070
+msgid ""
+"Not available: JDownloader doesn't expose its filtered-links list over the "
+"RemoteAPI."
+msgstr "사용 불가: JDownloader는 필터링된 링크 목록을 RemoteAPI를 통해 제공하지 않습니다."
+
+#: src/gui/link_grabber_panel.rs:1092
 msgid "Clear {n} link from the Link Collector"
 msgid_plural "Clear {n} links from the Link Collector"
 msgstr[0] "링크 수집기에서 링크 {n}개 제거"
 
-#: src/gui/link_grabber_panel.rs:1133 src/gui/mod.rs:293 src/gui/mod.rs:327
-#: src/gui/mod.rs:394 src/gui/mod.rs:410
-msgid "Delete"
-msgstr "삭제"
-
-#: src/gui/link_grabber_panel.rs:1145 src/gui/downloads_panel.rs:1308
-msgid "Delete disabled"
-msgstr "비활성 항목 삭제"
-
-#: src/gui/link_grabber_panel.rs:1154 src/gui/downloads_panel.rs:1311
-msgid "Delete offline"
-msgstr "오프라인 항목 삭제"
-
-#: src/gui/link_grabber_panel.rs:1163
-msgid "Remove incomplete archives"
-msgstr "불완전한 압축 파일 제거"
-
-#: src/gui/link_grabber_panel.rs:1176
-msgid "Clear filtered links"
-msgstr "필터링된 링크 지우기"
-
-#: src/gui/link_grabber_panel.rs:1183 src/gui/link_grabber_panel.rs:1370
-msgid ""
-"Not available: JDownloader doesn't expose its filtered-links list over the "
-"RemoteAPI."
-msgstr ""
-
-#: src/gui/link_grabber_panel.rs:1216
+#: src/gui/link_grabber_panel.rs:1182 src/gui/downloads_panel.rs:1341
 #, fuzzy
-msgid "Delete {n} disabled link"
-msgid_plural "Delete {n} disabled links"
-msgstr[0] "비활성 항목 삭제"
+msgid "File Name"
+msgstr "파일 이름"
 
-#: src/gui/link_grabber_panel.rs:1249
+#: src/gui/link_grabber_panel.rs:1183 src/gui/downloads_panel.rs:1342
+msgid "Please enter the file name you are looking for..."
+msgstr "찾고 있는 파일 이름을 입력하세요..."
+
+#: src/gui/link_grabber_panel.rs:1187 src/gui/downloads_panel.rs:1346
 #, fuzzy
-msgid "Delete {n} offline link"
-msgid_plural "Delete {n} offline links"
-msgstr[0] "오프라인 항목 삭제"
+msgid "File Path"
+msgstr "파일 형식"
 
-#: src/gui/link_grabber_panel.rs:1331
+#: src/gui/link_grabber_panel.rs:1188 src/gui/downloads_panel.rs:1347
+msgid "Please enter the file path you are looking for..."
+msgstr "찾고 있는 파일 경로를 입력하세요..."
+
+#: src/gui/link_grabber_panel.rs:1193 src/gui/downloads_panel.rs:1352
+msgid "Please enter the domain you are looking for..."
+msgstr "찾고 있는 도메인을 입력하세요..."
+
+#: src/gui/link_grabber_panel.rs:1197 src/gui/downloads_panel.rs:1356
 #, fuzzy
-msgid "Remove {n} link belonging to an incomplete archive"
-msgid_plural "Remove {n} links belonging to incomplete archives"
-msgstr[0] "불완전한 압축 파일 제거"
+msgid "Package Name"
+msgstr "패키지 이름"
 
-#: src/gui/link_grabber_panel.rs:1357
-msgid "Filter"
-msgstr "필터"
+#: src/gui/link_grabber_panel.rs:1198 src/gui/downloads_panel.rs:1357
+msgid "Please enter the package name you are looking for..."
+msgstr "찾고 있는 패키지 이름을 입력하세요..."
 
-#: src/gui/link_grabber_panel.rs:1382 src/gui/link_grabber_panel.rs:1396
+#: src/gui/link_grabber_panel.rs:1202 src/gui/downloads_panel.rs:960
+#: src/gui/downloads_panel.rs:966 src/gui/downloads_panel.rs:1361
+#: src/gui/dialogs/packagizer_rule_dialog.rs:243
+#: src/gui/dialogs/packagizer_rule_dialog.rs:386
+#: src/gui/properties_panel.rs:324
+msgid "Comment"
+msgstr "설명"
+
+#: src/gui/link_grabber_panel.rs:1203 src/gui/link_grabber_panel.rs:1208
+#: src/gui/downloads_panel.rs:1362 src/gui/downloads_panel.rs:1367
+msgid "Please enter the comment you are looking for..."
+msgstr "찾고 있는 설명을 입력하세요..."
+
+#: src/gui/link_grabber_panel.rs:1207 src/gui/downloads_panel.rs:1366
+#, fuzzy
+msgid "Comment(Package)"
+msgstr "설명"
+
+#: src/gui/link_grabber_panel.rs:1263
 #, fuzzy
 msgid "Start all Downloads"
 msgstr "모든 다운로드 시작"
 
-#: src/gui/link_grabber_panel.rs:1405
+#: src/gui/link_grabber_panel.rs:1284
 #, fuzzy
-msgid "Start selected Downloads"
-msgstr "모든 다운로드 시작"
-
-#: src/gui/link_grabber_panel.rs:1414
-#, fuzzy
-msgid "Add all to Download List"
+msgid "... add to Download List"
 msgstr "다운로드 목록에 추가"
+
+#: src/gui/link_grabber_panel.rs:1299
+#, fuzzy
+msgid "... start Downloads"
+msgstr "다운로드 시작"
+
+#: src/gui/link_grabber_panel.rs:1314
+#, fuzzy
+msgid "... Force Start"
+msgstr "강제 시작"
+
+#: src/gui/link_grabber_panel.rs:1321
+msgid ""
+"Not available: JDownloader keeps \"forced\" as an in-memory flag that isn't "
+"exposed over the RemoteAPI."
+msgstr "사용 불가: JDownloader는 \"강제 시작\" 상태를 RemoteAPI로 노출되지 않는 내부 플래그로 유지합니다."
+
+#: src/gui/link_grabber_panel.rs:1379
+#, fuzzy
+msgid "Download All"
+msgstr "다운로드"
 
 #: src/gui/link_grabber_panel.rs:1423
 #, fuzzy
-msgid "Add selected to Download List"
-msgstr "다운로드 목록에 추가"
+msgid "Download Selected"
+msgstr "다운로드 완료"
 
-#: src/gui/link_grabber_panel.rs:1525
+#: src/gui/link_grabber_panel.rs:1480
 msgid "Add at top"
 msgstr "맨 위에 추가"
 
-#: src/gui/link_grabber_panel.rs:1527
+#: src/gui/link_grabber_panel.rs:1485
 msgid "Auto confirm"
 msgstr "자동 확인"
 
-#: src/gui/link_grabber_panel.rs:1529
+#: src/gui/link_grabber_panel.rs:1490
 msgid "Auto start"
 msgstr "자동 시작"
 
-#: src/gui/link_grabber_panel.rs:1531
+#: src/gui/link_grabber_panel.rs:1495
 msgid "Link filter"
 msgstr "링크 필터"
 
-#: src/gui/link_grabber_panel.rs:1534
+#: src/gui/link_grabber_panel.rs:1501
 msgid "Properties"
 msgstr "속성"
 
-#: src/gui/link_grabber_panel.rs:1538
+#: src/gui/link_grabber_panel.rs:1511
 msgid "Sidebar"
 msgstr "사이드바"
 
-#: src/gui/link_grabber_panel.rs:2132 src/gui/link_grabber_panel.rs:2330
+#: src/gui/link_grabber_panel.rs:2103 src/gui/link_grabber_panel.rs:2280
 #: src/gui/downloads_panel.rs:2246
 msgid "Are you sure?"
 msgstr "확실합니까?"
 
-#: src/gui/link_grabber_panel.rs:2154 src/gui/link_grabber_panel.rs:2352
+#: src/gui/link_grabber_panel.rs:2125 src/gui/link_grabber_panel.rs:2302
 #: src/gui/downloads_panel.rs:2268
 msgid "Do you really want to perform this clean up action:"
 msgstr "이 정리 작업을 정말로 수행하시겠습니까:"
 
-#: src/gui/link_grabber_panel.rs:2155 src/gui/link_grabber_panel.rs:2353
+#: src/gui/link_grabber_panel.rs:2126 src/gui/link_grabber_panel.rs:2303
 msgid "Delete Selected Links?"
 msgstr "선택한 링크를 삭제하시겠습니까?"
 
-#: src/gui/link_grabber_panel.rs:2163 src/gui/link_grabber_panel.rs:2361
+#: src/gui/link_grabber_panel.rs:2134 src/gui/link_grabber_panel.rs:2311
 #: src/gui/downloads_panel.rs:2277
 msgid "Tasks to do:"
 msgstr "수행할 작업:"
 
-#: src/gui/link_grabber_panel.rs:2172 src/gui/downloads_panel.rs:2286
+#: src/gui/link_grabber_panel.rs:2143 src/gui/downloads_panel.rs:2286
 msgid "Delete selected link"
 msgid_plural "Delete selected links"
 msgstr[0] "선택한 링크 삭제"
 
-#: src/gui/link_grabber_panel.rs:2173 src/gui/downloads_panel.rs:2287
+#: src/gui/link_grabber_panel.rs:2144 src/gui/downloads_panel.rs:2287
 msgid "{n} link remaining"
 msgid_plural "{n} links remaining"
 msgstr[0] "{n}개의 링크 남음"
 
-#: src/gui/link_grabber_panel.rs:2191 src/gui/link_grabber_panel.rs:2384
+#: src/gui/link_grabber_panel.rs:2162 src/gui/link_grabber_panel.rs:2334
 #: src/gui/downloads_panel.rs:2329
 msgid "Don't show this again"
 msgstr "다시 표시하지 않음"
 
-#. #-#-#-#-#  mod.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  mod.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#: src/gui/link_grabber_panel.rs:2198 src/gui/link_grabber_panel.rs:2391
+#: src/gui/link_grabber_panel.rs:2169 src/gui/link_grabber_panel.rs:2341
 #: src/gui/downloads_panel.rs:2336 src/gui/dialogs/add_links_dialog.rs:232
 #: src/gui/donate.rs:38
 msgid "Continue"
 msgstr "계속"
 
-#: src/gui/link_grabber_panel.rs:2615
+#: src/gui/link_grabber_panel.rs:2565
 msgid "Temporarily Unknown"
 msgstr "일시적으로 알 수 없음"
 
@@ -479,18 +510,14 @@ msgstr "연결"
 msgid "Status"
 msgstr "상태"
 
-#: src/gui/downloads_panel.rs:960 src/gui/downloads_panel.rs:966
-#: src/gui/downloads_panel.rs:1361
-#: src/gui/dialogs/packagizer_rule_dialog.rs:243
-#: src/gui/dialogs/packagizer_rule_dialog.rs:386
-#: src/gui/properties_panel.rs:324
-msgid "Comment"
-msgstr "설명"
-
 #: src/gui/downloads_panel.rs:1300
 #, fuzzy
 msgid "Clear Downloadlist"
 msgstr "다운로드 시작"
+
+#: src/gui/downloads_panel.rs:1308
+msgid "Delete disabled"
+msgstr "비활성 항목 삭제"
 
 #: src/gui/downloads_panel.rs:1309
 msgid "Delete failed"
@@ -500,45 +527,9 @@ msgstr "실패 항목 삭제"
 msgid "Delete finished"
 msgstr "완료 항목 삭제"
 
-#: src/gui/downloads_panel.rs:1341
-#, fuzzy
-msgid "File Name"
-msgstr "파일 이름"
-
-#: src/gui/downloads_panel.rs:1342
-msgid "Please enter the file name you are looking for..."
-msgstr "찾고 있는 파일 이름을 입력하세요..."
-
-#: src/gui/downloads_panel.rs:1346
-#, fuzzy
-msgid "File Path"
-msgstr "파일 형식"
-
-#: src/gui/downloads_panel.rs:1347
-msgid "Please enter the file path you are looking for..."
-msgstr "찾고 있는 파일 경로를 입력하세요..."
-
-#: src/gui/downloads_panel.rs:1352
-msgid "Please enter the domain you are looking for..."
-msgstr "찾고 있는 도메인을 입력하세요..."
-
-#: src/gui/downloads_panel.rs:1356
-#, fuzzy
-msgid "Package Name"
-msgstr "패키지 이름"
-
-#: src/gui/downloads_panel.rs:1357
-msgid "Please enter the package name you are looking for..."
-msgstr "찾고 있는 패키지 이름을 입력하세요..."
-
-#: src/gui/downloads_panel.rs:1362 src/gui/downloads_panel.rs:1367
-msgid "Please enter the comment you are looking for..."
-msgstr "찾고 있는 설명을 입력하세요..."
-
-#: src/gui/downloads_panel.rs:1366
-#, fuzzy
-msgid "Comment(Package)"
-msgstr "설명"
+#: src/gui/downloads_panel.rs:1311
+msgid "Delete offline"
+msgstr "오프라인 항목 삭제"
 
 #: src/gui/downloads_panel.rs:1372
 msgid "Please enter the Status you are looking for..."
@@ -796,7 +787,7 @@ msgstr "계정이 정상입니다"
 msgid "Unlimited"
 msgstr "무제한"
 
-#. #-#-#-#-#  account_table.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  account_table.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
@@ -1175,7 +1166,7 @@ msgstr "패키지 이름을 입력하거나 자동 모드를 사용하려면 비
 msgid ""
 "Choose a Package Name for the Downloads above. If empty, JDownloader will "
 "create Packages based on the filenames"
-msgstr ""
+msgstr "위 다운로드에 사용할 패키지 이름을 선택하세요. 비워두면 JDownloader가 파일 이름을 기반으로 패키지를 생성합니다"
 
 #: src/gui/dialogs/add_links_dialog.rs:108
 msgid "Enter a comment or leave empty..."
@@ -1185,7 +1176,7 @@ msgstr "설명을 입력하거나 비워 두세요..."
 msgid ""
 "Enter a comment. This comment will be stored in every package and "
 "downloadlink."
-msgstr ""
+msgstr "설명을 입력하세요. 이 설명은 모든 패키지와 다운로드 링크에 저장됩니다."
 
 #: src/gui/dialogs/add_links_dialog.rs:120
 #: src/gui/dialogs/add_links_dialog.rs:131
@@ -1200,7 +1191,8 @@ msgstr "자동 압축 해제"
 
 #: src/gui/dialogs/add_links_dialog.rs:123
 msgid "Enable this option to extract all found archives after download"
-msgstr "이 옵션을 사용하면 다운로드 후 발견된 모든 압축 파일이 자동으로 풀립니다"
+msgstr ""
+"이 옵션을 사용하면 다운로드 후 발견된 모든 압축 파일이 자동으로 풀립니다"
 
 #: src/gui/dialogs/add_links_dialog.rs:139
 #: src/gui/dialogs/add_links_dialog.rs:155
@@ -1599,7 +1591,7 @@ msgstr "파일 속성: {}"
 msgid "Open download folder"
 msgstr "다운로드 폴더 열기"
 
-#: src/gui/window.rs:192
+#: src/gui/window.rs:151
 msgid "Waiting for JDownloader to exit..."
 msgstr "JDownloader가 종료되기를 기다리는 중..."
 
@@ -1619,6 +1611,10 @@ msgstr "다운로드 시작"
 #: src/gui/mod.rs:287 src/gui/mod.rs:321
 msgid "Start All Downloads"
 msgstr "모든 다운로드 시작"
+
+#: src/gui/mod.rs:293 src/gui/mod.rs:327 src/gui/mod.rs:394 src/gui/mod.rs:410
+msgid "Delete"
+msgstr "삭제"
 
 #. Status bar.
 #: src/gui/mod.rs:615
@@ -1824,6 +1820,35 @@ msgstr "링크그래버 하단 바 버튼 눌림"
 #: src/jd/settings/event_scripter_settings.rs:168
 msgid "Traymenu Button Pressed"
 msgstr "트레이 메뉴 버튼 눌림"
+
+#~ msgid "Remove incomplete archives"
+#~ msgstr "불완전한 압축 파일 제거"
+
+#, fuzzy
+#~ msgid "Delete {n} disabled link"
+#~ msgid_plural "Delete {n} disabled links"
+#~ msgstr[0] "비활성 항목 삭제"
+
+#, fuzzy
+#~ msgid "Delete {n} offline link"
+#~ msgid_plural "Delete {n} offline links"
+#~ msgstr[0] "오프라인 항목 삭제"
+
+#, fuzzy
+#~ msgid "Remove {n} link belonging to an incomplete archive"
+#~ msgid_plural "Remove {n} links belonging to incomplete archives"
+#~ msgstr[0] "불완전한 압축 파일 제거"
+
+#~ msgid "Filter"
+#~ msgstr "필터"
+
+#, fuzzy
+#~ msgid "Start selected Downloads"
+#~ msgstr "모든 다운로드 시작"
+
+#, fuzzy
+#~ msgid "Add selected to Download List"
+#~ msgstr "다운로드 목록에 추가"
 
 #~ msgid "Add container"
 #~ msgstr "컨테이너 추가"

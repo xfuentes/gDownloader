@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 17:41+0000\n"
+"POT-Creation-Date: 2026-09-25 05:55+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Chinese\n"
@@ -119,10 +119,10 @@ msgstr "不再为此压缩包显示"
 msgid "OK"
 msgstr "确定"
 
-#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Buttons
-#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2197
-#: src/gui/link_grabber_panel.rs:2390 src/gui/downloads_panel.rs:2335
+#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2168
+#: src/gui/link_grabber_panel.rs:2340 src/gui/downloads_panel.rs:2335
 #: src/gui/dialogs/account_add_dialog.rs:114
 #: src/gui/dialogs/add_links_dialog.rs:264
 #: src/gui/dialogs/archive_password_dialog.rs:33
@@ -148,32 +148,32 @@ msgstr[0] "已捕获 {n} 个链接"
 msgid "Show"
 msgstr "显示"
 
-#: src/gui/settings_panel.rs:87 src/gui/settings_panel.rs:108
+#: src/gui/settings_panel.rs:73 src/gui/settings_panel.rs:94
 msgid "General"
 msgstr "常规"
 
-#: src/gui/settings_panel.rs:90 src/gui/settings_panel.rs:111
+#: src/gui/settings_panel.rs:76 src/gui/settings_panel.rs:97
 #: src/gui/components/settings/account_manager.rs:43
 msgid "Account Manager"
 msgstr "账户管理器"
 
-#: src/gui/settings_panel.rs:94 src/gui/settings_panel.rs:115
+#: src/gui/settings_panel.rs:80 src/gui/settings_panel.rs:101
 #: src/gui/components/settings/package_manager.rs:54
 msgid "Package Manager"
 msgstr "包管理器"
 
-#: src/gui/settings_panel.rs:98 src/gui/settings_panel.rs:119
+#: src/gui/settings_panel.rs:84 src/gui/settings_panel.rs:105
 #: src/gui/components/settings/extension_manager.rs:172
 msgid "Extension Manager"
 msgstr "扩展管理器"
 
-#: src/gui/settings_panel.rs:100 src/gui/settings_panel.rs:105
+#: src/gui/settings_panel.rs:86 src/gui/settings_panel.rs:91
 #: src/gui/components/settings/scripts.rs:84
 msgid "Scripts"
 msgstr "脚本"
 
-#: src/gui/settings_panel.rs:212 src/gui/settings_panel.rs:263
-#: src/gui/settings_panel.rs:278 src/gui/main_menu_bar.rs:50
+#: src/gui/settings_panel.rs:198 src/gui/settings_panel.rs:249
+#: src/gui/settings_panel.rs:264 src/gui/main_menu_bar.rs:50
 #: src/gui/menus/settings.rs:15 src/gui/menus/settings.rs:242
 #: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
 msgid "Settings"
@@ -193,22 +193,22 @@ msgstr "链接"
 msgid "Size"
 msgstr "大小"
 
-#: src/gui/link_grabber_panel.rs:163 src/gui/link_grabber_panel.rs:2607
+#: src/gui/link_grabber_panel.rs:163 src/gui/link_grabber_panel.rs:2557
 msgid "Online"
 msgstr "在线"
 
 #: src/gui/link_grabber_panel.rs:169 src/gui/link_grabber_panel.rs:679
-#: src/gui/link_grabber_panel.rs:681 src/gui/downloads_panel.rs:749
-#: src/gui/downloads_panel.rs:751 src/gui/downloads_panel.rs:1351
-#: src/gui/components/account_table.rs:182
+#: src/gui/link_grabber_panel.rs:681 src/gui/link_grabber_panel.rs:1192
+#: src/gui/downloads_panel.rs:749 src/gui/downloads_panel.rs:751
+#: src/gui/downloads_panel.rs:1351 src/gui/components/account_table.rs:182
 msgid "Hoster"
 msgstr "托管商"
 
-#: src/gui/link_grabber_panel.rs:175 src/gui/link_grabber_panel.rs:2611
+#: src/gui/link_grabber_panel.rs:175 src/gui/link_grabber_panel.rs:2561
 msgid "Offline"
 msgstr "离线"
 
-#: src/gui/link_grabber_panel.rs:181 src/gui/link_grabber_panel.rs:2619
+#: src/gui/link_grabber_panel.rs:181 src/gui/link_grabber_panel.rs:2569
 msgid "Unknown"
 msgstr "未知"
 
@@ -233,194 +233,225 @@ msgstr "可用性"
 msgid "Choose visible columns"
 msgstr "选择可见列"
 
-#: src/gui/link_grabber_panel.rs:912 src/gui/link_grabber_panel.rs:1536
+#: src/gui/link_grabber_panel.rs:912 src/gui/link_grabber_panel.rs:1506
 #: src/gui/downloads_panel.rs:1110 src/gui/components/account_table.rs:248
 msgid "Overview"
 msgstr "概览"
 
-#: src/gui/link_grabber_panel.rs:948 src/gui/downloads_panel.rs:1153
+#: src/gui/link_grabber_panel.rs:952 src/gui/downloads_panel.rs:1153
 #, fuzzy
 msgid "Add Links"
 msgstr "添加链接"
 
-#: src/gui/link_grabber_panel.rs:950 src/gui/downloads_panel.rs:1155
+#: src/gui/link_grabber_panel.rs:954 src/gui/downloads_panel.rs:1155
 msgid "Add links to linkgrabber"
 msgstr "将链接添加到链接采集器"
 
-#: src/gui/link_grabber_panel.rs:963 src/gui/downloads_panel.rs:1168
+#: src/gui/link_grabber_panel.rs:967 src/gui/downloads_panel.rs:1168
 #: src/gui/menus/file.rs:35 src/gui/menus/file.rs:71
 msgid "Analyse Text with Links"
 msgstr "分析包含链接的文本"
 
-#: src/gui/link_grabber_panel.rs:977 src/gui/downloads_panel.rs:1182
+#: src/gui/link_grabber_panel.rs:981 src/gui/downloads_panel.rs:1182
 #: src/gui/menus/file.rs:40 src/gui/menus/file.rs:80
 msgid "Add Container"
 msgstr "添加容器"
 
-#: src/gui/link_grabber_panel.rs:986 src/gui/downloads_panel.rs:1191
+#: src/gui/link_grabber_panel.rs:990 src/gui/downloads_panel.rs:1191
 msgid "Loading link container files isn't supported yet."
 msgstr "暂不支持加载链接容器文件。"
 
-#: src/gui/link_grabber_panel.rs:993 src/gui/downloads_panel.rs:1198
+#: src/gui/link_grabber_panel.rs:997 src/gui/downloads_panel.rs:1198
 #, fuzzy
 msgid "Paste Links"
 msgstr "粘贴链接"
 
-#: src/gui/link_grabber_panel.rs:1005 src/gui/downloads_panel.rs:1210
+#: src/gui/link_grabber_panel.rs:1009 src/gui/downloads_panel.rs:1210
 msgid "Paste Links (Deep Analyse)"
 msgstr "粘贴链接（深度分析）"
 
-#: src/gui/link_grabber_panel.rs:1091
+#: src/gui/link_grabber_panel.rs:1036
 msgid "Clear linkgrabber"
 msgstr "清空链接采集器"
 
-#: src/gui/link_grabber_panel.rs:1108
+#: src/gui/link_grabber_panel.rs:1046
+msgid "Clear filtered links"
+msgstr "清除已过滤链接"
+
+#: src/gui/link_grabber_panel.rs:1056
+#, fuzzy
+msgid "Restore filtered links"
+msgstr "清除已过滤链接"
+
+#: src/gui/link_grabber_panel.rs:1070
+msgid ""
+"Not available: JDownloader doesn't expose its filtered-links list over the "
+"RemoteAPI."
+msgstr "不可用：JDownloader 不会通过 RemoteAPI 公开其已过滤链接列表。"
+
+#: src/gui/link_grabber_panel.rs:1092
 msgid "Clear {n} link from the Link Collector"
 msgid_plural "Clear {n} links from the Link Collector"
 msgstr[0] "从链接采集器中清除 {n} 个链接"
 
-#: src/gui/link_grabber_panel.rs:1133 src/gui/mod.rs:293 src/gui/mod.rs:327
-#: src/gui/mod.rs:394 src/gui/mod.rs:410
-msgid "Delete"
-msgstr "删除"
-
-#: src/gui/link_grabber_panel.rs:1145 src/gui/downloads_panel.rs:1308
-msgid "Delete disabled"
-msgstr "删除已禁用项"
-
-#: src/gui/link_grabber_panel.rs:1154 src/gui/downloads_panel.rs:1311
-msgid "Delete offline"
-msgstr "删除离线项"
-
-#: src/gui/link_grabber_panel.rs:1163
-msgid "Remove incomplete archives"
-msgstr "删除不完整的压缩包"
-
-#: src/gui/link_grabber_panel.rs:1176
-msgid "Clear filtered links"
-msgstr "清除已过滤链接"
-
-#: src/gui/link_grabber_panel.rs:1183 src/gui/link_grabber_panel.rs:1370
-msgid ""
-"Not available: JDownloader doesn't expose its filtered-links list over the "
-"RemoteAPI."
-msgstr ""
-
-#: src/gui/link_grabber_panel.rs:1216
+#: src/gui/link_grabber_panel.rs:1182 src/gui/downloads_panel.rs:1341
 #, fuzzy
-msgid "Delete {n} disabled link"
-msgid_plural "Delete {n} disabled links"
-msgstr[0] "删除已禁用项"
+msgid "File Name"
+msgstr "文件名"
 
-#: src/gui/link_grabber_panel.rs:1249
+#: src/gui/link_grabber_panel.rs:1183 src/gui/downloads_panel.rs:1342
+msgid "Please enter the file name you are looking for..."
+msgstr "请输入您要查找的文件名…"
+
+#: src/gui/link_grabber_panel.rs:1187 src/gui/downloads_panel.rs:1346
 #, fuzzy
-msgid "Delete {n} offline link"
-msgid_plural "Delete {n} offline links"
-msgstr[0] "删除离线项"
+msgid "File Path"
+msgstr "文件类型"
 
-#: src/gui/link_grabber_panel.rs:1331
+#: src/gui/link_grabber_panel.rs:1188 src/gui/downloads_panel.rs:1347
+msgid "Please enter the file path you are looking for..."
+msgstr "请输入您要查找的文件路径…"
+
+#: src/gui/link_grabber_panel.rs:1193 src/gui/downloads_panel.rs:1352
+msgid "Please enter the domain you are looking for..."
+msgstr "请输入您要查找的域名…"
+
+#: src/gui/link_grabber_panel.rs:1197 src/gui/downloads_panel.rs:1356
 #, fuzzy
-msgid "Remove {n} link belonging to an incomplete archive"
-msgid_plural "Remove {n} links belonging to incomplete archives"
-msgstr[0] "删除不完整的压缩包"
+msgid "Package Name"
+msgstr "包名称"
 
-#: src/gui/link_grabber_panel.rs:1357
-msgid "Filter"
-msgstr "筛选"
+#: src/gui/link_grabber_panel.rs:1198 src/gui/downloads_panel.rs:1357
+msgid "Please enter the package name you are looking for..."
+msgstr "请输入您要查找的包名…"
 
-#: src/gui/link_grabber_panel.rs:1382 src/gui/link_grabber_panel.rs:1396
+#: src/gui/link_grabber_panel.rs:1202 src/gui/downloads_panel.rs:960
+#: src/gui/downloads_panel.rs:966 src/gui/downloads_panel.rs:1361
+#: src/gui/dialogs/packagizer_rule_dialog.rs:243
+#: src/gui/dialogs/packagizer_rule_dialog.rs:386
+#: src/gui/properties_panel.rs:324
+msgid "Comment"
+msgstr "备注"
+
+#: src/gui/link_grabber_panel.rs:1203 src/gui/link_grabber_panel.rs:1208
+#: src/gui/downloads_panel.rs:1362 src/gui/downloads_panel.rs:1367
+msgid "Please enter the comment you are looking for..."
+msgstr "请输入您要查找的备注…"
+
+#: src/gui/link_grabber_panel.rs:1207 src/gui/downloads_panel.rs:1366
+#, fuzzy
+msgid "Comment(Package)"
+msgstr "备注"
+
+#: src/gui/link_grabber_panel.rs:1263
 #, fuzzy
 msgid "Start all Downloads"
 msgstr "开始所有下载"
 
-#: src/gui/link_grabber_panel.rs:1405
+#: src/gui/link_grabber_panel.rs:1284
 #, fuzzy
-msgid "Start selected Downloads"
-msgstr "开始所有下载"
-
-#: src/gui/link_grabber_panel.rs:1414
-#, fuzzy
-msgid "Add all to Download List"
+msgid "... add to Download List"
 msgstr "添加到下载列表"
+
+#: src/gui/link_grabber_panel.rs:1299
+#, fuzzy
+msgid "... start Downloads"
+msgstr "开始下载"
+
+#: src/gui/link_grabber_panel.rs:1314
+#, fuzzy
+msgid "... Force Start"
+msgstr "强制开始"
+
+#: src/gui/link_grabber_panel.rs:1321
+msgid ""
+"Not available: JDownloader keeps \"forced\" as an in-memory flag that isn't "
+"exposed over the RemoteAPI."
+msgstr "不可用：JDownloader 将“强制”状态保存为内部标志，不会通过 RemoteAPI 公开。"
+
+#: src/gui/link_grabber_panel.rs:1379
+#, fuzzy
+msgid "Download All"
+msgstr "下载"
 
 #: src/gui/link_grabber_panel.rs:1423
 #, fuzzy
-msgid "Add selected to Download List"
-msgstr "添加到下载列表"
+msgid "Download Selected"
+msgstr "下载完成"
 
-#: src/gui/link_grabber_panel.rs:1525
+#: src/gui/link_grabber_panel.rs:1480
 msgid "Add at top"
 msgstr "添加到顶部"
 
-#: src/gui/link_grabber_panel.rs:1527
+#: src/gui/link_grabber_panel.rs:1485
 msgid "Auto confirm"
 msgstr "自动确认"
 
-#: src/gui/link_grabber_panel.rs:1529
+#: src/gui/link_grabber_panel.rs:1490
 msgid "Auto start"
 msgstr "自动开始"
 
-#: src/gui/link_grabber_panel.rs:1531
+#: src/gui/link_grabber_panel.rs:1495
 msgid "Link filter"
 msgstr "链接过滤器"
 
-#: src/gui/link_grabber_panel.rs:1534
+#: src/gui/link_grabber_panel.rs:1501
 msgid "Properties"
 msgstr "属性"
 
-#: src/gui/link_grabber_panel.rs:1538
+#: src/gui/link_grabber_panel.rs:1511
 msgid "Sidebar"
 msgstr "侧边栏"
 
-#: src/gui/link_grabber_panel.rs:2132 src/gui/link_grabber_panel.rs:2330
+#: src/gui/link_grabber_panel.rs:2103 src/gui/link_grabber_panel.rs:2280
 #: src/gui/downloads_panel.rs:2246
 msgid "Are you sure?"
 msgstr "您确定吗？"
 
-#: src/gui/link_grabber_panel.rs:2154 src/gui/link_grabber_panel.rs:2352
+#: src/gui/link_grabber_panel.rs:2125 src/gui/link_grabber_panel.rs:2302
 #: src/gui/downloads_panel.rs:2268
 msgid "Do you really want to perform this clean up action:"
 msgstr "您确定要执行此清理操作吗："
 
-#: src/gui/link_grabber_panel.rs:2155 src/gui/link_grabber_panel.rs:2353
+#: src/gui/link_grabber_panel.rs:2126 src/gui/link_grabber_panel.rs:2303
 msgid "Delete Selected Links?"
 msgstr "删除所选链接？"
 
-#: src/gui/link_grabber_panel.rs:2163 src/gui/link_grabber_panel.rs:2361
+#: src/gui/link_grabber_panel.rs:2134 src/gui/link_grabber_panel.rs:2311
 #: src/gui/downloads_panel.rs:2277
 msgid "Tasks to do:"
 msgstr "待执行任务："
 
-#: src/gui/link_grabber_panel.rs:2172 src/gui/downloads_panel.rs:2286
+#: src/gui/link_grabber_panel.rs:2143 src/gui/downloads_panel.rs:2286
 msgid "Delete selected link"
 msgid_plural "Delete selected links"
 msgstr[0] "删除所选链接"
 
-#: src/gui/link_grabber_panel.rs:2173 src/gui/downloads_panel.rs:2287
+#: src/gui/link_grabber_panel.rs:2144 src/gui/downloads_panel.rs:2287
 msgid "{n} link remaining"
 msgid_plural "{n} links remaining"
 msgstr[0] "还剩 {n} 个链接"
 
-#: src/gui/link_grabber_panel.rs:2191 src/gui/link_grabber_panel.rs:2384
+#: src/gui/link_grabber_panel.rs:2162 src/gui/link_grabber_panel.rs:2334
 #: src/gui/downloads_panel.rs:2329
 msgid "Don't show this again"
 msgstr "不再显示"
 
-#. #-#-#-#-#  mod.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  mod.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#: src/gui/link_grabber_panel.rs:2198 src/gui/link_grabber_panel.rs:2391
+#: src/gui/link_grabber_panel.rs:2169 src/gui/link_grabber_panel.rs:2341
 #: src/gui/downloads_panel.rs:2336 src/gui/dialogs/add_links_dialog.rs:232
 #: src/gui/donate.rs:38
 msgid "Continue"
 msgstr "继续"
 
-#: src/gui/link_grabber_panel.rs:2615
+#: src/gui/link_grabber_panel.rs:2565
 msgid "Temporarily Unknown"
 msgstr "暂时未知"
 
@@ -479,18 +510,14 @@ msgstr "连接"
 msgid "Status"
 msgstr "状态"
 
-#: src/gui/downloads_panel.rs:960 src/gui/downloads_panel.rs:966
-#: src/gui/downloads_panel.rs:1361
-#: src/gui/dialogs/packagizer_rule_dialog.rs:243
-#: src/gui/dialogs/packagizer_rule_dialog.rs:386
-#: src/gui/properties_panel.rs:324
-msgid "Comment"
-msgstr "备注"
-
 #: src/gui/downloads_panel.rs:1300
 #, fuzzy
 msgid "Clear Downloadlist"
 msgstr "开始下载"
+
+#: src/gui/downloads_panel.rs:1308
+msgid "Delete disabled"
+msgstr "删除已禁用项"
 
 #: src/gui/downloads_panel.rs:1309
 msgid "Delete failed"
@@ -500,45 +527,9 @@ msgstr "删除失败项"
 msgid "Delete finished"
 msgstr "删除已完成项"
 
-#: src/gui/downloads_panel.rs:1341
-#, fuzzy
-msgid "File Name"
-msgstr "文件名"
-
-#: src/gui/downloads_panel.rs:1342
-msgid "Please enter the file name you are looking for..."
-msgstr "请输入您要查找的文件名…"
-
-#: src/gui/downloads_panel.rs:1346
-#, fuzzy
-msgid "File Path"
-msgstr "文件类型"
-
-#: src/gui/downloads_panel.rs:1347
-msgid "Please enter the file path you are looking for..."
-msgstr "请输入您要查找的文件路径…"
-
-#: src/gui/downloads_panel.rs:1352
-msgid "Please enter the domain you are looking for..."
-msgstr "请输入您要查找的域名…"
-
-#: src/gui/downloads_panel.rs:1356
-#, fuzzy
-msgid "Package Name"
-msgstr "包名称"
-
-#: src/gui/downloads_panel.rs:1357
-msgid "Please enter the package name you are looking for..."
-msgstr "请输入您要查找的包名…"
-
-#: src/gui/downloads_panel.rs:1362 src/gui/downloads_panel.rs:1367
-msgid "Please enter the comment you are looking for..."
-msgstr "请输入您要查找的备注…"
-
-#: src/gui/downloads_panel.rs:1366
-#, fuzzy
-msgid "Comment(Package)"
-msgstr "备注"
+#: src/gui/downloads_panel.rs:1311
+msgid "Delete offline"
+msgstr "删除离线项"
 
 #: src/gui/downloads_panel.rs:1372
 msgid "Please enter the Status you are looking for..."
@@ -795,7 +786,7 @@ msgstr "账户正常"
 msgid "Unlimited"
 msgstr "无限制"
 
-#. #-#-#-#-#  account_table.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  account_table.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
@@ -1165,7 +1156,7 @@ msgstr "输入包名称，留空则使用自动模式"
 msgid ""
 "Choose a Package Name for the Downloads above. If empty, JDownloader will "
 "create Packages based on the filenames"
-msgstr ""
+msgstr "为上方的下载项选择一个包名称。如果留空，JDownloader 将根据文件名创建包"
 
 #: src/gui/dialogs/add_links_dialog.rs:108
 msgid "Enter a comment or leave empty..."
@@ -1175,7 +1166,7 @@ msgstr "输入备注，留空即可…"
 msgid ""
 "Enter a comment. This comment will be stored in every package and "
 "downloadlink."
-msgstr ""
+msgstr "输入备注。此备注将保存在每个包和下载链接中。"
 
 #: src/gui/dialogs/add_links_dialog.rs:120
 #: src/gui/dialogs/add_links_dialog.rs:131
@@ -1588,7 +1579,7 @@ msgstr "文件属性：{}"
 msgid "Open download folder"
 msgstr "打开下载文件夹"
 
-#: src/gui/window.rs:192
+#: src/gui/window.rs:151
 msgid "Waiting for JDownloader to exit..."
 msgstr "正在等待 JDownloader 退出…"
 
@@ -1608,6 +1599,10 @@ msgstr "开始下载"
 #: src/gui/mod.rs:287 src/gui/mod.rs:321
 msgid "Start All Downloads"
 msgstr "开始所有下载"
+
+#: src/gui/mod.rs:293 src/gui/mod.rs:327 src/gui/mod.rs:394 src/gui/mod.rs:410
+msgid "Delete"
+msgstr "删除"
 
 #. Status bar.
 #: src/gui/mod.rs:615
@@ -1813,6 +1808,35 @@ msgstr "已按下链接采集器底部栏按钮"
 #: src/jd/settings/event_scripter_settings.rs:168
 msgid "Traymenu Button Pressed"
 msgstr "已按下系统托盘菜单按钮"
+
+#~ msgid "Remove incomplete archives"
+#~ msgstr "删除不完整的压缩包"
+
+#, fuzzy
+#~ msgid "Delete {n} disabled link"
+#~ msgid_plural "Delete {n} disabled links"
+#~ msgstr[0] "删除已禁用项"
+
+#, fuzzy
+#~ msgid "Delete {n} offline link"
+#~ msgid_plural "Delete {n} offline links"
+#~ msgstr[0] "删除离线项"
+
+#, fuzzy
+#~ msgid "Remove {n} link belonging to an incomplete archive"
+#~ msgid_plural "Remove {n} links belonging to incomplete archives"
+#~ msgstr[0] "删除不完整的压缩包"
+
+#~ msgid "Filter"
+#~ msgstr "筛选"
+
+#, fuzzy
+#~ msgid "Start selected Downloads"
+#~ msgstr "开始所有下载"
+
+#, fuzzy
+#~ msgid "Add selected to Download List"
+#~ msgstr "添加到下载列表"
 
 #~ msgid "Add container"
 #~ msgstr "添加容器"

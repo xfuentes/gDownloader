@@ -2,7 +2,7 @@
 
 All notable changes to gDownloader are documented in this file.
 
-## [Unreleased]
+## [0.4.0] - 2026-09-25
 
 ### Added
 - Link Collector bottom bar: a category search field (File Name/Path,

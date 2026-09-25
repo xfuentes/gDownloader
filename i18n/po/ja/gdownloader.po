@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 17:41+0000\n"
+"POT-Creation-Date: 2026-09-25 05:55+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
@@ -119,10 +119,10 @@ msgstr "この圧縮ファイルについて再度表示しない"
 msgid "OK"
 msgstr "OK"
 
-#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Buttons
-#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2197
-#: src/gui/link_grabber_panel.rs:2390 src/gui/downloads_panel.rs:2335
+#: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2168
+#: src/gui/link_grabber_panel.rs:2340 src/gui/downloads_panel.rs:2335
 #: src/gui/dialogs/account_add_dialog.rs:114
 #: src/gui/dialogs/add_links_dialog.rs:264
 #: src/gui/dialogs/archive_password_dialog.rs:33
@@ -148,32 +148,32 @@ msgstr[0] "{n} 件のリンクを取得しました"
 msgid "Show"
 msgstr "表示"
 
-#: src/gui/settings_panel.rs:87 src/gui/settings_panel.rs:108
+#: src/gui/settings_panel.rs:73 src/gui/settings_panel.rs:94
 msgid "General"
 msgstr "一般"
 
-#: src/gui/settings_panel.rs:90 src/gui/settings_panel.rs:111
+#: src/gui/settings_panel.rs:76 src/gui/settings_panel.rs:97
 #: src/gui/components/settings/account_manager.rs:43
 msgid "Account Manager"
 msgstr "アカウントマネージャー"
 
-#: src/gui/settings_panel.rs:94 src/gui/settings_panel.rs:115
+#: src/gui/settings_panel.rs:80 src/gui/settings_panel.rs:101
 #: src/gui/components/settings/package_manager.rs:54
 msgid "Package Manager"
 msgstr "パッケージマネージャー"
 
-#: src/gui/settings_panel.rs:98 src/gui/settings_panel.rs:119
+#: src/gui/settings_panel.rs:84 src/gui/settings_panel.rs:105
 #: src/gui/components/settings/extension_manager.rs:172
 msgid "Extension Manager"
 msgstr "拡張機能マネージャー"
 
-#: src/gui/settings_panel.rs:100 src/gui/settings_panel.rs:105
+#: src/gui/settings_panel.rs:86 src/gui/settings_panel.rs:91
 #: src/gui/components/settings/scripts.rs:84
 msgid "Scripts"
 msgstr "スクリプト"
 
-#: src/gui/settings_panel.rs:212 src/gui/settings_panel.rs:263
-#: src/gui/settings_panel.rs:278 src/gui/main_menu_bar.rs:50
+#: src/gui/settings_panel.rs:198 src/gui/settings_panel.rs:249
+#: src/gui/settings_panel.rs:264 src/gui/main_menu_bar.rs:50
 #: src/gui/menus/settings.rs:15 src/gui/menus/settings.rs:242
 #: src/gui/menus/tools.rs:21 src/gui/menus/tools.rs:42
 msgid "Settings"
@@ -193,22 +193,22 @@ msgstr "リンク"
 msgid "Size"
 msgstr "サイズ"
 
-#: src/gui/link_grabber_panel.rs:163 src/gui/link_grabber_panel.rs:2607
+#: src/gui/link_grabber_panel.rs:163 src/gui/link_grabber_panel.rs:2557
 msgid "Online"
 msgstr "オンライン"
 
 #: src/gui/link_grabber_panel.rs:169 src/gui/link_grabber_panel.rs:679
-#: src/gui/link_grabber_panel.rs:681 src/gui/downloads_panel.rs:749
-#: src/gui/downloads_panel.rs:751 src/gui/downloads_panel.rs:1351
-#: src/gui/components/account_table.rs:182
+#: src/gui/link_grabber_panel.rs:681 src/gui/link_grabber_panel.rs:1192
+#: src/gui/downloads_panel.rs:749 src/gui/downloads_panel.rs:751
+#: src/gui/downloads_panel.rs:1351 src/gui/components/account_table.rs:182
 msgid "Hoster"
 msgstr "ホスター"
 
-#: src/gui/link_grabber_panel.rs:175 src/gui/link_grabber_panel.rs:2611
+#: src/gui/link_grabber_panel.rs:175 src/gui/link_grabber_panel.rs:2561
 msgid "Offline"
 msgstr "オフライン"
 
-#: src/gui/link_grabber_panel.rs:181 src/gui/link_grabber_panel.rs:2619
+#: src/gui/link_grabber_panel.rs:181 src/gui/link_grabber_panel.rs:2569
 msgid "Unknown"
 msgstr "不明"
 
@@ -233,194 +233,225 @@ msgstr "可用性"
 msgid "Choose visible columns"
 msgstr "表示する列を選択"
 
-#: src/gui/link_grabber_panel.rs:912 src/gui/link_grabber_panel.rs:1536
+#: src/gui/link_grabber_panel.rs:912 src/gui/link_grabber_panel.rs:1506
 #: src/gui/downloads_panel.rs:1110 src/gui/components/account_table.rs:248
 msgid "Overview"
 msgstr "概要"
 
-#: src/gui/link_grabber_panel.rs:948 src/gui/downloads_panel.rs:1153
+#: src/gui/link_grabber_panel.rs:952 src/gui/downloads_panel.rs:1153
 #, fuzzy
 msgid "Add Links"
 msgstr "リンクを追加"
 
-#: src/gui/link_grabber_panel.rs:950 src/gui/downloads_panel.rs:1155
+#: src/gui/link_grabber_panel.rs:954 src/gui/downloads_panel.rs:1155
 msgid "Add links to linkgrabber"
 msgstr "リンクコレクターにリンクを追加"
 
-#: src/gui/link_grabber_panel.rs:963 src/gui/downloads_panel.rs:1168
+#: src/gui/link_grabber_panel.rs:967 src/gui/downloads_panel.rs:1168
 #: src/gui/menus/file.rs:35 src/gui/menus/file.rs:71
 msgid "Analyse Text with Links"
 msgstr "リンクを含むテキストを解析"
 
-#: src/gui/link_grabber_panel.rs:977 src/gui/downloads_panel.rs:1182
+#: src/gui/link_grabber_panel.rs:981 src/gui/downloads_panel.rs:1182
 #: src/gui/menus/file.rs:40 src/gui/menus/file.rs:80
 msgid "Add Container"
 msgstr "コンテナを追加"
 
-#: src/gui/link_grabber_panel.rs:986 src/gui/downloads_panel.rs:1191
+#: src/gui/link_grabber_panel.rs:990 src/gui/downloads_panel.rs:1191
 msgid "Loading link container files isn't supported yet."
 msgstr "リンクコンテナファイルの読み込みはまだサポートされていません。"
 
-#: src/gui/link_grabber_panel.rs:993 src/gui/downloads_panel.rs:1198
+#: src/gui/link_grabber_panel.rs:997 src/gui/downloads_panel.rs:1198
 #, fuzzy
 msgid "Paste Links"
 msgstr "リンクを貼り付け"
 
-#: src/gui/link_grabber_panel.rs:1005 src/gui/downloads_panel.rs:1210
+#: src/gui/link_grabber_panel.rs:1009 src/gui/downloads_panel.rs:1210
 msgid "Paste Links (Deep Analyse)"
 msgstr "リンクを貼り付け(詳細解析)"
 
-#: src/gui/link_grabber_panel.rs:1091
+#: src/gui/link_grabber_panel.rs:1036
 msgid "Clear linkgrabber"
 msgstr "リンクコレクターをクリア"
 
-#: src/gui/link_grabber_panel.rs:1108
+#: src/gui/link_grabber_panel.rs:1046
+msgid "Clear filtered links"
+msgstr "フィルターされたリンクを削除"
+
+#: src/gui/link_grabber_panel.rs:1056
+#, fuzzy
+msgid "Restore filtered links"
+msgstr "フィルターされたリンクを削除"
+
+#: src/gui/link_grabber_panel.rs:1070
+msgid ""
+"Not available: JDownloader doesn't expose its filtered-links list over the "
+"RemoteAPI."
+msgstr "利用不可: JDownloaderはフィルタ済みリンクのリストをRemoteAPI経由で公開していません。"
+
+#: src/gui/link_grabber_panel.rs:1092
 msgid "Clear {n} link from the Link Collector"
 msgid_plural "Clear {n} links from the Link Collector"
 msgstr[0] "リンクコレクターから{n}件のリンクを削除"
 
-#: src/gui/link_grabber_panel.rs:1133 src/gui/mod.rs:293 src/gui/mod.rs:327
-#: src/gui/mod.rs:394 src/gui/mod.rs:410
-msgid "Delete"
-msgstr "削除"
-
-#: src/gui/link_grabber_panel.rs:1145 src/gui/downloads_panel.rs:1308
-msgid "Delete disabled"
-msgstr "無効なものを削除"
-
-#: src/gui/link_grabber_panel.rs:1154 src/gui/downloads_panel.rs:1311
-msgid "Delete offline"
-msgstr "オフラインのものを削除"
-
-#: src/gui/link_grabber_panel.rs:1163
-msgid "Remove incomplete archives"
-msgstr "不完全なアーカイブを削除"
-
-#: src/gui/link_grabber_panel.rs:1176
-msgid "Clear filtered links"
-msgstr "フィルターされたリンクを削除"
-
-#: src/gui/link_grabber_panel.rs:1183 src/gui/link_grabber_panel.rs:1370
-msgid ""
-"Not available: JDownloader doesn't expose its filtered-links list over the "
-"RemoteAPI."
-msgstr ""
-
-#: src/gui/link_grabber_panel.rs:1216
+#: src/gui/link_grabber_panel.rs:1182 src/gui/downloads_panel.rs:1341
 #, fuzzy
-msgid "Delete {n} disabled link"
-msgid_plural "Delete {n} disabled links"
-msgstr[0] "無効なものを削除"
+msgid "File Name"
+msgstr "ファイル名"
 
-#: src/gui/link_grabber_panel.rs:1249
+#: src/gui/link_grabber_panel.rs:1183 src/gui/downloads_panel.rs:1342
+msgid "Please enter the file name you are looking for..."
+msgstr "検索するファイル名を入力してください…"
+
+#: src/gui/link_grabber_panel.rs:1187 src/gui/downloads_panel.rs:1346
 #, fuzzy
-msgid "Delete {n} offline link"
-msgid_plural "Delete {n} offline links"
-msgstr[0] "オフラインのものを削除"
+msgid "File Path"
+msgstr "ファイル形式"
 
-#: src/gui/link_grabber_panel.rs:1331
+#: src/gui/link_grabber_panel.rs:1188 src/gui/downloads_panel.rs:1347
+msgid "Please enter the file path you are looking for..."
+msgstr "検索するファイルパスを入力してください…"
+
+#: src/gui/link_grabber_panel.rs:1193 src/gui/downloads_panel.rs:1352
+msgid "Please enter the domain you are looking for..."
+msgstr "検索するドメインを入力してください…"
+
+#: src/gui/link_grabber_panel.rs:1197 src/gui/downloads_panel.rs:1356
 #, fuzzy
-msgid "Remove {n} link belonging to an incomplete archive"
-msgid_plural "Remove {n} links belonging to incomplete archives"
-msgstr[0] "不完全なアーカイブを削除"
+msgid "Package Name"
+msgstr "パッケージ名"
 
-#: src/gui/link_grabber_panel.rs:1357
-msgid "Filter"
-msgstr "フィルター"
+#: src/gui/link_grabber_panel.rs:1198 src/gui/downloads_panel.rs:1357
+msgid "Please enter the package name you are looking for..."
+msgstr "検索するパッケージ名を入力してください…"
 
-#: src/gui/link_grabber_panel.rs:1382 src/gui/link_grabber_panel.rs:1396
+#: src/gui/link_grabber_panel.rs:1202 src/gui/downloads_panel.rs:960
+#: src/gui/downloads_panel.rs:966 src/gui/downloads_panel.rs:1361
+#: src/gui/dialogs/packagizer_rule_dialog.rs:243
+#: src/gui/dialogs/packagizer_rule_dialog.rs:386
+#: src/gui/properties_panel.rs:324
+msgid "Comment"
+msgstr "コメント"
+
+#: src/gui/link_grabber_panel.rs:1203 src/gui/link_grabber_panel.rs:1208
+#: src/gui/downloads_panel.rs:1362 src/gui/downloads_panel.rs:1367
+msgid "Please enter the comment you are looking for..."
+msgstr "検索するコメントを入力してください…"
+
+#: src/gui/link_grabber_panel.rs:1207 src/gui/downloads_panel.rs:1366
+#, fuzzy
+msgid "Comment(Package)"
+msgstr "コメント"
+
+#: src/gui/link_grabber_panel.rs:1263
 #, fuzzy
 msgid "Start all Downloads"
 msgstr "すべてのダウンロードを開始"
 
-#: src/gui/link_grabber_panel.rs:1405
+#: src/gui/link_grabber_panel.rs:1284
 #, fuzzy
-msgid "Start selected Downloads"
-msgstr "すべてのダウンロードを開始"
-
-#: src/gui/link_grabber_panel.rs:1414
-#, fuzzy
-msgid "Add all to Download List"
+msgid "... add to Download List"
 msgstr "ダウンロードリストに追加"
+
+#: src/gui/link_grabber_panel.rs:1299
+#, fuzzy
+msgid "... start Downloads"
+msgstr "ダウンロードを開始"
+
+#: src/gui/link_grabber_panel.rs:1314
+#, fuzzy
+msgid "... Force Start"
+msgstr "強制開始"
+
+#: src/gui/link_grabber_panel.rs:1321
+msgid ""
+"Not available: JDownloader keeps \"forced\" as an in-memory flag that isn't "
+"exposed over the RemoteAPI."
+msgstr "利用不可: JDownloaderは「強制」状態を内部フラグとして保持しており、RemoteAPI経由では公開されません。"
+
+#: src/gui/link_grabber_panel.rs:1379
+#, fuzzy
+msgid "Download All"
+msgstr "ダウンロード"
 
 #: src/gui/link_grabber_panel.rs:1423
 #, fuzzy
-msgid "Add selected to Download List"
-msgstr "ダウンロードリストに追加"
+msgid "Download Selected"
+msgstr "ダウンロード完了"
 
-#: src/gui/link_grabber_panel.rs:1525
+#: src/gui/link_grabber_panel.rs:1480
 msgid "Add at top"
 msgstr "先頭に追加"
 
-#: src/gui/link_grabber_panel.rs:1527
+#: src/gui/link_grabber_panel.rs:1485
 msgid "Auto confirm"
 msgstr "自動確認"
 
-#: src/gui/link_grabber_panel.rs:1529
+#: src/gui/link_grabber_panel.rs:1490
 msgid "Auto start"
 msgstr "自動開始"
 
-#: src/gui/link_grabber_panel.rs:1531
+#: src/gui/link_grabber_panel.rs:1495
 msgid "Link filter"
 msgstr "リンクフィルター"
 
-#: src/gui/link_grabber_panel.rs:1534
+#: src/gui/link_grabber_panel.rs:1501
 msgid "Properties"
 msgstr "プロパティ"
 
-#: src/gui/link_grabber_panel.rs:1538
+#: src/gui/link_grabber_panel.rs:1511
 msgid "Sidebar"
 msgstr "サイドバー"
 
-#: src/gui/link_grabber_panel.rs:2132 src/gui/link_grabber_panel.rs:2330
+#: src/gui/link_grabber_panel.rs:2103 src/gui/link_grabber_panel.rs:2280
 #: src/gui/downloads_panel.rs:2246
 msgid "Are you sure?"
 msgstr "よろしいですか?"
 
-#: src/gui/link_grabber_panel.rs:2154 src/gui/link_grabber_panel.rs:2352
+#: src/gui/link_grabber_panel.rs:2125 src/gui/link_grabber_panel.rs:2302
 #: src/gui/downloads_panel.rs:2268
 msgid "Do you really want to perform this clean up action:"
 msgstr "本当にこのクリーンアップ操作を実行しますか:"
 
-#: src/gui/link_grabber_panel.rs:2155 src/gui/link_grabber_panel.rs:2353
+#: src/gui/link_grabber_panel.rs:2126 src/gui/link_grabber_panel.rs:2303
 msgid "Delete Selected Links?"
 msgstr "選択したリンクを削除しますか?"
 
-#: src/gui/link_grabber_panel.rs:2163 src/gui/link_grabber_panel.rs:2361
+#: src/gui/link_grabber_panel.rs:2134 src/gui/link_grabber_panel.rs:2311
 #: src/gui/downloads_panel.rs:2277
 msgid "Tasks to do:"
 msgstr "実行するタスク:"
 
-#: src/gui/link_grabber_panel.rs:2172 src/gui/downloads_panel.rs:2286
+#: src/gui/link_grabber_panel.rs:2143 src/gui/downloads_panel.rs:2286
 msgid "Delete selected link"
 msgid_plural "Delete selected links"
 msgstr[0] "選択したリンクを削除"
 
-#: src/gui/link_grabber_panel.rs:2173 src/gui/downloads_panel.rs:2287
+#: src/gui/link_grabber_panel.rs:2144 src/gui/downloads_panel.rs:2287
 msgid "{n} link remaining"
 msgid_plural "{n} links remaining"
 msgstr[0] "残り {n} 件のリンク"
 
-#: src/gui/link_grabber_panel.rs:2191 src/gui/link_grabber_panel.rs:2384
+#: src/gui/link_grabber_panel.rs:2162 src/gui/link_grabber_panel.rs:2334
 #: src/gui/downloads_panel.rs:2329
 msgid "Don't show this again"
 msgstr "次回から表示しない"
 
-#. #-#-#-#-#  mod.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  mod.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#: src/gui/link_grabber_panel.rs:2198 src/gui/link_grabber_panel.rs:2391
+#: src/gui/link_grabber_panel.rs:2169 src/gui/link_grabber_panel.rs:2341
 #: src/gui/downloads_panel.rs:2336 src/gui/dialogs/add_links_dialog.rs:232
 #: src/gui/donate.rs:38
 msgid "Continue"
 msgstr "続行"
 
-#: src/gui/link_grabber_panel.rs:2615
+#: src/gui/link_grabber_panel.rs:2565
 msgid "Temporarily Unknown"
 msgstr "一時的に不明"
 
@@ -479,18 +510,14 @@ msgstr "接続"
 msgid "Status"
 msgstr "状態"
 
-#: src/gui/downloads_panel.rs:960 src/gui/downloads_panel.rs:966
-#: src/gui/downloads_panel.rs:1361
-#: src/gui/dialogs/packagizer_rule_dialog.rs:243
-#: src/gui/dialogs/packagizer_rule_dialog.rs:386
-#: src/gui/properties_panel.rs:324
-msgid "Comment"
-msgstr "コメント"
-
 #: src/gui/downloads_panel.rs:1300
 #, fuzzy
 msgid "Clear Downloadlist"
 msgstr "ダウンロードを開始"
+
+#: src/gui/downloads_panel.rs:1308
+msgid "Delete disabled"
+msgstr "無効なものを削除"
 
 #: src/gui/downloads_panel.rs:1309
 msgid "Delete failed"
@@ -500,45 +527,9 @@ msgstr "失敗したものを削除"
 msgid "Delete finished"
 msgstr "完了したものを削除"
 
-#: src/gui/downloads_panel.rs:1341
-#, fuzzy
-msgid "File Name"
-msgstr "ファイル名"
-
-#: src/gui/downloads_panel.rs:1342
-msgid "Please enter the file name you are looking for..."
-msgstr "検索するファイル名を入力してください…"
-
-#: src/gui/downloads_panel.rs:1346
-#, fuzzy
-msgid "File Path"
-msgstr "ファイル形式"
-
-#: src/gui/downloads_panel.rs:1347
-msgid "Please enter the file path you are looking for..."
-msgstr "検索するファイルパスを入力してください…"
-
-#: src/gui/downloads_panel.rs:1352
-msgid "Please enter the domain you are looking for..."
-msgstr "検索するドメインを入力してください…"
-
-#: src/gui/downloads_panel.rs:1356
-#, fuzzy
-msgid "Package Name"
-msgstr "パッケージ名"
-
-#: src/gui/downloads_panel.rs:1357
-msgid "Please enter the package name you are looking for..."
-msgstr "検索するパッケージ名を入力してください…"
-
-#: src/gui/downloads_panel.rs:1362 src/gui/downloads_panel.rs:1367
-msgid "Please enter the comment you are looking for..."
-msgstr "検索するコメントを入力してください…"
-
-#: src/gui/downloads_panel.rs:1366
-#, fuzzy
-msgid "Comment(Package)"
-msgstr "コメント"
+#: src/gui/downloads_panel.rs:1311
+msgid "Delete offline"
+msgstr "オフラインのものを削除"
 
 #: src/gui/downloads_panel.rs:1372
 msgid "Please enter the Status you are looking for..."
@@ -635,13 +626,15 @@ msgstr[0] "ディスク上の {n} 件のファイル ({})"
 
 #: src/gui/downloads_panel.rs:2305
 msgid "Keep all downloaded files - just remove links from JDownloader"
-msgstr "ダウンロード済みファイルはすべて保持し、JDownloaderからリンクのみ削除する"
-"ダウンロード済みファイルはすべて残し、JDownloaderからリンクのみを削除する"
+msgstr ""
+"ダウンロード済みファイルはすべて保持し、JDownloaderからリンクのみ削除するダウ"
+"ンロード済みファイルはすべて残し、JDownloaderからリンクのみを削除する"
 
 #: src/gui/downloads_panel.rs:2306
 msgid "Move downloaded files to Trash & remove links from JDownloader"
-msgstr "ダウンロード済みファイルをごみ箱に移動し、JDownloaderからリンクを削除する"
-"ダウンロード済みファイルをゴミ箱に移動し、JDownloaderからリンクを削除する"
+msgstr ""
+"ダウンロード済みファイルをごみ箱に移動し、JDownloaderからリンクを削除するダウ"
+"ンロード済みファイルをゴミ箱に移動し、JDownloaderからリンクを削除する"
 
 #: src/gui/downloads_panel.rs:2307
 msgid ""
@@ -799,7 +792,7 @@ msgstr "アカウントは正常です"
 msgid "Unlimited"
 msgstr "無制限"
 
-#. #-#-#-#-#  account_table.pot (gdownloader 0.3.0)  #-#-#-#-#
+#. #-#-#-#-#  account_table.pot (gdownloader 0.4.0)  #-#-#-#-#
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
@@ -1166,7 +1159,8 @@ msgstr "リンクを含むテキストを解析"
 
 #: src/gui/dialogs/add_links_dialog.rs:63
 msgid "Enter Links, URLs, Websites, or any other text here..."
-msgstr "ここにリンク、URL、ウェブサイト、その他任意のテキストを入力してください…"
+msgstr ""
+"ここにリンク、URL、ウェブサイト、その他任意のテキストを入力してください…"
 
 #: src/gui/dialogs/add_links_dialog.rs:91
 msgid "Please choose Download Destination here."
@@ -1180,7 +1174,7 @@ msgstr "パッケージ名を入力するか、自動モードの場合は空欄
 msgid ""
 "Choose a Package Name for the Downloads above. If empty, JDownloader will "
 "create Packages based on the filenames"
-msgstr ""
+msgstr "上記のダウンロード用のパッケージ名を選択してください。空の場合、JDownloaderはファイル名に基づいてパッケージを作成します"
 
 #: src/gui/dialogs/add_links_dialog.rs:108
 msgid "Enter a comment or leave empty..."
@@ -1190,7 +1184,7 @@ msgstr "コメントを入力するか、空欄のままにしてください…
 msgid ""
 "Enter a comment. This comment will be stored in every package and "
 "downloadlink."
-msgstr ""
+msgstr "コメントを入力してください。このコメントはすべてのパッケージとダウンロードリンクに保存されます。"
 
 #: src/gui/dialogs/add_links_dialog.rs:120
 #: src/gui/dialogs/add_links_dialog.rs:131
@@ -1205,7 +1199,9 @@ msgstr "自動展開"
 
 #: src/gui/dialogs/add_links_dialog.rs:123
 msgid "Enable this option to extract all found archives after download"
-msgstr "このオプションを有効にすると、ダウンロード後に見つかったすべての書庫を展開します"
+msgstr ""
+"このオプションを有効にすると、ダウンロード後に見つかったすべての書庫を展開し"
+"ます"
 
 #: src/gui/dialogs/add_links_dialog.rs:139
 #: src/gui/dialogs/add_links_dialog.rs:155
@@ -1604,7 +1600,7 @@ msgstr "ファイルのプロパティ: {}"
 msgid "Open download folder"
 msgstr "ダウンロードフォルダーを開く"
 
-#: src/gui/window.rs:192
+#: src/gui/window.rs:151
 msgid "Waiting for JDownloader to exit..."
 msgstr "JDownloaderの終了を待機中…"
 
@@ -1624,6 +1620,10 @@ msgstr "ダウンロードを開始"
 #: src/gui/mod.rs:287 src/gui/mod.rs:321
 msgid "Start All Downloads"
 msgstr "すべてのダウンロードを開始"
+
+#: src/gui/mod.rs:293 src/gui/mod.rs:327 src/gui/mod.rs:394 src/gui/mod.rs:410
+msgid "Delete"
+msgstr "削除"
 
 #. Status bar.
 #: src/gui/mod.rs:615
@@ -1829,6 +1829,35 @@ msgstr "リンクグラバーの下部バーボタンが押されました"
 #: src/jd/settings/event_scripter_settings.rs:168
 msgid "Traymenu Button Pressed"
 msgstr "トレイメニューボタンが押されました"
+
+#~ msgid "Remove incomplete archives"
+#~ msgstr "不完全なアーカイブを削除"
+
+#, fuzzy
+#~ msgid "Delete {n} disabled link"
+#~ msgid_plural "Delete {n} disabled links"
+#~ msgstr[0] "無効なものを削除"
+
+#, fuzzy
+#~ msgid "Delete {n} offline link"
+#~ msgid_plural "Delete {n} offline links"
+#~ msgstr[0] "オフラインのものを削除"
+
+#, fuzzy
+#~ msgid "Remove {n} link belonging to an incomplete archive"
+#~ msgid_plural "Remove {n} links belonging to incomplete archives"
+#~ msgstr[0] "不完全なアーカイブを削除"
+
+#~ msgid "Filter"
+#~ msgstr "フィルター"
+
+#, fuzzy
+#~ msgid "Start selected Downloads"
+#~ msgstr "すべてのダウンロードを開始"
+
+#, fuzzy
+#~ msgid "Add selected to Download List"
+#~ msgstr "ダウンロードリストに追加"
 
 #~ msgid "Add container"
 #~ msgstr "コンテナを追加"
