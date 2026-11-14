@@ -2,6 +2,12 @@
 
 All notable changes to gDownloader are documented in this file.
 
+## [0.5.0] - 2026-11-14
+
+### Added
+- JDownloader.jar is now downloaded automatically on first launch when no
+  copy is found, with progress shown on the splash screen.
+
 ## [0.4.0] - 2026-09-25
 
 ### Added

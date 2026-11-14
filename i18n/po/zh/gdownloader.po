@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 05:55+0000\n"
+"POT-Creation-Date: 2026-11-14 17:20+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Chinese\n"
@@ -119,7 +119,7 @@ msgstr "不再为此压缩包显示"
 msgid "OK"
 msgstr "确定"
 
-#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Buttons
 #: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2168
 #: src/gui/link_grabber_panel.rs:2340 src/gui/downloads_panel.rs:2335
@@ -367,7 +367,8 @@ msgstr "强制开始"
 msgid ""
 "Not available: JDownloader keeps \"forced\" as an in-memory flag that isn't "
 "exposed over the RemoteAPI."
-msgstr "不可用：JDownloader 将“强制”状态保存为内部标志，不会通过 RemoteAPI 公开。"
+msgstr ""
+"不可用：JDownloader 将“强制”状态保存为内部标志，不会通过 RemoteAPI 公开。"
 
 #: src/gui/link_grabber_panel.rs:1379
 #, fuzzy
@@ -437,11 +438,11 @@ msgstr[0] "还剩 {n} 个链接"
 msgid "Don't show this again"
 msgstr "不再显示"
 
-#. #-#-#-#-#  mod.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  mod.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
@@ -786,7 +787,7 @@ msgstr "账户正常"
 msgid "Unlimited"
 msgstr "无限制"
 
-#. #-#-#-#-#  account_table.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  account_table.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
@@ -1613,15 +1614,19 @@ msgstr "就绪"
 msgid "JDownloader started"
 msgstr "JDownloader 已启动"
 
-#: src/gui/mod.rs:706
-msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
-msgstr "未找到 JDownloader.jar。请设置 JDOWNLOADER_JAR。"
+#: src/gui/mod.rs:703 src/gui/mod.rs:710
+msgid "Downloading JDownloader..."
+msgstr "正在下载 JDownloader..."
 
-#: src/jd/jar.rs:74
+#: src/gui/mod.rs:716
+msgid "Unable to download JDownloader.jar: {}"
+msgstr "无法下载 JDownloader.jar：{}"
+
+#: src/jd/jar.rs:82
 msgid "Unable to create local JDownloader directory {}: {}"
 msgstr "无法创建本地 JDownloader 目录 {}：{}"
 
-#: src/jd/jar.rs:88
+#: src/jd/jar.rs:96
 msgid "Unable to copy JDownloader.jar to {}: {}"
 msgstr "无法将 JDownloader.jar 复制到 {}：{}"
 
@@ -1808,6 +1813,9 @@ msgstr "已按下链接采集器底部栏按钮"
 #: src/jd/settings/event_scripter_settings.rs:168
 msgid "Traymenu Button Pressed"
 msgstr "已按下系统托盘菜单按钮"
+
+#~ msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
+#~ msgstr "未找到 JDownloader.jar。请设置 JDOWNLOADER_JAR。"
 
 #~ msgid "Remove incomplete archives"
 #~ msgstr "删除不完整的压缩包"

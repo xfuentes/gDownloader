@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 05:55+0000\n"
+"POT-Creation-Date: 2026-11-14 17:20+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Korean <translation-team-ko@googlegroups.com>\n"
@@ -119,7 +119,7 @@ msgstr "이 압축 파일에 대해 다시 표시 안 함"
 msgid "OK"
 msgstr "확인"
 
-#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Buttons
 #: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2168
 #: src/gui/link_grabber_panel.rs:2340 src/gui/downloads_panel.rs:2335
@@ -287,7 +287,9 @@ msgstr "필터링된 링크 지우기"
 msgid ""
 "Not available: JDownloader doesn't expose its filtered-links list over the "
 "RemoteAPI."
-msgstr "사용 불가: JDownloader는 필터링된 링크 목록을 RemoteAPI를 통해 제공하지 않습니다."
+msgstr ""
+"사용 불가: JDownloader는 필터링된 링크 목록을 RemoteAPI를 통해 제공하지 않습"
+"니다."
 
 #: src/gui/link_grabber_panel.rs:1092
 msgid "Clear {n} link from the Link Collector"
@@ -367,7 +369,9 @@ msgstr "강제 시작"
 msgid ""
 "Not available: JDownloader keeps \"forced\" as an in-memory flag that isn't "
 "exposed over the RemoteAPI."
-msgstr "사용 불가: JDownloader는 \"강제 시작\" 상태를 RemoteAPI로 노출되지 않는 내부 플래그로 유지합니다."
+msgstr ""
+"사용 불가: JDownloader는 \"강제 시작\" 상태를 RemoteAPI로 노출되지 않는 내부 "
+"플래그로 유지합니다."
 
 #: src/gui/link_grabber_panel.rs:1379
 #, fuzzy
@@ -437,11 +441,11 @@ msgstr[0] "{n}개의 링크 남음"
 msgid "Don't show this again"
 msgstr "다시 표시하지 않음"
 
-#. #-#-#-#-#  mod.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  mod.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
@@ -787,7 +791,7 @@ msgstr "계정이 정상입니다"
 msgid "Unlimited"
 msgstr "무제한"
 
-#. #-#-#-#-#  account_table.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  account_table.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
@@ -1166,7 +1170,9 @@ msgstr "패키지 이름을 입력하거나 자동 모드를 사용하려면 비
 msgid ""
 "Choose a Package Name for the Downloads above. If empty, JDownloader will "
 "create Packages based on the filenames"
-msgstr "위 다운로드에 사용할 패키지 이름을 선택하세요. 비워두면 JDownloader가 파일 이름을 기반으로 패키지를 생성합니다"
+msgstr ""
+"위 다운로드에 사용할 패키지 이름을 선택하세요. 비워두면 JDownloader가 파일 이"
+"름을 기반으로 패키지를 생성합니다"
 
 #: src/gui/dialogs/add_links_dialog.rs:108
 msgid "Enter a comment or leave empty..."
@@ -1625,15 +1631,19 @@ msgstr "준비됨"
 msgid "JDownloader started"
 msgstr "JDownloader가 시작되었습니다"
 
-#: src/gui/mod.rs:706
-msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
-msgstr "JDownloader.jar를 찾을 수 없습니다. JDOWNLOADER_JAR를 설정하세요."
+#: src/gui/mod.rs:703 src/gui/mod.rs:710
+msgid "Downloading JDownloader..."
+msgstr "JDownloader 다운로드 중..."
 
-#: src/jd/jar.rs:74
+#: src/gui/mod.rs:716
+msgid "Unable to download JDownloader.jar: {}"
+msgstr "JDownloader.jar을(를) 다운로드할 수 없습니다: {}"
+
+#: src/jd/jar.rs:82
 msgid "Unable to create local JDownloader directory {}: {}"
 msgstr "로컬 JDownloader 디렉터리 {}를 생성할 수 없습니다: {}"
 
-#: src/jd/jar.rs:88
+#: src/jd/jar.rs:96
 msgid "Unable to copy JDownloader.jar to {}: {}"
 msgstr "JDownloader.jar를 {}로 복사할 수 없습니다: {}"
 
@@ -1820,6 +1830,9 @@ msgstr "링크그래버 하단 바 버튼 눌림"
 #: src/jd/settings/event_scripter_settings.rs:168
 msgid "Traymenu Button Pressed"
 msgstr "트레이 메뉴 버튼 눌림"
+
+#~ msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
+#~ msgstr "JDownloader.jar를 찾을 수 없습니다. JDOWNLOADER_JAR를 설정하세요."
 
 #~ msgid "Remove incomplete archives"
 #~ msgstr "불완전한 압축 파일 제거"

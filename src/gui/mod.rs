@@ -36,7 +36,7 @@ use gtk4::glib;
 
 use crate::app::{JdMessage, start_jd};
 use crate::jd::{
-    find_jar, GeneralSettings, GraphicalUserInterfaceSettings, JdApi, JdProcess,
+    download_jar, find_jar, GeneralSettings, GraphicalUserInterfaceSettings, JdApi, JdProcess,
     ReconnectSettings, INTERNAL_JD_PORT,
 };
 use crate::gui::downloads_panel::DownloadsPanel;
@@ -698,13 +698,27 @@ pub fn build_ui(app: &adw::Application) {
         // Launch JD.
         if let Some(path) = jar_path {
             start_jd(path, process, tx);
-            splash.window.present();
         } else {
-            pulsing.set(false);
-            splash.window.close();
-            window.present();
-            status.set_label(tr!("JDownloader.jar not found. Set JDOWNLOADER_JAR.").as_ref());
+            std::thread::spawn(move || {
+                let _ = tx.try_send(JdMessage::Status(tr!("Downloading JDownloader...").to_string(), -1.0));
+                let progress_tx = tx.clone();
+                let mut last_percent = -1;
+                let result = download_jar(|fraction| {
+                    let percent = (fraction * 100.0) as i32;
+                    if percent != last_percent {
+                        last_percent = percent;
+                        let _ = progress_tx.try_send(JdMessage::Status(tr!("Downloading JDownloader...").to_string(), fraction));
+                    }
+                });
+                match result {
+                    Ok(path) => start_jd(path, process, tx),
+                    Err(e) => {
+                        let _ = tx.try_send(JdMessage::Error(tr!("Unable to download JDownloader.jar: {}", e).to_string()));
+                    }
+                }
+            });
         }
+        splash.window.present();
 
         // Return the close_page closure (this is still inside connect_close_page).
         move |tv, page| {

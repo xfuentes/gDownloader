@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 05:55+0000\n"
+"POT-Creation-Date: 2026-11-14 17:20+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Arabic <(nothing)>\n"
@@ -120,7 +120,7 @@ msgstr "عدم الإظهار مرة أخرى لهذا الأرشيف"
 msgid "OK"
 msgstr "موافق"
 
-#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Buttons
 #: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2168
 #: src/gui/link_grabber_panel.rs:2340 src/gui/downloads_panel.rs:2335
@@ -378,7 +378,9 @@ msgstr "بدء قسري"
 msgid ""
 "Not available: JDownloader keeps \"forced\" as an in-memory flag that isn't "
 "exposed over the RemoteAPI."
-msgstr "غير متاح: يحتفظ JDownloader بحالة \"الإجبار\" كعلامة داخلية غير معروضة عبر RemoteAPI."
+msgstr ""
+"غير متاح: يحتفظ JDownloader بحالة \"الإجبار\" كعلامة داخلية غير معروضة عبر "
+"RemoteAPI."
 
 #: src/gui/link_grabber_panel.rs:1379
 #, fuzzy
@@ -458,11 +460,11 @@ msgstr[5] "يتبقى {n} رابط"
 msgid "Don't show this again"
 msgstr "عدم إظهار هذا مرة أخرى"
 
-#. #-#-#-#-#  mod.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  mod.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
@@ -817,7 +819,7 @@ msgstr "الحساب سليم"
 msgid "Unlimited"
 msgstr "غير محدود"
 
-#. #-#-#-#-#  account_table.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  account_table.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
@@ -1193,7 +1195,9 @@ msgstr "أدخل اسم الحزمة، أو اتركه فارغًا للوضع �
 msgid ""
 "Choose a Package Name for the Downloads above. If empty, JDownloader will "
 "create Packages based on the filenames"
-msgstr "اختر اسم حزمة للتنزيلات أعلاه. إذا تُرك فارغًا، سينشئ JDownloader حزمًا بناءً على أسماء الملفات"
+msgstr ""
+"اختر اسم حزمة للتنزيلات أعلاه. إذا تُرك فارغًا، سينشئ JDownloader حزمًا بناءً "
+"على أسماء الملفات"
 
 #: src/gui/dialogs/add_links_dialog.rs:108
 msgid "Enter a comment or leave empty..."
@@ -1651,15 +1655,19 @@ msgstr "جاهز"
 msgid "JDownloader started"
 msgstr "تم بدء JDownloader"
 
-#: src/gui/mod.rs:706
-msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
-msgstr "لم يتم العثور على JDownloader.jar. اضبط JDOWNLOADER_JAR."
+#: src/gui/mod.rs:703 src/gui/mod.rs:710
+msgid "Downloading JDownloader..."
+msgstr "جارٍ تنزيل JDownloader..."
 
-#: src/jd/jar.rs:74
+#: src/gui/mod.rs:716
+msgid "Unable to download JDownloader.jar: {}"
+msgstr "تعذّر تنزيل JDownloader.jar: {}"
+
+#: src/jd/jar.rs:82
 msgid "Unable to create local JDownloader directory {}: {}"
 msgstr "تعذّر إنشاء دليل JDownloader المحلي {}: {}"
 
-#: src/jd/jar.rs:88
+#: src/jd/jar.rs:96
 msgid "Unable to copy JDownloader.jar to {}: {}"
 msgstr "تعذّر نسخ JDownloader.jar إلى {}: {}"
 
@@ -1846,6 +1854,9 @@ msgstr "تم الضغط على زر الشريط السفلي لملتقط ال�
 #: src/jd/settings/event_scripter_settings.rs:168
 msgid "Traymenu Button Pressed"
 msgstr "تم الضغط على زر قائمة علبة النظام"
+
+#~ msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
+#~ msgstr "لم يتم العثور على JDownloader.jar. اضبط JDOWNLOADER_JAR."
 
 #~ msgid "Remove incomplete archives"
 #~ msgstr "إزالة الأرشيفات غير المكتملة"

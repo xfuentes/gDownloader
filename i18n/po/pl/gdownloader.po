@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 05:55+0000\n"
+"POT-Creation-Date: 2026-11-14 17:20+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -121,7 +121,7 @@ msgstr "Nie pokazuj ponownie dla tego archiwum"
 msgid "OK"
 msgstr "OK"
 
-#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Buttons
 #: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2168
 #: src/gui/link_grabber_panel.rs:2340 src/gui/downloads_panel.rs:2335
@@ -291,7 +291,9 @@ msgstr "Wyczyść przefiltrowane linki"
 msgid ""
 "Not available: JDownloader doesn't expose its filtered-links list over the "
 "RemoteAPI."
-msgstr "Niedostępne: JDownloader nie udostępnia listy filtrowanych linków przez RemoteAPI."
+msgstr ""
+"Niedostępne: JDownloader nie udostępnia listy filtrowanych linków przez "
+"RemoteAPI."
 
 #: src/gui/link_grabber_panel.rs:1092
 msgid "Clear {n} link from the Link Collector"
@@ -373,7 +375,9 @@ msgstr "Wymuszony start"
 msgid ""
 "Not available: JDownloader keeps \"forced\" as an in-memory flag that isn't "
 "exposed over the RemoteAPI."
-msgstr "Niedostępne: JDownloader przechowuje „wymuszone” jako wewnętrzną flagę, która nie jest udostępniana przez RemoteAPI."
+msgstr ""
+"Niedostępne: JDownloader przechowuje „wymuszone” jako wewnętrzną flagę, "
+"która nie jest udostępniana przez RemoteAPI."
 
 #: src/gui/link_grabber_panel.rs:1379
 #, fuzzy
@@ -447,11 +451,11 @@ msgstr[2] "Pozostało {n} linków"
 msgid "Don't show this again"
 msgstr "Nie pokazuj ponownie"
 
-#. #-#-#-#-#  mod.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  mod.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
@@ -800,7 +804,7 @@ msgstr "Konto jest w porządku"
 msgid "Unlimited"
 msgstr "Bez limitu"
 
-#. #-#-#-#-#  account_table.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  account_table.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
@@ -1187,7 +1191,9 @@ msgstr "Wprowadź nazwę pakietu lub pozostaw puste dla trybu automatycznego"
 msgid ""
 "Choose a Package Name for the Downloads above. If empty, JDownloader will "
 "create Packages based on the filenames"
-msgstr "Wybierz nazwę pakietu dla powyższych pobrań. Jeśli puste, JDownloader utworzy pakiety na podstawie nazw plików"
+msgstr ""
+"Wybierz nazwę pakietu dla powyższych pobrań. Jeśli puste, JDownloader "
+"utworzy pakiety na podstawie nazw plików"
 
 #: src/gui/dialogs/add_links_dialog.rs:108
 msgid "Enter a comment or leave empty..."
@@ -1197,7 +1203,9 @@ msgstr "Wprowadź komentarz lub pozostaw puste..."
 msgid ""
 "Enter a comment. This comment will be stored in every package and "
 "downloadlink."
-msgstr "Wprowadź komentarz. Ten komentarz zostanie zapisany w każdym pakiecie i linku do pobrania."
+msgstr ""
+"Wprowadź komentarz. Ten komentarz zostanie zapisany w każdym pakiecie i "
+"linku do pobrania."
 
 #: src/gui/dialogs/add_links_dialog.rs:120
 #: src/gui/dialogs/add_links_dialog.rs:131
@@ -1646,15 +1654,19 @@ msgstr "Gotowy"
 msgid "JDownloader started"
 msgstr "JDownloader uruchomiony"
 
-#: src/gui/mod.rs:706
-msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
-msgstr "Nie znaleziono JDownloader.jar. Ustaw JDOWNLOADER_JAR."
+#: src/gui/mod.rs:703 src/gui/mod.rs:710
+msgid "Downloading JDownloader..."
+msgstr "Pobieranie JDownloadera..."
 
-#: src/jd/jar.rs:74
+#: src/gui/mod.rs:716
+msgid "Unable to download JDownloader.jar: {}"
+msgstr "Nie można pobrać JDownloader.jar: {}"
+
+#: src/jd/jar.rs:82
 msgid "Unable to create local JDownloader directory {}: {}"
 msgstr "Nie można utworzyć lokalnego katalogu JDownloader {}: {}"
 
-#: src/jd/jar.rs:88
+#: src/jd/jar.rs:96
 msgid "Unable to copy JDownloader.jar to {}: {}"
 msgstr "Nie można skopiować JDownloader.jar do {}: {}"
 
@@ -1841,6 +1853,9 @@ msgstr "Naciśnięto przycisk dolnego paska linkgrabbera"
 #: src/jd/settings/event_scripter_settings.rs:168
 msgid "Traymenu Button Pressed"
 msgstr "Naciśnięto przycisk menu zasobnika systemowego"
+
+#~ msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
+#~ msgstr "Nie znaleziono JDownloader.jar. Ustaw JDOWNLOADER_JAR."
 
 #~ msgid "Remove incomplete archives"
 #~ msgstr "Usuń niekompletne archiwa"

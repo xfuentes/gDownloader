@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gdownloader 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 05:55+0000\n"
+"POT-Creation-Date: 2026-11-14 17:20+0000\n"
 "PO-Revision-Date: 2026-09-07 17:48+0200\n"
 "Last-Translator: Xavier Fuentes <xfuentes-dev@serviam.cc>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -119,7 +119,7 @@ msgstr "Ne mutassa újra ehhez az archívumhoz"
 msgid "OK"
 msgstr "OK"
 
-#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  packagizer_rule_dialog.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Buttons
 #: src/gui/pending_jd_dialogs.rs:663 src/gui/link_grabber_panel.rs:2168
 #: src/gui/link_grabber_panel.rs:2340 src/gui/downloads_panel.rs:2335
@@ -288,7 +288,9 @@ msgstr "Szűrt linkek törlése"
 msgid ""
 "Not available: JDownloader doesn't expose its filtered-links list over the "
 "RemoteAPI."
-msgstr "Nem elérhető: A JDownloader nem teszi elérhetővé a szűrt hivatkozások listáját a RemoteAPI-n keresztül."
+msgstr ""
+"Nem elérhető: A JDownloader nem teszi elérhetővé a szűrt hivatkozások "
+"listáját a RemoteAPI-n keresztül."
 
 #: src/gui/link_grabber_panel.rs:1092
 msgid "Clear {n} link from the Link Collector"
@@ -369,7 +371,9 @@ msgstr "Kényszerített indítás"
 msgid ""
 "Not available: JDownloader keeps \"forced\" as an in-memory flag that isn't "
 "exposed over the RemoteAPI."
-msgstr "Nem elérhető: A JDownloader belső jelzőként tárolja a \"kényszerített\" állapotot, amely nincs kitéve a RemoteAPI-n keresztül."
+msgstr ""
+"Nem elérhető: A JDownloader belső jelzőként tárolja a \"kényszerített\" "
+"állapotot, amely nincs kitéve a RemoteAPI-n keresztül."
 
 #: src/gui/link_grabber_panel.rs:1379
 #, fuzzy
@@ -441,11 +445,11 @@ msgstr[1] "{n} link van hátra"
 msgid "Don't show this again"
 msgstr "Ne mutassa ezt többé"
 
-#. #-#-#-#-#  mod.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  mod.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
-#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  add_links_dialog.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Bottom row: the "overwrites packagizer rules" checkbox on the
 #. left, Cancel and Continue (+ its Deep/Normal Analyse arrow menu,
 #. visually joined via GTK's "linked" segmented style) on the right.
@@ -802,7 +806,7 @@ msgstr "A fiók rendben van"
 msgid "Unlimited"
 msgstr "Korlátlan"
 
-#. #-#-#-#-#  account_table.pot (gdownloader 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  account_table.pot (gdownloader 0.5.0)  #-#-#-#-#
 #. Icon names and sizes from JDownloader's AccountListPanel.
 #: src/gui/components/account_table.rs:146
 #: src/gui/components/settings/package_manager.rs:81
@@ -1185,7 +1189,9 @@ msgstr "Adjon meg egy csomagnevet, vagy hagyja üresen az automatikus módhoz"
 msgid ""
 "Choose a Package Name for the Downloads above. If empty, JDownloader will "
 "create Packages based on the filenames"
-msgstr "Válasszon csomagnevet a fenti letöltésekhez. Ha üres, a JDownloader a fájlnevek alapján hoz létre csomagokat"
+msgstr ""
+"Válasszon csomagnevet a fenti letöltésekhez. Ha üres, a JDownloader a "
+"fájlnevek alapján hoz létre csomagokat"
 
 #: src/gui/dialogs/add_links_dialog.rs:108
 msgid "Enter a comment or leave empty..."
@@ -1195,7 +1201,9 @@ msgstr "Adjon meg egy megjegyzést, vagy hagyja üresen..."
 msgid ""
 "Enter a comment. This comment will be stored in every package and "
 "downloadlink."
-msgstr "Adjon meg egy megjegyzést. Ez a megjegyzés minden csomagban és letöltési hivatkozásban tárolásra kerül."
+msgstr ""
+"Adjon meg egy megjegyzést. Ez a megjegyzés minden csomagban és letöltési "
+"hivatkozásban tárolásra kerül."
 
 #: src/gui/dialogs/add_links_dialog.rs:120
 #: src/gui/dialogs/add_links_dialog.rs:131
@@ -1646,16 +1654,19 @@ msgstr "Kész"
 msgid "JDownloader started"
 msgstr "A JDownloader elindult"
 
-#: src/gui/mod.rs:706
-msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
-msgstr ""
-"A JDownloader.jar nem található. Állítsa be a JDOWNLOADER_JAR változót."
+#: src/gui/mod.rs:703 src/gui/mod.rs:710
+msgid "Downloading JDownloader..."
+msgstr "A JDownloader letöltése..."
 
-#: src/jd/jar.rs:74
+#: src/gui/mod.rs:716
+msgid "Unable to download JDownloader.jar: {}"
+msgstr "A JDownloader.jar letöltése sikertelen: {}"
+
+#: src/jd/jar.rs:82
 msgid "Unable to create local JDownloader directory {}: {}"
 msgstr "Nem sikerült létrehozni a helyi JDownloader könyvtárat ({}): {}"
 
-#: src/jd/jar.rs:88
+#: src/jd/jar.rs:96
 msgid "Unable to copy JDownloader.jar to {}: {}"
 msgstr "Nem sikerült átmásolni a JDownloader.jar fájlt ide: {}: {}"
 
@@ -1842,6 +1853,10 @@ msgstr "Linkgyűjtő alsó sáv gombja megnyomva"
 #: src/jd/settings/event_scripter_settings.rs:168
 msgid "Traymenu Button Pressed"
 msgstr "Tálca menü gombja megnyomva"
+
+#~ msgid "JDownloader.jar not found. Set JDOWNLOADER_JAR."
+#~ msgstr ""
+#~ "A JDownloader.jar nem található. Állítsa be a JDOWNLOADER_JAR változót."
 
 #~ msgid "Remove incomplete archives"
 #~ msgstr "Hiányos archívumok eltávolítása"
